@@ -8,12 +8,15 @@
 	$s_plugin_Honey_trace_link = 'Trace';
 	$s_plugin_Honey_Lel_symbol_link='New Symbol';
 	$s_plugin_Honey_Lel_view_symbols_link='View symbols';
-	$s_plugin_Honey_Lel_subject_link='New Subject';
-	$s_plugin_Honey_Lel_object_link='New object';
-	$s_plugin_Honey_Lel_state_link='New state';
-	$s_plugin_Honey_Lel_verb_link='New verb';
 	$s_plugin_Honey_not_found='Not found';
 	$s_plugin_Honey_usecase_link = 'Use Cases';
 	$s_plugin_Honey_usecase_new_link='New Use Case';
         $s_plugin_Honey_usecase_view_cu_link='View Use Cases';
         $s_plugin_Honey_usecase_detail='Enter the details of the use case';
+	$s_plugin_Honey_symbol_detail='Enter the details of the symbol';
+	$s_plugin_Honey_symbol_information='Symbol Information';
+	$s_plugin_Honey_symbols='List of Symbols';
+	$s_plugin_Honey_symbol_modify='Modify symbol details';
+	$s_plugin_Honey_required='required';
+
+	

@@ -29,7 +29,6 @@ if($operation==0){//new
 	$t_page = plugin_page( 'new_symbol_page' );
 }
 else{//update
-//	$id_symbol_hidden=$_REQUEST['id_symbol_hidden'];
 	$t_page= plugin_page( 'update_symbol_page' );	;
 	$t_page=$t_page."&id_symbol=".$id_symbol;
 }
@@ -133,7 +132,6 @@ if($operation==0){//new
 	$t_page = plugin_page( 'new_symbol_page' );
 }
 else{//update
-	//$id_symbol_hidden=$_REQUEST['id_symbol_hidden'];
 	$t_page= plugin_page( 'update_symbol_page' );	;
 	$t_page=$t_page."&id_symbol=".$id_symbol;
 }

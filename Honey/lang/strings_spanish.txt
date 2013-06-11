@@ -1,12 +1,20 @@
 <?php
 
-
 	$s_plugin_Honey = '';
-	$s_plugin_Honey_title = 'Modulo Honey';
-	$s_plugin_Honey_description = 'Modulo que incorpora LEL y traza a MantisBT';
+	$s_plugin_Honey_title = 'Módulo Honey';
+	$s_plugin_Honey_description = 'Módulo que incorpora LEL y trazabilidad a MantisBT';
 	$s_plugin_Honey_lel_link = 'LEL';
 	$s_plugin_Honey_trace_link = 'Traza';
+	$s_plugin_Honey_Lel_symbol_link='New Symbol';
+	$s_plugin_Honey_Lel_view_symbols_link='Ver símbolos';
+	$s_plugin_Honey_not_found='No encontrado';
 	$s_plugin_Honey_usecase_link = 'Casos de Uso';
 	$s_plugin_Honey_usecase_new_link='Nuevo Caso de Uso';
-	$s_plugin_Honey_usecase_detail='Introduza los detalles del caso de uso ';
-	$s_plugin_Honey_usecase_view_cu_link='Ver Casos de Uso';
+        $s_plugin_Honey_usecase_view_cu_link='Ver Casos de Uso';
+        $s_plugin_Honey_usecase_detail='Ingrese los detalles del caso de uso';
+	$s_plugin_Honey_symbol_detail='Ingrese los detalles del símbolo';
+	$s_plugin_Honey_symbol_information='Información del símbolo';
+	$s_plugin_Honey_symbols='Lista de Símbolos';
+	$s_plugin_Honey_symbol_modify='Modifique los detalles del símbolo';
+	$s_plugin_Honey_required='requerido';
+

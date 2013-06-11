@@ -17,7 +17,6 @@ $t_page_update=$t_page_update."&id_symbol=".$id_symbol;
 <form id="form1" action="<?php echo plugin_page( $t_page_update ); ?>" method="POST">
 <?php
 
-echo "<center><p>Symbol Information</p></center>";
 
 $t_repo_table = plugin_table( 'symbol', 'honey' );
 
@@ -47,12 +46,23 @@ else{
 	}
 ?>
 
-<table align="center" border="1">
-<tr><td>Name</td><td><?php echo $name ?></td>
-<?php include('search_notion_symbols.php');?>
-<tr><td>Type</td><td><?php echo $type ?></td>
+<div align="center">
+<table class="width90">
+	<tr>
+		<td class="form-title" colspan="2">
+		<?php echo lang_get( 'plugin_Honey_symbol_information' )?>
+		</td>
+	</tr>
 
-<?php include('search_impacts_symbols.php');?>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">Name</td><td><?php echo $name ?></td>
+		
+		<?php include('search_notion_symbols.php');?>
+
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">Type</td><td><?php echo $type ?></td>
+
+		<?php include('search_impacts_symbols.php');?>
 
 
 <?php
@@ -67,8 +77,8 @@ $count_synonymous = db_num_rows( $result_synonymous );
 
 if($count_synonymous>0){?>
 
-	<tr>
-		<td>Synonyms</td>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">Synonyms</td>
 		<td>
 	<?php while( $row_synonymous = db_fetch_array( $result_synonymous) ){?>
 		
@@ -90,6 +100,7 @@ if($count_synonymous>0){?>
 		<td><input type="submit" value="Update"/></td><td><input type="button" value="Cancel"/></td>
 	</tr>
 </table>
+</div>
 <?php
 
 html_page_bottom1( );

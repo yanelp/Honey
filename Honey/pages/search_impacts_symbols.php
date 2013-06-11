@@ -9,8 +9,8 @@ $result_impacts = db_query_bound( $query_impacts, array($id_symbol) );
 $count_impacts = db_num_rows( $result_impacts );
 
 if($count_impacts>0){?>
-	<tr>
-		<td>Impacts</td>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">Impacts</td>
 		<td>
 	<?php while( $row_impacts = db_fetch_array( $result_impacts ) ){
 		

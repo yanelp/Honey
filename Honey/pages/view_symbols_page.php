@@ -18,9 +18,6 @@ $query_symbol = 'SELECT id, name
 $result = db_query_bound( $query_symbol, array() );
 $count = db_num_rows( $result );
 ?>
-<br>
-<center>Symbols</center>
-<br>
 
 <?php 
 
@@ -28,12 +25,18 @@ if ($count != 0) {
 	$t_page = plugin_page( 'symbol_page' );	
 ?>
 
-<table align="center" border="1">
+<div align="center">
+<table class="width90">
+	<tr>
+		<td class="form-title" colspan="2">
+		<?php echo lang_get( 'plugin_Honey_symbols' ) ?>
+		</td>
+	</tr>
 
 <?php 	while( $row = db_fetch_array( $result ) ){
 	$t_page=$t_page."&id_symbol=".$row['id'];
 	?>
-		<tr>
+		<tr <?php echo helper_alternate_class() ?>>
 			<td>
 			<?php echo "<a href=\"$t_page\">".$row['name']."</a>";?>
 			</td>
@@ -49,6 +52,7 @@ if ($count != 0) {
 
 <center><a href="<?php echo plugin_page( "core" ); ?>">Derivar a Casos de Uso</a></center>
 
+</div>
 <?php
 html_page_bottom1( );
 
