@@ -17,4 +17,4 @@
 	$s_plugin_Honey_symbols='Lista de Símbolos';
 	$s_plugin_Honey_symbol_modify='Modifique los detalles del símbolo';
 	$s_plugin_Honey_required='requerido';
-
+	$s_plugin_Honey_viewing_use_cases='Viendo Casos de Uso';

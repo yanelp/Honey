@@ -84,7 +84,7 @@ if ( ( ALL_PROJECTS == helper_get_current_project() ) && ( 0 == $f_master_bug_id
 </div>
 
 </form>
-<?
+<?php
 
 html_page_bottom1( );
 

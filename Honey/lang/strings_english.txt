@@ -18,5 +18,8 @@
 	$s_plugin_Honey_symbols='List of Symbols';
 	$s_plugin_Honey_symbol_modify='Modify symbol details';
 	$s_plugin_Honey_required='required';
+	$s_plugin_Honey_viewing_use_cases='Viewing Use Cases';
+
+
 
 	

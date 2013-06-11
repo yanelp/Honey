@@ -32,6 +32,8 @@ if ( is_blank( $name ) || is_blank( $mainscenario )) {
 echo "Must add Namea and main scenario";
 echo '<br><br>';
 echo "<a href=\"$t_page\">Back</a>";
+echo "<br>";
+html_page_bottom1( );
 die();
 }
 
@@ -71,3 +73,8 @@ echo "<p>Saved data</p>";
 
 echo '<br><br>';
 echo "<a href=\"$t_page\">Back</a>";
+
+echo "<br>";
+html_page_bottom1( );
+
+?>

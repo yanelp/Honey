@@ -36,6 +36,9 @@ else{//update
 
 echo '<br><br>';
 echo "<a href=\"$t_page\">Back</a>";
+echo "<br>";
+html_page_bottom1( );
+
 die();
 		}
 
@@ -148,5 +151,5 @@ else{//update
 
 echo '<br><br>';
 echo "<a href=\"$t_page\">Back</a>";
-
+echo '<br>';
 html_page_bottom( );

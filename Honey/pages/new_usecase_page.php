@@ -114,7 +114,7 @@ EVENT_LAYOUT_RESOURCES
 </form>
 
 
-<?
+<?php
 
 html_page_bottom1( );
 
