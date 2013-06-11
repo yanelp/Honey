@@ -8,6 +8,7 @@ print_lel_menu();
 
 $t_project_id= helper_get_current_project();
 
+
 ?>
 <br/>
 <?php
@@ -41,11 +42,16 @@ die();
 
 if($operation==1){//es update, primero tengo que borrar en cascada el simbolo
 
+//echo "id simbolo: ".$id_symbol;
+//echo "id proyecto: ".$t_project_id;
+
 	//delete impacts
 
 	$t_repo_table = plugin_table( 'impact', 'honey' );
 
 	$t_query_impact = 'DELETE FROM '.$t_repo_table.' WHERE  id_symbol=' . db_param();
+
+	//echo "sql: ".$t_query_impact;
 		
 	$g_result_update_impact=db_query_bound( $t_query_impact, array( $id_symbol)  );
 
@@ -54,6 +60,8 @@ if($operation==1){//es update, primero tengo que borrar en cascada el simbolo
 	$t_repo_table = plugin_table( 'synonymous', 'honey' );
 
 	$t_query_synonymous = 'DELETE FROM '.$t_repo_table.' WHERE  id_symbol=' . db_param();
+
+	//echo "sql2: ".$t_query_synonymous;
 		
 	$g_result_update_synonymous=db_query_bound( $t_query_synonymous, array( $id_symbol)  );
 
@@ -62,6 +70,8 @@ if($operation==1){//es update, primero tengo que borrar en cascada el simbolo
 	$t_repo_table = plugin_table( 'symbol', 'honey' );
 
 	$t_query_symbol = 'DELETE FROM '.$t_repo_table.' WHERE id_project=' . db_param() .' and id=' . db_param();
+
+	//echo "sql3: ".$t_query_symbol;
 		
 	$g_result_update_symbol=db_query_bound( $t_query_symbol, array( $t_project_id, $id_symbol)  );
 

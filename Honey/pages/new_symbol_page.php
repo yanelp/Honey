@@ -6,7 +6,15 @@ html_page_top( plugin_lang_get( 'title' ) );
 
 print_lel_menu();
 
-EVENT_LAYOUT_RESOURCES
+EVENT_LAYOUT_RESOURCES;
+
+$project_id =  helper_get_current_project();
+
+
+if ( ( ALL_PROJECTS == helper_get_current_project() ) && ( 0 == $f_master_bug_id ) ) {
+		print_header_redirect( 'login_select_proj_page.php?ref=plugin.php?page=Honey/new_symbol_page.php' );
+	}
+
 
 ?>
 
