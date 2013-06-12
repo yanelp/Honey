@@ -15,7 +15,9 @@
         $s_plugin_Honey_usecase_detail='Enter the details of the use case';
 	$s_plugin_Honey_symbol_detail='Enter the details of the symbol';
 	$s_plugin_Honey_symbol_information='Symbol Information';
+	$s_plugin_Honey_usecase_information='Use Case Information';
 	$s_plugin_Honey_symbols='List of Symbols';
+	$s_plugin_Honey_usecases='List of Use Cases';
 	$s_plugin_Honey_symbol_modify='Modify symbol details';
 	$s_plugin_Honey_required='required';
 	$s_plugin_Honey_viewing_use_cases='Viewing Use Cases';

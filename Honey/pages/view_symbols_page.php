@@ -6,16 +6,24 @@ html_page_top( plugin_lang_get( 'title' ) );
 
 print_lel_menu();
 
+$project_id =  helper_get_current_project();
+
+
+if ( ( ALL_PROJECTS == helper_get_current_project() ) && ( 0 == $f_master_bug_id ) ) {
+		print_header_redirect( 'login_select_proj_page.php?ref=plugin.php?page=Honey/view_symbols_page.php' );
+}
+
 EVENT_LAYOUT_RESOURCES;
 
 
 $t_repo_table = plugin_table( 'symbol', 'honey' );
 
 $query_symbol = 'SELECT id, name 
-				   FROM '.$t_repo_table.' 
+				   FROM '.$t_repo_table.'
+				   where id_project=' . db_param().'
 				   ORDER BY name';
 
-$result = db_query_bound( $query_symbol, array() );
+$result = db_query_bound( $query_symbol, array($project_id) );
 $count = db_num_rows( $result );
 ?>
 
