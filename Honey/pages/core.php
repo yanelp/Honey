@@ -30,7 +30,7 @@ $row_search = db_fetch_array($result_search);
 $count_verbs = db_num_rows( $result_search);
 
 if ($count_verbs == 0){
-   echo "no existen simbolos de tipo verbo para derivar a casos de uso"
+   echo "no existen simbolos de tipo verbo para derivar a casos de uso";
 }
 else {
 
