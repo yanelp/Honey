@@ -1,7 +1,6 @@
 
 <?php
 require_once( config_get( 'class_path' ) . 'MantisPlugin.class.php' );
-//require_once( config_get_global( 'class_path' ) . 'MantisPlugin.class.php' );
 
 class HoneyPlugin extends MantisPlugin {
 
@@ -43,6 +42,7 @@ class HoneyPlugin extends MantisPlugin {
 		return array_merge( parent::hooks(), $t_hooks );
 	}
 
+
 //los 2 primeros casilleros en blanco se deben a que estuve probando crear 2 tablas y quedaron registradas en el vector del esquema, con lo cual si agrego una nueva tabla o cambio va debajo de lo que ya escribí- porque compara los casilleros llenos del vector con los que tenía llenos la vez que instaló o actualizó el plugin. hay que ver la manera de borrar esos registros para no tener que desinstalar
 
 	function schema() {
@@ -74,25 +74,6 @@ class HoneyPlugin extends MantisPlugin {
 				",
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
 			),
-				
-
-			/*array( 'CreateTableSQL', array( plugin_table( 'notion' ), "
-				id		    	I		NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
-				description		C(200)	NOTNULL DEFAULT \" '' \" , 
-				id_symbol       I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_project_table.id'
-				",
-				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
-			),
-			array( 'CreateTableSQL', array( plugin_table( 'word' ), "
-				id		    	I		NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
-				word		    C(2)	NOTNULL DEFAULT \" '' \" , 
-				order			I		NOTNULL,
-				type			I		NOTNULL,
-				id_type         I		NOTNULL  
-				",
-				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
-			),*/
-
    
   
 	//CREACION DE MODELO PARA CASOS DE USO
@@ -198,7 +179,18 @@ class HoneyPlugin extends MantisPlugin {
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
 		),
 
-     	
+	    array('CreateTableSQL',array(plugin_table('uc_note'),"
+				id 			 I  NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
+				id_uc 		 I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_usecase_table.id',
+				note 		 XL NOTNULL,
+				reporter_id  I  UNSIGNED NOTNULL DEFAULT '0',
+				view_state 		I2 NOTNULL DEFAULT '10',
+				date_submitted 	T NOTNULL DEFAULT '0',
+				last_modified 	T NOTNULL DEFAULT '0'
+				",
+				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
+		),
+	    	
 );
 	}//function
 

@@ -10,7 +10,7 @@ EVENT_LAYOUT_RESOURCES;
 
 $id_usecase = gpc_get_int( 'id_usecase' );
 
-$t_page_update="modify_use_page";
+$t_page_update="modify_uc_page";
 $t_page_update=$t_page_update."&id_usecase=".$id_usecase;
 ?>
 
@@ -30,7 +30,7 @@ $row = db_fetch_array( $result );
 
 $name=$row['name'];
 $observation=$row['observations'];
-$id=$row['id'];
+$id=$row['view_id'];
 $precond=$row['preconditions'];
 $postcond=$row['postconditions'];
 $goal=$row['goal'];
@@ -71,16 +71,16 @@ $goal=$row['goal'];
 
  <?php
 
-$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
-$t_bugnote_table_text = db_get_table( 'mantis_bugnote_text_table' );
-$query_note = "SELECT bug_id, bugnote_text_id, note
-					  FROM ".$t_bugnote_table." a inner join ".$t_bugnote_table_text." b on (a.bugnote_text_id=b.id)
-					  WHERE bug_id =" . db_param() . " ";
+$t_uc_note_table = plugin_table( 'uc_note','honey' );
+$t_user_table = db_get_table( 'mantis_user_table' );
+$query_note = "SELECT a.id, a.id_uc, a.note, a.reporter_id, a.view_state, a.date_submitted,a.last_modified, b.username, b.access_level
+					  FROM ".$t_uc_note_table." a inner join  ".$t_user_table." b on (a.reporter_id=b.id)
+					  WHERE id_uc =" . db_param() . " ";
 $result_note = db_query_bound( $query_note,  array($id_usecase) );
 
 $count_notes = db_num_rows( $result_note );
 
-if($count_notes>0){?>
+?>
 
 	<br>
 	 <table class="width90">
@@ -89,34 +89,50 @@ if($count_notes>0){?>
 			<?php echo lang_get( 'plugin_Honey_usecase_notes' )?>
 			</td>
 		</tr>
+<?php 
+if($count_notes>0){?>
 		<tr>
-			<td class="category" >UC id</td>
-			<td class="category">BUG NOTE ID</td>
+			<td class="category">NOTE ID</td>
 			<td class="category" >NOTE</td>
+			<td class="category" >REPORTER</td>
+			<td class="category" >STATE</td>
+			<td class="category" >DATE SUMITTED</td>
+			<td class="category" >LAST MODIFIED</td>
 		</tr>
 
 <?php
 
 	while( $row_note = db_fetch_array( $result_note ) ){
+		$id_note=$row_note['id'];
+		$note=$row_note['note'];
+		$reporter=$row_note['username'];
+		$state=$row_note['view_state'];
+		$submitted=$row_note['date_submitted'];
+		$modified=$row_note['last_modified'];
 
-	$bug_id=$row_note['bug_id'];
-	$note_id=$row_note['bugnote_text_id'];
-	$note=$row_note['note'];
+		if ( VS_PRIVATE == $state) {$estado='[private]';}
+		else {$estado='[public]';}
+
+
+		$user_access_level =$row_note['access_level'];
+
 	?>
 		
 		<tr <?php echo helper_alternate_class() ?>>
-			<td><?php echo $bug_id ?></td>
-			<td><?php echo $note_id ?></td>
+			<td><?php echo $id_note ?></td>
 			<td><?php echo $note ?></td>
+			<td><?php echo $reporter ?> <?php echo '(', get_enum_element( 'access_levels', $user_access_level ), ')';?></td>
+			<td><?php echo $estado ?></td>
+			<td><?php echo $submitted ?></td>
+			<td><?php echo $modified ?></td>
 		</tr>
 
 
-	<?php }//while ?>
+	<?php }//while 
+
+  }//if ?>
 
 </TABLE>
-
-<?php }//if ?>
-
 <br>
 <table align="center">
 	<tr>
@@ -126,6 +142,7 @@ if($count_notes>0){?>
 </div>
 
 </form>
+
 <?php
 
 html_page_bottom1( );

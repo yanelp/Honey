@@ -58,7 +58,7 @@ if ($count != 0) {
 		<tr <?php echo helper_alternate_class() ?>>
 
 			<td>
-				<?php echo "<a href=\"$t_page\">".$row['id']."</a>";?>
+				<?php echo "<a href=\"$t_page\">".$row['view_id']."</a>";?>
 			</td>
 			<td>
 				<?php echo $row['name'];?>
