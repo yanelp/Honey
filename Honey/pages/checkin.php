@@ -1,21 +1,5 @@
 #!/usr/bin/php -q
 <?php
-# MantisBT - a php based bugtracking system
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-# See the README and LICENSE files for details
 
 global $g_bypass_headers;
 $g_bypass_headers = 1;
@@ -46,16 +30,13 @@ $t_commit_regexp_honey = config_get( 'source_control_regexp_honey' );
 $t_commit_fixed_regexp = config_get( 'source_control_fixed_regexp' );
 $t_commit_fixed_regexp_honey = config_get( 'source_control_fixed_regexp_honey' );
 
-/*Comienza a armar las notas para las issues*/
 
 $t_comment = '';
 $t_issues = array();
 $t_fixed_issues = array();
-
-/*inicio cecy*/
 $t_use_cases = array();
 $t_fixed_use_cases = array();
-/*fin cecy*/
+
 
 while(( $t_line = fgets( STDIN, 1024 ) ) ) {
 	$t_comment .= $t_line;
@@ -73,8 +54,6 @@ while(( $t_line = fgets( STDIN, 1024 ) ) ) {
 		}
 	}
 
-	/* inicio cecey*/
-
 	if( preg_match_all( $t_commit_regexp_honey, $t_line, $t_matches ) ) {
 		$t_count = count( $t_matches[0] );
 		for( $i = 0;$i < $t_count;++$i ) {
@@ -89,7 +68,6 @@ while(( $t_line = fgets( STDIN, 1024 ) ) ) {
 		}
 	}
 
-	/* fin cecy*/
 }
 
 # If no issues found, then no work to do.
@@ -126,9 +104,6 @@ else{
 
 }//else hay issue
 
-
-
-/*fin issues*/
 
 /*Comienza a armar las notas para los use cases*/
 
@@ -169,7 +144,6 @@ foreach( $t_fixed_use_cases as $t_use_case_id ) {
 	
 	add_uc_note( $id_uc,$t_comment,$t_use_case_id );
 }
-/**/
 
 
 exit( 0 );
