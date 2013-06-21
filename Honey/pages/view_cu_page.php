@@ -1,6 +1,6 @@
 <?php
 
-require_once('print_cu_menu.php');
+require_once('functions.php');
 require_once( 'core.php' );
 require_once('manage_sequences.php');
 
