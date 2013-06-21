@@ -89,16 +89,6 @@ $count_notes = db_num_rows( $result_note );
 			<?php echo lang_get( 'plugin_Honey_usecase_notes' )?>
 			</td>
 		</tr>
-<?php 
-if($count_notes>0){?>
-		<tr>
-			<td class="category">NOTE ID</td>
-			<td class="category" >NOTE</td>
-			<td class="category" >REPORTER</td>
-			<td class="category" >STATE</td>
-			<td class="category" >DATE SUMITTED</td>
-			<td class="category" >LAST MODIFIED</td>
-		</tr>
 
 <?php
 
@@ -109,28 +99,59 @@ if($count_notes>0){?>
 		$state=$row_note['view_state'];
 		$submitted=$row_note['date_submitted'];
 		$modified=$row_note['last_modified'];
+		$id_uc=$row_note['id_uc'];
 
-		if ( VS_PRIVATE == $state) {$estado='[private]';}
-		else {$estado='[public]';}
-
+		if ( VS_PRIVATE == $state) {
+			$estado='[private]';
+			$t_bugnote_css		= 'bugnote-private';
+			$t_bugnote_note_css	= 'bugnote-note-private';
+		}
+		else {$estado='[public]';
+			  $t_bugnote_css		= 'bugnote-public';
+			  $t_bugnote_note_css	= 'bugnote-note-public';
+			  }
 
 		$user_access_level =$row_note['access_level'];
 
 	?>
-		
-		<tr <?php echo helper_alternate_class() ?>>
-			<td><?php echo $id_note ?></td>
-			<td><?php echo $note ?></td>
-			<td><?php echo $reporter ?> <?php echo '(', get_enum_element( 'access_levels', $user_access_level ), ')';?></td>
-			<td><?php echo $estado ?></td>
-			<td><?php echo $submitted ?></td>
-			<td><?php echo $modified ?></td>
-		</tr>
+	
+	<tr>
+	  <td  class="<?php echo $t_bugnote_css ?>">
+		<?php echo $id_note;?>
+		<span class="small">
+		  <?php if ( user_exists( $reporter ) ) {
+			  $t_access_level = $user_access_level;
+			  }
+			  // Only display access level when higher than 0 (ANYBODY)
+			  if( $t_access_level > ANYBODY ) {
+				echo '(', get_enum_element( 'access_levels', $user_access_level ), ')';
+			  }?>
+		</span>
+			  <?php if ( VS_PRIVATE == $state) { ?>
+				<span class="small">[ <?php echo lang_get( 'private' ) ?> ]</span>
+			  <?php } ?>
+			  <br />
+			  <span class="small"><?php echo date( $submitted); ?></span><br />
+			  <?php	if ( $modified ) {
+				echo '<span class="small">' . lang_get( 'edited_on') . lang_get( 'word_separator' ) . date($modified ) . '</span><br />';
+			   }?>
+			  <br /><div class="small">
+			  <?php
+				print_button( 'bugnote_edit_page.php?bugnote_id='.$id_note,'Edit' );
+				
+				print_button( 'bugnote_delete.php?bugnote_id='.$id_note, 'Delete' );
+				
+				print_button( 'bugnote_set_view_state.php?private=0&bugnote_id=' .$id_note, 'Make_public' );
+					
+			?>
+	  </td>
+	  <td  class="<?php echo $t_bugnote_note_css ?>">
+	  <?php echo $note?>
+	  </td>
+	</tr>
 
 
-	<?php }//while 
-
-  }//if ?>
+	<?php }//while  ?>
 
 </TABLE>
 <br>
