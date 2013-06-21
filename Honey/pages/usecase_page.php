@@ -144,6 +144,7 @@ $count_notes = db_num_rows( $result_note );
 				print_button( 'bugnote_set_view_state.php?private=0&bugnote_id=' .$id_note, 'Make_public' );
 					
 			?>
+			</div>
 	  </td>
 	  <td  class="<?php echo $t_bugnote_note_css ?>">
 	  <?php echo $note?>
