@@ -231,10 +231,18 @@ class HoneyPlugin extends MantisPlugin {
 
 	
 	function include_js(){
-	$tpage=plugin_page('scripts.js');
+	//$tpage=plugin_page('scripts.js');
 	//$link_script="<script type='text/javascript' src=\"$tpage\"></script>";
-	$link_script="<script type='text/javascript' src='/mantis/plugins/Honey/pages/scripts.js'></script>";
+	$tpage=   dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'pages\scripts.js';
+	//$tpage='/mantisbt/plugins/Honey/pages/scripts.js';//con este anda
+	//$link_script="<script type='text/javascript' src='/mantisbt/plugins/Honey/pages/scripts.js'></script>";
 
+	$tpage=str_replace('\\', '/', $tpage);
+	$words = preg_split('[/]', $tpage);
+	$cant_words=sizeof($words);
+	for($i=3;$i<$cant_words;$i++){$tpage2=$tpage2.'/'.$words[$i];}
+	
+	$link_script="<script type='text/javascript' src=\"$tpage2\"></script>";
 	return $link_script;
 
 	}
