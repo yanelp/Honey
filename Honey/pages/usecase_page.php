@@ -1,6 +1,7 @@
 <?php
 
 require_once('functions.php');
+//require_once( 'current_user_api.php' );
 
 html_page_top( plugin_lang_get( 'title' ) );
 
@@ -147,7 +148,7 @@ $count_notes = db_num_rows( $result_note );
 			</div>
 	  </td>
 	  <td  class="<?php echo $t_bugnote_note_css ?>">
-	  <?php echo $note?>
+	  <?php echo string_convert_uc_link($note); ?>
 	  </td>
 	</tr>
 

@@ -77,7 +77,7 @@ function add_uc_note( $id_uc,$t_comment, $t_use_case_id){
 
 $c_user_id = auth_get_current_user_id();
 	
-		$t_view_state = VS_PUBLIC;
+		$t_view_state = VS_PRIVATE;
 		$fecha = date('Y-m-d H:i:s'); 
 		$submitted=$fecha;
 		$modified=$fecha;
@@ -96,6 +96,48 @@ $c_user_id = auth_get_current_user_id();
 		$g_result_insert_note=db_query_bound( $t_query_note, array( $id_uc,$t_comment,$c_user_id,$t_view_state,$submitted,$modified)  );
 
 	return true;
+}
+
+
+function string_convert_uc_link($p_string) {
+
+
+	$words = preg_split("/[\s]+/", $p_string);
+	$num_words=sizeof($words);
+	$t_page= plugin_page( 'usecase_page' );
+	$cant_links=0;
+	
+	for($r=0;$r<$num_words;$r++){
+
+		$palabra=str_replace('#', '', $words[$r]) ;
+		//echo "*".$palabra;
+		//busco en la tabla de casos de uso si la palabra es un id_view
+
+		$t_repo_table = plugin_table( 'usecase', 'honey' );
+
+		$query_note = 'SELECT id 
+						 FROM '.$t_repo_table.' 
+						 where view_id=trim(' . db_param().')';
+
+		$result_note = db_query_bound( $query_note, array($palabra) );
+		$count_note = db_num_rows( $result_note );
+		$row_search = db_fetch_array( $result_note ) ; 
+
+		if($count_note>0){
+			$cant_links++;
+
+			$id_uc_search=$row_search['id'];
+			
+			$t_page=$t_page."&id_usecase=".$id_uc_search;
+
+			$link="<a href=\"$t_page\">".$palabra."</a>";
+			$frase=str_replace($palabra, $link,$p_string);
+		}
+		
+	}
+	$frase=str_replace('#', '',$frase);
+	if($cant_links==0){$frase=$p_string;}
+	return $frase;
 }
 
 ?>

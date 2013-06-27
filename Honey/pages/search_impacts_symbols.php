@@ -95,7 +95,7 @@ if($count_impacts>0){?>
 								$count_search = db_num_rows( $result_search );
 								$row_search = db_fetch_array( $result_search ) ;
 								$id_symbol_search=$row_search['id'];
-								$t_page= plugin_page( 'symbol_page' );	;
+								$t_page= plugin_page( 'symbol_page' );	
 								$t_page=$t_page."&id_symbol=".$id_symbol_search;
 
 								if($count_search>0){//coincidence found
