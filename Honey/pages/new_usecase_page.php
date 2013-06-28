@@ -58,7 +58,7 @@ EVENT_LAYOUT_RESOURCES
 		 <td class="category">
 		    Actores Involucrados
 		</td>
-		<td><input type='text' name='uc_actor' id='uc_actor'size="133"/>
+		<td><input type='text' name='uc_actor' id='uc_actor' size="133"/>
 			<input type='button' name='button_actor_add' value='Agregar Actor' onClick="javascript:insert_row('table_actors','uc_actor',document.getElementById('uc_actor').value)"/>
 		</td>
 	</tr>
@@ -110,7 +110,7 @@ EVENT_LAYOUT_RESOURCES
 
 </table>
 
-<input type='hidden' name='row_number_usecas_actors' id='row_number_usecas_actors' value='0'/>
+<input type='hidden' name='row_number_uc_actor' id='row_number_uc_actor' value='0'/>
 <input type="hidden" name="operation" id="operation" value="1"/>
 </div>
 </form>
