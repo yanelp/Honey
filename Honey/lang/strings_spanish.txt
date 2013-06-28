@@ -21,3 +21,9 @@
 	$s_plugin_Honey_required='requerido';
 	$s_plugin_Honey_viewing_use_cases='Viendo Casos de Uso';
 	$s_plugin_Honey_usecase_notes='Notas';
+	$s_plugin_Honey_symbols_name_colum='Nombre';
+	$s_plugin_Honey_symbols_type_colum='Tipo';
+	$s_plugin_Honey_symbols_type_subject='Sujeto';
+	$s_plugin_Honey_symbols_type_verb='Verbo';
+	$s_plugin_Honey_symbols_type_object='Objeto';
+	$s_plugin_Honey_symbols_type_state='Estado';

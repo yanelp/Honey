@@ -18,7 +18,7 @@ EVENT_LAYOUT_RESOURCES;
 
 $t_repo_table = plugin_table( 'symbol', 'honey' );
 
-$query_symbol = 'SELECT id, name 
+$query_symbol = 'SELECT id, name, type 
 				   FROM '.$t_repo_table.'
 				   where id_project=' . db_param().'
 				   ORDER BY name';
@@ -40,13 +40,26 @@ if ($count != 0) {
 		<?php echo lang_get( 'plugin_Honey_symbols' ) ?>
 		</td>
 	</tr>
+	<tr  class="row-category">
+		<td>
+		<?php echo lang_get( 'plugin_Honey_symbols_name_colum' ) ?>
+		</td>
+
+		<td>
+		<?php echo lang_get( 'plugin_Honey_symbols_type_colum' ) ?>
+		</td>
+
+	</tr>
 
 <?php 	while( $row = db_fetch_array( $result ) ){
 	$t_page=$t_page."&id_symbol=".$row['id'];
 	?>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td>
+			<td width='50%'>
 			<?php echo "<a href=\"$t_page\">".$row['name']."</a>";?>
+			</td>
+			<td width='50%'>
+			<?php echo "<a href=\"$t_page\">".get_symbol_type($row['type'])."</a>";?>
 			</td>
 		</tr>
 	 <?php 

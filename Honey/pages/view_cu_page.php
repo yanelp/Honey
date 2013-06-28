@@ -49,7 +49,7 @@ if ($count != 0) {
 <tr class="row-category"> 
 	<td>ID</td>
 	<td>Name</td>
-	<td>Observation</td>
+	<td>Goal</td>
 </tr>
 
 <?php 	while( $row = db_fetch_array( $result ) ){
@@ -64,7 +64,7 @@ if ($count != 0) {
 				<?php echo $row['name'];?>
 			</td>
 			<td>
-				<?php echo $row['observations'];?>
+				<?php echo $row['goal'];?>
 			</td>
 		</tr>
 	 <?php 

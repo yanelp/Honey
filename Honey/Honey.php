@@ -191,6 +191,12 @@ class HoneyPlugin extends MantisPlugin {
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
 		),
 	    	
+		 array('AddColumnSQL',array(plugin_table('actor'),"
+				description	B
+				",
+				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
+		),
+
 );
 	}//function
 

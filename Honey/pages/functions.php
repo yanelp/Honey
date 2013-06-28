@@ -140,4 +140,18 @@ function string_convert_uc_link($p_string) {
 	return $frase;
 }
 
+function get_symbol_type($value) {
+
+switch ($value) {
+    case 1:
+        return lang_get('plugin_Honey_symbols_type_subject');
+    case 2:
+         return lang_get('plugin_Honey_symbols_type_object');
+    case 3:
+       return lang_get('plugin_Honey_symbols_type_state');
+	case 4:
+       return lang_get('plugin_Honey_symbols_type_verb');
+}
+
+}
 ?>

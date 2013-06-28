@@ -107,8 +107,10 @@ EVENT_LAYOUT_RESOURCES
 	<td class="center"><input type='submit' name='button_ok' value='Save' onclick='validar();'>
 	<input type='button' name='button_cancel' value='Cancel' onClick="javascript:clean_symbol()"></td>
 	</tr>
+
 </table>
 
+<input type='hidden' name='row_number_usecas_actors' id='row_number_usecas_actors' value='0'/>
 <input type="hidden" name="operation" id="operation" value="1"/>
 </div>
 </form>
