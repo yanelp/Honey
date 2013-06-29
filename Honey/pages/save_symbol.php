@@ -152,4 +152,11 @@ else{//update
 echo '<br><br>';
 echo "<a href=\"$t_page\">Back</a>";
 echo '<br>';
+
+$t_url= plugin_page( 'view_symbols_page' );
+
 html_page_bottom( );
+
+html_meta_redirect_honey( $t_url, $p_time = null);
+
+

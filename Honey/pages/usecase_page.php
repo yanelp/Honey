@@ -42,7 +42,9 @@ $goal=$row['goal'];
 <table class="width90">
 	<tr>
 		<td class="form-title" colspan="2">
-		<?php echo lang_get( 'plugin_Honey_usecase_information' )?>
+		<?php echo lang_get( 'plugin_Honey_usecase_information' );
+		echo '&#160;<span class="small">';
+	    print_bracket_link( "#uc_notes",'Jump to notes'  );?>
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
@@ -91,7 +93,7 @@ $count_notes = db_num_rows( $result_note );
 	 <table class="width90">
 		<tr>
 			<td class="form-title" colspan="2">
-			<?php echo lang_get( 'plugin_Honey_usecase_notes' )?>
+			<?php echo lang_get( 'plugin_Honey_usecase_notes' ) ;	?>
 			</td>
 		</tr>
 

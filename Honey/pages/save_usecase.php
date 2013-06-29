@@ -99,6 +99,11 @@ echo '<br><br>';
 echo "<a href=\"$t_page\">Back</a>";
 
 echo "<br>";
-html_page_bottom1( );
+
+$t_url= plugin_page( 'view_cu_page' );
+
+html_page_bottom( );
+
+html_meta_redirect_honey( $t_url, $p_time = null);
 
 ?>

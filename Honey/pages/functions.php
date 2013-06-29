@@ -203,6 +203,16 @@ function print_successful_redirect_honey($p_uc_id, $page){
 	return true;
 }
 
+function html_meta_redirect_honey( $p_url, $p_time = null){
+
+	if( null === $p_time ) {
+		$p_time = current_user_get_pref( 'redirect_delay' );
+	}
+
+	echo "\t<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$p_url\" />\n";
+
+}
+
 function get_symbol_type($value) {
 
 switch ($value) {
