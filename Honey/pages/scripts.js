@@ -45,3 +45,8 @@ function remove(t, campo)
 function clean_symbol(){
 	
 }
+
+function go_page(id_note, id_usecase, page){
+  document.getElementById('form1').action=page+'&uc_note_id='+id_note+'&id_usecase='+id_usecase;
+  document.getElementById('form1').submit();
+}

@@ -137,12 +137,13 @@ $count_notes = db_num_rows( $result_note );
 				echo '<span class="small">' . lang_get( 'edited_on') . lang_get( 'word_separator' ) . date($modified ) . '</span><br />';
 			   }?>
 			  <br /><div class="small">
+
+			  <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("uc_note_edit_page");?>')" value="Editar"/>
 			  <?php
-				print_button( 'bugnote_edit_page.php?bugnote_id='.$id_note,'Edit' );
 				
-				print_button( 'bugnote_delete.php?bugnote_id='.$id_note, 'Delete' );
+				print_button( 'uc_note_delete.php?uc_note_id='.$id_note, 'Delete' );
 				
-				print_button( 'bugnote_set_view_state.php?private=0&bugnote_id=' .$id_note, 'Make_public' );
+				print_button( 'uc_note_set_view_state.php?private=0&uc_note_id=' .$id_note, 'Make_public' );
 					
 			?>
 			</div>
