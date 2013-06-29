@@ -7,14 +7,14 @@ html_page_top( plugin_lang_get( 'title' ) );
 print_lel_menu();
 
 $t_project_id= helper_get_current_project();
-
+$row_name='';
 
 ?>
 <br/>
 <?php
 
-$name=$_REQUEST['symbol_name'];
-$notion=$_REQUEST['symbol_notion'];
+$name=trim($_REQUEST['symbol_name']);
+$notion=trim($_REQUEST['symbol_notion']);
 $type=$_REQUEST['symbol_type'];
 $row_number_symbol_synonymous=$_REQUEST['row_number_symbol_synonymous'];
 $row_number_symbol_impact=$_REQUEST['row_number_symbol_impact'];
@@ -78,85 +78,113 @@ if($operation==1){//es update, primero tengo que borrar en cascada el simbolo
 		
 	$g_result_update_symbol=db_query_bound( $t_query_symbol, array( $t_project_id, $id_symbol)  );
 
-}
+}//ES UPDATE
 
-//symbol insert
-$t_repo_table = plugin_table( 'symbol', 'honey' );
+else{//busco si el simbolo ya existe
 
-$t_query_symbol = 'INSERT INTO '.$t_repo_table.' (name, notion, type,id_project  )
-			VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-$g_result_insert_symbol=db_query_bound( $t_query_symbol, array( $name,$notion, $type, $t_project_id)  );
+	$t_repo_table = plugin_table( 'symbol', 'honey' );
 
-$id_symbol=mysql_insert_id();
+	$t_query_symbol_name = 'select name FROM '.$t_repo_table.' WHERE id_project=' . db_param() .' and name=' . db_param();
+		
+	$g_result_symbol_name=db_query_bound( $t_query_symbol_name, array( $t_project_id, $name) );
 
-//synonymous insert
-$t_repo_table = plugin_table( 'synonymous', 'honey' );
-
-for($i=0; $i<$row_number_symbol_synonymous;$i++){
-
-	$t_query_synonymous = 'INSERT INTO '.$t_repo_table.' (name, id_symbol)
-				VALUES ( ' . db_param() . ', ' . db_param() . ' )';
-	$g_result_insert_synonymous=db_query_bound( $t_query_synonymous, array( $_REQUEST['symbol_synonymous'.$i],$id_symbol)  );
+	$row = db_fetch_array( $g_result_symbol_name );
+	$row_name=$row['name'];
 
 }
 
-//impact insert
-$t_repo_table = plugin_table( 'impact', 'honey' );
+if($row_name==''){//si no existe el simbolo
 
-for($i=0; $i<$row_number_symbol_impact;$i++){
+	//symbol insert
+	$t_repo_table = plugin_table( 'symbol', 'honey' );
 
-	$t_query_impact = 'INSERT INTO '.$t_repo_table.' (description, id_symbol)
-				VALUES ( ' . db_param() . ', ' . db_param() . ' )';
-	$g_result_insert_impact=db_query_bound( $t_query_impact, array( $_REQUEST['symbol_impact'.$i], $id_symbol)  );
+	$t_query_symbol = 'INSERT INTO '.$t_repo_table.' (name, notion, type,id_project  )
+				VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
+	$g_result_insert_symbol=db_query_bound( $t_query_symbol, array( $name,$notion, $type, $t_project_id)  );
 
-}
+	$id_symbol=mysql_insert_id();
 
-echo "<p>Saved data</p>";
+	//synonymous insert
+	$t_repo_table = plugin_table( 'synonymous', 'honey' );
+
+	for($i=0; $i<$row_number_symbol_synonymous;$i++){
+
+		$t_query_synonymous = 'INSERT INTO '.$t_repo_table.' (name, id_symbol)
+					VALUES ( ' . db_param() . ', ' . db_param() . ' )';
+		$g_result_insert_synonymous=db_query_bound( $t_query_synonymous, array( $_REQUEST['symbol_synonymous'.$i],$id_symbol)  );
+
+	}
+
+	//impact insert
+	$t_repo_table = plugin_table( 'impact', 'honey' );
+
+	for($i=0; $i<$row_number_symbol_impact;$i++){
+
+		$t_query_impact = 'INSERT INTO '.$t_repo_table.' (description, id_symbol)
+					VALUES ( ' . db_param() . ', ' . db_param() . ' )';
+		$g_result_insert_impact=db_query_bound( $t_query_impact, array( $_REQUEST['symbol_impact'.$i], $id_symbol)  );
+
+	}
 
 
-echo 'name: '.$name;
-echo '<br><br>';
-for($i=0;$i<$row_number_symbol_synonymous;$i++){
-	$synonimous=$_REQUEST['symbol_synonymous'.$i];
-	echo 'synonimous: '.$synonimous;
+	echo "<p>Saved data</p>";
+
+
+	echo 'name: '.$name;
 	echo '<br><br>';
-}
-echo 'notion: '.$notion;
-echo '<br><br>';
-for($i=0;$i<$row_number_symbol_impact;$i++){
-	$impact=$_REQUEST['symbol_impact'.$i];
-	echo 'impact: '.$impact;
+	for($i=0;$i<$row_number_symbol_synonymous;$i++){
+		$synonimous=trim($_REQUEST['symbol_synonymous'.$i]);
+		echo 'synonimous: '.$synonimous;
+		echo '<br><br>';
+	}
+	echo 'notion: '.$notion;
 	echo '<br><br>';
-}
+	for($i=0;$i<$row_number_symbol_impact;$i++){
+		$impact=trim($_REQUEST['symbol_impact'.$i]);
+		echo 'impact: '.$impact;
+		echo '<br><br>';
+	}
 
-if($type==1){$type='Subject';}
-else{
-	if($type==2){$type='Object';}
+	if($type==1){$type='Subject';}
 	else{
-		if($type==3){$type='State';}
+		if($type==2){$type='Object';}
 		else{
-			if($type==4){$type='Verb';}
+			if($type==3){$type='State';}
+			else{
+				if($type==4){$type='Verb';}
+				}
 			}
 		}
+	echo 'type: '.$type;
+
+
+	if($operation==0){//new
+		$t_page = plugin_page( 'new_symbol_page' );
 	}
-echo 'type: '.$type;
+	else{//update
+		$t_page= plugin_page( 'update_symbol_page' );	
+		$t_page=$t_page."&id_symbol=".$id_symbol;
+	}
 
-if($operation==0){//new
+	echo '<br><br>';
+	echo "<a href=\"$t_page\">Back</a>";
+	echo '<br>';
+
+	$t_url= plugin_page( 'view_symbols_page' );
+
+	html_page_bottom( );
+
+	html_meta_redirect_honey( $t_url, $p_time = null);
+
+
+}//si no existe el simbolo
+else{//el simbolo esta repetido
+
+	echo  "<p>The symbol already exists</p>";
+
 	$t_page = plugin_page( 'new_symbol_page' );
+
+	echo '<br><br>';
+	echo "<a href=\"$t_page\">Back</a>";
+	echo '<br>';
 }
-else{//update
-	$t_page= plugin_page( 'update_symbol_page' );	
-	$t_page=$t_page."&id_symbol=".$id_symbol;
-}
-
-echo '<br><br>';
-echo "<a href=\"$t_page\">Back</a>";
-echo '<br>';
-
-$t_url= plugin_page( 'view_symbols_page' );
-
-html_page_bottom( );
-
-html_meta_redirect_honey( $t_url, $p_time = null);
-
-
