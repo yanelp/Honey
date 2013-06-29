@@ -98,6 +98,31 @@ $c_user_id = auth_get_current_user_id();
 	return true;
 }
 
+function set_view_state_uc_note($id_note){
+
+	//busco el estado actual de la NOTA
+	
+	$t_repo_table = plugin_table( 'uc_note', 'honey' );
+
+	$t_query_state = 'select view_state from '.$t_repo_table.'  WHERE  id=' . db_param();
+		
+	$g_result_state=db_query_bound( $t_query_state, array($id_note)  );
+
+	$row_state = db_fetch_array( $g_result_state );
+
+
+	$t_view_state = $row_state['view_state'];
+
+	if($t_view_state==VS_PRIVATE){$t_view_state=VS_PUBLIC;}
+	else {$t_view_state=VS_PRIVATE;}
+	
+
+	$t_query_impact = 'update '.$t_repo_table.' set view_state='.db_param().' WHERE  id=' . db_param();
+		
+	$g_result_update_impact=db_query_bound( $t_query_impact, array( $t_view_state, $id_note)  );
+
+  return true;
+}
 
 function string_convert_uc_link($p_string) {
 
@@ -149,18 +174,18 @@ function delete_uc_note($id_note){
 	$g_result_update_impact=db_query_bound( $t_query_impact, array( $id_note)  );
 }
 
-function string_get_uc_view_url( $p_uc_id ) {
+function string_get_uc_view_url( $p_uc_id , $page) {
 
-	$t_page= plugin_page( 'usecase_page' );
+	$t_page= plugin_page( $page );
 	return $t_page.'&id_usecase=' . $p_uc_id;
 }
 
 
-function print_successful_redirect_honey($p_uc_id){
+function print_successful_redirect_honey($p_uc_id, $page){
 
 	$t_use_iis = config_get( 'use_iis' );
 
-	$t_url = string_get_uc_view_url( $p_uc_id ) ;
+	$t_url = string_get_uc_view_url( $p_uc_id, $page ) ;
 
 	if( !headers_sent() ) {
 		header( 'Content-Type: text/html; charset=utf-8' );
@@ -168,7 +193,7 @@ function print_successful_redirect_honey($p_uc_id){
 		if( ON == $t_use_iis ) {
 			header( "Refresh: 0;url=$t_url" );
 		} else {
-			header( "Location: $t_url" );
+			header( "Location: $t_url" . "#uc_notes" );
 		}
 	} else {
 		trigger_error( ERROR_PAGE_REDIRECTION, ERROR );

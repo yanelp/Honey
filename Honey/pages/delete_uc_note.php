@@ -32,5 +32,5 @@
 	/*event_signal( 'EVENT_BUGNOTE_DELETED', array( $t_bug_id, $f_bugnote_id ) );
 
 	form_security_purge( 'bugnote_delete' );*/
-
-	print_successful_redirect_honey(  $t_uc_id   );
+	$page='usecase_page';
+	print_successful_redirect_honey(  $t_uc_id  , $page );

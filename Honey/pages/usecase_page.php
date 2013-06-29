@@ -70,7 +70,11 @@ $goal=$row['goal'];
 
  <!--aca muestro las notas-->
 
- <?php
+<?php # UC notes BEGIN ?>
+<a name="uc_notes" id="uc_notes" /><br />
+
+<?php
+	collapse_open( 'uc_notes' );
 
 $t_uc_note_table = plugin_table( 'uc_note','honey' );
 $t_user_table = db_get_table( 'mantis_user_table' );
@@ -141,10 +145,14 @@ $count_notes = db_num_rows( $result_note );
 			  <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("uc_note_edit_page");?>')" value="Editar"/>
 			  <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("delete_uc_note");?>')" value="Delete"/>
 			  <?php
-								
-				print_button( 'uc_note_set_view_state.php?private=0&uc_note_id=' .$id_note, 'Make_public' );
+				if($state==VS_PRIVATE){ ?>
+				 <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("set_view_state_uc_note");?>')" value="Make Public"/>
+			  <?php }
+					else{?>
+						<input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("set_view_state_uc_note");?>')" value="Make Private"/>
 					
-			?>
+			  <?php } ?>	
+
 			</div>
 	  </td>
 	  <td  class="<?php echo $t_bugnote_note_css ?>">
@@ -156,6 +164,10 @@ $count_notes = db_num_rows( $result_note );
 	<?php }//while  ?>
 
 </TABLE>
+
+<?php
+	collapse_closed( 'uc_notes' );
+?>
 <br>
 <table align="center">
 	<tr>
