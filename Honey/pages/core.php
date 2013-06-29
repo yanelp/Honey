@@ -6,8 +6,6 @@ require_once('manage_sequences.php');
 
 html_page_top( plugin_lang_get( 'title' ) );
 
-print_lel_menu();
-
 ?>
 <br/>
 
@@ -71,6 +69,9 @@ $result_search = db_query_bound( $query_search, array($type_verb) );
 $count = db_num_rows( $result_search );
 
 if ($count == 0){
+
+	print_lel_menu();
+
    echo "no existen simbolos de tipo verbo para derivar a casos de uso";
 
    $t_page = plugin_page( 'view_symbols_page' );
@@ -257,6 +258,9 @@ $precondiciones = implode(',' , $preconditions);
 
 
 }//fin por cada verbo
+
+$t_url=plugin_page('view_cu_page');
+header( "Location: $t_url" );
 	
 }// fin if ($count > 0)
 
