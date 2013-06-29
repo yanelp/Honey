@@ -6,7 +6,7 @@ require_once('manage_sequences.php');
 
 html_page_top( plugin_lang_get( 'title' ) );
 
-print_cu_menu();
+print_lel_menu();
 
 ?>
 <br/>
@@ -72,6 +72,13 @@ $count = db_num_rows( $result_search );
 
 if ($count == 0){
    echo "no existen simbolos de tipo verbo para derivar a casos de uso";
+
+   $t_page = plugin_page( 'view_symbols_page' );
+
+echo '<br><br>';
+echo "<a href=\"$t_page\">Back</a>";
+echo "<br>";
+html_page_bottom1( );
 };
 
 if ($count > 0){

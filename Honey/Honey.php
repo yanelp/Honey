@@ -112,7 +112,7 @@ class HoneyPlugin extends MantisPlugin {
 		array( 'CreateTableSQL', array( plugin_table( 'actor' ), "
 				id		    	I		NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
 				name		    C(50)	NOTNULL DEFAULT \" '' \" ,
-				id_proyect I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_project_table.id'
+				id_project I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_project_table.id'
 				",
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
 			),
@@ -139,7 +139,7 @@ class HoneyPlugin extends MantisPlugin {
 				view_id         C(10)	NOTNULL DEFAULT \" '' \"  ,
 				name			C(50)	NOTNULL DEFAULT \" '' \" ,
 				description		B ,
-				id_proyect I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_project_table.id'
+				id_project I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_project_table.id'
 				",
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
 			),
@@ -149,7 +149,7 @@ class HoneyPlugin extends MantisPlugin {
 				view_id         C(10)	NOTNULL DEFAULT \" '' \"  ,
 				description		B ,
 				file			B ,
-				id_proyect I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_project_table.id'
+				id_project I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_project_table.id'
 				",
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
 			),
