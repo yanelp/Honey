@@ -67,7 +67,7 @@ html_page_top( plugin_lang_get( 'title' ) );
 ?>
 <br />
 <div align="center">
-<form name='form1' action="<?php echo plugin_page( "uc_note_update" ); ?>" method="post">
+<form name='form1' action="<?php echo plugin_page( "update_uc_note" ); ?>" method="post">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">

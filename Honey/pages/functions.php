@@ -140,6 +140,44 @@ function string_convert_uc_link($p_string) {
 	return $frase;
 }
 
+function delete_uc_note($id_note){
+	
+	$t_repo_table = plugin_table( 'uc_note', 'honey' );
+
+	$t_query_impact = 'DELETE FROM '.$t_repo_table.' WHERE  id=' . db_param();
+		
+	$g_result_update_impact=db_query_bound( $t_query_impact, array( $id_note)  );
+}
+
+function string_get_uc_view_url( $p_uc_id ) {
+
+	$t_page= plugin_page( 'usecase_page' );
+	return $t_page.'&id_usecase=' . $p_uc_id;
+}
+
+
+function print_successful_redirect_honey($p_uc_id){
+
+	$t_use_iis = config_get( 'use_iis' );
+
+	$t_url = string_get_uc_view_url( $p_uc_id ) ;
+
+	if( !headers_sent() ) {
+		header( 'Content-Type: text/html; charset=utf-8' );
+
+		if( ON == $t_use_iis ) {
+			header( "Refresh: 0;url=$t_url" );
+		} else {
+			header( "Location: $t_url" );
+		}
+	} else {
+		trigger_error( ERROR_PAGE_REDIRECTION, ERROR );
+		return false;
+	}
+
+	return true;
+}
+
 function get_symbol_type($value) {
 
 switch ($value) {
