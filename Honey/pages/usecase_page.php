@@ -20,6 +20,7 @@ $t_page=plugin_page("view_cu_page");
 <form id="form1" action="<?php echo plugin_page( $t_page_update ); ?>" method="POST">
 <?php
 
+//busco el caso de uso seleccionado
 
 $t_repo_table = plugin_table( 'usecase', 'honey' );
 
@@ -38,6 +39,37 @@ $precond=$row['preconditions'];
 $postcond=$row['postconditions'];
 $goal=$row['goal'];
 
+//busco sus actores (si los tiene)
+
+$t_repo_table = plugin_table( 'actor', 'honey' );
+$t_repo_table2 = plugin_table( 'usecase_actor', 'honey' );
+
+$query_actors = 'SELECT a.name 
+				 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id=b.id_actor)
+				 where b.id_usecase=' . db_param();
+
+$result_actors = db_query_bound( $query_actors, array($id_usecase) );
+$count_actors = db_num_rows( $result_actors );
+
+$actors='';
+while( $row_actors = db_fetch_array( $result_actors )){
+	if($actors==''){
+		$actors=$row_actors['name'];
+	}
+	else{
+		$actors=$actors.', '.$row_actors['name'];
+		}
+}//while
+
+
+//busco sus interfaces y sus reglas (si los tiene)
+
+//busco sus escenarios secundarios y sus reglas (si los tiene)
+
+//busco si extiende o incluye otro cu (si los tiene)
+
+
+
 ?>
 
 <div align="center">
@@ -50,11 +82,14 @@ $goal=$row['goal'];
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">ID</td><td><?php echo $id ?></td>
+		<td class="category" width="20%">ID</td><td><?php echo $id ?></td>
 		
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">Name</td><td><?php echo $name ?></td>
+	</tr>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">Actor/s</td><td><?php echo $actors ?></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">Observation</td><td><?php echo $observation ?></td>
@@ -68,6 +103,8 @@ $goal=$row['goal'];
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">Goal</td><td><?php echo $goal ?></td>
 	</tr>
+
+
 
 </table>
 
