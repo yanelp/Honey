@@ -12,6 +12,7 @@ $id_symbol = gpc_get_int( 'id_symbol' );
 
 $t_page_update="update_symbol_page";
 $t_page_update=$t_page_update."&id_symbol=".$id_symbol;
+
 ?>
 
 <form id="form1" action="<?php echo plugin_page( $t_page_update ); ?>" method="POST">
@@ -97,7 +98,9 @@ if($count_synonymous>0){?>
 <br>
 <table align="center">
 	<tr>
-		<td><input type="submit" value="Update"/></td><td><input type="button" value="Cancel"/></td>
+		<td><input type="submit" value="Update"/></td>
+		<?php $t_page=plugin_page("view_symbols_page");?>
+		<td><input type="button" value="Cancel" onClick="javascript:go_page(null,null ,'<?php echo $t_page?>')"/></td>
 	</tr>
 </table>
 </div>

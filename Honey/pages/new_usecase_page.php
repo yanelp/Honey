@@ -22,6 +22,8 @@ if ( ( ALL_PROJECTS == helper_get_current_project() ) && ( 0 == $f_master_bug_id
 $nextId = getNextSeq("usecase_secuence");
 $view_id = "CU_".$nextId;
 
+$t_page=plugin_page("new_usecase_page");
+
 
 EVENT_LAYOUT_RESOURCES
 ?>
@@ -29,7 +31,7 @@ EVENT_LAYOUT_RESOURCES
 
 
 <div align="center">
-<form name="new_usecase_form"  id="new_usecase_form"  method="post" onsubmit="javascript:validar()" action="<?php echo plugin_page( "save_usecase" ); ?>">
+<form name="form1"  id="form1"  method="post" onsubmit="javascript:validar()" action="<?php echo plugin_page( "save_usecase" ); ?>">
 <table  class="width90" cellspacing="1">
 	<tr>
 		<td class="form-title" colspan="2">
@@ -51,7 +53,7 @@ EVENT_LAYOUT_RESOURCES
 		    Objetivo
 		</td>
 		<td>
-		   <Textarea cols="100" name="goal" id="goal" form="new_usecase_form""></Textarea>
+		   <Textarea cols="100" name="goal" id="goal"></Textarea>
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
@@ -71,7 +73,7 @@ EVENT_LAYOUT_RESOURCES
 		    Pre-condiciones
 		</td>
 		<td>
-		  <Textarea cols="100"  name="preconditions" id="preconditions" form="new_usecase_form"></Textarea>
+		  <Textarea cols="100"  name="preconditions" id="preconditions"></Textarea>
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
@@ -79,7 +81,7 @@ EVENT_LAYOUT_RESOURCES
 		    Post-condiciones
 		</td>
 		<td>
-	     <Textarea cols="100" name="postconditions" id="postconditions" form="new_usecase_form"></Textarea>
+	     <Textarea cols="100" name="postconditions" id="postconditions"></Textarea>
 		</td>
 	 </tr>
      <tr <?php echo helper_alternate_class() ?>>
@@ -87,7 +89,7 @@ EVENT_LAYOUT_RESOURCES
 		    Observaciones
 		</td>
 		<td>
-	      <Textarea cols="100" name="obsevations" id="obsevations" form="new_usecase_form"></Textarea>
+	      <Textarea cols="100" name="obsevations" id="obsevations" ></Textarea>
 		</td>
 	  </tr>
 	  <tr <?php echo helper_alternate_class() ?>>
@@ -95,7 +97,7 @@ EVENT_LAYOUT_RESOURCES
 		 <span class="required">*</span>Curso Normal
 		</td>
 		<td>
-	      <Textarea cols="100" rows="15" name="cursoNormal" id="cursoNormal" form="new_usecase_form"></Textarea>
+	      <Textarea cols="100" rows="15" name="cursoNormal" id="cursoNormal"></Textarea>
 		</td>
 	  </tr>
 
@@ -105,7 +107,7 @@ EVENT_LAYOUT_RESOURCES
 		</td>
 
 	<td class="center"><input type='submit' name='button_ok' value='Save' onclick='validar();'>
-	<input type='button' name='button_cancel' value='Cancel' onClick="javascript:clean_symbol()"></td>
+	<input type='button' name='button_cancel' value='Cancel'  onClick="javascript:go_page(null, null,'<?php echo $t_page?>')"></td>
 	</tr>
 
 </table>

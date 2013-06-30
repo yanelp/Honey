@@ -13,6 +13,8 @@ $id_usecase = gpc_get_int( 'id_usecase' );
 
 $t_page_update="modify_uc_page";
 $t_page_update=$t_page_update."&id_usecase=".$id_usecase;
+
+$t_page=plugin_page("view_cu_page");
 ?>
 
 <form id="form1" action="<?php echo plugin_page( $t_page_update ); ?>" method="POST">
@@ -72,11 +74,10 @@ $goal=$row['goal'];
 
  <!--aca muestro las notas-->
 
-<?php # UC notes BEGIN ?>
+<?php # UC notes BEGIN (permite el salto a #)?>
 <a name="uc_notes" id="uc_notes" /><br />
 
 <?php
-	collapse_open( 'uc_notes' );
 
 $t_uc_note_table = plugin_table( 'uc_note','honey' );
 $t_user_table = db_get_table( 'mantis_user_table' );
@@ -167,17 +168,15 @@ $count_notes = db_num_rows( $result_note );
 
 </TABLE>
 
-<?php
-	collapse_closed( 'uc_notes' );
-?>
+
 <br>
 <table align="center">
 	<tr>
-		<td><input type="submit" value="Update"/></td><td><input type="button" value="Cancel"/></td>
+		<td><input type="submit" value="Update"/></td>
+		<td><input type="button" value="Cancel"  onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page?>')"/></td>
 	</tr>
 </table>
 </div>
-
 </form>
 
 <?php

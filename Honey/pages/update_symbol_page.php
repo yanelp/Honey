@@ -61,7 +61,7 @@ $t_page=$t_page."&id_symbol=".$id_symbol;
 
 ?>
 
-<form name='form1' action="<?php echo $t_page; ?>" method="post">
+<form name='form1' action="<?php echo $t_page; ?>" method="post" id="form1" >
 
 <div align="center">
 <table class="width90">
@@ -110,7 +110,8 @@ $t_page=$t_page."&id_symbol=".$id_symbol;
 		<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
 	</td>
 	<td class="center"><input type='submit' name='button_ok' value='Save'>
-		<input type='submit' name='button_cancel' value='Cancel' onClick="javascript:document.form1.action='<?php echo plugin_page( "view_symbols_page" );?>'"></td>
+	<?php $t_page_back=plugin_page("view_symbols_page");?>
+	<input type='button' name='button_cancel' value='Cancel' onClick="javascript:go_page(null,null ,'<?php echo $t_page_back?>')"></td>
 </tr>
 </table>
 

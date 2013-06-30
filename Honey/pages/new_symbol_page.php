@@ -15,13 +15,11 @@ if ( ( ALL_PROJECTS == helper_get_current_project() ) && ( 0 == $f_master_bug_id
 		print_header_redirect( 'login_select_proj_page.php?ref=plugin.php?page=Honey/new_symbol_page.php' );
 	}
 
+$t_page=plugin_page("new_symbol_page"); 
 
 ?>
 
-
-
-
-<form name='form1' action="<?php echo plugin_page( "save_symbol" ); ?>" method="post">
+<form name='form1' action="<?php echo plugin_page( "save_symbol" ); ?>" id="form1" method="post">
 <div align="center">
 <table class="width90">
 	<tr>
@@ -69,14 +67,12 @@ if ( ( ALL_PROJECTS == helper_get_current_project() ) && ( 0 == $f_master_bug_id
 <input type='hidden' name='row_number_symbol_synonymous' id='row_number_symbol_synonymous' value='0'/>
 <input type='hidden' name='row_number_symbol_impact' id='row_number_symbol_impact' value='0'/>
 
-
-
 	<tr>
 		<td class="left">
 			<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
 		</td>
 		<td class="center"><input type='submit' name='button_ok' value='Save'>
-		<input type='button' name='button_cancel' value='Cancel' onClick="javascript:clean_symbol()"></td>
+		<input type='button' name='button_cancel' value='Cancel' onClick="javascript:go_page(null, null,'<?php echo $t_page?>')"></td>
 	</tr>
 </table>
 
