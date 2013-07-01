@@ -36,7 +36,8 @@ class HoneyPlugin extends MantisPlugin {
 	 */
 	function hooks( ) {
 		$t_hooks = array(
-			'EVENT_MENU_MAIN'  => 'print_menu_trace',
+		//	'EVENT_MENU_MAIN'  => 'print_menu_trace',
+			'EVENT_MENU_MAIN'  => 'print_menu_lel',
 			'EVENT_LAYOUT_RESOURCES' => 'include_js',
 		);
 		return array_merge( parent::hooks(), $t_hooks );
@@ -203,11 +204,12 @@ class HoneyPlugin extends MantisPlugin {
 
 //ITEMS DE MENU DEL PLUGIN QUE SE INCORPORAN EN MANTIS
 
-	function print_menu_trace( ) {
+//	function print_menu_trace( ) {
 
 
 		function print_menu_lel($t_links ) {
-
+			
+			$t_links = array();
 			$t_page = plugin_page( 'indexLel' );
 			//$t_page = plugin_page( 'new_subject_page' );
 			$t_lang = plugin_lang_get( 'lel_link' );
@@ -224,16 +226,16 @@ class HoneyPlugin extends MantisPlugin {
 
 		}
 
-		$t_links = array();
+	/*	$t_links = array();
 		$t_links=print_menu_lel($t_links);
 		$t_page = plugin_page( 'indexTrace' );
 		$t_lang = plugin_lang_get( 'trace_link' );
 		$t_links[] = "<a href=\"$t_page\">$t_lang</a>";
 
 		return $t_links;
+	*/
 
-
-	}
+	//}
 
 	
 	function include_js(){
