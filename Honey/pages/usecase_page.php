@@ -62,13 +62,125 @@ while( $row_actors = db_fetch_array( $result_actors )){
 }//while
 
 
-//busco sus interfaces y sus reglas (si los tiene)
+//busco sus escenarios, sus reglas y sus interfaces (si los tiene)
 
-//busco sus escenarios secundarios y sus reglas (si los tiene)
+	//main scenario
 
-//busco si extiende o incluye otro cu (si los tiene)
+	$t_repo_table = plugin_table( 'scenario', 'honey' );
+
+	$query_main_scenario = 'SELECT a.steps, a.id 
+					 FROM '.$t_repo_table.' a
+					 where id_usecase=' . db_param().' and type=1';
+
+	$result_main_scenario = db_query_bound( $query_main_scenario, array($id_usecase) );
+	$count_main_scenario = db_num_rows( $result_main_scenario );
+	$row_main_scenario = db_fetch_array( $result_main_scenario);
+	$main_scenario=$row_main_scenario['steps'];
+	$id_scenario=$row_main_scenario['id'];
+
+	//rules main
+
+	$t_repo_table = plugin_table( 'rule_scenario', 'honey' );
+	$t_repo_table2 = plugin_table( 'rule', 'honey' );
+
+	$query_rules_scenario = 'SELECT b.name 
+					 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_rule=b.id)
+					 where id_scenario=' . db_param();
+
+	$result_rules_scenario = db_query_bound( $query_rules_scenario, array($id_scenario) );
+	$count_rules_scenario = db_num_rows( $result_rules_scenario );
+	
+	$rules_main='';
+		
+	while( $row_rules_scenario = db_fetch_array( $result_rules_scenario )){
+		if($rules_main==''){
+			$rules_main=$row_rules_scenario['name'];
+		}
+		else{
+			$rules_main=$rules_main.', '.$row_rules_scenario['name'];
+			}
+	}//while
+	
+	//interfaces main
+
+	$t_repo_table = plugin_table( 'interface_scenario', 'honey' );
+	$t_repo_table2 = plugin_table( 'interface', 'honey' );
+
+	$query_interface_scenario = 'SELECT b.description 
+						FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_interface=b.id)
+						where id_scenario=' . db_param();
+
+	$result_interface_scenario = db_query_bound( $query_interface_scenario, array($id_scenario) );
+			
+	$interface_main='';
+				
+	while( $row_interface_scenario = db_fetch_array( $result_interface_scenario )){
+				if($interface_main==''){
+					$interface_main=$row_interface_scenario['description'];
+				}
+				else{
+					$interface_main=$interface_main.', '.$row_interface_scenario['description'];
+					}
+			}//while
 
 
+//alternative scenarios
+
+
+	$t_repo_table = plugin_table( 'scenario', 'honey' );
+
+	$query_alternative_scenario = 'SELECT a.steps, a.id 
+					 FROM '.$t_repo_table.' a
+					 where id_usecase=' . db_param().' and type<>1';
+
+	$result_alternative_scenario = db_query_bound( $query_alternative_scenario, array($id_usecase) );
+
+
+//busco si extiende de otro cu 
+
+	$t_repo_table = plugin_table( 'usecase_extend', 'honey' );
+	$t_repo_table2 = plugin_table( 'usecase', 'honey' );
+
+	$query_parents = 'SELECT b.view_id 
+					 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_usecase_parent=b.id)
+					 where id_usecase_extends=' . db_param();
+
+	$result_parents = db_query_bound( $query_parents, array($id_usecase) );
+	
+	$parents='';
+	
+	while( $row_parents = db_fetch_array( $result_parents )){
+		if($parents==''){
+			$parents=$row_parents['view_id'];
+		}
+		else{
+			$parents=$parents.', '.$row_parents['view_id'];
+			}
+	}//while
+
+
+	//busco si incluye otros cu 
+
+	$t_repo_table = plugin_table( 'usecase_include', 'honey' );
+	$t_repo_table2 = plugin_table( 'usecase', 'honey' );
+
+	$query_childs = 'SELECT b.view_id 
+					 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_usecase_include=b.id)
+					 where id_usecase_parent=' . db_param();
+
+	$result_childs = db_query_bound( $query_childs, array($id_usecase) );
+	
+	$childs='';
+		while( $row_childs = db_fetch_array( $result_childs )){
+			if($childs==''){
+				$childs=$row_childs['view_id'];
+			}
+			else{
+				$childs=$childs.', '.$row_childs['view_id'];
+				}
+		}//while
+
+	
 
 ?>
 
@@ -88,11 +200,17 @@ while( $row_actors = db_fetch_array( $result_actors )){
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">Name</td><td><?php echo $name ?></td>
 	</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">Goal</td><td><?php echo $goal ?></td>
+	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">Actor/s</td><td><?php echo $actors ?></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Observation</td><td><?php echo $observation ?></td>
+		<td class="category">Extends</td><td><?php echo $parents ?></td>
+	</tr>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">Includes</td><td><?php echo $childs ?></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">Preconditions</td><td><?php echo $precond ?></td>
@@ -101,9 +219,79 @@ while( $row_actors = db_fetch_array( $result_actors )){
 		<td class="category">Postconditions</td><td><?php echo $postcond ?></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Goal</td><td><?php echo $goal ?></td>
+		<td class="category">Observation</td><td><?php echo $observation ?></td>
 	</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">Main Scenario</td><td><?php echo $main_scenario ?></td>
+	</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">Rules Main Scenario</td><td><?php echo $rules_main?></td>
+	</tr>
+	</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">Interfaces Main Scenario</td><td><?php echo $interface_main?></td>
+	</tr>
+	</tr>
+		<?php 
+		while( $row_alternative_scenario = db_fetch_array( $result_alternative_scenario )){?>
+			<tr <?php echo helper_alternate_class() ?>><td>Alternative Scenario</td><td><?php echo  $row_alternative_scenario['steps']?></td></tr>
+			
+			<?php
+			//por cada escenario busco reglas
 
+			$id_alternative_scenario=$row_alternative_scenario['id'];
+
+			//rules alternatives
+
+			$t_repo_table = plugin_table( 'rule_scenario', 'honey' );
+			$t_repo_table2 = plugin_table( 'rule', 'honey' );
+
+			$query_rules_alt_scenario = 'SELECT b.name 
+							 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_rule=b.id)
+							 where id_scenario=' . db_param();
+
+			$result_rules_alt_scenario = db_query_bound( $query_rules_alt_scenario, array($id_alternative_scenario) );
+			
+			$rules_alternative='';
+				
+			while( $row_rules_alt_scenario = db_fetch_array( $result_rules_alt_scenario )){
+				if($rules_alternative==''){
+					$rules_alternative=$row_rules_alt_scenario['name'];
+				}
+				else{
+					$rules_alternative=$rules_alternative.', '.$row_rules_alt_scenario['name'];
+					}
+			}//while?>	
+			
+			<tr <?php echo helper_alternate_class() ?>><td>Alternative Rules</td><td><?php echo $rules_alternative?></td></tr>
+
+			<?php 
+			//interfaces alternatives
+
+			$t_repo_table = plugin_table( 'interface_scenario', 'honey' );
+			$t_repo_table2 = plugin_table( 'interface', 'honey' );
+
+			$query_interface_alt_scenario = 'SELECT b.description 
+							 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_interface=b.id)
+							 where id_scenario=' . db_param();
+
+			$result_interface_alt_scenario = db_query_bound( $query_interface_alt_scenario, array($id_alternative_scenario) );
+			
+			$interface_alternative='';
+				
+			while( $row_interface_alt_scenario = db_fetch_array( $result_interface_alt_scenario )){
+				if($interface_alternative==''){
+					$interface_alternative=$row_interface_alt_scenario['description'];
+				}
+				else{
+					$interface_alternative=$interface_alternative.', '.$row_interface_alt_scenario['description'];
+					}
+			}//while?>	
+			
+			<tr <?php echo helper_alternate_class() ?>><td>Alternative Interfaces</td><td><?php echo $interface_alternative?></td></tr>
+
+		<?php }//while cada escenario?>
+	</tr>
 
 
 </table>
