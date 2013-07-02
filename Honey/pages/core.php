@@ -13,43 +13,6 @@ html_page_top( plugin_lang_get( 'title' ) );
 
 $t_project_id= helper_get_current_project();
 
-/*CREACION DE ACTORES*/
-
-$type_subject = 1;
-
-$t_repo_table_symbol = plugin_table( 'symbol', 'honey' );
-
-								$query_search = 'SELECT *
-												  FROM '.$t_repo_table_symbol.' 
-												  WHERE type=' . db_param();
-
-$result_search = db_query_bound( $query_search, array($type_subject) );
-
-$a=0;
-$actores_id;
-
-
-while($row_search  = db_fetch_array( $result_search )){
-      
-	  $actor_name = $row_search['name'];
-	  $actor_description = $row_search['notion'];
-	  
-	  //actor insert
-		$t_repo_table = plugin_table( 'actor', 'honey' );
-
-		$t_query_actor = 'INSERT INTO '.$t_repo_table.' (name, description, id_project  )
-					VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-		$g_result_insert_actor=db_query_bound( $t_query_actor, array( $actor_name, $actor_description, $t_project_id)  );
-
-		$id_actor=mysql_insert_id();
-
-		$actores[$a] = $actor_name;
-		$actores_id[$a] = $id_actor;
-		
-
-		$a=$a+1;
-
-}
 
 /*CREACION DE CASOS DE USO*/
 
@@ -62,11 +25,15 @@ $t_repo_table_symbol = plugin_table( 'symbol', 'honey' );
 
 								$query_search = 'SELECT *
 												  FROM '.$t_repo_table_symbol.' 
-												  WHERE type=' . db_param();
+												  WHERE type=' . db_param().'
+												  AND active = 0';
 
 $result_search = db_query_bound( $query_search, array($type_verb) );
 
 $count = db_num_rows( $result_search );
+
+$a=0;
+$actores_id;
 
 if ($count == 0){
 
@@ -84,6 +51,71 @@ html_page_bottom1( );
 
 if ($count > 0){
     
+     /*CREACION DE ACTORES*/
+
+	$type_subject = 1;
+
+	$t_repo_table_symbol_subject = plugin_table( 'symbol', 'honey' );
+
+									$query_search_actor = 'SELECT *
+													  FROM '.$t_repo_table_symbol_subject.' 
+													  WHERE type=' . db_param().'
+													  AND active = 0';
+
+	$result_search_actor = db_query_bound( $query_search_actor, array($type_subject) );
+
+
+	while($row_search_actor  = db_fetch_array( $result_search_actor )){
+		 
+	     $actor_name = $row_search_actor['name'];
+
+		 $actor_description = $row_search_actor['notion'];
+		  
+		//busco si el actor ya existe
+
+		$t_repo_table_actor = plugin_table( 'actor', 'honey' );
+
+		
+		$t_query_actor= 'select * FROM '.$t_repo_table_actor.' WHERE id_project='. db_param() .' and active = 0 and name='. db_param();
+			
+		$g_result_actor_name=db_query_bound( $t_query_actor, array( $t_project_id, $actor_name) );
+
+		$row = db_fetch_array( $g_result_actor_name );
+
+		$count_actors = db_num_rows( $g_result_actor_name);
+
+		$row_name=$row['name'];
+		
+		if($count_actors==0){//si no existe el actor
+    
+		    //actor insert
+			$t_repo_table_actor = plugin_table( 'actor', 'honey' );
+
+			$t_query_actor = 'INSERT INTO '.$t_repo_table_actor.' (name, description, id_project  )
+						VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
+			$g_result_insert_actor=db_query_bound( $t_query_actor, array( $actor_name, $actor_description, $t_project_id)  );
+
+			$id_actor_insert=mysql_insert_id();
+
+			$actores[$a] = $row_name;
+			$actores_id[$a] = $id_actor_insert;
+			
+
+		}
+		 if ($count_actors>0){ //si el actor existe
+
+			 //me guardo los datos para relacionarlo con el nuevo caso de uso
+		     $actores[$a] = $row_name;
+			 $actores_id[$a] = $row_name=$row['id'];
+			
+		 }
+			$a=$a+1;
+
+
+	}
+
+     /*FIN CREACION DE ACTORES*/ 
+
 	//por cada verbo
     while($row_search  = db_fetch_array( $result_search )){
 
@@ -98,7 +130,6 @@ if ($count > 0){
  
         //la noción en el verbo del LEL es el objetivo del CU
 		$uc_goal = $row_search['notion'];
-
 
 
 			/*
@@ -123,7 +154,7 @@ if ($count > 0){
 	    //vinculamos los actores: Si entre sus impactos tiene el nombre del actor insertamos un registro en usecase_actor
 
 		 $max = sizeof($actores);
-    
+
 		 for ($i = 0; $i <= $max; $i++) {
 					
 
@@ -132,15 +163,17 @@ if ($count > 0){
 				     $query_search_impact = 'SELECT *
 								  FROM '.$t_repo_table_impact.'
 								  WHERE id_symbol=' . db_param().'
+								  AND active = 0
 								  AND description LIKE "%'.$actores[$i].'%"';
 			        
 
 					$result_search_impact= db_query_bound($query_search_impact, array($verb_id));
 					
 					$count = db_num_rows($result_search_impact);
-
+					
+                   
 					if ($count > 0){
-					    
+					  
 					$idactor = $actores_id[$i];
                          
 						if ($idactor>0){
