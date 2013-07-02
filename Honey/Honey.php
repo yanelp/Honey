@@ -197,6 +197,91 @@ class HoneyPlugin extends MantisPlugin {
 				",
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
 		),
+		
+		 array('AddColumnSQL',array(plugin_table('symbol'),"
+				active	I1 NOTNULL DEFAULT '0'
+				",
+				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
+		),
+		 
+		 array('AddColumnSQL',array(plugin_table('synonymous'),"
+				active	I1 NOTNULL DEFAULT '0'
+				",
+				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
+		),
+		 
+		 array('AddColumnSQL',array(plugin_table('impact'),"
+				active	I1 NOTNULL DEFAULT '0'
+				",
+				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
+		),
+
+		 array('AddColumnSQL',array(plugin_table('usecase'),"
+				active	I1 NOTNULL DEFAULT '0'
+				",
+				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
+		),
+					
+		  array('AddColumnSQL',array(plugin_table('usecase_include'),"
+				active	I1 NOTNULL DEFAULT '0'
+				",
+				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
+		),
+		 
+		  array('AddColumnSQL',array(plugin_table('usecase_extend'),"
+				active	I1 NOTNULL DEFAULT '0'
+				",
+				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
+		),
+
+		  array('AddColumnSQL',array(plugin_table('actor'),"
+				active	I1 NOTNULL DEFAULT '0'
+				",
+				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
+		),
+		
+		    array('AddColumnSQL',array(plugin_table('usecase_actor'),"
+				active	I1 NOTNULL DEFAULT '0'
+				",
+				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
+		),
+
+		    array('AddColumnSQL',array(plugin_table('scenario'),"
+				active	I1 NOTNULL DEFAULT '0'
+				",
+				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
+		),
+
+			array('AddColumnSQL',array(plugin_table('rule'),"
+				active	I1 NOTNULL DEFAULT '0'
+				",
+				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
+		),
+		    
+			array('AddColumnSQL',array(plugin_table('interface'),"
+				active	I1 NOTNULL DEFAULT '0'
+				",
+				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
+		),
+			
+			array('AddColumnSQL',array(plugin_table('rule_scenario'),"
+				active	I1 NOTNULL DEFAULT '0'
+				",
+				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
+		),
+
+			array('AddColumnSQL',array(plugin_table('interface_scenario'),"
+				active	I1 NOTNULL DEFAULT '0'
+				",
+				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
+		),
+		
+			array('AddColumnSQL',array(plugin_table('uc_note'),"
+				active	I1 NOTNULL DEFAULT '0'
+				",
+				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
+		),
+
 
 );
 	}//function
