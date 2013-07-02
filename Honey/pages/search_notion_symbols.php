@@ -3,7 +3,8 @@ $t_repo_table = plugin_table( 'symbol', 'honey' );
 
 $query_notion = 'SELECT notion
 				 FROM '.$t_repo_table.' 
-				 where id=' . db_param();
+				 where id=' . db_param().'
+				 AND active = 0';
 
 $result_notion = db_query_bound( $query_notion, array($id_symbol) );
 $count_notion = db_num_rows( $result_notion );

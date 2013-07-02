@@ -3,7 +3,8 @@ $t_repo_table = plugin_table( 'impact', 'honey' );
 
 $query_impacts = 'SELECT * 
 				 FROM '.$t_repo_table.' 
-				 where id_symbol=' . db_param();
+				 where id_symbol=' . db_param().' 
+				 AND active = 0';
 
 $result_impacts = db_query_bound( $query_impacts, array($id_symbol) );
 $count_impacts = db_num_rows( $result_impacts );

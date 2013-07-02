@@ -39,7 +39,8 @@
 
 	$query_note = 'SELECT * 
 					 FROM '.$t_repo_table.' 
-					 where id=' . db_param();
+					 where id=' . db_param().'
+					 AND active = 0';
 
 	$result = db_query_bound( $query_note, array($f_uc_note_id) );
 	$count = db_num_rows( $result );

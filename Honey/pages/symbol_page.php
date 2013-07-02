@@ -23,7 +23,8 @@ $t_repo_table = plugin_table( 'symbol', 'honey' );
 
 $query_symbol = 'SELECT * 
 				 FROM '.$t_repo_table.' 
-				 where id=' . db_param();
+				 where id=' . db_param().'
+				 AND active = 0';
 
 $result = db_query_bound( $query_symbol, array($id_symbol) );
 $count = db_num_rows( $result );
@@ -71,7 +72,8 @@ $t_repo_table = plugin_table( 'synonymous', 'honey' );
 
 $query_synonymous = 'SELECT * 
 				 FROM '.$t_repo_table.' 
-				 where id_symbol=' . db_param();
+				 where id_symbol=' . db_param().'
+				 AND active = 0';
 
 $result_synonymous = db_query_bound( $query_synonymous, array($id_symbol) );
 $count_synonymous = db_num_rows( $result_synonymous );

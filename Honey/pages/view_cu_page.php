@@ -26,6 +26,7 @@ $t_repo_table = plugin_table( 'usecase', 'honey' );
 $query_symbol = 'SELECT id, name, goal, view_id, postconditions, observations, preconditions 
 				   FROM '.$t_repo_table.'
 				   where id_project=' . db_param().'
+				   AND active = 0
 				   ORDER BY name';
 
 $result = db_query_bound( $query_symbol, array($project_id) );

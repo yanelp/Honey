@@ -26,7 +26,8 @@ $t_repo_table = plugin_table( 'usecase', 'honey' );
 
 $query_symbol = 'SELECT * 
 				 FROM '.$t_repo_table.' 
-				 where id=' . db_param();
+				 where id=' . db_param().'
+				 AND active = 0';
 
 $result = db_query_bound( $query_symbol, array($id_usecase) );
 $count = db_num_rows( $result );
@@ -46,7 +47,8 @@ $t_repo_table2 = plugin_table( 'usecase_actor', 'honey' );
 
 $query_actors = 'SELECT a.name 
 				 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id=b.id_actor)
-				 where b.id_usecase=' . db_param();
+				 where b.id_usecase=' . db_param().'
+				 AND a.active = 0 AND b.active = 0';
 
 $result_actors = db_query_bound( $query_actors, array($id_usecase) );
 $count_actors = db_num_rows( $result_actors );
@@ -70,7 +72,7 @@ while( $row_actors = db_fetch_array( $result_actors )){
 
 	$query_main_scenario = 'SELECT a.steps, a.id 
 					 FROM '.$t_repo_table.' a
-					 where id_usecase=' . db_param().' and type=1';
+					 where id_usecase=' . db_param().' and type=1 and a.active = 0';
 
 	$result_main_scenario = db_query_bound( $query_main_scenario, array($id_usecase) );
 	$count_main_scenario = db_num_rows( $result_main_scenario );
@@ -85,7 +87,8 @@ while( $row_actors = db_fetch_array( $result_actors )){
 
 	$query_rules_scenario = 'SELECT b.name 
 					 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_rule=b.id)
-					 where id_scenario=' . db_param();
+					 where id_scenario=' . db_param().'
+					 AND a.active = 0 AND b.active = 0';
 
 	$result_rules_scenario = db_query_bound( $query_rules_scenario, array($id_scenario) );
 	$count_rules_scenario = db_num_rows( $result_rules_scenario );
@@ -108,7 +111,8 @@ while( $row_actors = db_fetch_array( $result_actors )){
 
 	$query_interface_scenario = 'SELECT b.description 
 						FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_interface=b.id)
-						where id_scenario=' . db_param();
+						where id_scenario=' . db_param().'
+						AND a.active = 0 AND b.active = 0';
 
 	$result_interface_scenario = db_query_bound( $query_interface_scenario, array($id_scenario) );
 			
@@ -131,7 +135,7 @@ while( $row_actors = db_fetch_array( $result_actors )){
 
 	$query_alternative_scenario = 'SELECT a.steps, a.id 
 					 FROM '.$t_repo_table.' a
-					 where id_usecase=' . db_param().' and type<>1';
+					 where id_usecase=' . db_param().' and active = 0 and type<>1';
 
 	$result_alternative_scenario = db_query_bound( $query_alternative_scenario, array($id_usecase) );
 
@@ -143,7 +147,8 @@ while( $row_actors = db_fetch_array( $result_actors )){
 
 	$query_parents = 'SELECT b.view_id 
 					 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_usecase_parent=b.id)
-					 where id_usecase_extends=' . db_param();
+					 where id_usecase_extends=' . db_param().'
+					 AND a.active = 0 AND b.active = 0';
 
 	$result_parents = db_query_bound( $query_parents, array($id_usecase) );
 	
@@ -166,7 +171,8 @@ while( $row_actors = db_fetch_array( $result_actors )){
 
 	$query_childs = 'SELECT b.view_id 
 					 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_usecase_include=b.id)
-					 where id_usecase_parent=' . db_param();
+					 where id_usecase_parent=' . db_param().'
+					 AND a.active = 0 AND b.active = 0';
 
 	$result_childs = db_query_bound( $query_childs, array($id_usecase) );
 	
@@ -248,7 +254,8 @@ while( $row_actors = db_fetch_array( $result_actors )){
 
 			$query_rules_alt_scenario = 'SELECT b.name 
 							 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_rule=b.id)
-							 where id_scenario=' . db_param();
+							 where id_scenario=' . db_param().'
+							 AND a.active = 0 AND b.active = 0';
 
 			$result_rules_alt_scenario = db_query_bound( $query_rules_alt_scenario, array($id_alternative_scenario) );
 			
@@ -273,7 +280,8 @@ while( $row_actors = db_fetch_array( $result_actors )){
 
 			$query_interface_alt_scenario = 'SELECT b.description 
 							 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_interface=b.id)
-							 where id_scenario=' . db_param();
+							 where id_scenario=' . db_param().'
+							 AND a.active = 0 AND b.active = 0';
 
 			$result_interface_alt_scenario = db_query_bound( $query_interface_alt_scenario, array($id_alternative_scenario) );
 			
@@ -308,7 +316,8 @@ $t_uc_note_table = plugin_table( 'uc_note','honey' );
 $t_user_table = db_get_table( 'mantis_user_table' );
 $query_note = "SELECT a.id, a.id_uc, a.note, a.reporter_id, a.view_state, a.date_submitted,a.last_modified, b.username, b.access_level
 					  FROM ".$t_uc_note_table." a inner join  ".$t_user_table." b on (a.reporter_id=b.id)
-					  WHERE id_uc =" . db_param() . " ";
+					  WHERE id_uc =" . db_param() . " and a.active=0";
+
 $result_note = db_query_bound( $query_note,  array($id_usecase) );
 
 $count_notes = db_num_rows( $result_note );

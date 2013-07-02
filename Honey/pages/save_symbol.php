@@ -84,7 +84,7 @@ else{//busco si el simbolo ya existe
 
 	$t_repo_table = plugin_table( 'symbol', 'honey' );
 
-	$t_query_symbol_name = 'select name FROM '.$t_repo_table.' WHERE id_project=' . db_param() .' and name=' . db_param();
+	$t_query_symbol_name = 'select name FROM '.$t_repo_table.' WHERE id_project=' . db_param() .' and active = 0 and name=' . db_param();
 		
 	$g_result_symbol_name=db_query_bound( $t_query_symbol_name, array( $t_project_id, $name) );
 
