@@ -11,7 +11,6 @@ function print_lel_menu( $p_page = '' ) {
 		print_bracket_link(  plugin_page( 'view_symbols_page' ), plugin_lang_get( 'Lel_view_symbols_link' ) );
 	}
 
-
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE' );
 	$t_menu_options = array();
@@ -46,7 +45,18 @@ function print_cu_menu( $p_page = '' ) {
 	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
 		print_bracket_link(  plugin_page( 'view_cu_page' ), plugin_lang_get( 'usecase_view_cu_link' ) );
 	}
-	
+	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+		print_bracket_link(  plugin_page( 'new_rule_page' ), plugin_lang_get( 'new_rule_link' ) );
+	}
+	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+		print_bracket_link(  plugin_page( 'view_rules_page' ), plugin_lang_get( 'view_rule_link' ) );
+	}
+	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+		print_bracket_link(  plugin_page( 'new_actor_page' ), plugin_lang_get( 'new_actor_link' ) );
+	}
+	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+		print_bracket_link(  plugin_page( 'view_actors_page' ), plugin_lang_get( 'view_actor_link' ) );
+	}
 
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE' );
