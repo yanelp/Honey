@@ -28,14 +28,14 @@ $t_commit_regexp = config_get( 'source_control_regexp' );
 $t_commit_regexp_honey = config_get( 'source_control_regexp_honey' );
 
 $t_commit_fixed_regexp = config_get( 'source_control_fixed_regexp' );
-$t_commit_fixed_regexp_honey = config_get( 'source_control_fixed_regexp_honey' );
+//$t_commit_fixed_regexp_honey = config_get( 'source_control_fixed_regexp_honey' );
 
 
 $t_comment = '';
 $t_issues = array();
 $t_fixed_issues = array();
 $t_use_cases = array();
-$t_fixed_use_cases = array();
+//$t_fixed_use_cases = array();
 
 
 while(( $t_line = fgets( STDIN, 1024 ) ) ) {
@@ -61,12 +61,12 @@ while(( $t_line = fgets( STDIN, 1024 ) ) ) {
 		}
 	}
 
-	if( preg_match_all( $t_commit_fixed_regexp_honey, $t_line, $t_matches ) ) {
+/*	if( preg_match_all( $t_commit_fixed_regexp_honey, $t_line, $t_matches ) ) {
 		$t_count = count( $t_matches[0] );
 		for( $i = 0;$i < $t_count;++$i ) {
 			$t_fixed_use_cases[] = $t_matches[1][$i];
 		}
-	}
+	}*/
 
 }
 
@@ -124,7 +124,7 @@ if( !auth_attempt_script_login( $t_username ) ) {
 
 # add note to each use case only once
 $t_use_cases = array_unique( $t_use_cases );
-$t_fixed_use_cases = array_unique( $t_fixed_use_cases );
+//$t_fixed_use_cases = array_unique( $t_fixed_use_cases );
 
 # Call the custom function to register the checkin on each use case.
 
@@ -133,17 +133,17 @@ foreach( $t_use_cases as $t_use_case_id ) {
 		//helper_call_custom_function( 'checkin', array( $t_use_case_id, $t_comment, $t_history_old_value_honey, $t_history_new_value_honey, false ) );
 		//en vez de llamar a checkin tendriamos que llamar a nuestra funcion add_uc_comment() que inserte en honey_uc_notes
 
-		add_uc_note( $id_uc,$t_comment,$t_use_case_id );
+		add_uc_note( $t_use_case_id,$t_comment );
 
 	}
 }
 
-foreach( $t_fixed_use_cases as $t_use_case_id ) {
+/*foreach( $t_fixed_use_cases as $t_use_case_id ) {
 	//helper_call_custom_function( 'checkin', array( $t_use_case_id, $t_comment, $t_history_old_value_honey, $t_history_new_value_honey, true ) );
 	//en vez de llamar a checkin tendriamos que llamar a nuestra funcion add_uc_comment() que inserte en honey_uc_notes
 	
 	add_uc_note( $id_uc,$t_comment,$t_use_case_id );
-}
+}*/
 
 
 exit( 0 );

@@ -36,7 +36,8 @@ EVENT_LAYOUT_RESOURCES
 	<tr>
 		<td class="form-title" colspan="2">
 			<input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
-			<?php echo lang_get( 'plugin_Honey_usecase_detail' )." ".$view_id ?>
+			<?php //echo lang_get( 'plugin_Honey_usecase_detail' )." ".$view_id ?>
+			<?php echo lang_get( 'plugin_Honey_usecase_detail' )?>
 	        <input type="hidden" name="view_id" value="<?php echo $view_id ?>" />
 		</td>
 	</tr>

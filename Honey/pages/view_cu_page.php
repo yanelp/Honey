@@ -55,11 +55,12 @@ if ($count != 0) {
 
 <?php 	while( $row = db_fetch_array( $result ) ){
 	$t_page=$t_page."&id_usecase=".$row['id'];
+	$id= str_pad($row['id'], 7, "0", STR_PAD_LEFT);
 	?>
 		<tr <?php echo helper_alternate_class() ?>>
 
 			<td>
-				<?php echo "<a href=\"$t_page\">".$row['view_id']."</a>";?>
+				<?php echo "<a  href=\"$t_page\">".$id."</a>";?>
 			</td>
 			<td>
 				<?php echo $row['name'];?>

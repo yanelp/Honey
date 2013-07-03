@@ -35,7 +35,8 @@ $row = db_fetch_array( $result );
 
 $name=$row['name'];
 $observation=$row['observations'];
-$id=$row['view_id'];
+$id=$row['id'];
+$id= str_pad($row['id'], 7, "0", STR_PAD_LEFT);
 $precond=$row['preconditions'];
 $postcond=$row['postconditions'];
 $goal=$row['goal'];
