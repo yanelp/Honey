@@ -4,7 +4,10 @@
 	$s_plugin_Honey_title = 'Módulo Honey';
 	$s_plugin_Honey_description = 'Módulo que incorpora LEL y trazabilidad a MantisBT';
 	$s_plugin_Honey_lel_link = 'LEL';
-	$s_plugin_Honey_trace_link = 'Traza';
+	$s_plugin_Honey_view_rule_link = 'Ver Reglas';
+	$s_plugin_Honey_new_rule_link = 'Nueva Regla';
+	$s_plugin_Honey_new_actor_link = 'Nuevo Actor';
+	$s_plugin_Honey_view_actor_link = 'Ver Actores';
 	$s_plugin_Honey_Lel_symbol_link='New Symbol';
 	$s_plugin_Honey_Lel_view_symbols_link='Ver símbolos';
 	$s_plugin_Honey_not_found='No encontrado';

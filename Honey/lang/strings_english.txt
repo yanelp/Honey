@@ -5,7 +5,10 @@
 	$s_plugin_Honey_title = 'Honey Plugin';
 	$s_plugin_Honey_description = 'Plugin add LEL and tracebility to MantisBT';
 	$s_plugin_Honey_lel_link = 'LEL';
-	$s_plugin_Honey_trace_link = 'Trace';
+	$s_plugin_Honey_view_rule_link = 'View Rules';
+	$s_plugin_Honey_new_rule_link = 'New Rule';
+	$s_plugin_Honey_new_actor_link = 'New Actor';
+	$s_plugin_Honey_view_actor_link = 'View Actors';
 	$s_plugin_Honey_Lel_symbol_link='New Symbol';
 	$s_plugin_Honey_Lel_view_symbols_link='View symbols';
 	$s_plugin_Honey_not_found='Not found';

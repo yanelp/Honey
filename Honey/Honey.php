@@ -296,31 +296,17 @@ class HoneyPlugin extends MantisPlugin {
 			
 			$t_links = array();
 			$t_page = plugin_page( 'indexLel' );
-			//$t_page = plugin_page( 'new_subject_page' );
 			$t_lang = plugin_lang_get( 'lel_link' );
 			$t_links[] = "<a href=\"$t_page\">$t_lang</a>";
 
 			$t_page = plugin_page( 'indexCU' );
-			//$t_page = plugin_page( 'new_subject_page' );
 			$t_lang = plugin_lang_get( 'usecase_link' );
 			$t_links[] = "<a href=\"$t_page\">$t_lang</a>";
-
 			
 			return $t_links;
 
 
 		}
-
-	/*	$t_links = array();
-		$t_links=print_menu_lel($t_links);
-		$t_page = plugin_page( 'indexTrace' );
-		$t_lang = plugin_lang_get( 'trace_link' );
-		$t_links[] = "<a href=\"$t_page\">$t_lang</a>";
-
-		return $t_links;
-	*/
-
-	//}
 
 	
 	function include_js(){
