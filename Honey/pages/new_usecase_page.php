@@ -3,6 +3,7 @@
 require_once('functions.php');
 require_once( 'core.php' );
 require_once('manage_sequences.php');
+require_once( 'file_api.php' );
 
 
 html_page_top( plugin_lang_get( 'title' ) );
@@ -102,13 +103,96 @@ EVENT_LAYOUT_RESOURCES
 		</td>
 	  </tr>
 
-<tr>
+      <!--aca van las reglas-->
+	  <tr <?php echo helper_alternate_class() ?>>
+		<td colspan="2" class="none">
+			<?php 
+			if( ON == config_get( 'use_javascript' ) ) { ?>
+				<?php collapse_open( 'profile' ); collapse_icon('profile'); echo 'Asignar Reglas';
+
+				//busco todas las reglas del proyecto
+
+				$t_repo_table = plugin_table( 'rule', 'honey' );
+
+				$query_rules = 'SELECT * 
+								 FROM '.$t_repo_table.' 
+								 where id_project=' . db_param().'';
+
+				$result_rules = db_query_bound( $query_rules, array($project_id) );
+				$count_rules = db_num_rows( $result_rules );
+
+				$j=0;
+
+			}?>
+			<table>
+				<?php while( $row_rules = db_fetch_array( $result_rules )){?>
+				<tr>
+					<td><input type="checkbox" name="ck_rule_<?php echo $j?>"/></td>
+					<td><?php echo $row_rules['name'] ?></td>
+				</tr>
+				<?php } ?>
+			</table>
+
+			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
+				<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo 'Asignar Reglas';?>
+				<?php collapse_end( 'profile' ); ?>
+			<?php } ?>
+		</td>
+	  </tr>		
+<!--aca terminan las reglas-->
+
+<!--aca va el archivo-->
+
+<?php
+	// File Upload (if enabled)
+		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+		//$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
+?>
+	 <tr <?php echo helper_alternate_class() ?>>
+		<td colspan="2" class="none">
+			<?php 
+			if( ON == config_get( 'use_javascript' ) ) { ?>
+				<?php collapse_open( 'profile2' ); collapse_icon('profile2'); echo 'Adjuntar Pantallas';?>
+		
+				<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
+
+				<table>
+					<tr><td><?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
+					<?php echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?></td></tr>
+					<tr>
+						<td>
+							<?php
+							// Display multiple file upload fields
+							for( $i = 0; $i < 10; $i++ ) {?>
+
+								<input <?php echo helper_get_tab_index() ?> id="ufile[]" name="ufile[]" type="file" size="50" />
+								<br>
+								
+							<?php 
+							}//for	?>
+						</td>
+					</tr>
+				</table>
+
+			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
+				<?php collapse_closed( 'profile2' ); collapse_icon('profile2'); echo 'Adjuntar Pantallas';?>
+				<?php collapse_end( 'profile2' ); ?>
+			<?php }
+		}//if( ON == config_get ?>
+		</td>
+	  </tr>	
+
+
+<!--aca termina lo del archivo-->
+
+
+	  <tr>
 		<td class="left">
 			<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
 		</td>
 
-	<td class="center"><input type='submit' name='button_ok' value='Save' onclick='validar();'>
-	<input type='button' name='button_cancel' value='Cancel'  onClick="javascript:go_page(null, null,'<?php echo $t_page?>')"></td>
+		<td class="center"><input type='submit' name='button_ok' value='Save' onclick='validar();'>
+		<input type='button' name='button_cancel' value='Cancel'  onClick="javascript:go_page(null, null,'<?php echo $t_page?>')"></td>
 	</tr>
 
 </table>
