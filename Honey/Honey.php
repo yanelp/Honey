@@ -79,6 +79,14 @@ class HoneyPlugin extends MantisPlugin {
   
 	//CREACION DE MODELO PARA CASOS DE USO
 
+	array( 'CreateTableSQL', array( plugin_table( 'derivation' ), "
+				id		    	I		NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
+				date		    T NOTNULL DEFAULT '0',
+				active 			I1 NOTNULL DEFAULT '0'
+				",
+				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
+			),
+
 	  array( 'CreateTableSQL', array( plugin_table( 'usecase' ), "
 				id		    	I		NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
 				name		C(50)	NOTNULL DEFAULT \" '' \" , 
@@ -86,8 +94,8 @@ class HoneyPlugin extends MantisPlugin {
 				postconditions  C(255) ,	
 				observations    C(255) ,	
 				preconditions   C(255) ,
-				id_derivation   I,
-				id_symbol		I,
+				id_derivation   I  NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_derivation_table.id',
+				id_symbol		I  NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_symbol_table.id',
 				id_project       I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_project_table.id'
 				",
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
@@ -115,8 +123,8 @@ class HoneyPlugin extends MantisPlugin {
 				id		    	I		NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
 				name		    C(50)	NOTNULL DEFAULT \" '' \" ,
 				description		B,
-				id_derivation   I, 
-				id_symbol		I,
+				id_derivation   I  NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_derivation_table.id',
+				id_symbol		I  NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_symbol_table.id',
 				id_project I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_project_table.id'
 				",
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
@@ -140,7 +148,7 @@ class HoneyPlugin extends MantisPlugin {
 			),
 
 	     array( 'CreateTableSQL', array( plugin_table( 'rule' ), "
-				id		    	I		NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,,
+				id		    	I		NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
 				name			C(50)	NOTNULL DEFAULT \" '' \" ,
 				description		B ,
 				id_project I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_project_table.id'
@@ -179,7 +187,7 @@ class HoneyPlugin extends MantisPlugin {
 		),
 	    	
 		
-		 array('AddColumnSQL',array(plugin_table('symbol'),"
+		/* array('AddColumnSQL',array(plugin_table('symbol'),"
 				active	I1 NOTNULL DEFAULT '0'
 				",
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
@@ -195,7 +203,7 @@ class HoneyPlugin extends MantisPlugin {
 				active	I1 NOTNULL DEFAULT '0'
 				",
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
-		),
+		),*/
 
 		 array('AddColumnSQL',array(plugin_table('usecase'),"
 				active	I1 NOTNULL DEFAULT '0'
@@ -238,24 +246,6 @@ class HoneyPlugin extends MantisPlugin {
 				",
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
 		),
-		    
-			array('AddColumnSQL',array(plugin_table('interface'),"
-				active	I1 NOTNULL DEFAULT '0'
-				",
-				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
-		),
-			
-			array('AddColumnSQL',array(plugin_table('rule_scenario'),"
-				active	I1 NOTNULL DEFAULT '0'
-				",
-				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
-		),
-
-			array('AddColumnSQL',array(plugin_table('interface_scenario'),"
-				active	I1 NOTNULL DEFAULT '0'
-				",
-				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
-		),
 		
 			array('AddColumnSQL',array(plugin_table('uc_note'),"
 				active	I1 NOTNULL DEFAULT '0'
@@ -263,13 +253,6 @@ class HoneyPlugin extends MantisPlugin {
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
 		),
 
-		array( 'CreateTableSQL', array( plugin_table( 'derivation' ), "
-				id		    	I		NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
-				date		    T NOTNULL DEFAULT '0',
-				active 			I1 NOTNULL DEFAULT '0'
-				",
-				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
-			),
 );
 	}//function
 
