@@ -83,10 +83,11 @@ class HoneyPlugin extends MantisPlugin {
 				id		    	I		NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
 				name		C(50)	NOTNULL DEFAULT \" '' \" , 
 				goal		B , 
-				view_id     C(10)	NOTNULL DEFAULT \" '' \"  ,
 				postconditions  C(255) ,	
 				observations    C(255) ,	
 				preconditions   C(255) ,
+				id_derivation   I,
+				id_symbol		I,
 				id_project       I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_project_table.id'
 				",
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
@@ -113,6 +114,9 @@ class HoneyPlugin extends MantisPlugin {
 		array( 'CreateTableSQL', array( plugin_table( 'actor' ), "
 				id		    	I		NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
 				name		    C(50)	NOTNULL DEFAULT \" '' \" ,
+				description		B,
+				id_derivation   I, 
+				id_symbol		I,
 				id_project I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_project_table.id'
 				",
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
@@ -136,46 +140,28 @@ class HoneyPlugin extends MantisPlugin {
 			),
 
 	     array( 'CreateTableSQL', array( plugin_table( 'rule' ), "
-				id		    	I		NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
-				view_id         C(10)	NOTNULL DEFAULT \" '' \"  ,
+				id		    	I		NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,,
 				name			C(50)	NOTNULL DEFAULT \" '' \" ,
 				description		B ,
 				id_project I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_project_table.id'
 				",
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
 			),
-
-			array( 'CreateTableSQL', array( plugin_table( 'interface' ), "
-				id		    	I		NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
-				view_id         C(10)	NOTNULL DEFAULT \" '' \"  ,
-				description		B ,
-				file			B ,
-				id_project I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_project_table.id'
-				",
-				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
-			),
-	
 			
-		array( 'CreateTableSQL', array( plugin_table( 'rule_scenario' ), "
+		  array( 'CreateTableSQL', array( plugin_table( 'rule_usecase' ), "
 				id		    	I		NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
 				id_rule			I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_rule_table.id',
-				id_scenario		I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_scenario_table.id'
+				id_usecase		I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_usecase_table.id'
 				",
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
 			),
 
-		array( 'CreateTableSQL', array( plugin_table( 'interface_scenario' ), "
+		array( 'CreateTableSQL', array( plugin_table( 'file_usecase' ), "
 				id		    	I		NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
-				id_interface			I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_interface_table.id',
-				id_scenario		I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_scenario_table.id'
-				",
-				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
-		),
-
-		array( 'CreateTableSQL', array( plugin_table( 'sequence' ), "
-				id		    	I		NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
-				name			C(50)	NOTNULL DEFAULT \" '' \"  ,
-				value		    I NOTNULL  
+				content			B ,
+				filename		C(250),
+				file_type		C(250),
+				id_usecase		I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_usecase_table.id'
 				",
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
 		),
@@ -192,11 +178,6 @@ class HoneyPlugin extends MantisPlugin {
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
 		),
 	    	
-		 array('AddColumnSQL',array(plugin_table('actor'),"
-				description	B
-				",
-				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
-		),
 		
 		 array('AddColumnSQL',array(plugin_table('symbol'),"
 				active	I1 NOTNULL DEFAULT '0'
@@ -282,7 +263,13 @@ class HoneyPlugin extends MantisPlugin {
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
 		),
 
-
+		array( 'CreateTableSQL', array( plugin_table( 'derivation' ), "
+				id		    	I		NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
+				date		    T NOTNULL DEFAULT '0',
+				active 			I1 NOTNULL DEFAULT '0'
+				",
+				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
+			),
 );
 	}//function
 

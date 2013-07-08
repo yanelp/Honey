@@ -146,7 +146,7 @@ while( $row_actors = db_fetch_array( $result_actors )){
 	$t_repo_table = plugin_table( 'usecase_extend', 'honey' );
 	$t_repo_table2 = plugin_table( 'usecase', 'honey' );
 
-	$query_parents = 'SELECT b.view_id 
+	$query_parents = 'SELECT b.id, b.name 
 					 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_usecase_parent=b.id)
 					 where id_usecase_extends=' . db_param().'
 					 AND a.active = 0 AND b.active = 0';
@@ -157,10 +157,10 @@ while( $row_actors = db_fetch_array( $result_actors )){
 	
 	while( $row_parents = db_fetch_array( $result_parents )){
 		if($parents==''){
-			$parents=$row_parents['view_id'];
+			$parents=$row_parents['id'].'-'.$row_parents['name'];
 		}
 		else{
-			$parents=$parents.', '.$row_parents['view_id'];
+			$parents=$parents.', '.$row_parents['id'].'-'.$row_parents['name'];
 			}
 	}//while
 
@@ -170,7 +170,7 @@ while( $row_actors = db_fetch_array( $result_actors )){
 	$t_repo_table = plugin_table( 'usecase_include', 'honey' );
 	$t_repo_table2 = plugin_table( 'usecase', 'honey' );
 
-	$query_childs = 'SELECT b.view_id 
+	$query_childs = 'SELECT b.id , b.name
 					 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_usecase_include=b.id)
 					 where id_usecase_parent=' . db_param().'
 					 AND a.active = 0 AND b.active = 0';
@@ -180,10 +180,10 @@ while( $row_actors = db_fetch_array( $result_actors )){
 	$childs='';
 		while( $row_childs = db_fetch_array( $result_childs )){
 			if($childs==''){
-				$childs=$row_childs['view_id'];
+				$childs=$row_childs['id'].'-'.$row_childs['name'];
 			}
 			else{
-				$childs=$childs.', '.$row_childs['view_id'];
+				$childs=$childs.', '.$row_childs['id'].'-'.$row_childs['name'];
 				}
 		}//while
 

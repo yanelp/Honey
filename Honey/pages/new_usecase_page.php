@@ -20,8 +20,8 @@ if ( ( ALL_PROJECTS == helper_get_current_project() ) && ( 0 == $f_master_bug_id
 
 //Generación de la identificación del CU visible por el usuario
 
-$nextId = getNextSeq("usecase_secuence");
-$view_id = "CU_".$nextId;
+/*$nextId = getNextSeq("usecase_secuence");
+$view_id = "CU_".$nextId;*/
 
 $t_page=plugin_page("new_usecase_page");
 
@@ -39,7 +39,7 @@ EVENT_LAYOUT_RESOURCES
 			<input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
 			<?php //echo lang_get( 'plugin_Honey_usecase_detail' )." ".$view_id ?>
 			<?php echo lang_get( 'plugin_Honey_usecase_detail' )?>
-	        <input type="hidden" name="view_id" value="<?php echo $view_id ?>" />
+	       <!-- <input type="hidden" name="view_id" value="<?php echo $view_id ?>" />-->
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>

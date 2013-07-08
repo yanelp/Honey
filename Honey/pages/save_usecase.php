@@ -21,7 +21,7 @@ $preconditions=$_REQUEST['preconditions'];
 $postconditions=$_REQUEST['postconditions'];
 $obsevations=$_REQUEST['obsevations'];
 $mainscenario=$_REQUEST['cursoNormal'];
-$view_id=$_REQUEST['view_id'];
+//$view_id=$_REQUEST['view_id'];
 $row_number_uc_actor=$_REQUEST['row_number_uc_actor'];
 
 
@@ -44,10 +44,10 @@ die();
 
 $t_repo_table = plugin_table( 'usecase', 'honey' );
 
-$t_query_symbol = 'INSERT INTO '.$t_repo_table.' (name, goal, view_id, postconditions, observations, preconditions, id_project)
-			VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' , ' . db_param() . ')';
+$t_query_symbol = 'INSERT INTO '.$t_repo_table.' (name, goal, postconditions, observations, preconditions, id_project)
+			VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' , ' . db_param() . ')';
 
-$g_result_insert_symbol=db_query_bound( $t_query_symbol, array( $name, $goal, $view_id, $postconditions, $obsevations, $preconditions, $t_project_id)  );
+$g_result_insert_symbol=db_query_bound( $t_query_symbol, array( $name, $goal, $postconditions, $obsevations, $preconditions, $t_project_id)  );
 
 $id_usecase=mysql_insert_id();
 
