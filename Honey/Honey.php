@@ -253,6 +253,12 @@ class HoneyPlugin extends MantisPlugin {
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
 		),
 
+			array('AddColumnSQL',array(plugin_table('derivation'),"
+				id_project I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_project_table.id'
+				",
+				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
+			),
+
 );
 	}//function
 
