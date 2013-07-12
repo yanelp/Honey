@@ -94,8 +94,8 @@ class HoneyPlugin extends MantisPlugin {
 				postconditions  C(255) ,	
 				observations    C(255) ,	
 				preconditions   C(255) ,
-				id_derivation   I  NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_derivation_table.id',
-				id_symbol		I  NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_symbol_table.id',
+				id_derivation   I    CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_derivation_table.id',
+				id_symbol		I    CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_symbol_table.id',
 				id_project       I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_project_table.id'
 				",
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
@@ -123,8 +123,8 @@ class HoneyPlugin extends MantisPlugin {
 				id		    	I		NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
 				name		    C(50)	NOTNULL DEFAULT \" '' \" ,
 				description		B,
-				id_derivation   I  NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_derivation_table.id',
-				id_symbol		I  NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_symbol_table.id',
+				id_derivation   I    CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_derivation_table.id',
+				id_symbol		I    CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_symbol_table.id',
 				id_project I NOTNULL  CONSTRAINTS 'FOREIGN KEY REFERENCES bugtracker.mantis_project_table.id'
 				",
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )

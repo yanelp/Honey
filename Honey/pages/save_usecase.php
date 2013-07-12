@@ -21,8 +21,8 @@ $preconditions=$_REQUEST['preconditions'];
 $postconditions=$_REQUEST['postconditions'];
 $obsevations=$_REQUEST['obsevations'];
 $mainscenario=$_REQUEST['cursoNormal'];
-//$view_id=$_REQUEST['view_id'];
 $row_number_uc_actor=$_REQUEST['row_number_uc_actor'];
+$row_number_uc_rule=$_REQUEST['row_number_uc_rule'];
 
 
 
@@ -77,19 +77,18 @@ $t_repo_table = plugin_table( 'actor', 'honey' );
 $description = ""; //la descripción es vacia para los actores agregados desde el formulario de nuevo caso de uso. 
  
 for($i=0; $i<$row_number_uc_actor; $i++){
-
-	$t_query_actors = 'INSERT INTO '.$t_repo_table.' (name, id_project, description)
-				VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	$g_result_insert_actors=db_query_bound( $t_query_actors, array( $_REQUEST['uc_actor'.$i], $t_project_id, $description)  );
 	
-	$id_actor =mysql_insert_id();
+	if($_POST['ck_actor_'.$i]=='on'){
+	
+		$id_actor=$_POST['id_actor_'.$i];
+		
+		$t_repo_table_uc_actor= plugin_table( 'usecase_actor', 'honey' );
 
-	$t_repo_table_uc_actor= plugin_table( 'usecase_actor', 'honey' );
+		$t_query_uc_actor = 'INSERT INTO '.$t_repo_table_uc_actor.' (id_usecase, id_actor)
+					VALUES ( ' . db_param() . ', ' . db_param() .')';
+		$g_result_insert_actors= db_query_bound( $t_query_uc_actor,  array($id_usecase, $id_actor));
 
-	$t_query_uc_actor = 'INSERT INTO '.$t_repo_table_uc_actor.' (id_usecase, id_actor)
-				VALUES ( ' . db_param() . ', ' . db_param() .')';
-	$g_result_insert_actors= db_query_bound( $t_query_uc_actor,  array($id_usecase, $id_actor));
-     
+	}		 
 }
 
 echo "<p>Saved data</p>";

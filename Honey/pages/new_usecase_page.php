@@ -44,7 +44,7 @@ EVENT_LAYOUT_RESOURCES
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		   <td class="category">
-		   <span class="required">*</span>Nombre del caso de uso
+		   <span class="required">*</span>Name of the use case
 		</td>
 		<td>
 	      <input type="text" name="cu_name" id='cu_name' size="133">
@@ -52,15 +52,15 @@ EVENT_LAYOUT_RESOURCES
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		 <td class="category">
-		    Objetivo
+		    Objetive
 		</td>
 		<td>
 		   <Textarea cols="100" name="goal" id="goal"></Textarea>
 		</td>
 	</tr>
-	<tr <?php echo helper_alternate_class() ?>>
+	<!--<tr <?php echo helper_alternate_class() ?>>
 		 <td class="category">
-		    Actores Involucrados
+		    Actores Involucrados no va mas
 		</td>
 		<td><input type='text' name='uc_actor' id='uc_actor' size="133"/>
 			<input type='button' name='button_actor_add' value='Agregar Actor' onClick="javascript:insert_row('table_actors','uc_actor',document.getElementById('uc_actor').value)"/>
@@ -69,26 +69,58 @@ EVENT_LAYOUT_RESOURCES
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">&nbsp;</td>
 		<td><table name='table_actors' id='table_actors' ><thead></thead><tbody></tbody></table></td>
-	 </tr>
+	 </tr>-->
+
+	<?php
+		//busco todos los actores del proyecto
+
+		$t_repo_table = plugin_table( 'actor', 'honey' );
+
+		$query_actors = 'SELECT * 
+						 FROM '.$t_repo_table.' 
+						 where id_project=' . db_param().' and active=0';
+
+		$result_actors = db_query_bound( $query_actors, array($project_id) );
+		$count_actors = db_num_rows( $result_actors);
+	?>
 	<tr <?php echo helper_alternate_class() ?>>
 		 <td class="category">
-		    Pre-condiciones
+		    Actores Involved
 		</td>
 		<td>
-		  <Textarea cols="100"  name="preconditions" id="preconditions"></Textarea>
+			<table>
+				<?php while( $row_actors = db_fetch_array( $result_actors )){?>
+				<tr>
+					<td><input type="checkbox" name="ck_actor_<?php echo $j?>"/>
+					<input type="hidden" name="id_actor_<?php echo $j?>" id="id_actor_<?php echo $j?>" value="<?php echo $row_actors['id'] ?>"/></td>
+					<td><?php echo $row_actors['name'] ?></td>
+				</tr>
+				<?php } ?>
+			</table>
+
+			<?php if($count_actors==0){echo "<p class='category'> No actors created for this project<p>";}?>
+		</td>
+	</tr>
+
+	<tr <?php echo helper_alternate_class() ?>>
+		 <td class="category">
+		    Pre-conditions
+		</td>
+		<td>
+		  <Textarea cols="100" rows="5"  name="preconditions" id="preconditions"></Textarea>
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		 <td class="category">
-		    Post-condiciones
+		    Post-conditions
 		</td>
 		<td>
-	     <Textarea cols="100" name="postconditions" id="postconditions"></Textarea>
+	     <Textarea cols="100" rows="5" name="postconditions" id="postconditions"></Textarea>
 		</td>
 	 </tr>
      <tr <?php echo helper_alternate_class() ?>>
 		 <td class="category">
-		    Observaciones
+		    Observations
 		</td>
 		<td>
 	      <Textarea cols="100" name="obsevations" id="obsevations" ></Textarea>
@@ -96,11 +128,25 @@ EVENT_LAYOUT_RESOURCES
 	  </tr>
 	  <tr <?php echo helper_alternate_class() ?>>
 		 <td class="category">
-		 <span class="required">*</span>Curso Normal
+		 <span class="required">*</span> Normal Course
 		</td>
 		<td>
 	      <Textarea cols="100" rows="15" name="cursoNormal" id="cursoNormal"></Textarea>
 		</td>
+	  </tr>
+	   <tr <?php echo helper_alternate_class() ?>>
+		 <td class="category">
+		 <span class="required">*</span> Alternative Course
+		</td>
+		<td>
+	      <Textarea cols="100" rows="5" name="cursoAlternativo" id="cursoAlternativo"></Textarea>
+		  <input type='button' name='button_actor_add' value='Add alternative course' onClick="javascript:insert_row_course('table_course','cursoAlternativo',document.getElementById('cursoAlternativo').value)"/>
+		</td>
+	</tr>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">&nbsp;</td>
+		<td><table name='table_course' id='table_course' ><thead></thead><tbody valign="bottom"></tbody></table></td>
+	 </tr>
 	  </tr>
 
       <!--aca van las reglas-->
@@ -116,7 +162,7 @@ EVENT_LAYOUT_RESOURCES
 
 				$query_rules = 'SELECT * 
 								 FROM '.$t_repo_table.' 
-								 where id_project=' . db_param().'';
+								 where id_project=' . db_param().' and active=0';
 
 				$result_rules = db_query_bound( $query_rules, array($project_id) );
 				$count_rules = db_num_rows( $result_rules );
@@ -127,11 +173,14 @@ EVENT_LAYOUT_RESOURCES
 			<table>
 				<?php while( $row_rules = db_fetch_array( $result_rules )){?>
 				<tr>
-					<td><input type="checkbox" name="ck_rule_<?php echo $j?>"/></td>
+					<td><input type="checkbox" name="ck_rule_<?php echo $j?>"/>
+					<input type="hidden" name="id_rule_<?php echo $j?>" id="id_rule_<?php echo $j?>" value="<?php echo $row_rules['id'] ?>"/></td>
 					<td><?php echo $row_rules['name'] ?></td>
 				</tr>
 				<?php } ?>
 			</table>
+
+			<?php if($count_rules==0){echo "<p class='category'> No rules created for this project<p>";}?>
 
 			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
 				<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo 'Asignar Reglas';?>
@@ -196,8 +245,9 @@ EVENT_LAYOUT_RESOURCES
 	</tr>
 
 </table>
-
-<input type='hidden' name='row_number_uc_actor' id='row_number_uc_actor' value='0'/>
+<input type='hidden' name='row_number_cursoAlternativo' id='row_number_cursoAlternativo' value='0'/>
+<input type='hidden' name='row_number_uc_actor' id='row_number_uc_actor' value='<?php $count_actors ?>'/>
+<input type='hidden' name='row_number_uc_rule' id='row_number_uc_rule' value='<?php $count_rules ?>'/>
 <input type="hidden" name="operation" id="operation" value="1"/>
 </div>
 </form>

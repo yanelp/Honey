@@ -30,6 +30,42 @@ function insert_row(tabla, campo, valor){
 	}
 }
 
+
+function insert_row_course(tabla, campo, valor){
+
+	if(valor!=''){
+		
+		
+		//busco si hay enter
+		valor=escape(valor); //pone %0 en cada enter y %20 en cada espacio
+		n=valor.search("%0"); //devuelve la pos donde encuentra el enter
+		renglon=valor.substring(0,n);
+		largo=valor.length;
+		x=0;
+		var escenario="";
+		while(n!=-1){
+		
+			//me quedo con el primer renglon
+			if(x!=0){renglon=valor.substring(0,n);}
+			x=1;
+			renglon=unescape(renglon);
+			if(x==0){escenario=renglon;}
+			else{escenario=escenario+renglon+'<br>';}
+			valor=valor.substring(n+3,largo);
+			n=valor.search("%0"); 
+		}
+		if(n=-1){
+			renglon=valor.substring(0,largo);
+			escenario=escenario+renglon+'<br>';
+		}
+		insert_row(tabla, campo, escenario);
+		
+	}
+	else{
+	  alert('Must put a value');
+	}
+} 
+
 function remove(t, campo)
 {
 	//campo='symbol_synonymous'
