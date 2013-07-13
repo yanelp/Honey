@@ -320,6 +320,8 @@ if ($count > 0){
 						
 					$isCondition = isCondition($text_impact, $arrayverbo);
 
+					echo $isCondition;
+
 					if ($isCondition == true){
 					  echo $text_impact;
 					}
