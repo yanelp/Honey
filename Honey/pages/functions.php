@@ -237,4 +237,59 @@ switch ($value) {
 }
 
 }
+
+function isCondition($impactText, $comparationArray){
+		
+	$coincide;
+
+	$words = preg_split("/[\s]+/", $impactText);
+	
+	$num_words=sizeof($words);
+	
+	//Iteracion por cada palabra de la descripción
+	for($r=0;$r<$num_words;$r++){
+
+		$i=1;
+
+		while($i<=$num_words){
+		 //por cada palabra del impacto//5
+		 $new_word='';
+
+		 $j=$r;
+
+			while($j<$i){//desde el ppio hasta el final
+			
+					$new_word=trim($new_word." ".$words[$j]);
+
+					if (in_array($new_word, $words)==false) {//si no está y es se encuentra en el arreglo $comparationArray)
+							
+							array_push($words,$new_word);}
+
+						 $j++;
+
+						} //fin while($j<$i)
+
+			$i++;
+			} //fin while($i<=$num_words)
+		
+				
+		} //fin for($r=0...
+     
+	$num_words_comparation=sizeof($comparationArray);
+
+	for($a=0;$a<$num_words_comparation;$a++){
+	    
+		if (in_array($comparationArray[$a], $words)== true){
+
+			return  true;
+						}
+											 
+	}
+    
+	return false;
+	}//fin function
+
+
+
+
 ?>

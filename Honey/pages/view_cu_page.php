@@ -23,7 +23,7 @@ EVENT_LAYOUT_RESOURCES;
 
 $t_repo_table = plugin_table( 'usecase', 'honey' );
 
-$query_symbol = 'SELECT id, name, goal, view_id, postconditions, observations, preconditions 
+$query_symbol = 'SELECT * 
 				   FROM '.$t_repo_table.'
 				   where id_project=' . db_param().'
 				   AND active = 0
