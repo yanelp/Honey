@@ -81,13 +81,12 @@ if ($count > 0){
 
 		$result_search_actor = db_query_bound( $query_search_actor, array($type_subject) );
 
-        $row_symbol = db_fetch_array( $result_search_actor);
-
-        $id_symbol_subject= $row_symbol ['id'];
-
+        
 
 		while($row_search_actor  = db_fetch_array( $result_search_actor )){
 			 
+	         $id_symbol_subject= $row_search_actor['id'];
+
 			 $actor_name = $row_search_actor['name'];
 
 			 $actor_description = $row_search_actor['notion'];
@@ -210,7 +209,7 @@ if ($count > 0){
 		$t_query_scenario = 'INSERT INTO '.$t_repo_table_scenario.' (type, steps, id_usecase)
 					VALUES ( ' . db_param() . ', ' . db_param() . ' , ' . db_param() . ')';
 		
-		$g_result_scenario =db_query_bound( $t_query_scenario, array($scenario_type, $scenarioText, $verb_id) );
+		$g_result_scenario =db_query_bound( $t_query_scenario, array($scenario_type, $scenarioText, $id_usecase) );
 
 		$id_scenario = mysql_insert_id();
 
@@ -320,7 +319,7 @@ if ($count > 0){
 						
 					$isCondition = isCondition($text_impact, $arrayverbo);
 
-					echo $isCondition;
+					//echo $isCondition;
 
 					if ($isCondition == true){
 					  echo $text_impact;

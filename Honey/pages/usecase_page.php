@@ -83,15 +83,15 @@ while( $row_actors = db_fetch_array( $result_actors )){
 
 	//rules main
 
-	$t_repo_table = plugin_table( 'rule_scenario', 'honey' );
+	$t_repo_table = plugin_table( 'rule_usecase', 'honey' );
 	$t_repo_table2 = plugin_table( 'rule', 'honey' );
 
 	$query_rules_scenario = 'SELECT b.name 
 					 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_rule=b.id)
-					 where id_scenario=' . db_param().'
-					 AND a.active = 0 AND b.active = 0';
+					 where id_usecase=' . db_param().'
+					AND b.active = 0';
 
-	$result_rules_scenario = db_query_bound( $query_rules_scenario, array($id_scenario) );
+	$result_rules_scenario = db_query_bound( $query_rules_scenario, array($id_usecase) );
 	$count_rules_scenario = db_num_rows( $result_rules_scenario );
 	
 	$rules_main='';
@@ -107,15 +107,14 @@ while( $row_actors = db_fetch_array( $result_actors )){
 	
 	//interfaces main
 
-	$t_repo_table = plugin_table( 'interface_scenario', 'honey' );
-	$t_repo_table2 = plugin_table( 'interface', 'honey' );
+	$t_repo_table2 = plugin_table( 'file_usecase', 'honey' );
 
-	$query_interface_scenario = 'SELECT b.description 
-						FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_interface=b.id)
-						where id_scenario=' . db_param().'
-						AND a.active = 0 AND b.active = 0';
+	$query_interface_scenario = 'SELECT b.content 
+						FROM  '.$t_repo_table2.' b 
+						where id_usecase=' . db_param().'
+						';
 
-	$result_interface_scenario = db_query_bound( $query_interface_scenario, array($id_scenario) );
+	$result_interface_scenario = db_query_bound( $query_interface_scenario, array($id_usecase) );
 			
 	$interface_main='';
 				
