@@ -55,9 +55,11 @@ function insert_row_course(tabla, campo, valor){
 			n=valor.search("%0"); 
 		}
 		if(n=-1){
+			renglon=unescape(renglon);
 			renglon=valor.substring(0,largo);
 			escenario=escenario+renglon+'<br>';
 		}
+		escenario=unescape(escenario);
 		insert_row(tabla, campo, escenario);
 		
 	}

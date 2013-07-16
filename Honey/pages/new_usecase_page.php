@@ -2,7 +2,7 @@
 
 require_once('functions.php');
 require_once( 'core.php' );
-require_once('manage_sequences.php');
+//require_once('manage_sequences.php');
 require_once( 'file_api.php' );
 
 
@@ -89,18 +89,108 @@ EVENT_LAYOUT_RESOURCES
 		</td>
 		<td>
 			<table>
-				<?php while( $row_actors = db_fetch_array( $result_actors )){?>
+				<?php 
+				$j=0;
+				while( $row_actors = db_fetch_array( $result_actors )){?>
 				<tr>
-					<td><input type="checkbox" name="ck_actor_<?php echo $j?>"/>
+					<td><input type="checkbox" name="ck_actor_<?php echo $j?>" id="ck_actor_<?php echo $j?>"/>
 					<input type="hidden" name="id_actor_<?php echo $j?>" id="id_actor_<?php echo $j?>" value="<?php echo $row_actors['id'] ?>"/></td>
 					<td><?php echo $row_actors['name'] ?></td>
 				</tr>
-				<?php } ?>
+				<?php 
+				$j++;	
+				} ?>
 			</table>
 
 			<?php if($count_actors==0){echo "<p class='category'> No actors created for this project<p>";}?>
 		</td>
 	</tr>
+
+	 <!--aca van las relaciones extiende-->
+	  <tr <?php echo helper_alternate_class() ?>>
+		<td colspan="2" class="none">
+			<?php 
+			if( ON == config_get( 'use_javascript' ) ) { ?>
+				<?php collapse_open( 'profile3' ); collapse_icon('profile3'); echo 'Extends';
+
+				//busco todas las reglas del proyecto
+
+				$t_repo_table = plugin_table( 'usecase', 'honey' );
+
+				$query_extends = 'SELECT * 
+								 FROM '.$t_repo_table.' 
+								 where id_project=' . db_param().' and active=0';
+
+				$result_extends = db_query_bound( $query_extends, array($project_id) );
+				$count_extends = db_num_rows( $result_extends );
+
+				$j=0;
+
+			}?>
+			<table>
+				<?php while( $row_extends = db_fetch_array( $result_extends )){?>
+				<tr>
+					<td><input type="checkbox" name="ck_extends_<?php echo $j?>"/>
+					<input type="hidden" name="id_extends_<?php echo $j?>" id="id_extends_<?php echo $j?>" value="<?php echo $row_extends['id'] ?>"/></td>
+					<td><?php echo $row_extends['name'] ?></td>
+				</tr>
+				<?php
+				$j++;
+				} ?>
+			</table>
+
+			<?php if($count_extends==0){echo "<p class='category'> No usecases created for this project<p>";}?>
+
+			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
+				<?php collapse_closed( 'profile3' ); collapse_icon('profile3'); echo 'Extends';?>
+				<?php collapse_end( 'profile3' ); ?>
+			<?php } ?>
+		</td>
+	  </tr>		
+<!--aca terminan las extiende-->
+
+	 <!--aca van las relaciones incluye-->
+	  <tr <?php echo helper_alternate_class() ?>>
+		<td colspan="2" class="none">
+			<?php 
+			if( ON == config_get( 'use_javascript' ) ) { ?>
+				<?php collapse_open( 'profile4' ); collapse_icon('profile4'); echo 'Includes';
+
+				//busco todas las reglas del proyecto
+
+				$t_repo_table = plugin_table( 'usecase', 'honey' );
+
+				$query_includes = 'SELECT * 
+								 FROM '.$t_repo_table.' 
+								 where id_project=' . db_param().' and active=0';
+
+				$result_includes = db_query_bound( $query_includes, array($project_id) );
+				$count_includes = db_num_rows( $result_includes);
+
+				$j=0;
+
+			}?>
+			<table>
+				<?php while( $row_includes = db_fetch_array( $result_includes )){?>
+				<tr>
+					<td><input type="checkbox" name="ck_includes_<?php echo $j?>"/>
+					<input type="hidden" name="id_includes_<?php echo $j?>" id="id_includes_<?php echo $j?>" value="<?php echo $row_includes['id'] ?>"/></td>
+					<td><?php echo $row_includes['name'] ?></td>
+				</tr>
+				<?php 
+				$j++;
+				} ?>
+			</table>
+
+			<?php if($count_includs==0){echo "<p class='category'> No usecases created for this project<p>";}?>
+
+			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
+				<?php collapse_closed( 'profile4' ); collapse_icon('profile4'); echo 'Includes';?>
+				<?php collapse_end( 'profile4' ); ?>
+			<?php } ?>
+		</td>
+	  </tr>		
+<!--aca terminan las incluye-->
 
 	<tr <?php echo helper_alternate_class() ?>>
 		 <td class="category">
@@ -135,8 +225,7 @@ EVENT_LAYOUT_RESOURCES
 		</td>
 	  </tr>
 	   <tr <?php echo helper_alternate_class() ?>>
-		 <td class="category">
-		 <span class="required">*</span> Alternative Course
+		 <td class="category"> Alternative Course
 		</td>
 		<td>
 	      <Textarea cols="100" rows="5" name="cursoAlternativo" id="cursoAlternativo"></Textarea>
@@ -177,7 +266,9 @@ EVENT_LAYOUT_RESOURCES
 					<input type="hidden" name="id_rule_<?php echo $j?>" id="id_rule_<?php echo $j?>" value="<?php echo $row_rules['id'] ?>"/></td>
 					<td><?php echo $row_rules['name'] ?></td>
 				</tr>
-				<?php } ?>
+				<?php
+				$j++;
+				} ?>
 			</table>
 
 			<?php if($count_rules==0){echo "<p class='category'> No rules created for this project<p>";}?>
@@ -246,8 +337,10 @@ EVENT_LAYOUT_RESOURCES
 
 </table>
 <input type='hidden' name='row_number_cursoAlternativo' id='row_number_cursoAlternativo' value='0'/>
-<input type='hidden' name='row_number_uc_actor' id='row_number_uc_actor' value='<?php $count_actors ?>'/>
-<input type='hidden' name='row_number_uc_rule' id='row_number_uc_rule' value='<?php $count_rules ?>'/>
+<input type='hidden' name='row_number_uc_actor' id='row_number_uc_actor' value='<?php echo $count_actors ?>'/>
+<input type='hidden' name='row_number_uc_rule' id='row_number_uc_rule' value='<?php echo $count_rules ?>'/>
+<input type='hidden' name='row_number_uc_extends' id='row_number_uc_extends' value='<?php echo $count_extends ?>'/>
+<input type='hidden' name='row_number_uc_includes' id='row_number_uc_includes' value='<?php echo $count_includes ?>'/>
 <input type="hidden" name="operation" id="operation" value="1"/>
 </div>
 </form>
