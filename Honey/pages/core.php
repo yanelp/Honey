@@ -35,6 +35,7 @@ $count = db_num_rows( $result_search );
 
 $a=0;
 $actores_id;
+$existenCondiciones = false;
 
 if ($count == 0){
 
@@ -138,8 +139,10 @@ if ($count > 0){
      /*FIN CREACION DE ACTORES*/ 
 
      /*INSERT DE CU´s*/ 
- 
+        
+	    //matriz de las condiciones por cada verbo
 
+		$matrizVerbo;
 	  //por cada verbo
 		while($row_search  = db_fetch_array( $result_search )){
 
@@ -149,7 +152,8 @@ if ($count > 0){
 	 
 			//la noción en el verbo del LEL es el objetivo del CU
 			$uc_goal = $row_search['notion'];
-
+			
+			
 
 		/*
 		TODO: falta derivar postoconditios y observaciones, por ahora se dejan como variables vacias. Se empezo a hacer derivación de precondiciones
@@ -268,7 +272,7 @@ if ($count > 0){
 		
 			$i=0;
 
-			$arrayverbo[$i] = $uc_name;
+			$arrayverbo[$i] = strtolower($uc_name);
 
 			
 			$t_repo_table_synonymous = plugin_table( 'synonymous', 'honey' );
@@ -276,20 +280,22 @@ if ($count > 0){
 			$query_search_synonymous = 'SELECT *
 									    FROM '.$t_repo_table_synonymous.' 
 									    WHERE id_symbol=' . db_param();
-
+             
 			$result_search_synonymous = db_query_bound( $query_search_synonymous, array($verb_id) );
 
 			 while($row_search_synonymous = db_fetch_array( $result_search_synonymous)){
 
 			    $i=$i+1;
-				$arrayverbo[$i] = $row_search_synonymous['name'];
+				$minusculas = strtolower($row_search_synonymous['name']);
+				$arrayverbo[$i] = $minusculas ;
 				
 			  }
-
+   
 			 //Buscamos los simbolos de tipo estado
 
 			$type_state = 3; //tipo estado
-
+     
+	     
 			$t_repo_table_state = plugin_table( 'symbol', 'honey' );
 
 									$query_search_state = 'SELECT *
@@ -298,10 +304,12 @@ if ($count > 0){
 
 			$result_search_state= db_query_bound( $query_search_state, array($type_state) );
 	
+            
 			while($row_search_state = db_fetch_array( $result_search_state)){
-		
+		 
+                     
 					 $state_id = $row_search_state['id'];
-			
+					
 					//recuperamos todos los impactos del estado
 					
 					 $t_repo_table_impact = plugin_table( 'impact', 'honey' );
@@ -311,31 +319,87 @@ if ($count > 0){
 								  WHERE id_symbol=' . db_param();
 			
 					$result_search_impact= db_query_bound($query_search_impact, array($state_id) );
-					
-					$row_search_impact = db_fetch_array( $result_search_impact);
+				
+				  $i=0;
 
+				  while($row_search_impact = db_fetch_array( $result_search_impact)){
+		
 					$text_impact = $row_search_impact['description'];
+									
+					$isCondition = isCondition(strtolower($text_impact), $arrayverbo);
 					
-						
-					$isCondition = isCondition($text_impact, $arrayverbo);
-
-					//echo $isCondition;
-
 					if ($isCondition == true){
-					  echo $text_impact;
+					 $matrizVerbo[$uc_name][$i] = $text_impact;
+					 $i++;
+					 $existenCondiciones = true;
 					}
 				
+				}//fin while impact 
+				
+				//si hay condiciones para el verbo creo la tabla
+	
+			if ($i>0){
+		   ?>
+			<div align="center">
+			<table class="width90">
+			<tr class="row-category">
+				<td >
+				<?php echo $uc_name?>
+				</td>
+				<td>
+				No es condicion
+				</td>
+				<td>
+				Pre-Condicion
+				</td>
+				<td>
+				Post-Condicion
+				</td>
+			 </tr>
+		
+			<?php
+            $a = 0;
+			while ($a <= $i) {
+			?>
+			<tr <?php echo helper_alternate_class() ?>>
+			
+			<td>
+				<?php echo $matrizVerbo[$uc_name][$a];?>
+			</td>
+
+			<td class="center">
+				<input type='checkbox'>
+			</td>
+	        
+			<td  class="center">
+				<input type='checkbox'>
+			</td>
+
+			<td  class="center">
+				<input type='checkbox'>
+			</td>
+			</tr>
+           <?php
+		    $a++;
+	   		}//fin while
+           ?>
+	       </table>
+		   <BR>
+		   <BR>
+	
+		 <?php
+				}//fin if
 
 			} //fin while($row_search_state
-
-		   
-
 
 
 }//fin por cada verbo
 
-//$t_url=plugin_page('view_cu_page');
-//header( "Location: $t_url" );
+if ($existenCondiciones == false){
+
+$t_url=plugin_page('view_cu_page');
+header( "Location: $t_url" );
+}
 	
 }// fin if ($count > 0)
 
