@@ -27,7 +27,7 @@ $query_symbol = 'SELECT *
 				   FROM '.$t_repo_table.'
 				   where id_project=' . db_param().'
 				   AND active = 0
-				   ORDER BY name';
+				   ORDER BY id';
 
 $result = db_query_bound( $query_symbol, array($project_id) );
 $count = db_num_rows( $result );
@@ -48,9 +48,9 @@ if ($count != 0) {
 	</tr>
 
 <tr class="row-category"> 
-	<td>ID</td>
-	<td>Name</td>
-	<td>Goal</td>
+	<td class="category"  width="7%">ID</td>
+	<td class="category"  width="30%">Name</td>
+	<td class="category">Goal</td>
 </tr>
 
 <?php 	while( $row = db_fetch_array( $result ) ){
@@ -59,7 +59,7 @@ if ($count != 0) {
 	?>
 		<tr <?php echo helper_alternate_class() ?>>
 
-			<td>
+			<td >
 				<?php echo "<a  href=\"$t_page\">".$id."</a>";?>
 			</td>
 			<td>

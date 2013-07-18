@@ -293,45 +293,17 @@ function isCondition($impactText, $comparationArray){
 function attach_add($id_usecase, $p_file){
 
 	file_ensure_uploaded( $p_file );
-	
-	
+		
 	$t_project_id= helper_get_current_project();
-	/*$p_title='';
-	$p_desc = '';
-	$p_user_id = null;
-
-	if( !file_type_check( $t_file_name ) ) {
-		trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
-	}
-
-	if( !file_is_name_unique( $t_file_name, $id_usecase ) ) {
-		trigger_error( ERROR_FILE_DUPLICATE, ERROR );
-	}
-
-	/*if( $p_user_id === null ) {
-		$c_user_id = auth_get_current_user_id();
-	} else {
-		$c_user_id = (int)$p_user_id;
-	}*/
-
-	# prepare variables for insertion
-	/*$c_bug_id = db_prepare_int( $p_bug_id );
-	$c_project_id = db_prepare_int( $t_project_id );
+	$t_file_name = $p_file['name'];
+	$t_tmp_file = $p_file['tmp_name'];
+	$t_file_size = filesize( $t_tmp_file );
 	$c_file_type = db_prepare_string( $p_file['type'] );
-	$c_title = db_prepare_string( $p_title );
-	$c_desc = db_prepare_string( $p_desc );*/
+	$c_content = db_prepare_binary_string( fread( fopen( $t_tmp_file, 'rb' ), $t_file_size ) );
+	$c_new_file_name = db_prepare_string( $t_file_name );
+	$c_id_usecase=db_prepare_int( $id_usecase );
 
-	
-
-$t_file_name = $p_file['name'];
-$t_tmp_file = $p_file['tmp_name'];
-$t_file_size = filesize( $t_tmp_file );
-$c_file_type = db_prepare_string( $p_file['type'] );
-$c_content = db_prepare_binary_string( fread( fopen( $t_tmp_file, 'rb' ), $t_file_size ) );
-$c_new_file_name = db_prepare_string( $t_file_name );
-$c_id_usecase=db_prepare_int( $id_usecase );
-
-if( $t_project_id == ALL_PROJECTS ) {
+	if( $t_project_id == ALL_PROJECTS ) {
 		$t_file_path = config_get( 'absolute_path_default_upload_folder' );
 	} else {
 		$t_file_path = project_get_field( $t_project_id, 'file_path' );
@@ -354,7 +326,14 @@ if( $t_project_id == ALL_PROJECTS ) {
 		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
 	}
 	//$c_file_size = db_prepare_int( $t_file_size );
+	
+	if( !file_type_check( $t_file_name ) ) {
+		trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
+	}
 
+	if( !file_is_name_unique( $t_file_name, $id_usecase ) ) {
+		trigger_error( ERROR_FILE_DUPLICATE, ERROR );
+	}
 
 $t_method = config_get( 'file_upload_method' );
 
@@ -389,14 +368,215 @@ $t_method = config_get( 'file_upload_method' );
 	}
 
 
-$t_file_table = plugin_table( 'file_usecase', 'honey' );
+	$t_file_table = plugin_table( 'file_usecase', 'honey' );
 
-$query = "INSERT INTO $t_file_table
-						 (content,  filename, file_type, id_usecase)
-					  VALUES
-						(  '$c_new_file_name', '$c_file_type',  $c_content, $c_id_usecase)";
-db_query( $query );
+	$query = "INSERT INTO $t_file_table
+							 (content,  filename, file_type, id_usecase)
+						  VALUES
+							(  $c_content, '$c_new_file_name', '$c_file_type', $c_id_usecase)";
+	db_query( $query );
 
+}//fin function
+
+function usecase_get_attachments( $p_usecase_id ) {
+
+	$c_usecase_id = db_prepare_int( $p_usecase_id );
+
+	$t_bug_file_table = plugin_table( 'file_usecase', 'honey' );
+
+	$query = "SELECT *
+		                FROM $t_bug_file_table
+		                WHERE id_usecase=" . db_param() . "
+		                ORDER BY id";
+
+	$db_result = db_query_bound( $query, Array( $c_usecase_id ) );
+	$num_files = db_num_rows( $db_result );
+
+	$t_result = array();
+
+	for( $i = 0;$i < $num_files;$i++ ) {
+		$t_result[] = db_fetch_array( $db_result );
+	}
+
+	return $t_result;
 }
+
+function file_usecase_get_visible_attachments( $p_usecase_id ) {
+	$t_attachment_rows = usecase_get_attachments( $p_usecase_id );
+	$t_visible_attachments = array();
+
+	$t_attachments_count = count( $t_attachment_rows );
+	if( $t_attachments_count === 0 ) {
+		return $t_visible_attachments;
+	}
+
+	$t_attachments = array();
+
+	$t_preview_text_ext = config_get( 'preview_text_extensions' );
+	$t_preview_image_ext = config_get( 'preview_image_extensions' );
+
+	$image_previewed = false;
+	for( $i = 0;$i < $t_attachments_count;$i++ ) {
+		$t_row = $t_attachment_rows[$i];
+		$t_id = $t_row['id'];
+		$t_filename = $t_row['filename'];
+		$t_filesize = $t_row['filesize'];
+		//$t_diskfile = file_normalize_attachment_path( $t_row['diskfile'], bug_get_field( $p_usecase_id, 'project_id' ) );
+
+		$t_attachment = array();
+		$t_attachment['id'] = $t_id;
+		$t_attachment['display_name'] = file_get_display_name( $t_filename );
+		$t_attachment['size'] = $t_filesize;
+		/*$t_attachment['date_added'] = $t_date_added;*/
+		$t_attachment['diskfile'] = $t_diskfile;
+
+		$t_attachment['download_url'] = "file_usecase_download.php?file_id=$t_id";
+
+		if( $image_previewed ) {
+			$image_previewed = false;
+		}
+
+		//$t_attachment['exists'] = config_get( 'file_upload_method' ) != DISK || file_exists( $t_diskfile );
+		$t_attachment['icon'] = file_get_icon_url( $t_attachment['display_name'] );
+
+		$t_attachment['preview'] = false;
+		$t_attachment['type'] = '';
+
+		$t_ext = strtolower( file_get_extension( $t_attachment['display_name'] ) );
+		$t_attachment['alt'] = $t_ext;
+
+		if ( in_array( $t_ext, $t_preview_text_ext, true ) ) {
+				$t_attachment['preview'] = true;
+				$t_attachment['type'] = 'text';
+			} else if ( in_array( $t_ext, $t_preview_image_ext, true ) ) {
+				$t_attachment['preview'] = true;
+				$t_attachment['type'] = 'image';
+			}
+		}
+
+		$t_attachments[] = $t_attachment;
+
+	return $t_attachments;
+}
+
+function print_uc_attachments_list( $p_usecase_id ) {
+	
+	$t_attachments = file_usecase_get_visible_attachments( $p_usecase_id );
+	$t_attachments_count = count( $t_attachments );
+
+	$i = 0;
+	$image_previewed = false;
+
+	foreach ( $t_attachments as $t_attachment ) {
+		$t_file_display_name = string_display_line( $t_attachment['display_name'] );
+		$t_filesize = number_format( $t_attachment['size'] );
+
+		if ( $image_previewed ) {
+			$image_previewed = false;
+			echo '<br />';
+		}
+
+		$t_href_start = '<a href="' . string_attribute( $t_attachment['download_url'] ) . '">';
+		$t_href_end = '</a>';
+
+		$t_href_clicket = " [<a href=\"file_usecase_download.php?file_id={$t_attachment['id']}&amp;type=bug\" target=\"_blank\">^</a>]";
+	
+			echo $t_href_start;
+			print_file_icon( $t_file_display_name );
+			echo $t_href_end . '&#160;' . $t_href_start . $t_file_display_name . $t_href_end . $t_href_clicket . ' (' . $t_filesize . ' ' . lang_get( 'bytes' ) . ') ' . '<span class="italic">' . $t_date_added . '</span>';
+
+			echo '&#160;[';
+			print_link( 'bug_file_delete.php?file_id=' . $t_attachment['id'] . form_security_param( 'bug_file_delete' ), lang_get( 'delete_link' ), false, 'small' );
+			echo ']';
+		
+
+			if ( ( FTP == config_get( 'file_upload_method' ) ) && $t_attachment['exists'] ) {
+				echo ' (' . lang_get( 'cached' ) . ')';
+			}
+
+			if ( $t_attachment['preview'] && ( $t_attachment['type'] == 'text' ) ) {
+				 $c_id = db_prepare_int( $t_attachment['id'] );
+				 $t_bug_file_table = db_get_table( 'mantis_bug_file_table' );
+
+				echo "<script type=\"text/javascript\" language=\"JavaScript\">
+					<!--
+					function swap_content( span ) {
+					displayType = ( document.getElementById( span ).style.display == 'none' ) ? '' : 'none';
+					document.getElementById( span ).style.display = displayType;
+					}
+
+					 -->
+					 </script>";
+				echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content(\"hideSection_" . $c_id . "\");swap_content(\"showSection_" . $c_id . "\");return false;'>" . lang_get( 'show_content' ) . "</a>]</span>";
+				echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content(\"hideSection_" . $c_id . "\");swap_content(\"showSection_" . $c_id . "\");return false;'>" . lang_get( 'hide_content' ) . "</a>]";
+
+				echo "<pre>";
+
+				/** @todo Refactor into a method that gets contents for download / preview. */
+				switch( config_get( 'file_upload_method' ) ) {
+					case DISK:
+						if ( $t_attachment['exists'] ) {
+							$v_content = file_get_contents( $t_attachment['diskfile'] );
+						}
+						break;
+					case FTP:
+						if( file_exists( $t_attachment['exists'] ) ) {
+							file_get_contents( $t_attachment['diskfile'] );
+						} else {
+							$ftp = file_ftp_connect();
+							file_ftp_get( $ftp, $t_attachment['diskfile'], $t_attachment['diskfile'] );
+							file_ftp_disconnect( $ftp );
+							$v_content = file_get_contents( $t_attachment['diskfile'] );
+						}
+						break;
+					default:
+						$query = "SELECT *
+	                  					FROM $t_bug_file_table
+				            			WHERE id=" . db_param();
+						$result = db_query_bound( $query, Array( $c_id ) );
+						$row = db_fetch_array( $result );
+						$v_content = $row['content'];
+				}
+
+					$query = "SELECT *
+	                  					FROM $t_bug_file_table
+				            			WHERE id=" . db_param();
+						$result = db_query_bound( $query, Array( $c_id ) );
+						$row = db_fetch_array( $result );
+						$v_content = $row['content'];
+
+				echo htmlspecialchars( $v_content );
+				echo "</pre></span>\n";
+		
+
+				$t_preview_style = 'border: 0;';
+				$t_max_width = config_get( 'preview_max_width' );
+				if( $t_max_width > 0 ) {
+					$t_preview_style .= ' max-width:' . $t_max_width . 'px;';
+				}
+
+				$t_max_height = config_get( 'preview_max_height' );
+				if( $t_max_height > 0 ) {
+					$t_preview_style .= ' max-height:' . $t_max_height . 'px;';
+				}
+
+				$t_preview_style = 'style="' . $t_preview_style . '"';
+				$t_title = file_get_field( $t_attachment['id'], 'title' );
+
+				$t_image_url = $t_attachment['download_url'] . '&amp;show_inline=1' . form_security_param( 'file_show_inline' );
+
+				echo "\n<br />$t_href_start<img alt=\"$t_title\" $t_preview_style src=\"$t_image_url\" />$t_href_end";
+				$image_previewed = true;
+			
+		}
+
+		if ( $i != ( $t_attachments_count - 1 ) ) {
+			echo "<br />\n";
+			$i++;
+		}
+	}
+}//fin function
+
+
 
 ?>

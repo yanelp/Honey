@@ -343,6 +343,17 @@ $count_notes = db_num_rows( $result_note );
 
 </TABLE>
 
+<table>
+	<?php # Attachments
+//	if ( $tpl_show_attachments ) {
+		echo '<tr ', helper_alternate_class(), '>';
+		echo '<td class="category"><a name="attachments" id="attachments" />', lang_get( 'attached_files' ), '</td>';
+		echo '<td colspan="5">';
+		print_uc_attachments_list( $id_usecase );
+		echo '</td></tr>';
+	//}?>
+</table>
+
 
 <br>
 <table align="center">

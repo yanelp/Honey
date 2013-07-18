@@ -159,7 +159,7 @@ for($i=0; $i<$row_number_uc_includes; $i++){
 
 $f_files=gpc_get_file( 'ufile', null );
 
-echo "count( $f_files ): ".count( $f_files );
+//echo "count( $f_files ): ".count( $f_files );
 
 for( $i = 0; $i < 10; $i++ ) {
 	
@@ -189,6 +189,6 @@ $t_url= plugin_page( 'view_cu_page' );
 
 html_page_bottom( );
 
-//html_meta_redirect_honey( $t_url, $p_time = null);
+html_meta_redirect_honey( $t_url, $p_time = null);
 
 ?>
