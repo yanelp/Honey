@@ -290,6 +290,113 @@ function isCondition($impactText, $comparationArray){
 	}//fin function
 
 
+function attach_add($id_usecase, $p_file){
 
+	file_ensure_uploaded( $p_file );
+	
+	
+	$t_project_id= helper_get_current_project();
+	/*$p_title='';
+	$p_desc = '';
+	$p_user_id = null;
+
+	if( !file_type_check( $t_file_name ) ) {
+		trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
+	}
+
+	if( !file_is_name_unique( $t_file_name, $id_usecase ) ) {
+		trigger_error( ERROR_FILE_DUPLICATE, ERROR );
+	}
+
+	/*if( $p_user_id === null ) {
+		$c_user_id = auth_get_current_user_id();
+	} else {
+		$c_user_id = (int)$p_user_id;
+	}*/
+
+	# prepare variables for insertion
+	/*$c_bug_id = db_prepare_int( $p_bug_id );
+	$c_project_id = db_prepare_int( $t_project_id );
+	$c_file_type = db_prepare_string( $p_file['type'] );
+	$c_title = db_prepare_string( $p_title );
+	$c_desc = db_prepare_string( $p_desc );*/
+
+	
+
+$t_file_name = $p_file['name'];
+$t_tmp_file = $p_file['tmp_name'];
+$t_file_size = filesize( $t_tmp_file );
+$c_file_type = db_prepare_string( $p_file['type'] );
+$c_content = db_prepare_binary_string( fread( fopen( $t_tmp_file, 'rb' ), $t_file_size ) );
+$c_new_file_name = db_prepare_string( $t_file_name );
+$c_id_usecase=db_prepare_int( $id_usecase );
+
+if( $t_project_id == ALL_PROJECTS ) {
+		$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+	} else {
+		$t_file_path = project_get_field( $t_project_id, 'file_path' );
+		if( is_blank( $t_file_path ) ) {
+			$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+		}
+	}
+
+	$t_file_hash =  $id_usecase . config_get( 'document_files_prefix' ) . '-' . $t_project_id;
+	$t_unique_name = file_generate_unique_name( $t_file_hash . '-' . $t_file_name, $t_file_path );
+	$t_disk_file_name = $t_file_path . $t_unique_name;
+	$c_unique_name = db_prepare_string( $t_unique_name );
+
+	
+	if( 0 == $t_file_size ) {
+		trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
+	}
+	$t_max_file_size = (int) min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+	if( $t_file_size > $t_max_file_size ) {
+		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+	}
+	//$c_file_size = db_prepare_int( $t_file_size );
+
+
+$t_method = config_get( 'file_upload_method' );
+
+	switch( $t_method ) {
+		case FTP:
+		case DISK:
+			file_ensure_valid_upload_path( $t_file_path );
+
+			if( !file_exists( $t_disk_file_name ) ) {
+				if( FTP == $t_method ) {
+					$conn_id = file_ftp_connect();
+					file_ftp_put( $conn_id, $t_disk_file_name, $t_tmp_file );
+					file_ftp_disconnect( $conn_id );
+				}
+
+				if( !move_uploaded_file( $t_tmp_file, $t_disk_file_name ) ) {
+					trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
+				}
+
+				chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
+
+				$c_content = "''";
+			} else {
+				trigger_error( ERROR_FILE_DUPLICATE, ERROR );
+			}
+			break;
+		case DATABASE:
+			$c_content = db_prepare_binary_string( fread( fopen( $t_tmp_file, 'rb' ), $t_file_size ) );
+			break;
+		default:
+			trigger_error( ERROR_GENERIC, ERROR );
+	}
+
+
+$t_file_table = plugin_table( 'file_usecase', 'honey' );
+
+$query = "INSERT INTO $t_file_table
+						 (content,  filename, file_type, id_usecase)
+					  VALUES
+						(  '$c_new_file_name', '$c_file_type',  $c_content, $c_id_usecase)";
+db_query( $query );
+
+}
 
 ?>

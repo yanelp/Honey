@@ -32,7 +32,7 @@ EVENT_LAYOUT_RESOURCES
 
 
 <div align="center">
-<form name="form1"  id="form1"  method="post" onsubmit="javascript:validar()" action="<?php echo plugin_page( "save_usecase" ); ?>">
+<form name="form1"  id="form1"  method="post"  enctype="multipart/form-data" onsubmit="javascript:validar()" action="<?php echo plugin_page( "save_usecase" ); ?>">
 <table  class="width90" cellspacing="1">
 	<tr>
 		<td class="form-title" colspan="2">
@@ -85,7 +85,7 @@ EVENT_LAYOUT_RESOURCES
 	?>
 	<tr <?php echo helper_alternate_class() ?>>
 		 <td class="category">
-		    Actores Involved
+		    Actors Involved
 		</td>
 		<td>
 			<table>
@@ -243,7 +243,7 @@ EVENT_LAYOUT_RESOURCES
 		<td colspan="2" class="none">
 			<?php 
 			if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_open( 'profile' ); collapse_icon('profile'); echo 'Asignar Reglas';
+				<?php collapse_open( 'profile' ); collapse_icon('profile'); echo 'Assign Rules';
 
 				//busco todas las reglas del proyecto
 
@@ -274,7 +274,7 @@ EVENT_LAYOUT_RESOURCES
 			<?php if($count_rules==0){echo "<p class='category'> No rules created for this project<p>";}?>
 
 			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo 'Asignar Reglas';?>
+				<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo 'Assign Rules';?>
 				<?php collapse_end( 'profile' ); ?>
 			<?php } ?>
 		</td>
@@ -292,7 +292,7 @@ EVENT_LAYOUT_RESOURCES
 		<td colspan="2" class="none">
 			<?php 
 			if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_open( 'profile2' ); collapse_icon('profile2'); echo 'Adjuntar Pantallas';?>
+				<?php collapse_open( 'profile2' ); collapse_icon('profile2'); echo 'Attachments';?>
 		
 				<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 
@@ -315,7 +315,7 @@ EVENT_LAYOUT_RESOURCES
 				</table>
 
 			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_closed( 'profile2' ); collapse_icon('profile2'); echo 'Adjuntar Pantallas';?>
+				<?php collapse_closed( 'profile2' ); collapse_icon('profile2'); echo 'Attachments';?>
 				<?php collapse_end( 'profile2' ); ?>
 			<?php }
 		}//if( ON == config_get ?>
