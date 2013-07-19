@@ -479,7 +479,7 @@ function print_uc_attachments_list( $p_usecase_id ) {
 
 		if ( $image_previewed ) {
 			$image_previewed = false;
-			echo '<br />';
+			//echo '<br />';
 		}
 
 		$t_href_start = '<a href="' . string_attribute( $t_attachment['download_url'] ) . '">';
@@ -542,8 +542,29 @@ function print_uc_attachments_list( $p_usecase_id ) {
 
 				$t_image_url = $t_attachment['download_url'] . '&amp;show_inline=1' . form_security_param( 'file_show_inline' );
 
+
+				/**/
+
+				$c_id = db_prepare_int( $t_attachment['id'] );
+				echo "<script type=\"text/javascript\" language=\"JavaScript\">
+					<!--
+					function swap_content2( span ) {
+					displayType = ( document.getElementById( span ).style.display == 'none' ) ? '' : 'none';
+					document.getElementById( span ).style.display = displayType;
+					}
+
+					 -->
+					 </script>";
+			echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content2(\"hideSection_" . $c_id . "\");swap_content2(\"showSection_" . $c_id . "\");return false;'>" . lang_get( 'show_content' ) . "</a>]</span>";
+			echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content2(\"hideSection_" . $c_id . "\");swap_content(\"showSection_" . $c_id . "\");return false;'>" . lang_get( 'hide_content' ) . "</a>]";
+				echo "<pre>";
+
+				/**/
+
 				echo "\n<br />$t_href_start<img alt=\"$t_title\" $t_preview_style src=\"$t_image_url\" />$t_href_end";
 				$image_previewed = true;
+
+				echo "</pre></span>\n";
 		}
 			
 
