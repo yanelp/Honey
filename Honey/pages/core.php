@@ -128,7 +128,7 @@ if ($count > 0){
 
 				 //me guardo los datos para relacionarlo con el nuevo caso de uso
 				 $actores[$a] = $row_name;
-				 $actores_id[$a] = $row_name=$row['id'];
+				 $actores_id[$a] =$row['id'];
 				
 			 }
 				$a=$a+1;
