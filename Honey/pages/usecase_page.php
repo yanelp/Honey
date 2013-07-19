@@ -233,18 +233,23 @@ while( $row_actors = db_fetch_array( $result_actors )){
 		<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">Rules Main Scenario</td><td><?php echo $rules_main?></td>
 	</tr>
-	</tr>
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Attachments</td><td><?php echo $interface_main?></td>
-	</tr>
 		<?php 
 		while( $row_alternative_scenario = db_fetch_array( $result_alternative_scenario )){?>
 			<tr <?php echo helper_alternate_class() ?>><td>Alternative Scenario</td><td><?php echo  $row_alternative_scenario['steps']?></td></tr>
 			
 			<?php
 		}//while cada escenario ?>
+
+<?php # Attachments
+		echo '<tr ', helper_alternate_class(), '>';
+		echo '<td class="category"><a name="attachments" id="attachments">', 'Attachments', '</a>','</td>';
+		echo '<td colspan="5">';
+		print_uc_attachments_list( $id_usecase );
+		echo '</td></tr>';
+?>
 </table>
 
+<?php // echo $interface_main?>
 
  <!--aca muestro las notas-->
 
@@ -343,16 +348,7 @@ $count_notes = db_num_rows( $result_note );
 
 </TABLE>
 
-<table>
-	<?php # Attachments
-//	if ( $tpl_show_attachments ) {
-		echo '<tr ', helper_alternate_class(), '>';
-		echo '<td class="category"><a name="attachments" id="attachments" />', lang_get( 'attached_files' ), '</td>';
-		echo '<td colspan="5">';
-		print_uc_attachments_list( $id_usecase );
-		echo '</td></tr>';
-	//}?>
-</table>
+
 
 
 <br>

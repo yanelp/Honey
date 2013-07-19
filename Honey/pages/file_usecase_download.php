@@ -1,4 +1,26 @@
 <?php
+# MantisBT - a php based bugtracking system
+
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+	/**
+	 * Add file and redirect to the referring page
+	 * @package MantisBT
+	 * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	 * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+	 * @link http://www.mantisbt.org
+	 */
 
 	$g_bypass_headers = true; # suppress headers as we will send our own later
 	define( 'COMPRESSION_DISABLED', true );
@@ -31,11 +53,15 @@
 	}
 
 	$f_file_id = gpc_get_int( 'file_id' );
-	$f_type = gpc_get_string( 'type' );
+	//$f_type = gpc_get_string( 'type' );
 
 	$c_file_id = (integer)$f_file_id;
 
-	$t_bug_file_table =plugin_table( 'file_usecase', 'honey' );
+	# we handle the case where the file is attached to a bug
+	# or attached to a project as a project doc.
+	$query = '';
+	
+	$t_bug_file_table = plugin_table( 'file_usecase', 'honey' );
 	$query = "SELECT *
 				FROM $t_bug_file_table
 				WHERE id=" . db_param();
@@ -44,8 +70,10 @@
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-	$t_project_id = helper_get_current_project();
-	
+
+	$t_project_id = $v_project_id;
+
+
 
 	# throw away output buffer contents (and disable it) to protect download
 	while ( @ob_end_clean() );
@@ -81,7 +109,6 @@
 
 	http_content_disposition_header( $t_filename, $f_show_inline );
 
-	header( 'Content-Length: ' . $v_filesize );
 
 	# If finfo is available (always true for PHP >= 5.3.0) we can use it to determine the MIME type of files
 	$finfo = finfo_get_if_available();
@@ -90,65 +117,6 @@
 
 	$t_content_type_override = file_get_content_type_override ( $t_filename );
 
-	# dump file content to the connection.
-	switch ( config_get( 'file_upload_method' ) ) {
-		case DISK:
-			$t_local_disk_file = file_normalize_attachment_path( $v_diskfile, $t_project_id );
+	
 
-			if ( file_exists( $t_local_disk_file ) ) {
-				if ( $finfo ) {
-					$t_file_info_type = $finfo->file( $t_local_disk_file );
-
-					if ( $t_file_info_type !== false ) {
-						$t_content_type = $t_file_info_type;
-					}
-				}
-
-				if ( $t_content_type_override ) {
-					$t_content_type = $t_content_type_override;
-				}
-
-				header( 'Content-Type: ' . $t_content_type );
-				readfile( $t_local_disk_file );
-			}
-			break;
-		case FTP:
-			$t_local_disk_file = file_normalize_attachment_path( $v_diskfile, $t_project_id );
-
-			if ( !file_exists( $t_local_disk_file ) ) {
-				$ftp = file_ftp_connect();
-				file_ftp_get ( $ftp, $t_local_disk_file, $v_diskfile );
-				file_ftp_disconnect( $ftp );
-			}
-
-			if ( $finfo ) {
-				$t_file_info_type = $finfo->file( $t_local_disk_file );
-
-				if ( $t_file_info_type !== false ) {
-					$t_content_type = $t_file_info_type;
-				}
-			}
-
-			if ( $t_content_type_override ) {
-				$t_content_type = $t_content_type_override;
-			}
-
-			header( 'Content-Type: ' . $t_content_type );
-			readfile( $t_local_disk_file );
-			break;
-		default:
-			if ( $finfo ) {
-				$t_file_info_type = $finfo->buffer( $v_content );
-
-				if ( $t_file_info_type !== false ) {
-					$t_content_type = $t_file_info_type;
-				}
-			}
-
-			if ( $t_content_type_override ) {
-				$t_content_type = $t_content_type_override;
-			}
-
-			header( 'Content-Type: ' . $t_content_type );
-			echo $v_content;
-	}
+	echo $v_content;
