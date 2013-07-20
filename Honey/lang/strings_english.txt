@@ -22,6 +22,7 @@
 	$s_plugin_Honey_symbols='List of Symbols';
 	$s_plugin_Honey_usecases='List of Use Cases';
 	$s_plugin_Honey_symbol_modify='Modify symbol details';
+	$s_plugin_Honey_usecase_modify='Modify usecase details';
 	$s_plugin_Honey_required='required';
 	$s_plugin_Honey_viewing_use_cases='Viewing Use Cases';
 	$s_plugin_Honey_usecase_notes='Notes';
@@ -31,6 +32,12 @@
 	$s_plugin_Honey_symbols_type_verb='Verb';
 	$s_plugin_Honey_symbols_type_object='Object';
 	$s_plugin_Honey_symbols_type_state='State';
+	$s_plugin_Honey_actor_detail='Enter the details of the actor';
+	$s_plugin_Honey_rule_detail='Enter the details of the rule';
+	$s_plugin_Honey_actors='List of Actors';
+	$s_plugin_Honey_rules='List of Rules';
+	$s_plugin_Honey_actor_modify='Modify actor details';
+	$s_plugin_Honey_rule_modify='Modify rule details';
 
 
 	

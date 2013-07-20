@@ -14,7 +14,7 @@ $project_id =  helper_get_current_project();
 
 
 if ( ( ALL_PROJECTS == helper_get_current_project() ) && ( 0 == $f_master_bug_id ) ) {
-		print_header_redirect( 'login_select_proj_page.php?ref=plugin.php?page=Honey/new_usecase_page.php' );
+		print_header_redirect( 'login_select_proj_page.php?ref=plugin.php?page=Honey/view_cu_page.php' );
 	}
 
 
