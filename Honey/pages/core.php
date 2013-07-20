@@ -128,7 +128,7 @@ if ($count > 0){
 
 				 //me guardo los datos para relacionarlo con el nuevo caso de uso
 				 $actores[$a] = $row_name;
-				 $actores_id[$a] =$row['id'];
+				 $actores_id[$a] = $row_name=$row['id'];
 				
 			 }
 				$a=$a+1;
@@ -304,10 +304,10 @@ if ($count > 0){
 
 			$result_search_state= db_query_bound( $query_search_state, array($type_state) );
 	
-            
+            $i=0; //variable para contar la canridad de impactos
+			
 			while($row_search_state = db_fetch_array( $result_search_state)){
-		 
-                     
+				                    
 					 $state_id = $row_search_state['id'];
 					
 					//recuperamos todos los impactos del estado
@@ -320,8 +320,7 @@ if ($count > 0){
 			
 					$result_search_impact= db_query_bound($query_search_impact, array($state_id) );
 				
-				  $i=0;
-
+				  
 				  while($row_search_impact = db_fetch_array( $result_search_impact)){
 		
 					$text_impact = $row_search_impact['description'];
@@ -334,11 +333,12 @@ if ($count > 0){
 					 $existenCondiciones = true;
 					}
 				
-				}//fin while impact 
+				}//fin while $row_search_impact 
 				
-				//si hay condiciones para el verbo creo la tabla
-	
-			if ($i>0){
+		
+	   		}//fin while($row_search_state
+
+         	if ($i>0){	//si hay condiciones para el verbo creo la tabla
 		   ?>
 			<div align="center">
 			<table class="width90">
@@ -359,7 +359,7 @@ if ($count > 0){
 		
 			<?php
             $a = 0;
-			while ($a <= $i) {
+			while ($a < $i) {
 			?>
 			<tr <?php echo helper_alternate_class() ?>>
 			
@@ -381,18 +381,19 @@ if ($count > 0){
 			</tr>
            <?php
 		    $a++;
-	   		}//fin while
-           ?>
-	       </table>
+			}
+		  ?>
+		   </table>
 		   <BR>
 		   <BR>
-	
-		 <?php
+		
+			<?php
+
 				}//fin if
 
-			} //fin while($row_search_state
-
-
+			//} //fin while($row_search_state
+          
+		
 }//fin por cada verbo
 
 if ($existenCondiciones == false){
