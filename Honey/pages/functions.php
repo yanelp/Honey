@@ -153,7 +153,7 @@ function string_convert_uc_link($p_string) {
 
 		$query_note = 'SELECT id 
 						 FROM '.$t_repo_table.' 
-						 where view_id=trim(' . db_param().')';
+						 where id=trim(' . db_param().')';
 
 		$result_note = db_query_bound( $query_note, array($palabra) );
 		$count_note = db_num_rows( $result_note );
@@ -165,7 +165,7 @@ function string_convert_uc_link($p_string) {
 			$id_uc_search=$row_search['id'];
 			
 			$t_page=$t_page."&id_usecase=".$id_uc_search;
-
+			//$palabra= str_pad($palabra, 7, "0", STR_PAD_LEFT);
 			$link="<a href=\"$t_page\">".$palabra."</a>";
 			$frase=str_replace($palabra, $link,$p_string);
 		}
@@ -556,7 +556,7 @@ function print_uc_attachments_list( $p_usecase_id ) {
 					 -->
 					 </script>";
 			echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content2(\"hideSection_" . $c_id . "\");swap_content2(\"showSection_" . $c_id . "\");return false;'>" . lang_get( 'show_content' ) . "</a>]</span>";
-			echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content2(\"hideSection_" . $c_id . "\");swap_content(\"showSection_" . $c_id . "\");return false;'>" . lang_get( 'hide_content' ) . "</a>]";
+			echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content2(\"hideSection_" . $c_id . "\");swap_content2(\"showSection_" . $c_id . "\");return false;'>" . lang_get( 'hide_content' ) . "</a>]";
 				echo "<pre>";
 
 				/**/

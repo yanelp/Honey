@@ -11,7 +11,7 @@ EVENT_LAYOUT_RESOURCES;
 
 $id_usecase = gpc_get_int( 'id_usecase' );
 
-$t_page_update="modify_uc_page";
+$t_page_update="update_usecase_page";
 $t_page_update=$t_page_update."&id_usecase=".$id_usecase;
 
 $t_page=plugin_page("view_cu_page");
@@ -272,12 +272,13 @@ $count_notes = db_num_rows( $result_note );
 
 	<br>
 	 <table class="width90">
-		<tr>
-			<td class="form-title" colspan="2">
-			<?php echo lang_get( 'plugin_Honey_usecase_notes' ) ;	?>
-			</td>
-		</tr>
-
+	 <tr <?php echo helper_alternate_class() ?>>
+		<td colspan="2" class="none">
+			<?php 
+			if( ON == config_get( 'use_javascript' ) ) { ?>
+				<?php collapse_open( 'profile2' ); collapse_icon('profile2'); echo lang_get( 'plugin_Honey_usecase_notes' ) ;}?>
+		
+<table>
 <?php
 
 	while( $row_note = db_fetch_array( $result_note ) ){
@@ -345,16 +346,45 @@ $count_notes = db_num_rows( $result_note );
 
 
 	<?php }//while  ?>
+	</table>
+	
+
+	<?php if( ON == config_get( 'use_javascript' ) ) { ?>
+			<?php collapse_closed( 'profile2' ); collapse_icon('profile2'); echo 'Notes';?>
+			<?php collapse_end( 'profile2' ); ?>
+			<?php } ?>
+	</td></tr>
 
 </TABLE>
 
-
+<!--aca van las notas-->
+	<table class="width90">
+	  <tr <?php echo helper_alternate_class() ?>>
+		<td colspan="2" class="category">
+			<?php 
+			if( ON == config_get( 'use_javascript' ) ) { ?>
+				<?php collapse_open( 'profile' ); collapse_icon('profile'); echo 'Add Note';}?>
+				<table>
+				<tr>
+					<td>Note</td>
+					<td>
+					<textarea></textarea>
+					</td>
+				</tr>
+				</table>
+			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
+			<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo 'Add Note';?>
+			<?php collapse_end( 'profile' ); ?>
+			<?php } ?>
+		</td>
+	  </tr>
+	</table>  
 
 
 <br>
 <table align="center">
 	<tr>
-		<td><input type="submit" value="Update"/></td>
+		<td><input type="submit" value="Edit"/></td>
 		<td><input type="button" value="Cancel"  onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page?>')"/></td>
 	</tr>
 </table>
