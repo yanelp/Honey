@@ -111,7 +111,7 @@ EVENT_LAYOUT_RESOURCES
 							<!---->
 							</td>
 							<?php }
-							else { echo "<td>[No Description]</td>";}?>
+							else { echo "<td class='small'>[No Description]</td>";}?>
 
 
 				</tr>
@@ -179,7 +179,7 @@ EVENT_LAYOUT_RESOURCES
 							<!---->
 							</td>
 							<?php }
-							else { echo "<td>[No Goal]</td>";}?>	
+							else { echo "<td class='small'>[No Goal]</td>";}?>	
 
 				</tr>
 				<?php
@@ -252,7 +252,7 @@ EVENT_LAYOUT_RESOURCES
 							<!---->
 							</td>
 							<?php }
-							else { echo "<td>[No Goal]</td>";}?>
+							else { echo "<td  class='small'>[No Goal]</td>";}?>
 				</tr>
 				<?php 
 				$j++;
@@ -370,7 +370,7 @@ EVENT_LAYOUT_RESOURCES
 							<!---->
 							</td>	
 							<?php }
-							else { echo "<td>[No Description]</td>";}?>
+							else { echo "<td  class='small'>[No Description]</td>";}?>
 
 				</tr>
 				<?php

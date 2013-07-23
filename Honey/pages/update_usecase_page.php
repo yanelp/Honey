@@ -212,7 +212,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 							<!---->
 							</td>
 							<?php }
-							else { echo "<td>[No Description]</td>";}?>
+							else { echo "<td  class='small'>[No Description]</td>";}?>
 				</tr>
 				<?php $j++;	
 				} ?>
@@ -287,7 +287,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 							<!---->
 							</td>
 							<?php }
-							else { echo "<td>[No Goal]</td>";}?>					
+							else { echo "<td  class='small'>[No Goal]</td>";}?>					
 
 				</tr>
 				<?php $j++;	
@@ -369,7 +369,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 							<!---->
 							</td>
 							<?php }
-							else { echo "<td>[No Goal]</td>";}?>
+							else { echo "<td  class='small'>[No Goal]</td>";}?>
 
 				</tr>
 				<?php $j++;	
@@ -458,7 +458,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 							<!---->
 							</td>	
 							<?php }
-							else { echo "<td>[No Description]</td>";}?>
+							else { echo "<td  class='small'>[No Description]</td>";}?>
 				</tr>
 
 				<?php $j++;	
