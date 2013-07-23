@@ -1,6 +1,7 @@
 <?php
 
 require_once('functions.php');
+require_once( 'file_api.php' );
 //require_once( 'current_user_api.php' );
 
 html_page_top( plugin_lang_get( 'title' ) );
@@ -12,13 +13,13 @@ EVENT_LAYOUT_RESOURCES;
 $id_usecase = gpc_get_int( 'id_usecase' );
 $id_project=helper_get_current_project();
 
-$t_page_update="usecase_update_page";
+$t_page_update="update_usecase";
 $t_page_update=$t_page_update."&id_usecase=".$id_usecase;
 
 $t_page=plugin_page("view_cu_page");
 ?>
 
-<form id="form1" action="<?php echo plugin_page( $t_page_update ); ?>" method="POST">
+<form id="form1" action="<?php echo plugin_page( $t_page_update ); ?>" method="POST" enctype="multipart/form-data">
 <?php
 
 //busco el caso de uso seleccionado
@@ -118,6 +119,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 					 where id_usecase=' . db_param().' and active = 0 and type<>1';
 
 	$result_alternative_scenario = db_query_bound( $query_alternative_scenario, array($id_usecase) );
+	$count_alternative_scenarios= db_num_rows( $result_alternative_scenario);
 
 
 //busco todos los cus menos el seleccionado
@@ -218,7 +220,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 				} ?>
 			</table>
 
-			<?php if($count_actors==0){echo "<p class='category'> No actors created for this project<p>";}?>
+			<?php if($count_all_actors==0){echo "<p class='category'> No actors created for this project<p>";}?>
 		</td>
 	</tr>
 	 <!--aca van las relaciones extiende-->
@@ -253,11 +255,11 @@ $count_all_actors = db_num_rows( $result_all_actors );
 				<tr>
 						<td>
 							<?php if($ck==false){?>
-								<input type="checkbox" name="ck_rule_<?php echo $j?>" id="ck_rule_<?php echo $j?>"/>
+								<input type="checkbox" name="ck_extends_<?php echo $j?>" id="ck_extends_<?php echo $j?>"/>
 							<?php }else{ ?>
-									<input type="checkbox" name="ck_rule_<?php echo $j?>" id="ck_rule_<?php echo $j?>" checked/>
+									<input type="checkbox" name="ck_extends_<?php echo $j?>" id="ck_extends_<?php echo $j?>" checked/>
 							<?php } ?>
-							<input type="hidden" name="id_rule_<?php echo $j?>" id="id_rule_<?php echo $j?>" value="<?php echo $row_all_ucs['id'] ?>"/>
+							<input type="hidden" name="id_extends_<?php echo $j?>" id="id_extends_<?php echo $j?>" value="<?php echo $row_all_ucs['id'] ?>"/>
 						</td>
 							<td><?php echo $row_all_ucs['name'] ?></td>
 							<?php if( $row_all_ucs['goal']!=''){?>
@@ -335,11 +337,11 @@ $count_all_actors = db_num_rows( $result_all_actors );
 				<tr>
 						<td>
 							<?php if($ck==false){?>
-								<input type="checkbox" name="ck_rule_<?php echo $j?>" id="ck_rule_<?php echo $j?>"/>
+								<input type="checkbox" name="ck_includes_<?php echo $j?>" id="ck_includes_<?php echo $j?>"/>
 							<?php }else{ ?>
-									<input type="checkbox" name="ck_rule_<?php echo $j?>" id="ck_rule_<?php echo $j?>" checked/>
+									<input type="checkbox" name="ck_includes_<?php echo $j?>" id="ck_includes_<?php echo $j?>" checked/>
 							<?php } ?>
-							<input type="hidden" name="id_rule_<?php echo $j?>" id="id_rule_<?php echo $j?>" value="<?php echo $row_all_ucs['id'] ?>"/>
+							<input type="hidden" name="id_includes_<?php echo $j?>" id="id_includes_<?php echo $j?>" value="<?php echo $row_all_ucs['id'] ?>"/>
 						</td>
 							<td><?php echo $row_all_ucs['name'] ?></td>
 							<?php if( $row_all_ucs['goal']!=''){?>
@@ -388,7 +390,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 		<td class="category">Preconditions</td><td><textarea  cols="100" rows="5"  name="preconditions" id="preconditions"><?php echo $precond ?></textarea></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Postconditions</td><td><textarea  cols="100" rows="5"  name="preconditions" id="preconditions"><?php echo $postcond ?></textarea></td>
+		<td class="category">Postconditions</td><td><textarea  cols="100" rows="5"  name="postconditions" id="postconditions"><?php echo $postcond ?></textarea></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">Observation</td><td><Textarea cols="100" name="obsevations" id="obsevations" ><?php echo $observation ?></Textarea></td>
@@ -473,6 +475,8 @@ $count_all_actors = db_num_rows( $result_all_actors );
 		</td>
 	</tr>
 		<?php 
+
+		//en vez de mostrar asi tendria que generar la tabla dinamica con los que ya existen y permitir agregar más
 		$h=0;
 		while( $row_alternative_scenario = db_fetch_array( $result_alternative_scenario )){
 			$alt= $row_alternative_scenario['steps'];
@@ -683,6 +687,13 @@ $count_notes = db_num_rows( $result_note );
 	</tr>
 </table>
 </div>
+
+<input type='hidden' name='row_number_cursoAlternativo' id='row_number_cursoAlternativo' value='<?php $count_alternative_scenarios?>'/>
+<input type='hidden' name='row_number_uc_actor' id='row_number_uc_actor' value='<?php echo $count_all_actors ?>'/>
+<input type='hidden' name='row_number_uc_rule' id='row_number_uc_rule' value='<?php echo $count_all_rules ?>'/>
+<input type='hidden' name='row_number_uc_extends' id='row_number_uc_extends' value='<?php echo $count_all_ucs ?>'/>
+<input type='hidden' name='row_number_uc_includes' id='row_number_uc_includes' value='<?php echo $count_all_ucs ?>'/>
+<input type='hidden' name='cant_files' id='cant_files' value='<?php echo $hasta ?>'/>
 
 </form>
 
