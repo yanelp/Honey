@@ -23,7 +23,7 @@
 		access_ensure_bugnote_level( config_get( 'delete_bugnote_threshold' ), $f_bugnote_id );
 	}
 */
-	helper_ensure_confirmed( lang_get( 'delete_bugnote_sure_msg' ), 'Delete' );
+	helper_ensure_confirmed( lang_get( 'delete_bugnote_sure_msg' ), 'Delete');
 
 	delete_uc_note( $f_uc_note_id );
 

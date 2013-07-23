@@ -182,7 +182,7 @@ EVENT_LAYOUT_RESOURCES
 				} ?>
 			</table>
 
-			<?php if($count_includs==0){echo "<p class='category'> No usecases created for this project<p>";}?>
+			<?php if($count_includes==0){echo "<p class='category'> No usecases created for this project<p>";}?>
 
 			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
 				<?php collapse_closed( 'profile4' ); collapse_icon('profile4'); echo 'Includes';?>

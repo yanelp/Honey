@@ -1,7 +1,6 @@
 <?php
 
 require_once('functions.php');
-//require_once( 'current_user_api.php' );
 
 html_page_top( plugin_lang_get( 'title' ) );
 
@@ -347,7 +346,6 @@ $count_notes = db_num_rows( $result_note );
 
 	<?php }//while  ?>
 	</table>
-	
 
 	<?php if( ON == config_get( 'use_javascript' ) ) { ?>
 			<?php collapse_closed( 'profile2' ); collapse_icon('profile2'); echo 'Notes';?>
@@ -357,20 +355,23 @@ $count_notes = db_num_rows( $result_note );
 
 </TABLE>
 
+
+<br>
 <!--aca van las notas-->
 	<table class="width90">
 	  <tr <?php echo helper_alternate_class() ?>>
-		<td colspan="2" class="category">
+		<td colspan="2" class="none">
 			<?php 
 			if( ON == config_get( 'use_javascript' ) ) { ?>
 				<?php collapse_open( 'profile' ); collapse_icon('profile'); echo 'Add Note';}?>
 				<table>
 				<tr>
-					<td>Note</td>
-					<td>
-					<textarea></textarea>
+					<td class="category" width="25%">Note</td>
+					<td width="75%">
+					<textarea cols="88" rows="10" name="new_note"></textarea>
 					</td>
 				</tr>
+				<tr><td colspan="2"><input type="button" onClick="javascript:go_page(0,<?php  echo $id_usecase?>,'<?php  echo plugin_page("add_uc_note");?>')" value="Add Note"/></td></tr>
 				</table>
 			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
 			<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo 'Add Note';?>

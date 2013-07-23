@@ -165,9 +165,14 @@ function string_convert_uc_link($p_string) {
 			$id_uc_search=$row_search['id'];
 			
 			$t_page=$t_page."&id_usecase=".$id_uc_search;
-			//$palabra= str_pad($palabra, 7, "0", STR_PAD_LEFT);
-			$link="<a href=\"$t_page\">".$palabra."</a>";
-			$frase=str_replace($palabra, $link,$p_string);
+			
+			$concat= str_pad($palabra, 7, "0", STR_PAD_LEFT);
+
+			$frase=str_replace($palabra, $concat,$p_string);	
+
+			$link="<a href=\"$t_page\">".$concat."</a>";
+
+			$frase=str_replace($concat, $link,$frase);
 		}
 		
 	}
@@ -489,9 +494,10 @@ function print_uc_attachments_list( $p_usecase_id ) {
 		print_file_icon( $t_file_display_name );
 		echo $t_href_end . '&#160;' . $t_href_start . $t_file_display_name . $t_href_end  . '<span class="italic">' . $t_date_added . '</span>';
 
-			/*echo '&#160;[';
-			print_link( 'bug_file_delete.php?file_id=' . $t_attachment['id'] . form_security_param( 'bug_file_delete' ), lang_get( 'delete_link' ), false, 'small' );
-			echo ']';*/
+		$t_page_delete= plugin_page( 'file_usecase_delete' );;
+		echo '&#160;[';
+		print_link( $t_page_delete.'&file_id=' . $t_attachment['id'].'&usecase_id='.$p_usecase_id  ,'Delete', false, 'small' );
+		echo ']';
 
 		if ( $t_attachment['preview'] && ( $t_attachment['type'] == 'text' ) ) {
 			 $c_id = db_prepare_int( $t_attachment['id'] );

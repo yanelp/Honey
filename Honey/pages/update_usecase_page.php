@@ -490,6 +490,31 @@ $count_notes = db_num_rows( $result_note );
 
 </TABLE>
 
+<br>
+<!--aca van las notas-->
+	<table class="width90">
+	  <tr <?php echo helper_alternate_class() ?>>
+		<td colspan="2" class="none">
+			<?php 
+			if( ON == config_get( 'use_javascript' ) ) { ?>
+				<?php collapse_open( 'profile' ); collapse_icon('profile'); echo 'Add Note';}?>
+				<table>
+				<tr>
+					<td class="category" width="25%">Note</td>
+					<td width="75%">
+					<textarea cols="88" rows="10" name="new_note"></textarea>
+					</td>
+				</tr>
+				<tr><td colspan="2"><input type="button" onClick="javascript:go_page(0,<?php  echo $id_usecase?>,'<?php  echo plugin_page("add_uc_note");?>')" value="Add Note"/></td></tr>
+				</table>
+			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
+			<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo 'Add Note';?>
+			<?php collapse_end( 'profile' ); ?>
+			<?php } ?>
+		</td>
+	  </tr>
+	</table>  
+
 
 
 
