@@ -469,14 +469,14 @@ function file_usecase_get_visible_attachments( $p_usecase_id ) {
 	return $t_attachments;
 }
 
-function print_uc_attachments_list( $p_usecase_id ) {
+function print_uc_attachments_list( $p_usecase_id, $num ) {
 	
 	$t_attachments = file_usecase_get_visible_attachments( $p_usecase_id );
 	$t_attachments_count = count( $t_attachments );
 
 	$i = 0;
 	$image_previewed = false;
-
+	$cant=0;
 	foreach ( $t_attachments as $t_attachment ) {
 		$t_file_display_name = string_display_line( $t_attachment['display_name'] );
 		
@@ -494,10 +494,12 @@ function print_uc_attachments_list( $p_usecase_id ) {
 		print_file_icon( $t_file_display_name );
 		echo $t_href_end . '&#160;' . $t_href_start . $t_file_display_name . $t_href_end  . '<span class="italic">' . $t_date_added . '</span>';
 
-		$t_page_delete= plugin_page( 'file_usecase_delete' );;
-		echo '&#160;[';
-		print_link( $t_page_delete.'&file_id=' . $t_attachment['id'].'&usecase_id='.$p_usecase_id  ,'Delete', false, 'small' );
-		echo ']';
+		if($num==1){
+			$t_page_delete= plugin_page( 'file_usecase_delete' );
+			echo '&#160;[';
+			print_link( $t_page_delete.'&file_id=' . $t_attachment['id'].'&usecase_id='.$p_usecase_id  ,'Delete', false, 'small' );
+			echo ']';
+		}
 
 		if ( $t_attachment['preview'] && ( $t_attachment['type'] == 'text' ) ) {
 			 $c_id = db_prepare_int( $t_attachment['id'] );
@@ -578,7 +580,9 @@ function print_uc_attachments_list( $p_usecase_id ) {
 			echo "<br />\n";
 			$i++;
 		}
+		$cant++;
 	}//for
+	return $cant;
 }//fin function
 
 

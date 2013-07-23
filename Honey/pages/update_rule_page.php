@@ -46,7 +46,7 @@ $t_page=$t_page."&id_rule=".$id_rule;
 		<td><input type="text" name="rule_name" id='rule_name' size="50" value="<?php echo $name?>"/></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Description</td><td><textarea name='rule_descrip' id='rule_descrip' cols='37' rows='5'><?php echo $descrip?></textarea></td>
+		<td class="category">Description</td><td><textarea name='rule_descrip' id='rule_descrip' cols='38' rows='5'><?php echo $descrip?></textarea></td>
 	</tr>
 	<tr>
 		<td class="left">

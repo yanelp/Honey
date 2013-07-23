@@ -58,18 +58,6 @@ EVENT_LAYOUT_RESOURCES
 		   <Textarea cols="100" name="goal" id="goal"></Textarea>
 		</td>
 	</tr>
-	<!--<tr <?php echo helper_alternate_class() ?>>
-		 <td class="category">
-		    Actores Involucrados no va mas
-		</td>
-		<td><input type='text' name='uc_actor' id='uc_actor' size="133"/>
-			<input type='button' name='button_actor_add' value='Agregar Actor' onClick="javascript:insert_row('table_actors','uc_actor',document.getElementById('uc_actor').value)"/>
-		</td>
-	</tr>
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">&nbsp;</td>
-		<td><table name='table_actors' id='table_actors' ><thead></thead><tbody></tbody></table></td>
-	 </tr>-->
 
 	<?php
 		//busco todos los actores del proyecto
@@ -96,6 +84,36 @@ EVENT_LAYOUT_RESOURCES
 					<td><input type="checkbox" name="ck_actor_<?php echo $j?>" id="ck_actor_<?php echo $j?>"/>
 					<input type="hidden" name="id_actor_<?php echo $j?>" id="id_actor_<?php echo $j?>" value="<?php echo $row_actors['id'] ?>"/></td>
 					<td><?php echo $row_actors['name'] ?></td>
+					<?php if( $row_actors['description']!=''){?>
+							<td>
+									<!---->
+								<?php
+								$c_id = $row_actors['id'];
+								echo "<script type=\"text/javascript\" language=\"JavaScript\">
+									<!--
+									function swap_content4( span ) {
+									displayType = ( document.getElementById( span ).style.display == 'none' ) ? '' : 'none';
+									document.getElementById( span ).style.display = displayType;
+									}
+
+									 -->
+									 </script>";
+							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content4(\"hideSection_" . $c_id . "\");swap_content4(\"showSection_" . $c_id . "\");return false;'>Show Description</a>]</span>";
+							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content4(\"hideSection_" . $c_id . "\");swap_content4(\"showSection_" . $c_id . "\");return false;'>Hide Description</a>]";
+								echo "<pre>";
+
+								echo $row_actors['description'];
+
+
+								echo "</pre></span>\n";
+
+								?>
+							<!---->
+							</td>
+							<?php }
+							else { echo "<td>[No Description]</td>";}?>
+
+
 				</tr>
 				<?php 
 				$j++;	
@@ -133,6 +151,36 @@ EVENT_LAYOUT_RESOURCES
 					<td><input type="checkbox" name="ck_extends_<?php echo $j?>"/>
 					<input type="hidden" name="id_extends_<?php echo $j?>" id="id_extends_<?php echo $j?>" value="<?php echo $row_extends['id'] ?>"/></td>
 					<td><?php echo $row_extends['name'] ?></td>
+
+					<?php if( $row_extends['goal']!=''){?>
+							<td>
+							<!---->
+								<?php
+								$c_id = $row_extends['id'];
+								echo "<script type=\"text/javascript\" language=\"JavaScript\">
+									<!--
+									function swap_content5( span ) {
+									displayType = ( document.getElementById( span ).style.display == 'none' ) ? '' : 'none';
+									document.getElementById( span ).style.display = displayType;
+									}
+
+									 -->
+									 </script>";
+							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content5(\"hideSection_" . $c_id . "\");swap_content5(\"showSection_" . $c_id . "\");return false;'>Show Goal</a>]</span>";
+							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content5(\"hideSection_" . $c_id . "\");swap_content5(\"showSection_" . $c_id . "\");return false;'>Hide Goal</a>]";
+								echo "<pre>";
+
+								echo $row_extends['goal'];
+
+
+								echo "</pre></span>\n";
+
+								?>
+							<!---->
+							</td>
+							<?php }
+							else { echo "<td>[No Goal]</td>";}?>	
+
 				</tr>
 				<?php
 				$j++;
@@ -176,6 +224,35 @@ EVENT_LAYOUT_RESOURCES
 					<td><input type="checkbox" name="ck_includes_<?php echo $j?>"/>
 					<input type="hidden" name="id_includes_<?php echo $j?>" id="id_includes_<?php echo $j?>" value="<?php echo $row_includes['id'] ?>"/></td>
 					<td><?php echo $row_includes['name'] ?></td>
+
+					<?php if( $row_includes['goal']!=''){?>
+							<td>
+							<!---->
+								<?php
+								$c_id = $row_includes['id']."algo";
+								echo "<script type=\"text/javascript\" language=\"JavaScript\">
+									<!--
+									function swap_content6( span ) {
+									displayType = ( document.getElementById( span ).style.display == 'none' ) ? '' : 'none';
+									document.getElementById( span ).style.display = displayType;
+									}
+
+									 -->
+									 </script>";
+							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content6(\"hideSection_" . $c_id . "\");swap_content6(\"showSection_" . $c_id . "\");return false;'>Show Goal</a>]</span>";
+							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content6(\"hideSection_" . $c_id . "\");swap_content6(\"showSection_" . $c_id . "\");return false;'>Hide Goal</a>]";
+								echo "<pre>";
+
+								echo $row_includes['goal'];
+
+
+								echo "</pre></span>\n";
+
+								?>
+							<!---->
+							</td>
+							<?php }
+							else { echo "<td>[No Goal]</td>";}?>
 				</tr>
 				<?php 
 				$j++;
@@ -265,6 +342,36 @@ EVENT_LAYOUT_RESOURCES
 					<td><input type="checkbox" name="ck_rule_<?php echo $j?>"/>
 					<input type="hidden" name="id_rule_<?php echo $j?>" id="id_rule_<?php echo $j?>" value="<?php echo $row_rules['id'] ?>"/></td>
 					<td><?php echo $row_rules['name'] ?></td>
+
+					<?php if( $row_rules['description']!=''){?>
+							<td>
+								<!---->
+								<?php
+								$c_id = $row_rules['id'];
+								echo "<script type=\"text/javascript\" language=\"JavaScript\">
+									<!--
+									function swap_content3( span ) {
+									displayType = ( document.getElementById( span ).style.display == 'none' ) ? '' : 'none';
+									document.getElementById( span ).style.display = displayType;
+									}
+
+									 -->
+									 </script>";
+							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content3(\"hideSection_" . $c_id . "\");swap_content3(\"showSection_" . $c_id . "\");return false;'>Show Description</a>]</span>";
+							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content3(\"hideSection_" . $c_id . "\");swap_content3(\"showSection_" . $c_id . "\");return false;'>Hide Description</a>]";
+								echo "<pre>";
+
+								echo $row_rules['description'];
+
+
+								echo "</pre></span>\n";
+
+								?>
+							<!---->
+							</td>	
+							<?php }
+							else { echo "<td>[No Description]</td>";}?>
+
 				</tr>
 				<?php
 				$j++;

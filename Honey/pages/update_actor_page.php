@@ -46,7 +46,7 @@ $t_page=$t_page."&id_actor=".$id_actor;
 		<td><input type="text" name="actor_name" id='actor_name' size="50" value="<?php echo $name?>"/></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Description</td><td><textarea name='actor_descrip' id='actor_descrip' cols='37' rows='5'><?php echo $descrip?></textarea></td>
+		<td class="category">Description</td><td><textarea name='actor_descrip' id='actor_descrip' cols='38' rows='5'><?php echo $descrip?></textarea></td>
 	</tr>
 	<tr>
 		<td class="left">

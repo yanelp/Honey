@@ -234,7 +234,7 @@ while( $row_actors = db_fetch_array( $result_actors )){
 	</tr>
 		<?php 
 		while( $row_alternative_scenario = db_fetch_array( $result_alternative_scenario )){?>
-			<tr <?php echo helper_alternate_class() ?>><td>Alternative Scenario</td><td><?php echo  $row_alternative_scenario['steps']?></td></tr>
+			<tr <?php echo helper_alternate_class() ?>><td class="category">Alternative Scenario</td><td><?php echo  $row_alternative_scenario['steps']?></td></tr>
 			
 			<?php
 		}//while cada escenario ?>
@@ -243,10 +243,11 @@ while( $row_actors = db_fetch_array( $result_actors )){
 		echo '<tr ', helper_alternate_class(), '>';
 		echo '<td class="category"><a name="attachments" id="attachments">', 'Attachments', '</a>','</td>';
 		echo '<td colspan="5">';
-		print_uc_attachments_list( $id_usecase );
+		print_uc_attachments_list( $id_usecase, 0 );//0 significa sin delete de file
 		echo '</td></tr>';
 ?>
 </table>
+
 
 <?php // echo $interface_main?>
 
@@ -269,7 +270,7 @@ $count_notes = db_num_rows( $result_note );
 
 ?>
 
-	<br>
+	
 	 <table class="width90">
 	 <tr <?php echo helper_alternate_class() ?>>
 		<td colspan="2" class="none">
@@ -277,7 +278,7 @@ $count_notes = db_num_rows( $result_note );
 			if( ON == config_get( 'use_javascript' ) ) { ?>
 				<?php collapse_open( 'profile2' ); collapse_icon('profile2'); echo lang_get( 'plugin_Honey_usecase_notes' ) ;}?>
 		
-<table>
+<table width="90%">
 <?php
 
 	while( $row_note = db_fetch_array( $result_note ) ){
@@ -304,7 +305,7 @@ $count_notes = db_num_rows( $result_note );
 	?>
 	
 	<tr>
-	  <td  class="<?php echo $t_bugnote_css ?>">
+	  <td  class="<?php echo $t_bugnote_css ?>" width="20%">
 		<?php echo $id_note;?>
 		<span class="small">
 		  <?php if ( user_exists( $reporter ) ) {
@@ -323,7 +324,9 @@ $count_notes = db_num_rows( $result_note );
 			  <?php	if ( $modified ) {
 				echo '<span class="small">' . lang_get( 'edited_on') . lang_get( 'word_separator' ) . date($modified ) . '</span><br />';
 			   }?>
-			  <br /><div class="small">
+			  <br />
+			  
+			  <!--<div class="small">
 
 			  <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("uc_note_edit_page");?>')" value="Editar"/>
 			  <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("delete_uc_note");?>')" value="Delete"/>
@@ -336,9 +339,9 @@ $count_notes = db_num_rows( $result_note );
 					
 			  <?php } ?>	
 
-			</div>
+			</div>-->
 	  </td>
-	  <td  class="<?php echo $t_bugnote_note_css ?>">
+	  <td  class="<?php echo $t_bugnote_note_css ?>" width="80%">
 	  <?php echo string_convert_uc_link($note); ?>
 	  </td>
 	</tr>
@@ -358,6 +361,7 @@ $count_notes = db_num_rows( $result_note );
 
 <br>
 <!--aca van las notas-->
+
 	<table class="width90">
 	  <tr <?php echo helper_alternate_class() ?>>
 		<td colspan="2" class="none">

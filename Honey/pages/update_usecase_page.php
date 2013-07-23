@@ -46,7 +46,7 @@ $goal=$row['goal'];
 
 $t_repo_table = plugin_table( 'actor', 'honey' );
 
-$query_all_actors = 'SELECT a.name , a.id
+$query_all_actors = 'SELECT a.name , a.id, a.description
 				 FROM '.$t_repo_table.' a 
 				 where a.id_project=' . db_param().'
 				 AND a.active = 0 ';
@@ -76,7 +76,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 
 	$t_repo_table2 = plugin_table( 'rule', 'honey' );
 
-	$query_all_rules = 'SELECT b.name , b.id
+	$query_all_rules = 'SELECT b.name , b.id, b.description
 					 FROM '.$t_repo_table2.' b
 					 where id_project=' . db_param().'
 					AND b.active = 0';
@@ -124,7 +124,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 
 	$t_repo_table2 = plugin_table( 'usecase', 'honey' );
 
-	$query_all_ucs = 'SELECT b.id, b.name 
+	$query_all_ucs = 'SELECT b.id, b.name , b.goal
 					 FROM '.$t_repo_table2.' b
 					 where id_project=' . db_param().'
 					  AND b.active = 0 and id!=' . db_param().'';	
@@ -158,7 +158,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 				$t_repo_table = plugin_table( 'actor', 'honey' );
 				$t_repo_table2 = plugin_table( 'usecase_actor', 'honey' );
 
-				$query_actors = 'SELECT a.name , a.id
+				$query_actors = 'SELECT a.name , a.id, a.description
 								 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id=b.id_actor)
 								 where b.id_usecase=' . db_param().'
 								 AND a.active = 0 AND b.active = 0';
@@ -185,8 +185,34 @@ $count_all_actors = db_num_rows( $result_all_actors );
 							<input type="hidden" name="id_actor_<?php echo $j?>" id="id_actor_<?php echo $j?>" value="<?php echo $row_all_actors['id'] ?>"/>
 						</td>
 							<td><?php echo $row_all_actors['name'] ?></td>
-					
+							<?php if( $row_all_actors['description']!=''){?>
+							<td>
+									<!---->
+								<?php
+								$c_id = $row_all_actors['id'];
+								echo "<script type=\"text/javascript\" language=\"JavaScript\">
+									<!--
+									function swap_content4( span ) {
+									displayType = ( document.getElementById( span ).style.display == 'none' ) ? '' : 'none';
+									document.getElementById( span ).style.display = displayType;
+									}
 
+									 -->
+									 </script>";
+							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content4(\"hideSection_" . $c_id . "\");swap_content4(\"showSection_" . $c_id . "\");return false;'>Show Description</a>]</span>";
+							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content4(\"hideSection_" . $c_id . "\");swap_content4(\"showSection_" . $c_id . "\");return false;'>Hide Description</a>]";
+								echo "<pre>";
+
+								echo $row_all_actors['description'];
+
+
+								echo "</pre></span>\n";
+
+								?>
+							<!---->
+							</td>
+							<?php }
+							else { echo "<td>[No Description]</td>";}?>
 				</tr>
 				<?php $j++;	
 				} ?>
@@ -209,7 +235,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 				$t_repo_table = plugin_table( 'usecase_extend', 'honey' );
 				$t_repo_table2 = plugin_table( 'usecase', 'honey' );
 
-				$query_parents = 'SELECT b.id, b.name 
+				$query_parents = 'SELECT b.id, b.name , b.goal
 					 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_usecase_parent=b.id)
 					 where id_usecase_extends=' . db_param().'
 					 AND a.active = 0 AND b.active = 0';
@@ -234,7 +260,34 @@ $count_all_actors = db_num_rows( $result_all_actors );
 							<input type="hidden" name="id_rule_<?php echo $j?>" id="id_rule_<?php echo $j?>" value="<?php echo $row_all_ucs['id'] ?>"/>
 						</td>
 							<td><?php echo $row_all_ucs['name'] ?></td>
-					
+							<?php if( $row_all_ucs['goal']!=''){?>
+							<td>
+							<!---->
+								<?php
+								$c_id = $row_all_ucs['id'];
+								echo "<script type=\"text/javascript\" language=\"JavaScript\">
+									<!--
+									function swap_content5( span ) {
+									displayType = ( document.getElementById( span ).style.display == 'none' ) ? '' : 'none';
+									document.getElementById( span ).style.display = displayType;
+									}
+
+									 -->
+									 </script>";
+							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content5(\"hideSection_" . $c_id . "\");swap_content5(\"showSection_" . $c_id . "\");return false;'>Show Goal</a>]</span>";
+							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content5(\"hideSection_" . $c_id . "\");swap_content5(\"showSection_" . $c_id . "\");return false;'>Hide Goal</a>]";
+								echo "<pre>";
+
+								echo $row_all_ucs['goal'];
+
+
+								echo "</pre></span>\n";
+
+								?>
+							<!---->
+							</td>
+							<?php }
+							else { echo "<td>[No Goal]</td>";}?>					
 
 				</tr>
 				<?php $j++;	
@@ -264,7 +317,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 				$t_repo_table = plugin_table( 'usecase_include', 'honey' );
 				$t_repo_table2 = plugin_table( 'usecase', 'honey' );
 
-				$query_childs = 'SELECT b.id , b.name
+				$query_childs = 'SELECT b.id , b.name, b.goal
 								 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_usecase_include=b.id)
 								 where id_usecase_parent=' . db_param().'
 								 AND a.active = 0 AND b.active = 0';
@@ -289,7 +342,34 @@ $count_all_actors = db_num_rows( $result_all_actors );
 							<input type="hidden" name="id_rule_<?php echo $j?>" id="id_rule_<?php echo $j?>" value="<?php echo $row_all_ucs['id'] ?>"/>
 						</td>
 							<td><?php echo $row_all_ucs['name'] ?></td>
-					
+							<?php if( $row_all_ucs['goal']!=''){?>
+							<td>
+							<!---->
+								<?php
+								$c_id = $row_all_ucs['id']."algo";
+								echo "<script type=\"text/javascript\" language=\"JavaScript\">
+									<!--
+									function swap_content6( span ) {
+									displayType = ( document.getElementById( span ).style.display == 'none' ) ? '' : 'none';
+									document.getElementById( span ).style.display = displayType;
+									}
+
+									 -->
+									 </script>";
+							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content6(\"hideSection_" . $c_id . "\");swap_content6(\"showSection_" . $c_id . "\");return false;'>Show Goal</a>]</span>";
+							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content6(\"hideSection_" . $c_id . "\");swap_content6(\"showSection_" . $c_id . "\");return false;'>Hide Goal</a>]";
+								echo "<pre>";
+
+								echo $row_all_ucs['goal'];
+
+
+								echo "</pre></span>\n";
+
+								?>
+							<!---->
+							</td>
+							<?php }
+							else { echo "<td>[No Goal]</td>";}?>
 
 				</tr>
 				<?php $j++;	
@@ -326,7 +406,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 				$t_repo_table = plugin_table( 'rule_usecase', 'honey' );
 				$t_repo_table2 = plugin_table( 'rule', 'honey' );
 
-				$query_rules_usecase = 'SELECT b.name , b.id
+				$query_rules_usecase = 'SELECT b.name , b.id, b.description
 								 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_rule=b.id)
 								 where id_usecase=' . db_param().'
 								AND b.active = 0';
@@ -350,10 +430,37 @@ $count_all_actors = db_num_rows( $result_all_actors );
 							<?php } ?>
 							<input type="hidden" name="id_rule_<?php echo $j?>" id="id_rule_<?php echo $j?>" value="<?php echo $row_all_rules['id'] ?>"/>
 						</td>
-							<td><?php echo $row_all_rules['name'] ?></td>
-					
+							<td><?php echo $row_all_rules['name'] ?></td>	
+							<?php if( $row_all_rules['description']!=''){?>
+							<td>
+								<!---->
+								<?php
+								$c_id = $row_all_rules['id'];
+								echo "<script type=\"text/javascript\" language=\"JavaScript\">
+									<!--
+									function swap_content3( span ) {
+									displayType = ( document.getElementById( span ).style.display == 'none' ) ? '' : 'none';
+									document.getElementById( span ).style.display = displayType;
+									}
 
+									 -->
+									 </script>";
+							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content3(\"hideSection_" . $c_id . "\");swap_content3(\"showSection_" . $c_id . "\");return false;'>Show Description</a>]</span>";
+							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content3(\"hideSection_" . $c_id . "\");swap_content3(\"showSection_" . $c_id . "\");return false;'>Hide Description</a>]";
+								echo "<pre>";
+
+								echo $row_all_rules['description'];
+
+
+								echo "</pre></span>\n";
+
+								?>
+							<!---->
+							</td>	
+							<?php }
+							else { echo "<td>[No Description]</td>";}?>
 				</tr>
+
 				<?php $j++;	
 				} ?>
 			</table>
@@ -386,9 +493,59 @@ $count_all_actors = db_num_rows( $result_all_actors );
 		echo '<tr ', helper_alternate_class(), '>';
 		echo '<td class="category">	<a name="attachments" id="attachments">', 'Attachments', '</a>','</td>';
 		echo '<td colspan="5">';
-		print_uc_attachments_list( $id_usecase );
+		$cant_files=print_uc_attachments_list( $id_usecase , 1);//1 significa con delete file
 		echo '</td></tr>';
 ?>
+
+
+<!--aca van los archivos-->
+
+<?php
+	// File Upload (if enabled)
+		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+		//$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
+?>
+	 <tr <?php echo helper_alternate_class() ?>>
+		<td colspan="2" class="none">
+			<?php 
+			if( ON == config_get( 'use_javascript' ) ) { ?>
+				<?php collapse_open( 'profile7' ); collapse_icon('profile7'); echo 'Add Attachments';?>
+		
+				<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
+
+				<table>
+					<tr><td><?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
+					<?php echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?></td></tr>
+					<tr>
+						<td>
+							<?php
+							// Display multiple file upload fields
+
+							//muestro en total 10 archivos-->10-la cant de ya guardados
+							$hasta=10-$cant_files;
+							
+							for( $i = 0; $i < $hasta; $i++ ) {?>
+
+								<input <?php echo helper_get_tab_index() ?> id="ufile[]" name="ufile[]" type="file" size="50" />
+								<br>
+								
+							<?php 
+							}//for	?>
+						</td>
+					</tr>
+				</table>
+
+			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
+				<?php collapse_closed( 'profile7' ); collapse_icon('profile7'); echo 'Add Attachments';?>
+				<?php collapse_end( 'profile7' ); ?>
+			<?php }
+		}//if( ON == config_get ?>
+		</td>
+	  </tr>	
+
+
+<!--aca termina lo de los archivos-->
+
 </table>
 
 <?php // echo $interface_main?>
