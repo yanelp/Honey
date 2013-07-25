@@ -31,13 +31,13 @@ $t_repo_table_symbol = plugin_table( 'symbol', 'honey' );
 
 $result_search = db_query_bound( $query_search, array($type_verb) );
 
-$count = db_num_rows( $result_search );
+$count_verb = db_num_rows( $result_search );
 
 $a=0;
 $actores_id;
 $existenCondiciones = false;
 
-if ($count == 0){
+if ($count_verb  == 0){
 
 	print_lel_menu();
 
@@ -51,7 +51,7 @@ echo "<br>";
 html_page_bottom1( );
 };
 
-if ($count > 0){
+if ($count_verb > 0){
     
      /*Insert de info de la derivación*/
 
@@ -140,9 +140,13 @@ if ($count > 0){
 
      /*INSERT DE CU´s*/ 
         
-	    //matriz de las condiciones por cada verbo
+	    //matriz con el texto de las condiciones por cada verbo
+        $matrizVerbo;
 
-		$matrizVerbo;
+	   //matriz con el ID de las condiciones por cada verbo
+        $matrizCondiciones;
+
+	   $x=0;
 	  //por cada verbo
 		while($row_search  = db_fetch_array( $result_search )){
 
@@ -152,73 +156,65 @@ if ($count > 0){
 	 
 			//la noción en el verbo del LEL es el objetivo del CU
 			$uc_goal = $row_search['notion'];
+
+			$postconditions = "";
+			$observations = "";
+			$precondition = "";
+
+			$t_repo_table = plugin_table( 'usecase', 'honey' );
+
+			$t_query_symbol = 'INSERT INTO '.$t_repo_table.' (name, goal, postconditions, observations, preconditions, id_derivation, id_symbol, id_project)
+						VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' , ' . db_param() . ' , ' . db_param() . ')';
+
+			$g_result_insert_symbol=db_query_bound( $t_query_symbol, array( $uc_name, $uc_goal, $postconditions, $observations, $precondiciones, $id_derivation, $verb_id, $t_project_id)  );
+
+			$id_usecase=mysql_insert_id();
 			
+			//Creación de escenario principal
+
+			$t_repo_table_impact = plugin_table( 'impact', 'honey' );
 			
-
-		/*
-		TODO: falta derivar postoconditios y observaciones, por ahora se dejan como variables vacias. Se empezo a hacer derivación de precondiciones
-		*/
-
-		$postconditions = "";
-		$observations = "";
-		$precondition = "";
-
-		$t_repo_table = plugin_table( 'usecase', 'honey' );
-
-		$t_query_symbol = 'INSERT INTO '.$t_repo_table.' (name, goal, postconditions, observations, preconditions, id_derivation, id_symbol, id_project)
-					VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' , ' . db_param() . ' , ' . db_param() . ')';
-
-		$g_result_insert_symbol=db_query_bound( $t_query_symbol, array( $uc_name, $uc_goal, $postconditions, $observations, $precondiciones, $id_derivation, $verb_id, $t_project_id)  );
-
-		$id_usecase=mysql_insert_id();
-
-		
-		//Creación de escenario principal
-
-		$t_repo_table_impact = plugin_table( 'impact', 'honey' );
-		
-		$t_query_impact= 'select * FROM '.$t_repo_table_impact.' WHERE id_symbol='. db_param() .' and active = 0';
-			
-		$g_result_impact =db_query_bound( $t_query_impact, array($verb_id) );
-	
-		$count_impact = db_num_rows( $g_result_impact);
-
-		$scenarioText="";
-
-		if ($count_impact > 0 ){
-              
-			
-   
-			while($row_search_impact = db_fetch_array( $g_result_impact)){
-			
-				if($scenarioText == ""){
+			$t_query_impact= 'select * FROM '.$t_repo_table_impact.' WHERE id_symbol='. db_param() .' and active = 0';
 				
-				 //echo "Hay escenario";
-				  $scenarioText = $row_search_impact['description'].'<br>';
-				
-				}//fin if($scenarioText == "")
-					else{
-				 
-					 //echo "no hay escneario";
-					 $scenarioText = $scenarioText.'<br>'.$row_search_impact['description'].'<br>';
-					 }// fin else
+			$g_result_impact =db_query_bound( $t_query_impact, array($verb_id) );
+		
+			$count_impact = db_num_rows( $g_result_impact);
 
-			}//fin while($row_search_impact..
+			$scenarioText="";
+
+			if ($count_impact > 0 ){
+         
+		
+				while($row_search_impact = db_fetch_array( $g_result_impact)){
+				
+					if($scenarioText == ""){
+					
+					 //echo "Hay escenario";
+					  $scenarioText = $row_search_impact['description'].'<br>';
+					
+					}//fin if($scenarioText == "")
+						else{
+					 
+						 //echo "no hay escneario";
+						 $scenarioText = $scenarioText.'<br>'.$row_search_impact['description'].'<br>';
+						 }// fin else
+
+				}//fin while($row_search_impact..
 
       
-		$scenario_type = 1;
+			$scenario_type = 1;
 
-        $t_repo_table_scenario = plugin_table( 'scenario', 'honey' );
+			$t_repo_table_scenario = plugin_table( 'scenario', 'honey' );
 
-		$t_query_scenario = 'INSERT INTO '.$t_repo_table_scenario.' (type, steps, id_usecase)
-					VALUES ( ' . db_param() . ', ' . db_param() . ' , ' . db_param() . ')';
-		
-		$g_result_scenario =db_query_bound( $t_query_scenario, array($scenario_type, $scenarioText, $id_usecase) );
+			$t_query_scenario = 'INSERT INTO '.$t_repo_table_scenario.' (type, steps, id_usecase)
+						VALUES ( ' . db_param() . ', ' . db_param() . ' , ' . db_param() . ')';
+			
+			$g_result_scenario =db_query_bound( $t_query_scenario, array($scenario_type, $scenarioText, $id_usecase) );
 
-		$id_scenario = mysql_insert_id();
+			$id_scenario = mysql_insert_id();
 
 		} //fin  if ($count > 0 )
-		
+			
 		
 		//vinculamos los actores: Si entre sus impactos tiene el nombre del actor insertamos un registro en usecase_actor
 
@@ -305,7 +301,7 @@ if ($count > 0){
 			$result_search_state= db_query_bound( $query_search_state, array($type_state) );
 	
             $i=0; //variable para contar la canridad de impactos
-			
+			$idsimpacts;
 			while($row_search_state = db_fetch_array( $result_search_state)){
 				                    
 					 $state_id = $row_search_state['id'];
@@ -329,6 +325,10 @@ if ($count > 0){
 					
 					if ($isCondition == true){
 					 $matrizVerbo[$uc_name][$i] = $text_impact;
+					 $matrizCondiciones[$uc_name][$i] = $row_search_impact['id'];
+
+					 
+					 $idsimpacts[$uc_name][$i] = $row_search_impact['id'];
 					 $i++;
 					 $existenCondiciones = true;
 					}
@@ -337,9 +337,19 @@ if ($count > 0){
 				
 		
 	   		}//fin while($row_search_state
-
+            
          	if ($i>0){	//si hay condiciones para el verbo creo la tabla
-		   ?>
+		?>
+		
+		
+		<form name="form1"  id="form1"  method="post"  enctype="multipart/form-data" onsubmit="javascript:validar()" action="<?php echo plugin_page( "save_conditions" ); ?>">
+
+		<!--enviamos el id del CU -->
+		<input type='hidden' name="cu_<?php echo $x?>" id="cu_<?php echo $x?>" value='<?php echo $id_usecase?>'/>
+		
+		<!--enviamos la cantida de condiciones que tiene el CU-->
+		<input type='hidden' name="condiciones_<?php echo $x?>" id="condiciones_<?php echo $x?>" value='<?php echo $i?>'/>
+
 			<div align="center">
 			<table class="width90">
 			<tr class="row-category">
@@ -368,22 +378,22 @@ if ($count > 0){
 			</td>
 
 			<td class="center">
-				<input type='checkbox'>
-			</td>
-	        
-			<td  class="center">
-				<input type='checkbox'>
+				<input type="radio" name="cond_<?php echo $id_usecase.$a?>" id="cond_<?php echo $id_usecase.$a?>" value="condicion"/>
 			</td>
 
-			<td  class="center">
-				<input type='checkbox'>
-			</td>
+	        <td><input type="radio"  name="cond_<?php echo $id_usecase.$a?>" id="cond_<?php echo $id_usecase.$a?>" value="precondicion"/>
+			<input type="hidden" name="id_cond_<?php echo $id_usecase.$a?>" id="id_cond_<?php echo $id_usecase.$a?>" value="<?php echo $matrizVerbo[$uc_name][$a]?>"/></td>
+
+	        <td><input type="radio"  name="cond_<?php echo $id_usecase.$a?>" id="cond_<?php echo $id_usecase.$a?>" value="postcondicion"/>
+			<input type="hidden" name="id_cond_<?php echo $id_usecase.$a?>" id="id_cond_<?php echo $id_usecase.$a?>" value="<?php echo $matrizVerbo[$uc_name][$a]?>"/></td>
+
 			</tr>
            <?php
 		    $a++;
 			}
 		  ?>
 		   </table>
+		   
 		   <BR>
 		   <BR>
 		
@@ -392,10 +402,15 @@ if ($count > 0){
 				}//fin if
 
 			//} //fin while($row_search_state
-          
-		
+  $x++;
 }//fin por cada verbo
+?>
+<input type='hidden' name='cant_cu' id='cant_cu' value='<?php echo $count_verb ?>'/>
 
+</form>
+
+<td class="center"><input type='submit' name='button_ok' value='Save' onclick='validar();'>
+<?php
 if ($existenCondiciones == false){
 
 $t_url=plugin_page('view_cu_page');
