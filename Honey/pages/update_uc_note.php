@@ -50,7 +50,7 @@ die();
 echo "<p>Saved data</p>";
 
 
-echo 'Note: '.$note;
+//echo 'Note: '.$note;
 echo '<br><br>';
 
 
@@ -62,3 +62,6 @@ echo '<br><br>';
 echo "<a href=\"$t_page\">Back</a>";
 echo "<br>";
 html_page_bottom1( );
+
+//html_meta_redirect_honey( $t_page, $p_time = null);
+print_successful_redirect_honey(  $id_usecase  , 'usecase_page' );
