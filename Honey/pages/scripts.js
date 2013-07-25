@@ -1,7 +1,11 @@
+function trim(str) {
+  return str.replace(/^\s+|\s+$/g,"");
+}
+
 function insert_row(tabla, campo, valor){
 
 	if(valor!=''){
-	
+		valor=trim(valor);
 		//insertar nueva fila al final
 		var tabla = document.getElementById(tabla);
 		
@@ -57,7 +61,7 @@ function insert_row_course(tabla, campo, valor){
 		if(n=-1){
 			renglon=unescape(renglon);
 			renglon=valor.substring(0,largo);
-			escenario=escenario+renglon+'<br>';
+			escenario=escenario+renglon;
 		}
 		escenario=unescape(escenario);
 		insert_row(tabla, campo, escenario);

@@ -474,30 +474,38 @@ $count_all_actors = db_num_rows( $result_all_actors );
 			<?php } ?>
 		</td>
 	</tr>
-		<?php 
 
-		//en vez de mostrar asi tendria que generar la tabla dinamica con los que ya existen y permitir agregar más
-		$h=0;
-		while( $row_alternative_scenario = db_fetch_array( $result_alternative_scenario )){
-			$alt= $row_alternative_scenario['steps'];
-			$alt=str_replace("<br>", "\n",$alt);
-			?>
-			<tr <?php echo helper_alternate_class() ?>>
-				<td class="category">Alternative Scenario</td>
-				<td><Textarea cols="100" rows="5" name="cursoAlternativo<?php echo $h?>" id="cursoAlternativo<?php echo $h?>"><?php echo $alt?></Textarea>
-				</td>
-			</tr>
-			
-			<?php
-			$h++;	
-		}//while cada escenario ?>
+		<!--aca va para agregar nuevos escenarios alterativos-->
+
+		  <tr <?php echo helper_alternate_class() ?>>
+		 <td class="category">Alternative Courses</td>
+		<td>
+	      <Textarea cols="100" rows="5" name="cursoAlternativo" id="cursoAlternativo"></Textarea>
+		  <input type='button' name='button_actor_add' value='Add alternative course' onClick="javascript:insert_row_course('table_course','cursoAlternativo',document.getElementById('cursoAlternativo').value)"/>
+		</td>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<td class="category">&nbsp;</td>
+			<td><table name='table_course' id='table_course'><thead></thead><tbody valign="bottom"></tbody></table></td>
+		 </tr>
+
+
+		 
+		<!--Aca pongo en la tabla dinámica los escenarios alternativos almacenados-->
+		<tr <?php echo helper_alternate_class() ?>>
+			<td class="category"> &nbsp</td>
+			<td class="category"> &nbsp;</td>
+		 </tr>
+
+		 <input type='hidden' name='row_number_cursoAlternativo' id='row_number_cursoAlternativo' value='0'/>
+	
 
 <?php # Attachments
 
 		echo '<tr ', helper_alternate_class(), '>';
 		echo '<td class="category">	<a name="attachments" id="attachments">', 'Attachments', '</a>','</td>';
 		echo '<td colspan="5">';
-		$cant_files=print_uc_attachments_list( $id_usecase , 1);//1 significa con delete file
+		$cant_files=print_uc_attachments_list( $id_usecase , 0);//1 significa con delete file
 		echo '</td></tr>';
 ?>
 
@@ -555,7 +563,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 <?php // echo $interface_main?>
 
  <!--aca muestro las notas-->
-
+<!--
 <?php # UC notes BEGIN (permite el salto a #)?>
 <a name="uc_notes" id="uc_notes" /><br />
 
@@ -650,10 +658,10 @@ $count_notes = db_num_rows( $result_note );
 	<?php }//while  ?>
 
 </TABLE>
-
+-->
 <br>
 <!--aca van las notas-->
-	<table class="width90">
+	<!--<table class="width90">
 	  <tr <?php echo helper_alternate_class() ?>>
 		<td colspan="2" class="none">
 			<?php 
@@ -666,7 +674,8 @@ $count_notes = db_num_rows( $result_note );
 					<textarea cols="88" rows="10" name="new_note"></textarea>
 					</td>
 				</tr>
-				<tr><td colspan="2"><input type="button" onClick="javascript:go_page(0,<?php  echo $id_usecase?>,'<?php  echo plugin_page("add_uc_note");?>')" value="Add Note"/></td></tr>
+				<?php $t_back=plugin_page("add_uc_note")?>
+				<tr><td colspan="2"><input type="button" onClick="javascript:go_page(0,<?php  echo $id_usecase?>,'<?php  echo $t_back.'&backPage=update_usecase_page' ;?>')" value="Add Note"/></td></tr>
 				</table>
 			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
 			<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo 'Add Note';?>
@@ -674,7 +683,7 @@ $count_notes = db_num_rows( $result_note );
 			<?php } ?>
 		</td>
 	  </tr>
-	</table>  
+	</table>  -->
 
 
 
@@ -688,13 +697,38 @@ $count_notes = db_num_rows( $result_note );
 </table>
 </div>
 
-<input type='hidden' name='row_number_cursoAlternativo' id='row_number_cursoAlternativo' value='<?php $count_alternative_scenarios?>'/>
+
 <input type='hidden' name='row_number_uc_actor' id='row_number_uc_actor' value='<?php echo $count_all_actors ?>'/>
 <input type='hidden' name='row_number_uc_rule' id='row_number_uc_rule' value='<?php echo $count_all_rules ?>'/>
 <input type='hidden' name='row_number_uc_extends' id='row_number_uc_extends' value='<?php echo $count_all_ucs ?>'/>
 <input type='hidden' name='row_number_uc_includes' id='row_number_uc_includes' value='<?php echo $count_all_ucs ?>'/>
 <input type='hidden' name='cant_files' id='cant_files' value='<?php echo $hasta ?>'/>
 
+
+	<?php
+
+		$h=0;
+		while( $row_alternative_scenario = db_fetch_array( $result_alternative_scenario )){
+			$alt=trim( $row_alternative_scenario['steps']);
+			$alt=str_replace("<br>", "\n",$alt);
+			?>
+			<div id="capa_oculta_<?php echo $h?>">
+			<textarea name="oculto_alt_<?php echo $h?>" id="oculto_alt_<?php echo $h?>"  ><?php echo $alt?></textarea>
+			</div>
+			<?php
+			echo "<script>";
+			echo "insert_row_course('table_course', 'cursoAlternativo',document.getElementById('oculto_alt_".$h."').value)";
+			echo "</script>";
+			$h++;	
+		}//while cada escenario ?>
+
+
+<script>
+var l=<?php echo $h?>;
+for(i=0;i<l;i++){
+	document.getElementById('capa_oculta_'+i).style.visibility = 'hidden'; 
+}
+</script>
 </form>
 
 <?php

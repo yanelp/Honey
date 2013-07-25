@@ -243,13 +243,14 @@ while( $row_actors = db_fetch_array( $result_actors )){
 		echo '<tr ', helper_alternate_class(), '>';
 		echo '<td class="category"><a name="attachments" id="attachments">', 'Attachments', '</a>','</td>';
 		echo '<td colspan="5">';
-		print_uc_attachments_list( $id_usecase, 0 );//0 significa sin delete de file
+		print_uc_attachments_list( $id_usecase, 1 );//0 significa sin delete de file
 		echo '</td></tr>';
 ?>
 </table>
 
 
 <?php // echo $interface_main?>
+
 
  <!--aca muestro las notas-->
 
@@ -326,7 +327,7 @@ $count_notes = db_num_rows( $result_note );
 			   }?>
 			  <br />
 			  
-			  <!--<div class="small">
+			  <div class="small">
 
 			  <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("uc_note_edit_page");?>')" value="Editar"/>
 			  <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("delete_uc_note");?>')" value="Delete"/>
@@ -339,7 +340,7 @@ $count_notes = db_num_rows( $result_note );
 					
 			  <?php } ?>	
 
-			</div>-->
+			</div>
 	  </td>
 	  <td  class="<?php echo $t_bugnote_note_css ?>" width="80%">
 	  <?php echo string_convert_uc_link($note); ?>
@@ -375,7 +376,8 @@ $count_notes = db_num_rows( $result_note );
 					<textarea cols="88" rows="10" name="new_note"></textarea>
 					</td>
 				</tr>
-				<tr><td colspan="2"><input type="button" onClick="javascript:go_page(0,<?php  echo $id_usecase?>,'<?php  echo plugin_page("add_uc_note");?>')" value="Add Note"/></td></tr>
+				<?php $t_back=plugin_page("add_uc_note")?>
+				<tr><td colspan="2"><input type="button" onClick="javascript:go_page(0,<?php  echo $id_usecase?>,'<?php  echo $t_back.'&backPage=usecase_page'?>')" value="Add Note"/></td></tr>
 				</table>
 			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
 			<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo 'Add Note';?>
