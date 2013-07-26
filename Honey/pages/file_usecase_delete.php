@@ -22,6 +22,6 @@
 
 	$t_url= plugin_page( 'usecase_page' );
 
-	html_meta_redirect_honey( $t_url.'&id_usecase='.$t_usecase_id, $p_time =0);
+	html_meta_redirect_honey( $t_url.'&id_usecase='.$t_usecase_id, $p_time =0, 'attachment');
 
 ?>

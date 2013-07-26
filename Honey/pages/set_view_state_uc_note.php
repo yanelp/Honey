@@ -44,4 +44,4 @@
 	//print_successful_redirect_honey( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );
 
 	$page='usecase_page';
-	print_successful_redirect_honey(  $t_uc_id  , $page );
+	print_successful_redirect_honey(  $t_uc_id  , $page, 'note' );

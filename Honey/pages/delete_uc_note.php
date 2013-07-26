@@ -33,4 +33,4 @@
 
 	form_security_purge( 'bugnote_delete' );*/
 	$page='usecase_page';
-	print_successful_redirect_honey(  $t_uc_id  , $page );
+	print_successful_redirect_honey(  $t_uc_id  , $page , 'note');

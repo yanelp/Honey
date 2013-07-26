@@ -1,6 +1,7 @@
 <?php
 
 require_once('functions.php');
+require_once( 'file_api.php' );
 
 html_page_top( plugin_lang_get( 'title' ) );
 
@@ -16,7 +17,7 @@ $t_page_update=$t_page_update."&id_usecase=".$id_usecase;
 $t_page=plugin_page("view_cu_page");
 ?>
 
-<form id="form1" action="<?php echo plugin_page( $t_page_update ); ?>" method="POST">
+<form id="form1" action="<?php echo plugin_page( $t_page_update ); ?>" method="POST" enctype="multipart/form-data">
 <?php
 
 //busco el caso de uso seleccionado
@@ -239,13 +240,67 @@ while( $row_actors = db_fetch_array( $result_actors )){
 			<?php
 		}//while cada escenario ?>
 
+
 <?php # Attachments
 		echo '<tr ', helper_alternate_class(), '>';
 		echo '<td class="category"><a name="attachments" id="attachments">', 'Attachments', '</a>','</td>';
 		echo '<td colspan="5">';
-		print_uc_attachments_list( $id_usecase, 1 );//0 significa sin delete de file
+		$cant_files=print_uc_attachments_list( $id_usecase, 1 );//0 significa sin delete de file
 		echo '</td></tr>';
 ?>
+
+<!--aca van los archivos-->
+
+<?php
+	// File Upload (if enabled)
+		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+		//$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
+?>
+<?php
+	//muestro en total 10 archivos-->10-la cant de ya guardados
+	$hasta=10-$cant_files;
+							
+	if($hasta>0){?>
+		 <tr <?php echo helper_alternate_class() ?>>
+			<td colspan="2" class="none">
+				<?php 
+				if( ON == config_get( 'use_javascript' ) ) { ?>
+					<?php collapse_open( 'profile7' ); collapse_icon('profile7'); echo 'Add Attachments';?>
+			
+					<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
+					<table>
+						<tr><td><?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
+						<?php echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?></td></tr>
+						<tr>
+							<td>
+								<?php
+
+									for( $i = 0; $i < $hasta; $i++ ) {?>
+
+										<input <?php echo helper_get_tab_index() ?> id="ufile[]" name="ufile[]" type="file" size="50" />
+										<br>
+										
+									<?php 
+									}//for	?>
+						</td>
+					</tr>
+					
+					<tr><td colspan="2"><input type="button" onClick="javascript:go_page(0,<?php  echo $id_usecase?>,'<?php  echo plugin_page('save_files_usecase');?>')" value="Add Files"/></td></tr>
+					
+				</table>
+
+			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
+				<?php collapse_closed( 'profile7' ); collapse_icon('profile7'); echo 'Add Attachments';?>
+				<?php collapse_end( 'profile7' ); ?>
+			<?php }
+		}//if( ON == config_get ?>
+		</td>
+	  </tr>	
+<?php }//si puede poner mas archivos ?>
+
+<!--aca termina lo de los archivos-->
+
+
 </table>
 
 
@@ -396,6 +451,7 @@ $count_notes = db_num_rows( $result_note );
 	</tr>
 </table>
 </div>
+<input type='hidden' name='cant_files' id='cant_files' value='<?php echo $hasta ?>'/>
 </form>
 
 <?php

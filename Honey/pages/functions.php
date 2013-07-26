@@ -197,7 +197,7 @@ function string_get_uc_view_url( $p_uc_id , $page) {
 }
 
 
-function print_successful_redirect_honey($p_uc_id, $page){
+function print_successful_redirect_honey($p_uc_id, $page, $salto){
 
 	$t_use_iis = config_get( 'use_iis' );
 
@@ -209,7 +209,10 @@ function print_successful_redirect_honey($p_uc_id, $page){
 		if( ON == $t_use_iis ) {
 			header( "Refresh: 0;url=$t_url" );
 		} else {
-			header( "Location: $t_url" . "#uc_notes" );
+			if($salto=='note'){
+				header( "Location: $t_url" . "#uc_notes" );
+			}
+				else{header( "Location: $t_url" );}
 		}
 	} else {
 		trigger_error( ERROR_PAGE_REDIRECTION, ERROR );
