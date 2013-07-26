@@ -139,7 +139,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 		<td class="form-title" colspan="2">
 		<?php echo lang_get( 'plugin_Honey_usecase_information' );
 		echo '&#160;<span class="small">';
-	    print_bracket_link( "#uc_notes",'Jump to notes'  );?>
+	   // print_bracket_link( "#uc_notes",'Jump to notes'  );?>
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
