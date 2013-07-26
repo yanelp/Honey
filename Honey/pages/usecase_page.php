@@ -38,7 +38,9 @@ $observation=$row['observations'];
 $id=$row['id'];
 $id= str_pad($row['id'], 7, "0", STR_PAD_LEFT);
 $precond=$row['preconditions'];
+$precond=str_replace("\n", "<br>",$precond);
 $postcond=$row['postconditions'];
+$postcond=str_replace("\n", "<br>",$postcond);
 $goal=$row['goal'];
 
 //busco sus actores (si los tiene)
@@ -155,11 +157,14 @@ while( $row_actors = db_fetch_array( $result_actors )){
 	$parents='';
 	
 	while( $row_parents = db_fetch_array( $result_parents )){
+		$parent_id=string_convert_uc_link($row_parents['id']);
+		 
 		if($parents==''){
-			$parents=$row_parents['id'].'-'.$row_parents['name'];
+			
+			$parents=$parent_id.'-'.$row_parents['name'];
 		}
 		else{
-			$parents=$parents.', '.$row_parents['id'].'-'.$row_parents['name'];
+			$parents=$parents.', '.$parent_id.'-'.$row_parents['name'];
 			}
 	}//while
 
@@ -176,13 +181,16 @@ while( $row_actors = db_fetch_array( $result_actors )){
 
 	$result_childs = db_query_bound( $query_childs, array($id_usecase) );
 	
-	$childs='';
+		$childs='';
+	
 		while( $row_childs = db_fetch_array( $result_childs )){
+	
+			$child_id=string_convert_uc_link($row_childs['id']);
 			if($childs==''){
-				$childs=$row_childs['id'].'-'.$row_childs['name'];
+				$childs=$child_id.'-'.$row_childs['name'];
 			}
 			else{
-				$childs=$childs.', '.$row_childs['id'].'-'.$row_childs['name'];
+				$childs=$childs.', '.$child_id.'-'.$row_childs['name'];
 				}
 		}//while
 
