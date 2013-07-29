@@ -39,8 +39,15 @@ $name=$row['name'];
 $observation=$row['observations'];
 $id=$row['id'];
 $id= str_pad($row['id'], 7, "0", STR_PAD_LEFT);
-$precond=$row['preconditions'];
+
+$precond= $row['preconditions'];
+$precond=str_replace("<br>", "\n",$precond);	
+
 $postcond=$row['postconditions'];
+$postcond=str_replace("<br>", "\n",$postcond);	
+
+
+
 $goal=$row['goal'];
 
 //busco todos los actores

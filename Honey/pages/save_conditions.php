@@ -20,25 +20,27 @@ echo "la cantidad de casos de uso es ".$cant_cus;
 						 $precondition = $_REQUEST['id_cond_'.$cu.$a];					
 						
 						 if ($textPrecondition==""){
-						       $textPrecondition = $precondition;
+						       $textPrecondition = $precondition.'<br>';
+	
 						 }
 						 else{
-							 $textPrecondition =  $textPrecondition.'<br>'.$precondition;
+						 $textPrecondition = $textPrecondition.'<br>'.$precondition.'<br>';
 						 
-
 						 }
+
 						 
 						
 						} //fin if
 
 					if($_REQUEST['cond_'.$cu.$a]=='postcondicion'){
-						 $precondition = $_REQUEST['id_cond_'.$cu.$a];					
+
+						 $postcondition = $_REQUEST['id_cond_'.$cu.$a];					
 					
 							if ($textPostcondition==""){
-									   $textPostcondition = $precondition;
+									   $textPostcondition = $postcondition.'<br>';
 								 }
 								 else{
-									 $textPostcondition =  $textPostcondition."<BR>".$precondition;
+									 $textPostcondition =  $textPostcondition.'<br>'.$postcondition.'<br>';
 								 }
 					}//fin if
 	 
