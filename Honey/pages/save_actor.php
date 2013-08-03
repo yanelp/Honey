@@ -88,8 +88,8 @@ else{//busco si el simbolo ya existe
 		//actor insert
 		$t_repo_table = plugin_table( 'actor', 'honey' );
 
-		$t_query_actor = 'INSERT INTO '.$t_repo_table.' (name, description, id_derivation, id_symbol, id_project )
-					VALUES ( ' . db_param() . ', ' . db_param() . ', null,null, ' . db_param() . ' )';
+		$t_query_actor = 'INSERT INTO '.$t_repo_table.' (name, description, id_project )
+					VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 		$g_result_insert_actor=db_query_bound( $t_query_actor, array( $name,$descrip, $t_project_id)  );
 
 

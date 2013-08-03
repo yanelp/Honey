@@ -28,7 +28,7 @@ $row_number_uc_course_alt=$_REQUEST['row_number_cursoAlternativo'];
 $row_number_uc_includes=$_REQUEST['row_number_uc_includes'];
 $row_number_uc_extends=$_REQUEST['row_number_uc_extends'];
 $cant_files=$_REQUEST['cant_files'];
-
+$active=0;
 $t_page = plugin_page( 'update_usecase_page' );
 
 
@@ -188,9 +188,9 @@ for($i=0; $i<$row_number_uc_extends; $i++){
 	
 		$id_parent=$_POST['id_extends_'.$i];
 
-		$t_query_uc_extends = 'INSERT INTO '.$t_repo_table.' (id_usecase_parent, id_usecase_extends)
-					VALUES ( ' . db_param() . ', ' . db_param() .')';
-		$g_result_insert_extends= db_query_bound( $t_query_uc_extends,  array($id_parent, $id_usecase));
+		$t_query_uc_extends = 'INSERT INTO '.$t_repo_table.' (id_usecase_parent, id_usecase_extends, active)
+					VALUES ( ' . db_param() . ', ' . db_param() .', ' . db_param() .')';
+		$g_result_insert_extends= db_query_bound( $t_query_uc_extends,  array($id_parent, $id_usecase, $active));
 
 	}		 
 }
@@ -214,9 +214,9 @@ for($i=0; $i<$row_number_uc_includes; $i++){
 	
 		$id_child=$_POST['id_includes_'.$i];
 
-		$t_query_uc_includes = 'INSERT INTO '.$t_repo_table.' (id_usecase_parent, id_usecase_include)
-					VALUES ( ' . db_param() . ', ' . db_param() .')';
-		$g_result_insert_includes= db_query_bound( $t_query_uc_includes,  array($id_usecase, $id_child));
+		$t_query_uc_includes = 'INSERT INTO '.$t_repo_table.' (id_usecase_parent, id_usecase_include, active)
+					VALUES ( ' . db_param() . ', ' . db_param() .', ' . db_param() .')';
+		$g_result_insert_includes= db_query_bound( $t_query_uc_includes,  array($id_usecase, $id_child, $active));
 
 	}		 
 }

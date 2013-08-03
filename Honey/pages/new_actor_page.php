@@ -59,8 +59,3 @@ html_page_bottom1( );
 ?>
 
 
-<?php
-
-html_page_bottom1( );
-
-?>

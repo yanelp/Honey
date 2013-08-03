@@ -15,6 +15,7 @@ $t_page_update="update_usecase_page";
 $t_page_update=$t_page_update."&id_usecase=".$id_usecase;
 
 $t_page=plugin_page("view_cu_page");
+$t_page_delete=plugin_page("delete_usecase_page");
 ?>
 
 <form id="form1" action="<?php echo plugin_page( $t_page_update ); ?>" method="POST" enctype="multipart/form-data">
@@ -81,6 +82,7 @@ while( $row_actors = db_fetch_array( $result_actors )){
 	$count_main_scenario = db_num_rows( $result_main_scenario );
 	$row_main_scenario = db_fetch_array( $result_main_scenario);
 	$main_scenario=$row_main_scenario['steps'];
+	$main_scenario=str_replace("\n", "<br>",$main_scenario);
 	$id_scenario=$row_main_scenario['id'];
 
 	//rules 
@@ -456,10 +458,13 @@ $count_notes = db_num_rows( $result_note );
 	<tr>
 		<td><input type="submit" value="Edit"/></td>
 		<td><input type="button" value="Cancel"  onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page?>')"/></td>
+		<td><input type="button" value="Delete" onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page_delete?>')"/></td>
 	</tr>
 </table>
 </div>
 <input type='hidden' name='cant_files' id='cant_files' value='<?php echo $hasta ?>'/>
+<input type='hidden' name='usecase_name' id='usecase_name' value='<?php echo $name ?>'/>
+
 </form>
 
 <?php

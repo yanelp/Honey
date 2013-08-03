@@ -41,13 +41,27 @@ if ($count_verb  == 0){
 
 	print_lel_menu();
 
-   echo "no existen simbolos de tipo verbo para derivar a casos de uso";
+?>
 
-   $t_page = plugin_page( 'view_symbols_page' );
-
+<div align="center">
+<table class="width90">
+<tr class="row-category">
+<td> 
+<?php echo lang_get( 'plugin_Honey_usecase_derivation_title' ) ?>
+</td>
+</tr>
+<tr class="row-category">
+<td class="form-title" colspan="2"> 
+	<?php echo lang_get( 'plugin_Honey_usecase_derivation' ) ?>
+</td>
+</tr>
+</table>
+</form>
+<?php
+/*$t_page = plugin_page( 'view_symbols_page' );
 echo '<br><br>';
 echo "<a href=\"$t_page\">Back</a>";
-echo "<br>";
+echo "<br>";*/
 html_page_bottom1( );
 };
 
