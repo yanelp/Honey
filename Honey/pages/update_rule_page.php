@@ -30,6 +30,9 @@ $descrip=$row['description'];
 $t_page=plugin_page( "save_rule" );
 $t_page=$t_page."&id_rule=".$id_rule;
 
+$t_page_delete = plugin_page( "delete_rule_page" );
+$t_page_delete= $t_page_delete."&id_rule=".$id_rule;
+
 ?>
 
 <form name='form1' action="<?php echo $t_page; ?>" method="post" id="form1" >
@@ -55,7 +58,8 @@ $t_page=$t_page."&id_rule=".$id_rule;
 		<td class="center"><input type='submit' name='button_ok' value='Save'>
 			<?php $t_page_back=plugin_page("view_rules_page");?>
 			<input type='button' name='button_cancel' value='Cancel' onClick="javascript:go_page(null,null ,'<?php echo $t_page_back?>')">
-		</td>
+			<input type="button" value="Delete" onClick="javascript:go_page(null, <?php echo $id_rule?> ,'<?php echo $t_page_delete?>')"/>
+	</td>
 	</tr>
 </table>
 
