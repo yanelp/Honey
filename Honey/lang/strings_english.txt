@@ -38,6 +38,6 @@
 	$s_plugin_Honey_rules='List of Rules';
 	$s_plugin_Honey_actor_modify='Modify actor details';
 	$s_plugin_Honey_rule_modify='Modify rule details';
-
-
+	$s_plugin_Honey_usecase_derivation='Therea are no verb type symbols for derivation to use case';
+	$s_plugin_Honey_usecase_derivation_title='Derivation result';
 	

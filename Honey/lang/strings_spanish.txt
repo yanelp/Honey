@@ -1,7 +1,7 @@
 <?php
 
 	$s_plugin_Honey = '';
-	$s_plugin_Honey_title = 'Módulo Honey';
+	$s_plugin_Honey_title = 'Modulo Honey';
 	$s_plugin_Honey_description = 'Módulo que incorpora LEL y trazabilidad a MantisBT';
 	$s_plugin_Honey_lel_link = 'LEL';
 	$s_plugin_Honey_view_rule_link = 'Ver Reglas';
@@ -37,3 +37,5 @@
 	$s_plugin_Honey_rules='Lista de Reglas';
 	$s_plugin_Honey_actor_modify='Modifique los datos del actor';
 	$s_plugin_Honey_rule_modify='Modifique los datos de la regla';
+        $s_plugin_Honey_usecase_derivation='No existen símbolos de tipo verbo para realizar la derivación a Casos de Uso';
+	$s_plugin_Honey_usecase_derivation_title='Resultado de la derivación';
