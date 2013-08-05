@@ -11,27 +11,27 @@ print_cu_menu();
 
 EVENT_LAYOUT_RESOURCES;
 
-//regla a borrar
-$id_rule = gpc_get_int( 'id_rule' );
+//actor a borrar
+$id_actor = gpc_get_int( 'id_actor' );
 
 //borramos logicamente la reglas
-$t_repo_table = plugin_table( 'rule', 'honey' );
+$t_repo_table = plugin_table( 'actor', 'honey' );
 
 $t_query_rule = 'UPDATE '.$t_repo_table.' set active=1
 					where id= ' . db_param() . '';
 
-$g_result_delet =db_query_bound( $t_query_rule, array( $id_rule) );
+$g_result_delet =db_query_bound( $t_query_rule, array( $id_actor) );
 
 
 echo "<p>Deleted data</p>";
 
-$t_page=plugin_page('view_rules_page');
+$t_page=plugin_page('view_actors_page');
 echo '<br><br>';
 echo "<a href=\"$t_page\">Back</a>";
 
 echo "<br>";
 
-$t_url= plugin_page( 'view_rules_page' );
+$t_url= plugin_page( 'view_actors_page' );
 
 html_page_bottom( );
 

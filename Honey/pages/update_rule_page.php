@@ -58,7 +58,7 @@ $t_page_delete= $t_page_delete."&id_rule=".$id_rule;
 		<td class="center"><input type='submit' name='button_ok' value='Save'>
 			<?php $t_page_back=plugin_page("view_rules_page");?>
 			<input type='button' name='button_cancel' value='Cancel' onClick="javascript:go_page(null,null ,'<?php echo $t_page_back?>')">
-			<input type="button" value="Delete" onClick="javascript:go_page(null, <?php echo $id_rule?> ,'<?php echo $t_page_delete?>')"/>
+			<input type="button" value="Delete" onClick="javascript:go_page('id_rule', <?php echo $id_rule?> ,'<?php echo $t_page_delete?>')"/>
 	</td>
 	</tr>
 </table>

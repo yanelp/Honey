@@ -32,7 +32,10 @@ $row = db_fetch_array( $result );
 
 $name=$row['name'];
 $type=$row['type'];
+$type_symbol = $type;
 $notion=$row['notion'];
+
+$t_page_delete = plugin_page( "delete_symbol_page" );
 
 //include('search_symbols.php');
 
@@ -102,7 +105,12 @@ if($count_synonymous>0){?>
 	<tr>
 		<td><input type="submit" value="Update"/></td>
 		<?php $t_page=plugin_page("view_symbols_page");?>
-		<td><input type="button" value="Cancel" onClick="javascript:go_page(null,null ,'<?php echo $t_page?>')"/></td>
+		<td><input type="button" value="Cancel" onClick="javascript:go_page(null,null ,'<?php echo $t_page?>')"/>
+		<input type="button" value="Delete" onClick="javascript:go_page('null', null ,'<?php echo $t_page_delete?>')"/>
+		<input type="hidden" name="id_symbol_hidden" id="id_symbol_hidden" value="<?php echo $id_symbol ?>"/>
+		<input type="hidden" name="type_symbol_hidden" id="type_symbol_hidden" value="<?php echo $type_symbol?>"/>
+
+	</td>
 	</tr>
 </table>
 </div>

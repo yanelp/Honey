@@ -30,6 +30,10 @@ $descrip=$row['description'];
 $t_page=plugin_page( "save_actor" );
 $t_page=$t_page."&id_actor=".$id_actor;
 
+$t_page_delete = plugin_page( "delete_actor_page" );
+//$t_page_delete= $t_page_delete."&id_rule=".$id_rule;
+
+
 ?>
 
 <form name='form1' action="<?php echo $t_page; ?>" method="post" id="form1" >
@@ -55,6 +59,7 @@ $t_page=$t_page."&id_actor=".$id_actor;
 		<td class="center"><input type='submit' name='button_ok' value='Save'>
 			<?php $t_page_back=plugin_page("view_actors_page");?>
 			<input type='button' name='button_cancel' value='Cancel' onClick="javascript:go_page(null,null ,'<?php echo $t_page_back?>')">
+			<input type="button" value="Delete" onClick="javascript:go_page('null', null ,'<?php echo $t_page_delete?>')"/>
 		</td>
 	</tr>
 </table>

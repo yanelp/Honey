@@ -72,7 +72,7 @@ if ($count != 0) {
 
 <br>
 
-<center><a href="<?php echo plugin_page( 'core' ); ?>">Derivar a Casos de Uso</a></center>
+<center><a href="<?php echo plugin_page( 'derivation_page' ); ?>">Derivar a Casos de Uso</a></center>
 
 </div>
 <?php
