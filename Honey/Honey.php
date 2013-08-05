@@ -271,11 +271,11 @@ class HoneyPlugin extends MantisPlugin {
 		function print_menu_lel($t_links ) {
 			
 			$t_links = array();
-			$t_page = plugin_page( 'indexLel' );
+			$t_page = plugin_page( 'view_symbols_page' );
 			$t_lang = plugin_lang_get( 'lel_link' );
 			$t_links[] = "<a href=\"$t_page\">$t_lang</a>";
 
-			$t_page = plugin_page( 'indexCU' );
+			$t_page = plugin_page( 'view_cu_page' );
 			$t_lang = plugin_lang_get( 'usecase_link' );
 			$t_links[] = "<a href=\"$t_page\">$t_lang</a>";
 			
