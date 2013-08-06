@@ -21,10 +21,11 @@ $t_page_return= plugin_page( 'update_rule_page' );
 $t_page_return=$t_page_return."&id_rule=".$id_rule;
 
 $t_repo_table= plugin_table( 'rule_usecase', 'honey' );
+$t_repo_table_usecase= plugin_table( 'usecase', 'honey' );
 
 								$query_search = 'SELECT *
-												  FROM '.$t_repo_table.' 
-												  WHERE id_rule=' . db_param();
+												  FROM '.$t_repo_table.' r, '.$t_repo_table_usecase.' c 
+												  WHERE r.id_usecase = c.id  and c.active=0 and id_rule=' . db_param();
 
 $result_search = db_query_bound( $query_search, array($id_rule) );
 

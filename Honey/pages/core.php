@@ -6,19 +6,39 @@ require_once('manage_sequences.php');
 
 html_page_top( plugin_lang_get( 'title' ) );
 
-?>
-<br/>
-
-<?php
-
 $t_project_id= helper_get_current_project();
+
+$id_derivation = gpc_get_int( 'id_derivation' );
+
+
+/*Dejamos obsoleta la derivación activa del proyecto, casos de uso y actores generados por esa derivación*/
+
+//borrado CUs
+$t_repo_table = plugin_table( 'usecase', 'honey' );
+$t_query_usecase = 'UPDATE '.$t_repo_table.' set active = 1
+					where active = 0 AND id_derivation = '. db_param();
+
+$g_result_delete_usecase = db_query_bound( $t_query_usecase, array( $id_derivation) );
+
+//borrado actores
+$t_repo_table = plugin_table( 'actor', 'honey' );
+$t_query_usecase = 'UPDATE '.$t_repo_table.' set active=1
+					where active = 0 AND id_derivation = ' . db_param();
+
+$g_result_delete_usecase=db_query_bound( $t_query_usecase, array( $id_derivation) );
+
+//borrado derivación
+$t_repo_table = plugin_table( 'derivation', 'honey' );
+$t_query_usecase = 'UPDATE '.$t_repo_table.' set active=1
+					where active= 0 AND id = ' . db_param();
+
+$g_result_delete_usecase=db_query_bound( $t_query_usecase, array( $id_derivation) );
+
 
 
 /*CREACION DE CASOS DE USO*/
 
 //Buscamos los simbolos de tipo verbo
-
-
 
 $type_verb = 4;
 
@@ -27,9 +47,9 @@ $t_repo_table_symbol = plugin_table( 'symbol', 'honey' );
 								$query_search = 'SELECT *
 												  FROM '.$t_repo_table_symbol.' 
 												  WHERE type=' . db_param().'
-												  AND active = 0';
+												  AND id_project='. db_param().' AND active = 0';
 
-$result_search = db_query_bound( $query_search, array($type_verb) );
+$result_search = db_query_bound( $query_search, array($type_verb, $t_project_id) );
 
 $count_verb = db_num_rows( $result_search );
 
@@ -353,9 +373,14 @@ if ($count_verb > 0){
 	   		}//fin while($row_search_state
             
          	if ($i>0){	//si hay condiciones para el verbo creo la tabla
+
+	
+
+				print_lel_menu();
+
 		?>
 		
-		
+
 		<form name="form1"  id="form1"  method="post"  enctype="multipart/form-data" onsubmit="javascript:validar()" action="<?php echo plugin_page( "save_conditions" ); ?>">
 
 		<!--enviamos el id del CU -->
@@ -415,6 +440,8 @@ if ($count_verb > 0){
 
 				}//fin if
 
+	
+
 			//} //fin while($row_search_state
   $x++;
 }//fin por cada verbo
@@ -424,7 +451,13 @@ if ($count_verb > 0){
 </form>
 
 <td class="center"><input type='submit' name='button_ok' value='Save' onclick='validar();'>
+
+
 <?php
+
+html_page_bottom1( );
+
+
 if ($existenCondiciones == false){
 
 $t_url=plugin_page('view_cu_page');

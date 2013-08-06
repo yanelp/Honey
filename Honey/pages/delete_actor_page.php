@@ -21,10 +21,12 @@ $t_page_return= plugin_page( 'update_actor_page' );
 $t_page_return=$t_page_return."&id_actor=".$id_actor;
 
 $t_repo_table= plugin_table( 'usecase_actor', 'honey' );
+$t_repo_table_usecase= plugin_table( 'usecase', 'honey' );
 
 								$query_search = 'SELECT *
-												  FROM '.$t_repo_table.' 
-												  WHERE id_actor=' . db_param();
+												  FROM '.$t_repo_table.' r, '.$t_repo_table_usecase.' c 
+												  WHERE r.id_usecase = c.id and c.active=0 and id_actor=' . db_param();
+
 
 $result_search = db_query_bound( $query_search, array($id_actor) );
 
@@ -35,7 +37,7 @@ if($count_cus > 0){
 <div align="center">
 <table class="width90">
 <tr class="row-category">
-<td>The actor can not be deleted because the rule <?php echo "<a  href=\"$t_page_return\">".str_pad($id_actor, 7, "0", STR_PAD_LEFT)."</a>";?> is being referenced  by the following use cases:</td>
+<td>The actor can not be deleted because the Use Case <?php echo "<a  href=\"$t_page_return\">".str_pad($id_actor, 7, "0", STR_PAD_LEFT)."</a>";?> is being referenced  by the following use cases:</td>
 </tr>
 <?php
 while($row_search = db_fetch_array( $result_search )){
