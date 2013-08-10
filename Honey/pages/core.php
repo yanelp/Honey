@@ -10,6 +10,210 @@ $t_project_id= helper_get_current_project();
 
 $id_derivation = gpc_get_int( 'id_derivation' );
 
+/*Verificamos si existen actores activos y derivados vinculados a casos e usos activos*/
+
+$t_repo_table= plugin_table( 'usecase_actor', 'honey' );
+$t_repo_table_actor = plugin_table( 'actor', 'honey' );
+$t_repo_table_usecase= plugin_table( 'usecase', 'honey' );
+
+								$query_search = 'SELECT a.name actor, c.name caso_uso, c.id id_usecase, a.id id_actor
+												  FROM '.$t_repo_table.' r, '.$t_repo_table_usecase.' c, '.$t_repo_table_actor.' a
+												  WHERE r.id_usecase = c.id and r.id_actor = a.id and a.active=0 and a.id_derivation is not null';
+
+
+$result_search = db_query_bound( $query_search, array() );
+
+$count = db_num_rows( $result_search );
+
+if( $count>0 ){
+
+ ?>
+
+<div align="center">
+<br><table class="width90">
+<tr  class="row-category">
+	<td colspan="2"> 
+	Existen casos de usos que referencian a los actores derivados
+	</td>
+</tr>
+
+
+
+<tr  class="row-category"><td>Actor</td>
+<td >Caso de Uso</td></tr>
+
+<!-- <tr class="row-category"> <td>Existen actores referenciados por los casos de uso:</td></tr>-->
+<?php
+
+while($row_search = db_fetch_array( $result_search )){
+   
+	 
+	 $id_usecase = $row_search['id_usecase'];
+	 $id_actor = $row_search['id_actor'];
+	 $t_page = plugin_page( 'update_actor_page' );	
+	 $t_page=$t_page."&id_actor=".$id_actor;
+	 $t_page_usecase = plugin_page( 'usecase_page' );	
+	 $t_page_usecase=$t_page_usecase."&id_usecase=".$id_usecase;
+	 $id_a = str_pad($id_actor, 7, "0", STR_PAD_LEFT);
+	 $id_cu = str_pad($id_usecase, 7, "0", STR_PAD_LEFT);
+	 ?>
+
+
+	 <tr <?php echo helper_alternate_class() ?>>
+			<td width='50%'>
+			<?php echo "<a href=\"$t_page\">".$id_a."</a>";?>
+			</td>
+			<td width='50%'>
+			<?php echo "<a href=\"$t_page_usecase\">".$id_cu."</a>";?>	
+			</td>
+		</tr>
+	
+
+<?php
+
+}
+?>
+</table>
+</div>
+<?php
+
+
+
+
+}
+
+/*Verificamos si existen CUs activos y derivados vinculados a casos e usos activos*/
+
+$t_repo_table_extend = plugin_table( 'usecase_extend', 'honey' );
+$t_repo_table_usecase = plugin_table( 'usecase', 'honey' );
+
+								$query_search = 'SELECT *
+												  FROM '.$t_repo_table_extend.' e, '.$t_repo_table_usecase.' c 
+												  WHERE e.id_usecase_parent = c.id and c.active=0 and c.id_derivation is not null';
+
+
+$result_search = db_query_bound( $query_search, array() );
+
+$count_cu = db_num_rows( $result_search );
+
+if( $count_cu >0 ){
+
+?>
+ <div align="center">
+<br><table class="width90">
+<tr  class="row-category">
+	<td colspan="2"> 
+	Algunos de los casos de uso que se quieren borrar extienden a otros no erivados
+	</td>
+</tr>
+
+
+
+<tr  class="row-category"><td>Caso de Uso creado manualmente</td>
+<td >Caso de Uso derivado a borrarse </td></tr>
+
+<!-- <tr class="row-category"> <td>Existen actores referenciados por los casos de uso:</td></tr>-->
+<?php
+
+while($row_search = db_fetch_array( $result_search )){
+     
+	 $usecase = $row_search['id_usecase_parent'];
+	 $usecase_extend =  $row_search['id_usecase_extends'];
+	 $t_page_usecase =  plugin_page( 'usecase_page' );
+	 $t_page_usecase=$t_page_usecase."&id_usecase=".$usecase;
+     $t_page_usecase_extend = $t_page_usecase."&id_usecase=".$usecase_extend;
+     $id_cu = str_pad($usecase, 7, "0", STR_PAD_LEFT);
+	 $id_cu_extend = str_pad($usecase_extend, 7, "0", STR_PAD_LEFT);
+	 ?>
+
+
+	 <tr <?php echo helper_alternate_class() ?>>
+			<td width='50%'>
+			<?php echo "<a href=\"$t_page_usecase\">".$id_cu."</a>";?>	
+			</td>
+			<td width='50%'>
+			<?php echo "<a href=\"$t_page_usecase_extend\">".$id_cu_extend."</a>";?>	
+			</td>
+		</tr>
+	
+
+<?php
+
+}
+?>
+</table>
+</div>
+<?php
+
+
+}
+
+
+$t_repo_table_include = plugin_table( 'usecase_include', 'honey' );
+$t_repo_table_usecase = plugin_table( 'usecase', 'honey' );
+
+								$query_search = 'SELECT *
+												  FROM '.$t_repo_table_include.' e, '.$t_repo_table_usecase.' c 
+												  WHERE e.id_usecase_include = c.id and c.active=0 and c.id_derivation is not null';
+
+
+$result_search = db_query_bound( $query_search, array() );
+
+$count_cu_include = db_num_rows( $result_search );
+
+if( $count_cu_include >0 ){
+ 
+?>
+ <div align="center">
+<br><table class="width90">
+<tr  class="row-category">
+	<td colspan="2"> 
+	Algunos de los casos de uso que se quieren borrar son incluidos por otros no erivados
+	</td>
+</tr>
+
+
+
+<tr  class="row-category"><td>Caso de Uso creado manualmente</td>
+<td >Caso de Uso derivado a borrarse </td></tr>
+
+<!-- <tr class="row-category"> <td>Existen actores referenciados por los casos de uso:</td></tr>-->
+<?php
+
+while($row_search = db_fetch_array( $result_search )){
+     
+	 $usecase = $row_search['id_usecase_parent'];
+	 $usecase_include =  $row_search['id_usecase_include'];
+
+     $t_page_usecase =  plugin_page( 'usecase_page' );
+	 $t_page_usecase=$t_page_usecase."&id_usecase=".$usecase;
+     $t_page_usecase_include= $t_page_usecase."&id_usecase=".$usecase_include;
+     $id_cu = str_pad($usecase, 7, "0", STR_PAD_LEFT);
+	 $id_cu_include = str_pad($usecase_include, 7, "0", STR_PAD_LEFT);
+	 ?>
+
+
+	 <tr <?php echo helper_alternate_class() ?>>
+			<td width='50%'>
+			<?php echo "<a href=\"$t_page_usecase\">".$id_cu."</a>";?>	
+			</td>
+			<td width='50%'>
+			<?php echo "<a href=\"$t_page_usecase_include\">".$id_cu_include."</a>";?>	
+			</td>
+		</tr>
+	
+
+<?php
+
+}
+?>
+</table>
+</div>
+<?php
+}
+
+
+if( ($count_cu + $count + $count_cu_include) == 0 ){
 
 /*Dejamos obsoleta la derivación activa del proyecto, casos de uso y actores generados por esa derivación*/
 
@@ -454,6 +658,8 @@ if ($count_verb > 0){
 
 
 <?php
+
+}
 
 html_page_bottom1( );
 

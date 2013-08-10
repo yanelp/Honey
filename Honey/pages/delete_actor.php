@@ -14,7 +14,7 @@ EVENT_LAYOUT_RESOURCES;
 //actor a borrar
 $id_actor = gpc_get_int( 'id_actor' );
 
-//borramos logicamente la reglas
+//borramos logicamente el actor
 $t_repo_table = plugin_table( 'actor', 'honey' );
 
 $t_query_rule = 'UPDATE '.$t_repo_table.' set active=1
