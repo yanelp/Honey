@@ -48,7 +48,7 @@ $t_repo_table = plugin_table( 'usecase', 'honey' );
 
 $query_uc = 'SELECT name 
 				 FROM '.$t_repo_table.' 
-				 where name=' . db_param().' and id!='.db_param().'';
+				 where name=' . db_param().' and id!='.db_param().' and active=0';
 
 $result = db_query_bound( $query_uc, array($name, $id_usecase) );
 $count = db_num_rows( $result );
