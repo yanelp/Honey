@@ -41,6 +41,26 @@ html_page_bottom1( );
 die();
 }
 
+//busco si existe un uc con el mismo nombre 
+
+$t_repo_table = plugin_table( 'usecase', 'honey' );
+
+$query_uc = 'SELECT name 
+				 FROM '.$t_repo_table.' 
+				 where name=' . db_param().' and active=0';
+
+$result = db_query_bound( $query_uc, array($name, $id_usecase) );
+$count = db_num_rows( $result );
+$row = db_fetch_array( $result );
+
+if($count>0){
+	echo "Name already exists";
+	echo '<br><br>';
+	echo "<a href=\"$t_page&id_usecase=$id_usecase\">Back</a>";
+	echo "<br>";
+	html_page_bottom1( );
+	die();
+}
 
 //usecase insert
 

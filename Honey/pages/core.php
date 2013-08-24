@@ -415,10 +415,9 @@ if ($count_verb > 0){
 
 				$id_actor_insert=mysql_insert_id();
 
-				$actores[$a] = $row_name;
+				$actores[$a] = $actor_name;
 				$actores_id[$a] = $id_actor_insert;
 				
-
 			}
 			 if ($count_actors>0){ //si el actor existe
 
