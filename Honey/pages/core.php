@@ -10,7 +10,7 @@ $t_project_id= helper_get_current_project();
 
 $id_derivation = gpc_get_int( 'id_derivation' );
 
-echo "DERIVATION: ".$id_derivation;
+//echo "DERIVATION: ".$id_derivation;
 
 /*Verificamos si existen actores activos y derivados vinculados a casos e usos activos*/
 
@@ -246,6 +246,32 @@ $t_query_usecase = 'UPDATE '.$t_repo_table.' set active = 1
 					where active = 0 AND id_usecase in (select id from '.$t_repo_table2.'
 					where active = 0 AND id_derivation = '. db_param().')';
 $g_result_delete_usecase = db_query_bound( $t_query_usecase, array( $id_derivation) );
+
+
+//borrado CUs-escenarios
+$t_repo_table2 = plugin_table( 'usecase', 'honey' );
+$t_repo_table = plugin_table( 'scenario', 'honey' );
+$t_query_usecase = 'UPDATE '.$t_repo_table.' set active = 1
+					where active = 0 AND id_usecase in (select id from '.$t_repo_table2.'
+					where active = 0 AND id_derivation = '. db_param().')';
+$g_result_delete_usecase = db_query_bound( $t_query_usecase, array( $id_derivation) );
+
+//borrado CUs-extends
+$t_repo_table2 = plugin_table( 'usecase', 'honey' );
+$t_repo_table = plugin_table( 'usecase_extend', 'honey' );
+$t_query_usecase = 'UPDATE '.$t_repo_table.' set active = 1
+					where active = 0 AND id_usecase_parent in (select id from '.$t_repo_table2.'
+					where active = 0 AND id_derivation = '. db_param().')';
+$g_result_delete_usecase = db_query_bound( $t_query_usecase, array( $id_derivation) );
+
+//borrado CUs-includes
+$t_repo_table2 = plugin_table( 'usecase', 'honey' );
+$t_repo_table = plugin_table( 'usecase_include', 'honey' );
+$t_query_usecase = 'UPDATE '.$t_repo_table.' set active = 1
+					where active = 0 AND id_usecase_parent in (select id from '.$t_repo_table2.'
+					where active = 0 AND id_derivation = '. db_param().')';
+$g_result_delete_usecase = db_query_bound( $t_query_usecase, array( $id_derivation) );
+
 
 //borrado CUs
 $t_repo_table = plugin_table( 'usecase', 'honey' );
@@ -659,7 +685,12 @@ if ($count_verb > 0){
 			</td>
 
 			<td class="center">
-				<input type="radio" name="cond_<?php echo $id_usecase.$a?>" id="cond_<?php echo $id_usecase.$a?>" value="condicion"/>
+				<?php if($a==0){?>
+					<input type="radio" name="cond_<?php echo $id_usecase.$a?>" id="cond_<?php echo $id_usecase.$a?>" value="condicion" checked/>
+				<?php }
+				else { ?>
+					<input type="radio" name="cond_<?php echo $id_usecase.$a?>" id="cond_<?php echo $id_usecase.$a?>" value="condicion"/>
+				<?php } ?>		
 			</td>
 
 	        <td><input type="radio"  name="cond_<?php echo $id_usecase.$a?>" id="cond_<?php echo $id_usecase.$a?>" value="precondicion"/>
