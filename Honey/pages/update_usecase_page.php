@@ -733,7 +733,7 @@ $count_notes = db_num_rows( $result_note );
 <script>
 var l=<?php echo $h?>;
 for(i=0;i<l;i++){
-	document.getElementById('capa_oculta_'+i).style.visibility = 'hidden'; 
+	//document.getElementById('capa_oculta_'+i).style.visibility = 'hidden'; 
 }
 </script>
 </form>

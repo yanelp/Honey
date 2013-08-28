@@ -103,7 +103,7 @@ if($count_synonymous>0){?>
 <br>
 <table align="center">
 	<tr>
-		<td><input type="submit" value="Update"/></td>
+		<td><input type="submit" value="Edit"/></td>
 		<?php $t_page=plugin_page("view_symbols_page");?>
 		<td><input type="button" value="Cancel" onClick="javascript:go_page(null,null ,'<?php echo $t_page?>')"/>
 		<input type="button" value="Delete" onClick="javascript:go_page('null', null ,'<?php echo $t_page_delete?>')"/>

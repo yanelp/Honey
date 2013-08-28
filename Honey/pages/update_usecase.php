@@ -135,10 +135,13 @@ for($i=0;$i<$row_number_uc_course_alt;$i++){
 	// insert cursoAlternativo
 	$course_alt=$_REQUEST['cursoAlternativo'.$i];
 
-	$t_query_scenario = 'INSERT INTO '.$t_repo_table_scneario.' (type, steps, id_usecase)
-			VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ')';
+	if($course_alt!=''){
 
-	$g_result_insert_scenario=db_query_bound( $t_query_scenario, array( $type, $course_alt, $id_usecase));
+		$t_query_scenario = 'INSERT INTO '.$t_repo_table_scneario.' (type, steps, id_usecase)
+				VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ')';
+
+		$g_result_insert_scenario=db_query_bound( $t_query_scenario, array( $type, $course_alt, $id_usecase));
+	}
 
 }
 

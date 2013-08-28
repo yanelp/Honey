@@ -109,21 +109,24 @@ if($row_name==''){//si no existe el simbolo
 
 	for($i=0; $i<$row_number_symbol_synonymous;$i++){
 
-		$t_query_synonymous = 'INSERT INTO '.$t_repo_table.' (name, id_symbol)
-					VALUES ( ' . db_param() . ', ' . db_param() . ' )';
-		$g_result_insert_synonymous=db_query_bound( $t_query_synonymous, array( $_REQUEST['symbol_synonymous'.$i],$id_symbol)  );
-
+		if($_REQUEST['symbol_synonymous'.$i]!=''){
+			$t_query_synonymous = 'INSERT INTO '.$t_repo_table.' (name, id_symbol)
+						VALUES ( ' . db_param() . ', ' . db_param() . ' )';
+			$g_result_insert_synonymous=db_query_bound( $t_query_synonymous, array( $_REQUEST['symbol_synonymous'.$i],$id_symbol)  );
+		}
 	}
 
 	//impact insert
 	$t_repo_table = plugin_table( 'impact', 'honey' );
 
 	for($i=0; $i<$row_number_symbol_impact;$i++){
-
-		$t_query_impact = 'INSERT INTO '.$t_repo_table.' (description, id_symbol)
-					VALUES ( ' . db_param() . ', ' . db_param() . ' )';
-		$g_result_insert_impact=db_query_bound( $t_query_impact, array( $_REQUEST['symbol_impact'.$i], $id_symbol)  );
-
+		
+		if($_REQUEST['symbol_impact'.$i]!=''){
+		
+			$t_query_impact = 'INSERT INTO '.$t_repo_table.' (description, id_symbol)
+						VALUES ( ' . db_param() . ', ' . db_param() . ' )';
+			$g_result_insert_impact=db_query_bound( $t_query_impact, array( $_REQUEST['symbol_impact'.$i], $id_symbol)  );
+		}
 	}
 
 
@@ -134,15 +137,19 @@ if($row_name==''){//si no existe el simbolo
 	echo '<br><br>';
 	for($i=0;$i<$row_number_symbol_synonymous;$i++){
 		$synonimous=trim($_REQUEST['symbol_synonymous'.$i]);
-		echo 'synonimous: '.$synonimous;
-		echo '<br><br>';
+		if($synonimous!=''){
+			echo 'synonimous: '.$synonimous;
+			echo '<br><br>';
+		}
 	}
 	echo 'notion: '.$notion;
 	echo '<br><br>';
 	for($i=0;$i<$row_number_symbol_impact;$i++){
 		$impact=trim($_REQUEST['symbol_impact'.$i]);
-		echo 'impact: '.$impact;
-		echo '<br><br>';
+		if($impact!=''){
+			echo 'impact: '.$impact;
+			echo '<br><br>';
+		}
 	}
 
 	if($type==1){$type='Subject';}
