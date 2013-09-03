@@ -588,7 +588,102 @@ function print_uc_attachments_list( $p_usecase_id, $num ) {
 	return $cant;
 }//fin function
 
+function actors_usecase($actores, $verb_id, $actores_id, $id_usecase, $symbol_actor){
 
+	//busco los sinomimos de cada actor
+	$cant_actores=sizeof($symbol_actor);
+
+	for($i=0;$i<$cant_actores;$i++){
+	
+		$t_repo_table_syn = plugin_table( 'synonymous', 'honey' );
+
+		$query_search_syn = 'SELECT name
+						    FROM '.$t_repo_table_syn.'
+							WHERE id_symbol=' . db_param();
+		$result_search_syn= db_query_bound($query_search_syn, array($symbol_actor[$i]));
+
+		$cant_syn=db_num_rows( $result_search_syn );
+
+		if($cant_syn>0){//SI TIENE SYN
+		
+			while( $row_actor = db_fetch_array( $result_search_syn ) ){
+				$synonymous=strtoupper($row_actor['name']);
+				array_push($actores,$synonymous);
+				array_push($actores_id,$actores_id[$i]);
+			}//while
+		}//if
+
+	}//for
+
+	//busco los impactos de un simbolo de tipo verbo dado
+
+	$t_repo_table_impact = plugin_table( 'impact', 'honey' );
+
+	$query_search_impact = 'SELECT description
+						    FROM '.$t_repo_table_impact.'
+							WHERE id_symbol=' . db_param().'
+							AND active = 0';
+ 
+	$result_search_impact= db_query_bound($query_search_impact, array($verb_id));
+
+	//por cada impacto del simbolo de tipo verbo armo un vector con todas las palabras simples + las compuestas que sean actores o sus simonimos
+
+	while( $row_impact = db_fetch_array( $result_search_impact ) ){
+				
+				$upper_impact=strtoupper($row_impact['description']);
+				$words = preg_split("/[\s]+/", $upper_impact);
+				$num_words=sizeof($words);
+				
+				for($r=0;$r<$num_words;$r++){
+				  $i=1;
+					while($i<=$num_words){
+						$new_word='';
+						$j=$r;
+						
+						while($j<$i){//desde el ppio hasta el final
+							
+							$new_word=trim($new_word." ".$words[$j]);
+							$new_word=strtoupper($new_word);
+
+							if (in_array($new_word, $words)==false) {//si no está en el vector
+
+								//busco si es un actor
+							
+								if (in_array($new_word, $actores)==true){
+
+									array_push($words,$new_word);
+								}
+							}
+							
+							$j++;
+						}//while ($j<$i)
+						
+						$i++;
+					
+						}//while ($i<=$num_words)
+				}//for				
+		 }//while  
+
+		 //ahora en words tengo todas las palabras simples del impacto + las compuestas que son actores
+
+		 //si en words hay un actor inserto en usecase_actor
+
+		 $max = sizeof($actores);
+
+		 for($i=0;$i<$max;$i++){
+		 
+			if (in_array($actores[$i], $words)==true){
+		  
+				$t_repo_table = plugin_table( 'usecase_actor', 'honey' );
+
+				$t_query_actor = 'INSERT INTO '.$t_repo_table.' (id_usecase, id_actor )
+									VALUES ( ' . db_param() . ', ' . db_param() . ' )';
+
+				$g_result_insert_actor=db_query_bound( $t_query_actor, array($id_usecase, $actores_id[$i]));
+			}//if	
+		 }//for
+		
+}//function
 
 
 ?>

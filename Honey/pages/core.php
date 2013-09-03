@@ -315,6 +315,7 @@ $count_verb = db_num_rows( $result_search );
 
 $a=0;
 $actores_id;
+$symbol_actor;
 $existenCondiciones = false;
 
 print_lel_menu();
@@ -402,6 +403,8 @@ if ($count_verb > 0){
 			$count_actors = db_num_rows( $g_result_actor_name);
 
 			$row_name=$row['name'];
+
+			$symbol_actor[$a]=$row_search_actor['id'];
 			
 			if($count_actors==0){//si no existe el actor
 		
@@ -415,14 +418,14 @@ if ($count_verb > 0){
 
 				$id_actor_insert=mysql_insert_id();
 
-				$actores[$a] = $actor_name;
+				$actores[$a] = strtoupper($actor_name);
 				$actores_id[$a] = $id_actor_insert;
 				
 			}
 			 if ($count_actors>0){ //si el actor existe
 
 				 //me guardo los datos para relacionarlo con el nuevo caso de uso
-				 $actores[$a] = $row_name;
+				 $actores[$a] = strtoupper($row_name);
 				 $actores_id[$a] =$row['id'];
 				
 			 }
@@ -510,10 +513,12 @@ if ($count_verb > 0){
 
 		} //fin  if ($count > 0 )
 			
-		
+		//por cada simbolo de tipo verbo
 		//vinculamos los actores: Si entre sus impactos tiene el nombre del actor insertamos un registro en usecase_actor
 
-		 $max = sizeof($actores);
+		 actors_usecase($actores, $verb_id, $actores_id, $id_usecase, $symbol_actor);
+
+		/* $max = sizeof($actores);
 
 		 for ($i = 0; $i < $max; $i++) {
 					
@@ -533,13 +538,7 @@ if ($count_verb > 0){
 				    
 					if ($count > 0){
 
-					/*echo "nombrennn: ".$actores[$i];
-					echo "<br>";
-					echo "verb id:".$verb_id;
-					echo "<br>";*/
-			       
-					  
-					$idactor = $actores_id[$i];
+						$idactor = $actores_id[$i];
                          
 						if ($idactor>0){
 
@@ -556,7 +555,7 @@ if ($count_verb > 0){
 
 					 } //FIN  if ($count > 0)
 
-	}//FIN for
+		}//FIN for*/
 
 	/* CONDICIONES DEL CASO DE USO */
     
