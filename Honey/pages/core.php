@@ -341,10 +341,6 @@ if ($count_verb  == 0){
 </table>
 </form>
 <?php
-/*$t_page = plugin_page( 'view_symbols_page' );
-echo '<br><br>';
-echo "<a href=\"$t_page\">Back</a>";
-echo "<br>";*/
 html_page_bottom1( );
 };
 
@@ -517,45 +513,6 @@ if ($count_verb > 0){
 		//vinculamos los actores: Si entre sus impactos tiene el nombre del actor insertamos un registro en usecase_actor
 
 		 actors_usecase($actores, $verb_id, $actores_id, $id_usecase, $symbol_actor);
-
-		/* $max = sizeof($actores);
-
-		 for ($i = 0; $i < $max; $i++) {
-					
-
-					$t_repo_table_impact = plugin_table( 'impact', 'honey' );
-
-				     $query_search_impact = 'SELECT *
-								  FROM '.$t_repo_table_impact.'
-								  WHERE id_symbol=' . db_param().'
-								  AND active = 0
-								  AND description LIKE "%'.$actores[$i].'%"';
- 
-
-					$result_search_impact= db_query_bound($query_search_impact, array($verb_id));
-					
-					$count = db_num_rows($result_search_impact);
-				    
-					if ($count > 0){
-
-						$idactor = $actores_id[$i];
-                         
-						if ($idactor>0){
-
-						$t_repo_table = plugin_table( 'usecase_actor', 'honey' );
-
-						$t_query_actor = 'INSERT INTO '.$t_repo_table.' (id_usecase, id_actor )
-									VALUES ( ' . db_param() . ', ' . db_param() . ' )';
-
-						$g_result_insert_actor=db_query_bound( $t_query_actor, array($id_usecase, $idactor));
-						
-						$id_rel= mysql_insert_id();
-
-						}//FIN if ($idactor>0)
-
-					 } //FIN  if ($count > 0)
-
-		}//FIN for*/
 
 	/* CONDICIONES DEL CASO DE USO */
     

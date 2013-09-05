@@ -39,3 +39,6 @@
 	$s_plugin_Honey_rule_modify='Modifique los datos de la regla';
         $s_plugin_Honey_usecase_derivation='No existen símbolos de tipo verbo para realizar la derivación a Casos de Uso';
 	$s_plugin_Honey_usecase_derivation_title='Resultado de la derivación';
+	$s_plugin_Honey_Lel_derivation_link='Derivar a Casos de Uso';
+	$s_plugin_Honey_symbol_id='Simbolo #';
+	$s_plugin_Honey_usecase_id='Caso de Uso #';

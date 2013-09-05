@@ -11,6 +11,8 @@ EVENT_LAYOUT_RESOURCES;
 
 $id_usecase = gpc_get_int( 'id_usecase' );
 
+if($id_usecase==-1){$id_usecase=$_REQUEST['usecase_id'];}
+
 $t_page_update="update_usecase_page";
 $t_page_update=$t_page_update."&id_usecase=".$id_usecase;
 
@@ -32,440 +34,452 @@ $query_symbol = 'SELECT *
 
 $result = db_query_bound( $query_symbol, array($id_usecase) );
 $count = db_num_rows( $result );
-$row = db_fetch_array( $result );
 
-$name=$row['name'];
-$observation=$row['observations'];
-$id=$row['id'];
-$id= str_pad($row['id'], 7, "0", STR_PAD_LEFT);
-$precond=$row['preconditions'];
-$precond=str_replace("\n", "<br>",$precond);
-$postcond=$row['postconditions'];
-$postcond=str_replace("\n", "<br>",$postcond);
-$goal=$row['goal'];
+if($count>0){
 
-//busco sus actores (si los tiene)
+	$row = db_fetch_array( $result );
 
-$t_repo_table = plugin_table( 'actor', 'honey' );
-$t_repo_table2 = plugin_table( 'usecase_actor', 'honey' );
+	$name=$row['name'];
+	$observation=$row['observations'];
+	$id=$row['id'];
+	$id= str_pad($row['id'], 7, "0", STR_PAD_LEFT);
+	$precond=$row['preconditions'];
+	$precond=str_replace("\n", "<br>",$precond);
+	$postcond=$row['postconditions'];
+	$postcond=str_replace("\n", "<br>",$postcond);
+	$goal=$row['goal'];
 
-$query_actors = 'SELECT a.name 
-				 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id=b.id_actor)
-				 where b.id_usecase=' . db_param().'
-				 AND a.active = 0 AND b.active = 0';
+	//busco sus actores (si los tiene)
 
-$result_actors = db_query_bound( $query_actors, array($id_usecase) );
-$count_actors = db_num_rows( $result_actors );
+	$t_repo_table = plugin_table( 'actor', 'honey' );
+	$t_repo_table2 = plugin_table( 'usecase_actor', 'honey' );
 
-$actors='';
-while( $row_actors = db_fetch_array( $result_actors )){
-	if($actors==''){
-		$actors=$row_actors['name'];
-	}
-	else{
-		$actors=$actors.', '.$row_actors['name'];
+	$query_actors = 'SELECT a.name 
+					 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id=b.id_actor)
+					 where b.id_usecase=' . db_param().'
+					 AND a.active = 0 AND b.active = 0';
+
+	$result_actors = db_query_bound( $query_actors, array($id_usecase) );
+	$count_actors = db_num_rows( $result_actors );
+
+	$actors='';
+	while( $row_actors = db_fetch_array( $result_actors )){
+		if($actors==''){
+			$actors=$row_actors['name'];
 		}
-}//while
+		else{
+			$actors=$actors.', '.$row_actors['name'];
+			}
+	}//while
 
 
-//busco sus escenarios, sus reglas y sus interfaces (si los tiene)
+	//busco sus escenarios, sus reglas y sus interfaces (si los tiene)
 
-	//main scenario
+		//main scenario
 
-	$t_repo_table = plugin_table( 'scenario', 'honey' );
+		$t_repo_table = plugin_table( 'scenario', 'honey' );
 
-	$query_main_scenario = 'SELECT a.steps, a.id 
-					 FROM '.$t_repo_table.' a
-					 where id_usecase=' . db_param().' and type=1 and a.active = 0';
+		$query_main_scenario = 'SELECT a.steps, a.id 
+						 FROM '.$t_repo_table.' a
+						 where id_usecase=' . db_param().' and type=1 and a.active = 0';
 
-	$result_main_scenario = db_query_bound( $query_main_scenario, array($id_usecase) );
-	$count_main_scenario = db_num_rows( $result_main_scenario );
-	$row_main_scenario = db_fetch_array( $result_main_scenario);
-	$main_scenario=$row_main_scenario['steps'];
-	$main_scenario=str_replace("\n", "<br>",$main_scenario);
-	$id_scenario=$row_main_scenario['id'];
+		$result_main_scenario = db_query_bound( $query_main_scenario, array($id_usecase) );
+		$count_main_scenario = db_num_rows( $result_main_scenario );
+		$row_main_scenario = db_fetch_array( $result_main_scenario);
+		$main_scenario=$row_main_scenario['steps'];
+		$main_scenario=str_replace("\n", "<br>",$main_scenario);
+		$id_scenario=$row_main_scenario['id'];
 
-	//rules 
+		//rules 
 
-	$t_repo_table = plugin_table( 'rule_usecase', 'honey' );
-	$t_repo_table2 = plugin_table( 'rule', 'honey' );
+		$t_repo_table = plugin_table( 'rule_usecase', 'honey' );
+		$t_repo_table2 = plugin_table( 'rule', 'honey' );
 
-	$query_rules_scenario = 'SELECT b.name 
-					 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_rule=b.id)
-					 where id_usecase=' . db_param().'
-					AND b.active = 0';
+		$query_rules_scenario = 'SELECT b.name 
+						 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_rule=b.id)
+						 where id_usecase=' . db_param().'
+						AND b.active = 0';
 
-	$result_rules_scenario = db_query_bound( $query_rules_scenario, array($id_usecase) );
-	$count_rules_scenario = db_num_rows( $result_rules_scenario );
-	
-	$rules_main='';
+		$result_rules_scenario = db_query_bound( $query_rules_scenario, array($id_usecase) );
+		$count_rules_scenario = db_num_rows( $result_rules_scenario );
 		
-	while( $row_rules_scenario = db_fetch_array( $result_rules_scenario )){
-		if($rules_main==''){
-			$rules_main=$row_rules_scenario['name'];
-		}
-		else{
-			$rules_main=$rules_main.', '.$row_rules_scenario['name'];
-			}
-	}//while
-	
-	//interfaces main
-
-	$t_repo_table2 = plugin_table( 'file_usecase', 'honey' );
-
-	$query_interface_scenario = 'SELECT b.content 
-						FROM  '.$t_repo_table2.' b 
-						where id_usecase=' . db_param().'
-						';
-
-	$result_interface_scenario = db_query_bound( $query_interface_scenario, array($id_usecase) );
+		$rules_main='';
 			
-	$interface_main='';
-				
-	while( $row_interface_scenario = db_fetch_array( $result_interface_scenario )){
-				if($interface_main==''){
-					$interface_main=$row_interface_scenario['description'];
-				}
-				else{
-					$interface_main=$interface_main.', '.$row_interface_scenario['description'];
-					}
-			}//while
-
-
-//alternative scenarios
-
-
-	$t_repo_table = plugin_table( 'scenario', 'honey' );
-
-	$query_alternative_scenario = 'SELECT a.steps, a.id 
-					 FROM '.$t_repo_table.' a
-					 where id_usecase=' . db_param().' and active = 0 and type<>1';
-
-	$result_alternative_scenario = db_query_bound( $query_alternative_scenario, array($id_usecase) );
-
-
-//busco si extiende de otro cu 
-
-	$t_repo_table = plugin_table( 'usecase_extend', 'honey' );
-	$t_repo_table2 = plugin_table( 'usecase', 'honey' );
-
-	$query_parents = 'SELECT b.id, b.name 
-					 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_usecase_parent=b.id)
-					 where id_usecase_extends=' . db_param().'
-					 AND a.active = 0 AND b.active = 0';
-
-	$result_parents = db_query_bound( $query_parents, array($id_usecase) );
-	
-	$parents='';
-	
-	while( $row_parents = db_fetch_array( $result_parents )){
-		$parent_id=string_convert_uc_link($row_parents['id']);
-		 
-		if($parents==''){
-			
-			$parents=$parent_id.'-'.$row_parents['name'];
-		}
-		else{
-			$parents=$parents.', '.$parent_id.'-'.$row_parents['name'];
-			}
-	}//while
-
-
-	//busco si incluye otros cu 
-
-	$t_repo_table = plugin_table( 'usecase_include', 'honey' );
-	$t_repo_table2 = plugin_table( 'usecase', 'honey' );
-
-	$query_childs = 'SELECT b.id , b.name
-					 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_usecase_include=b.id)
-					 where id_usecase_parent=' . db_param().'
-					 AND a.active = 0 AND b.active = 0';
-
-	$result_childs = db_query_bound( $query_childs, array($id_usecase) );
-	
-		$childs='';
-	
-		while( $row_childs = db_fetch_array( $result_childs )){
-	
-			$child_id=string_convert_uc_link($row_childs['id']);
-			if($childs==''){
-				$childs=$child_id.'-'.$row_childs['name'];
+		while( $row_rules_scenario = db_fetch_array( $result_rules_scenario )){
+			if($rules_main==''){
+				$rules_main=$row_rules_scenario['name'];
 			}
 			else{
-				$childs=$childs.', '.$child_id.'-'.$row_childs['name'];
+				$rules_main=$rules_main.', '.$row_rules_scenario['name'];
+				}
+		}//while
+		
+		//interfaces main
+
+		$t_repo_table2 = plugin_table( 'file_usecase', 'honey' );
+
+		$query_interface_scenario = 'SELECT b.content 
+							FROM  '.$t_repo_table2.' b 
+							where id_usecase=' . db_param().'
+							';
+
+		$result_interface_scenario = db_query_bound( $query_interface_scenario, array($id_usecase) );
+				
+		$interface_main='';
+					
+		while( $row_interface_scenario = db_fetch_array( $result_interface_scenario )){
+					if($interface_main==''){
+						$interface_main=$row_interface_scenario['description'];
+					}
+					else{
+						$interface_main=$interface_main.', '.$row_interface_scenario['description'];
+						}
+				}//while
+
+
+	//alternative scenarios
+
+
+		$t_repo_table = plugin_table( 'scenario', 'honey' );
+
+		$query_alternative_scenario = 'SELECT a.steps, a.id 
+						 FROM '.$t_repo_table.' a
+						 where id_usecase=' . db_param().' and active = 0 and type<>1';
+
+		$result_alternative_scenario = db_query_bound( $query_alternative_scenario, array($id_usecase) );
+
+
+	//busco si extiende de otro cu 
+
+		$t_repo_table = plugin_table( 'usecase_extend', 'honey' );
+		$t_repo_table2 = plugin_table( 'usecase', 'honey' );
+
+		$query_parents = 'SELECT b.id, b.name 
+						 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_usecase_parent=b.id)
+						 where id_usecase_extends=' . db_param().'
+						 AND a.active = 0 AND b.active = 0';
+
+		$result_parents = db_query_bound( $query_parents, array($id_usecase) );
+		
+		$parents='';
+		
+		while( $row_parents = db_fetch_array( $result_parents )){
+			$parent_id=string_convert_uc_link($row_parents['id']);
+			 
+			if($parents==''){
+				
+				$parents=$parent_id.'-'.$row_parents['name'];
+			}
+			else{
+				$parents=$parents.', '.$parent_id.'-'.$row_parents['name'];
 				}
 		}//while
 
-	
 
-?>
+		//busco si incluye otros cu 
 
-<div align="center">
-<table class="width90">
-	<tr>
-		<td class="form-title" colspan="2">
-		<?php echo lang_get( 'plugin_Honey_usecase_information' );
-		echo '&#160;<span class="small">';
-	    print_bracket_link( "#uc_notes",'Jump to notes'  );?>
-		</td>
-	</tr>
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category" width="20%">ID</td><td><?php echo $id ?></td>
+		$t_repo_table = plugin_table( 'usecase_include', 'honey' );
+		$t_repo_table2 = plugin_table( 'usecase', 'honey' );
+
+		$query_childs = 'SELECT b.id , b.name
+						 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_usecase_include=b.id)
+						 where id_usecase_parent=' . db_param().'
+						 AND a.active = 0 AND b.active = 0';
+
+		$result_childs = db_query_bound( $query_childs, array($id_usecase) );
 		
-	</tr>
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Name</td><td><?php echo $name ?></td>
-	</tr>
+			$childs='';
+		
+			while( $row_childs = db_fetch_array( $result_childs )){
+		
+				$child_id=string_convert_uc_link($row_childs['id']);
+				if($childs==''){
+					$childs=$child_id.'-'.$row_childs['name'];
+				}
+				else{
+					$childs=$childs.', '.$child_id.'-'.$row_childs['name'];
+					}
+			}//while
+
+		
+
+	?>
+
+	<div align="center">
+	<table class="width90">
+		<tr>
+			<td class="form-title" colspan="2">
+			<?php echo lang_get( 'plugin_Honey_usecase_information' );
+			echo '&#160;<span class="small">';
+			print_bracket_link( "#uc_notes",'Jump to notes'  );?>
+			</td>
+		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Goal</td><td><?php echo $goal ?></td>
-	</tr>
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Actor/s</td><td><?php echo $actors ?></td>
-	</tr>
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Extends</td><td><?php echo $parents ?></td>
-	</tr>
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Includes</td><td><?php echo $childs ?></td>
-	</tr>
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Preconditions</td><td><?php echo $precond ?></td>
-	</tr>
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Postconditions</td><td><?php echo $postcond ?></td>
-	</tr>
-	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Observation</td><td><?php echo $observation ?></td>
-	</tr>
-		<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Main Scenario</td><td><?php echo $main_scenario ?></td>
-	</tr>
-		<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Rules Main Scenario</td><td><?php echo $rules_main?></td>
-	</tr>
-		<?php 
-		while( $row_alternative_scenario = db_fetch_array( $result_alternative_scenario )){?>
-			<tr <?php echo helper_alternate_class() ?>><td class="category">Alternative Scenario</td><td><?php echo  $row_alternative_scenario['steps']?></td></tr>
+			<td class="category" width="20%">ID</td><td><?php echo $id ?></td>
 			
-			<?php
-		}//while cada escenario ?>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<td class="category">Name</td><td><?php echo $name ?></td>
+		</tr>
+			<tr <?php echo helper_alternate_class() ?>>
+			<td class="category">Goal</td><td><?php echo $goal ?></td>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<td class="category">Actor/s</td><td><?php echo $actors ?></td>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<td class="category">Extends</td><td><?php echo $parents ?></td>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<td class="category">Includes</td><td><?php echo $childs ?></td>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<td class="category">Preconditions</td><td><?php echo $precond ?></td>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<td class="category">Postconditions</td><td><?php echo $postcond ?></td>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<td class="category">Observation</td><td><?php echo $observation ?></td>
+		</tr>
+			<tr <?php echo helper_alternate_class() ?>>
+			<td class="category">Main Scenario</td><td><?php echo $main_scenario ?></td>
+		</tr>
+			<tr <?php echo helper_alternate_class() ?>>
+			<td class="category">Rules Main Scenario</td><td><?php echo $rules_main?></td>
+		</tr>
+			<?php 
+			while( $row_alternative_scenario = db_fetch_array( $result_alternative_scenario )){?>
+				<tr <?php echo helper_alternate_class() ?>><td class="category">Alternative Scenario</td><td><?php echo  $row_alternative_scenario['steps']?></td></tr>
+				
+				<?php
+			}//while cada escenario ?>
 
 
-<?php # Attachments
-		echo '<tr ', helper_alternate_class(), '>';
-		echo '<td class="category"><a name="attachments" id="attachments">', 'Attachments', '</a>','</td>';
-		echo '<td colspan="5">';
-		$cant_files=print_uc_attachments_list( $id_usecase, 1 );//0 significa sin delete de file
-		echo '</td></tr>';
-?>
+	<?php # Attachments
+			echo '<tr ', helper_alternate_class(), '>';
+			echo '<td class="category"><a name="attachments" id="attachments">', 'Attachments', '</a>','</td>';
+			echo '<td colspan="5">';
+			$cant_files=print_uc_attachments_list( $id_usecase, 1 );//0 significa sin delete de file
+			echo '</td></tr>';
+	?>
 
-<!--aca van los archivos-->
+	<!--aca van los archivos-->
 
-<?php
-	// File Upload (if enabled)
-		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
-		//$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
-?>
-<?php
-	//muestro en total 10 archivos-->10-la cant de ya guardados
-	$hasta=10-$cant_files;
-							
-	if($hasta>0){?>
+	<?php
+		// File Upload (if enabled)
+			$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+			//$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
+	?>
+	<?php
+		//muestro en total 10 archivos-->10-la cant de ya guardados
+		$hasta=10-$cant_files;
+								
+		if($hasta>0){?>
+			 <tr <?php echo helper_alternate_class() ?>>
+				<td colspan="2" class="none">
+					<?php 
+					if( ON == config_get( 'use_javascript' ) ) { ?>
+						<?php collapse_open( 'profile7' ); collapse_icon('profile7'); echo 'Add Attachments';?>
+				
+						<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
+						<table>
+							<tr><td><?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
+							<?php echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?></td></tr>
+							<tr>
+								<td>
+									<?php
+
+										for( $i = 0; $i < $hasta; $i++ ) {?>
+
+											<input <?php echo helper_get_tab_index() ?> id="ufile[]" name="ufile[]" type="file" size="50" />
+											<br>
+											
+										<?php 
+										}//for	?>
+							</td>
+						</tr>
+						
+						<tr><td colspan="2"><input type="button" onClick="javascript:go_page(0,<?php  echo $id_usecase?>,'<?php  echo plugin_page('save_files_usecase');?>')" value="Add Files"/></td></tr>
+						
+					</table>
+
+				<?php if( ON == config_get( 'use_javascript' ) ) { ?>
+					<?php collapse_closed( 'profile7' ); collapse_icon('profile7'); echo 'Add Attachments';?>
+					<?php collapse_end( 'profile7' ); ?>
+				<?php }
+			}//if( ON == config_get ?>
+			</td>
+		  </tr>	
+	<?php }//si puede poner mas archivos ?>
+
+	<!--aca termina lo de los archivos-->
+
+
+	</table>
+
+
+	<?php // echo $interface_main?>
+
+
+	 <!--aca muestro las notas-->
+
+	<?php # UC notes BEGIN (permite el salto a #)?>
+	<a name="uc_notes" id="uc_notes" /><br />
+
+	<?php
+
+	$t_uc_note_table = plugin_table( 'uc_note','honey' );
+	$t_user_table = db_get_table( 'mantis_user_table' );
+	$query_note = "SELECT a.id, a.id_uc, a.note, a.reporter_id, a.view_state, a.date_submitted,a.last_modified, b.username, b.access_level
+						  FROM ".$t_uc_note_table." a inner join  ".$t_user_table." b on (a.reporter_id=b.id)
+						  WHERE id_uc =" . db_param() . " and a.active=0";
+
+	$result_note = db_query_bound( $query_note,  array($id_usecase) );
+
+	$count_notes = db_num_rows( $result_note );
+
+	?>
+
+		
+		 <table class="width90">
 		 <tr <?php echo helper_alternate_class() ?>>
 			<td colspan="2" class="none">
 				<?php 
 				if( ON == config_get( 'use_javascript' ) ) { ?>
-					<?php collapse_open( 'profile7' ); collapse_icon('profile7'); echo 'Add Attachments';?>
+					<?php collapse_open( 'profile2' ); collapse_icon('profile2'); echo lang_get( 'plugin_Honey_usecase_notes' ) ;}?>
 			
-					<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
+	<table width="90%">
+	<?php
+
+		while( $row_note = db_fetch_array( $result_note ) ){
+			$id_note=$row_note['id'];
+			$note=$row_note['note'];
+			$reporter=$row_note['username'];
+			$state=$row_note['view_state'];
+			$submitted=$row_note['date_submitted'];
+			$modified=$row_note['last_modified'];
+			$id_uc=$row_note['id_uc'];
+
+			if ( VS_PRIVATE == $state) {
+				$estado='[private]';
+				$t_bugnote_css		= 'bugnote-private';
+				$t_bugnote_note_css	= 'bugnote-note-private';
+			}
+			else {$estado='[public]';
+				  $t_bugnote_css		= 'bugnote-public';
+				  $t_bugnote_note_css	= 'bugnote-note-public';
+				  }
+
+			$user_access_level =$row_note['access_level'];
+
+		?>
+		
+		<tr>
+		  <td  class="<?php echo $t_bugnote_css ?>" width="20%">
+			<?php echo $id_note;?>
+			<span class="small">
+			  <?php if ( user_exists( $reporter ) ) {
+				  $t_access_level = $user_access_level;
+				  }
+				  // Only display access level when higher than 0 (ANYBODY)
+				  if( $t_access_level > ANYBODY ) {
+					echo '(', get_enum_element( 'access_levels', $user_access_level ), ')';
+				  }?>
+			</span>
+				  <?php if ( VS_PRIVATE == $state) { ?>
+					<span class="small">[ <?php echo lang_get( 'private' ) ?> ]</span>
+				  <?php } ?>
+				  <br />
+				  <span class="small"><?php echo date( $submitted); ?></span><br />
+				  <?php	if ( $modified ) {
+					echo '<span class="small">' . lang_get( 'edited_on') . lang_get( 'word_separator' ) . date($modified ) . '</span><br />';
+				   }?>
+				  <br />
+				  
+				  <div class="small">
+
+				  <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("uc_note_edit_page");?>')" value="Editar"/>
+				  <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("delete_uc_note");?>')" value="Delete"/>
+				  <?php
+					if($state==VS_PRIVATE){ ?>
+					 <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("set_view_state_uc_note");?>')" value="Make Public"/>
+				  <?php }
+						else{?>
+							<input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("set_view_state_uc_note");?>')" value="Make Private"/>
+						
+				  <?php } ?>	
+
+				</div>
+		  </td>
+		  <td  class="<?php echo $t_bugnote_note_css ?>" width="80%">
+		  <?php echo string_convert_uc_link($note); ?>
+		  </td>
+		</tr>
+
+
+		<?php }//while  ?>
+		</table>
+
+		<?php if( ON == config_get( 'use_javascript' ) ) { ?>
+				<?php collapse_closed( 'profile2' ); collapse_icon('profile2'); echo 'Notes';?>
+				<?php collapse_end( 'profile2' ); ?>
+				<?php } ?>
+		</td></tr>
+
+	</TABLE>
+
+
+	<br>
+	<!--aca van las notas-->
+
+		<table class="width90">
+		  <tr <?php echo helper_alternate_class() ?>>
+			<td colspan="2" class="none">
+				<?php 
+				if( ON == config_get( 'use_javascript' ) ) { ?>
+					<?php collapse_open( 'profile' ); collapse_icon('profile'); echo 'Add Note';}?>
 					<table>
-						<tr><td><?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
-						<?php echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?></td></tr>
-						<tr>
-							<td>
-								<?php
-
-									for( $i = 0; $i < $hasta; $i++ ) {?>
-
-										<input <?php echo helper_get_tab_index() ?> id="ufile[]" name="ufile[]" type="file" size="50" />
-										<br>
-										
-									<?php 
-									}//for	?>
+					<tr>
+						<td class="category" width="25%">Note</td>
+						<td width="75%">
+						<textarea cols="88" rows="10" name="new_note"></textarea>
 						</td>
 					</tr>
-					
-					<tr><td colspan="2"><input type="button" onClick="javascript:go_page(0,<?php  echo $id_usecase?>,'<?php  echo plugin_page('save_files_usecase');?>')" value="Add Files"/></td></tr>
-					
-				</table>
-
-			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_closed( 'profile7' ); collapse_icon('profile7'); echo 'Add Attachments';?>
-				<?php collapse_end( 'profile7' ); ?>
-			<?php }
-		}//if( ON == config_get ?>
-		</td>
-	  </tr>	
-<?php }//si puede poner mas archivos ?>
-
-<!--aca termina lo de los archivos-->
+					<?php $t_back=plugin_page("add_uc_note")?>
+					<tr><td colspan="2"><input type="button" onClick="javascript:go_page(0,<?php  echo $id_usecase?>,'<?php  echo $t_back.'&backPage=usecase_page'?>')" value="Add Note"/></td></tr>
+					</table>
+				<?php if( ON == config_get( 'use_javascript' ) ) { ?>
+				<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo 'Add Note';?>
+				<?php collapse_end( 'profile' ); ?>
+				<?php } ?>
+			</td>
+		  </tr>
+		</table>  
 
 
-</table>
-
-
-<?php // echo $interface_main?>
-
-
- <!--aca muestro las notas-->
-
-<?php # UC notes BEGIN (permite el salto a #)?>
-<a name="uc_notes" id="uc_notes" /><br />
-
-<?php
-
-$t_uc_note_table = plugin_table( 'uc_note','honey' );
-$t_user_table = db_get_table( 'mantis_user_table' );
-$query_note = "SELECT a.id, a.id_uc, a.note, a.reporter_id, a.view_state, a.date_submitted,a.last_modified, b.username, b.access_level
-					  FROM ".$t_uc_note_table." a inner join  ".$t_user_table." b on (a.reporter_id=b.id)
-					  WHERE id_uc =" . db_param() . " and a.active=0";
-
-$result_note = db_query_bound( $query_note,  array($id_usecase) );
-
-$count_notes = db_num_rows( $result_note );
-
-?>
-
-	
-	 <table class="width90">
-	 <tr <?php echo helper_alternate_class() ?>>
-		<td colspan="2" class="none">
-			<?php 
-			if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_open( 'profile2' ); collapse_icon('profile2'); echo lang_get( 'plugin_Honey_usecase_notes' ) ;}?>
-		
-<table width="90%">
-<?php
-
-	while( $row_note = db_fetch_array( $result_note ) ){
-		$id_note=$row_note['id'];
-		$note=$row_note['note'];
-		$reporter=$row_note['username'];
-		$state=$row_note['view_state'];
-		$submitted=$row_note['date_submitted'];
-		$modified=$row_note['last_modified'];
-		$id_uc=$row_note['id_uc'];
-
-		if ( VS_PRIVATE == $state) {
-			$estado='[private]';
-			$t_bugnote_css		= 'bugnote-private';
-			$t_bugnote_note_css	= 'bugnote-note-private';
-		}
-		else {$estado='[public]';
-			  $t_bugnote_css		= 'bugnote-public';
-			  $t_bugnote_note_css	= 'bugnote-note-public';
-			  }
-
-		$user_access_level =$row_note['access_level'];
-
-	?>
-	
-	<tr>
-	  <td  class="<?php echo $t_bugnote_css ?>" width="20%">
-		<?php echo $id_note;?>
-		<span class="small">
-		  <?php if ( user_exists( $reporter ) ) {
-			  $t_access_level = $user_access_level;
-			  }
-			  // Only display access level when higher than 0 (ANYBODY)
-			  if( $t_access_level > ANYBODY ) {
-				echo '(', get_enum_element( 'access_levels', $user_access_level ), ')';
-			  }?>
-		</span>
-			  <?php if ( VS_PRIVATE == $state) { ?>
-				<span class="small">[ <?php echo lang_get( 'private' ) ?> ]</span>
-			  <?php } ?>
-			  <br />
-			  <span class="small"><?php echo date( $submitted); ?></span><br />
-			  <?php	if ( $modified ) {
-				echo '<span class="small">' . lang_get( 'edited_on') . lang_get( 'word_separator' ) . date($modified ) . '</span><br />';
-			   }?>
-			  <br />
-			  
-			  <div class="small">
-
-			  <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("uc_note_edit_page");?>')" value="Editar"/>
-			  <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("delete_uc_note");?>')" value="Delete"/>
-			  <?php
-				if($state==VS_PRIVATE){ ?>
-				 <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("set_view_state_uc_note");?>')" value="Make Public"/>
-			  <?php }
-					else{?>
-						<input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("set_view_state_uc_note");?>')" value="Make Private"/>
-					
-			  <?php } ?>	
-
-			</div>
-	  </td>
-	  <td  class="<?php echo $t_bugnote_note_css ?>" width="80%">
-	  <?php echo string_convert_uc_link($note); ?>
-	  </td>
-	</tr>
-
-
-	<?php }//while  ?>
+	<br>
+	<table align="center">
+		<tr>
+			<td><input type="submit" value="Edit"/></td>
+			<td><input type="button" value="Cancel"  onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page?>')"/></td>
+			<td><input type="button" value="Delete" onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page_delete?>')"/></td>
+		</tr>
 	</table>
+	</div>
+	<input type='hidden' name='cant_files' id='cant_files' value='<?php echo $hasta ?>'/>
+	<input type='hidden' name='usecase_name' id='usecase_name' value='<?php echo $name ?>'/>
 
-	<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-			<?php collapse_closed( 'profile2' ); collapse_icon('profile2'); echo 'Notes';?>
-			<?php collapse_end( 'profile2' ); ?>
-			<?php } ?>
-	</td></tr>
+	</form>
 
-</TABLE>
-
-
-<br>
-<!--aca van las notas-->
-
-	<table class="width90">
-	  <tr <?php echo helper_alternate_class() ?>>
-		<td colspan="2" class="none">
-			<?php 
-			if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_open( 'profile' ); collapse_icon('profile'); echo 'Add Note';}?>
-				<table>
-				<tr>
-					<td class="category" width="25%">Note</td>
-					<td width="75%">
-					<textarea cols="88" rows="10" name="new_note"></textarea>
-					</td>
-				</tr>
-				<?php $t_back=plugin_page("add_uc_note")?>
-				<tr><td colspan="2"><input type="button" onClick="javascript:go_page(0,<?php  echo $id_usecase?>,'<?php  echo $t_back.'&backPage=usecase_page'?>')" value="Add Note"/></td></tr>
-				</table>
-			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-			<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo 'Add Note';?>
-			<?php collapse_end( 'profile' ); ?>
-			<?php } ?>
-		</td>
-	  </tr>
-	</table>  
-
-
-<br>
-<table align="center">
-	<tr>
-		<td><input type="submit" value="Edit"/></td>
-		<td><input type="button" value="Cancel"  onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page?>')"/></td>
-		<td><input type="button" value="Delete" onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page_delete?>')"/></td>
-	</tr>
-</table>
-</div>
-<input type='hidden' name='cant_files' id='cant_files' value='<?php echo $hasta ?>'/>
-<input type='hidden' name='usecase_name' id='usecase_name' value='<?php echo $name ?>'/>
-
-</form>
+<?php
+}//if existe el uc buscado
+else{echo "<p>Use Case doesn't exist</p>";
+echo '<br><br>';
+$t_page=plugin_page("view_cu_page");
+echo "<a href=\"$t_page\">Back</a>";
+echo "<br>";}
+?>
 
 <?php
 

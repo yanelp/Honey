@@ -40,4 +40,8 @@
 	$s_plugin_Honey_rule_modify='Modify rule details';
 	$s_plugin_Honey_usecase_derivation='Therea are no verb type symbols for derivation to use case';
 	$s_plugin_Honey_usecase_derivation_title='Derivation result';
+	$s_plugin_Honey_Lel_derivation_link='Derive to Use Cases';
+	$s_plugin_Honey_symbol_id='Symbol #';
+	$s_plugin_Honey_usecase_id='Use Case #';
+
 	
