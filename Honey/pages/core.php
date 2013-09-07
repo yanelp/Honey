@@ -37,16 +37,15 @@ if( $count>0 ){
 <br><table class="width90">
 <tr  class="row-category">
 	<td colspan="2"> 
-	
-	Algunos actores derivados son referenciados por casos de uso no derivados
+	<?php echo plugin_lang_get('derivation_actor_ref');?>
 	</td>
 </tr>
 
 
 
 <tr  class="row-category">
-	<td >Actor</td>
-	<td>Caso de Uso creado manualmente</td>
+	<td ><?php echo plugin_lang_get('actor');?></td>
+	<td><?php echo plugin_lang_get('uc_manual');?></td>
 </tr>
 
 <!-- <tr class="row-category"> <td>Existen actores referenciados por los casos de uso:</td></tr>-->
@@ -114,14 +113,14 @@ if( $count_cu >0 ){
 <br><table class="width90">
 <tr  class="row-category">
 	<td colspan="2"> 
-	Algunos de los casos de uso que se quieren borrar extienden a otros no derivados
+	<?php echo plugin_lang_get('derivation_uc_extend');?>
 	</td>
 </tr>
 
 
 
-<tr  class="row-category"><td>Caso de Uso derivado a borrarse </td>
-<td >Caso de Uso creado manualmente</td></tr>
+<tr  class="row-category"><td><?php echo plugin_lang_get('derivation_uc_be_erased');?></td>
+<td ><?php echo plugin_lang_get('uc_manual');?></td></tr>
 
 <!-- <tr class="row-category"> <td>Existen actores referenciados por los casos de uso:</td></tr>-->
 <?php
@@ -184,15 +183,16 @@ if( $count_cu_include >0 ){
 <br><table class="width90">
 <tr  class="row-category">
 	<td colspan="2"> 
-	Algunos de los casos de uso que se quieren borrar son incluidos por otros no derivados
+	<?php echo plugin_lang_get('derivation_uc_be_erased');?>
+	<?php echo plugin_lang_get('derivation_uc_include');?>
 	</td>
 </tr>
 
 
 
 <tr  class="row-category">
-<td >Caso de Uso derivado a borrarse </td>
-<td>Caso de Uso creado manualmente</td>
+<td ><?php echo plugin_lang_get('derivation_uc_be_erased');?></td>
+<td><?php echo plugin_lang_get('uc_manual');?></td>
 </tr>
 
 <!-- <tr class="row-category"> <td>Existen actores referenciados por los casos de uso:</td></tr>-->
@@ -619,13 +619,13 @@ if ($count_verb > 0){
 				<?php echo $uc_name?>
 				</td>
 				<td>
-				No es condicion
+				<?php echo plugin_lang_get('derivation_not_condition');?>
 				</td>
 				<td>
-				Pre-Condicion
+				<?php echo plugin_lang_get('derivation_pre_condition');?>
 				</td>
 				<td>
-				Post-Condicion
+				<?php echo plugin_lang_get('derivation_post_condition');?>
 				</td>
 			 </tr>
 		

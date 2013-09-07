@@ -43,5 +43,19 @@
 	$s_plugin_Honey_Lel_derivation_link='Derive to Use Cases';
 	$s_plugin_Honey_symbol_id='Symbol #';
 	$s_plugin_Honey_usecase_id='Use Case #';
+	$s_plugin_Honey_comment_issue='Comment does not reference any issue.\n';
+	$s_plugin_Honey_comment_uc='Comment does not reference any usecase\n';
+	$s_plugin_Honey_no_login='Unable to login.\n';
+	$s_plugin_Honey_derivation_actor_ref='Some derived actors are referenced by non-derivative use cases.';
+	$s_plugin_Honey_actor='Actor';
+	$s_plugin_Honey_uc_manual='Manually created Use Case';
+	$s_plugin_Honey_derivation_uc_extend='Some of the use cases that you want to delete extend to other non-derivative.';
+	$s_plugin_Honey_derivation_uc_include='Some of the use cases that you want to delete are included to other non-derivative.';
+	$s_plugin_Honey_derivation_uc_be_erased='Use Case derived  to be erased';
+	$s_plugin_Honey_derivation_not_condition='Not Condition';
+	$s_plugin_Honey_derivation_pre_condition='Precondition';
+	$s_plugin_Honey_derivation_post_condition='Postcondition';
+
+
 
 	

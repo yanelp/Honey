@@ -42,3 +42,16 @@
 	$s_plugin_Honey_Lel_derivation_link='Derivar a Casos de Uso';
 	$s_plugin_Honey_symbol_id='Simbolo #';
 	$s_plugin_Honey_usecase_id='Caso de Uso #';
+	$s_plugin_Honey_comment_issue='El comentario no hace referencia a ninguna incidencia.\n';
+	$s_plugin_Honey_comment_uc='El comentario no hace referencia a ningun caso de uso.\n';
+	$s_plugin_Honey_no_login='Inhabilitado para loguearse.\n';
+	$s_plugin_Honey_derivation_actor_ref='Algunos actores derivados son referenciados por casos de uso no derivados.';
+	$s_plugin_Honey_actor='Actor';
+	$s_plugin_Honey_uc_manual='Caso de Uso creado manualmente';
+	$s_plugin_Honey_derivation_uc_extend='Algunos de los casos de uso que se quieren borrar extienden a otros no derivados.';
+	$s_plugin_Honey_derivation_uc_include='Algunos de los casos de uso que se quieren borrar son incluidos por otros no derivados.';
+	$s_plugin_Honey_derivation_uc_be_erased='Caso de Uso a borrarse';
+	$s_plugin_Honey_derivation_not_condition='No es Condicion';
+	$s_plugin_Honey_derivation_pre_condition='Precondicion';
+	$s_plugin_Honey_derivation_post_condition='Postcondicion';
+

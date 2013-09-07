@@ -51,7 +51,7 @@ $t_commit_regexp ='/\b(?:bug|issue|incidencia|fallo|error|problema)\s*[#]{0,1}(\
 $t_commit_regexp_honey ='/\b(?:uc|cu|caso de uso|use case)\s*[#]{0,1}(\d+)\b/i';
 
 //$t_commit_fixed_regexp = config_get( 'source_control_fixed_regexp' );
-$t_commit_fixed_regexp = '/\b(?:resuelto|resuelta|arreglado|arreglada|corregido|corregida)\s+(?:bug|issue|incidencia|fallo|error|problema)?\s*[#](\d+)\b/i';
+$t_commit_fixed_regexp = '/\b(?:resuelto|resuelta|arreglado|arreglada|corregido|corregida|fixed)\s+(?:bug|issue|incidencia|fallo|error|problema)?\s*[#](\d+)\b/i';
 
 
 
@@ -88,13 +88,13 @@ while(( $t_line = fgets( STDIN, 1024 ) ) ) {
 
 # If no issues found, then no work to do.
 if(( count( $t_issues ) == 0 ) && ( count( $t_fixed_issues ) == 0 ) ) {
-	echo "Comment does not reference any issues.\n";
+	echo plugin_lang_get('comment_issue');
 	//exit( 0 );
 }
 else{
 	# Login as source control user
 	if( !auth_attempt_script_login( $t_username ) ) {
-		echo "Unable to login\n";
+		echo plugin_lang_get('no_login');
 		exit( 1 );
 	}
 
@@ -126,14 +126,14 @@ else{
 
 # If no use case found, then no work to do.
 if(( count( $t_use_cases ) == 0 ) && ( count( $t_fixed_use_cases ) == 0 ) ) {
-	echo "Comment does not reference any use case.\n";
+	echo plugin_lang_get('comment_uc');
 	exit( 0 );
 }
 
 
 # Login as source control user
 if( !auth_attempt_script_login( $t_username ) ) {
-	echo "Unable to login\n";
+	echo plugin_lang_get('no_login');
 	exit( 1 );
 }
 
