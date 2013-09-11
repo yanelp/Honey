@@ -33,9 +33,9 @@ $t_page = plugin_page( 'new_usecase_page' );
 
 if ( is_blank( $name ) || is_blank( $mainscenario )) {
 //			trigger_error( ERROR_GENERIC, ERROR );
-echo "Must add Name and main scenario";
+echo  plugin_lang_get('must_uc');
 echo '<br><br>';
-echo "<a href=\"$t_page\">Back</a>";
+echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";
 echo "<br>";
 html_page_bottom1( );
 die();
@@ -54,9 +54,9 @@ $count = db_num_rows( $result );
 $row = db_fetch_array( $result );
 
 if($count>0){
-	echo "Name already exists";
+	echo  plugin_lang_get('uc_exist');
 	echo '<br><br>';
-	echo "<a href=\"$t_page&id_usecase=$id_usecase\">Back</a>";
+	echo "<a href=\"$t_page&id_usecase=$id_usecase\">". plugin_lang_get('back')."</a>";
 	echo "<br>";
 	html_page_bottom1( );
 	die();
@@ -197,11 +197,11 @@ for( $i = 0; $i < 10; $i++ ) {
 
 /*save */
 
-echo "<p>Saved data</p>";
+echo "<p>". plugin_lang_get('saved_data')."</p>";
 
 
 echo '<br><br>';
-echo "<a href=\"$t_page\">Back</a>";
+echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";
 
 echo "<br>";
 

@@ -44,7 +44,7 @@ EVENT_LAYOUT_RESOURCES
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		   <td class="category">
-		   <span class="required">*</span>Name of the use case
+		   <span class="required">*</span><?php echo plugin_lang_get('name')?>
 		</td>
 		<td>
 	      <input type="text" name="cu_name" id='cu_name' size="133">
@@ -52,7 +52,7 @@ EVENT_LAYOUT_RESOURCES
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		 <td class="category">
-		    Objetive
+		    <?php echo plugin_lang_get('objetive')?>
 		</td>
 		<td>
 		   <Textarea cols="100" name="goal" id="goal"></Textarea>
@@ -73,7 +73,7 @@ EVENT_LAYOUT_RESOURCES
 	?>
 	<tr <?php echo helper_alternate_class() ?>>
 		 <td class="category">
-		    Actors Involved
+		    <?php echo plugin_lang_get('actors_involved')?>
 		</td>
 		<td>
 			<table>
@@ -98,8 +98,8 @@ EVENT_LAYOUT_RESOURCES
 
 									 -->
 									 </script>";
-							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content4(\"hideSection_" . $c_id . "\");swap_content4(\"showSection_" . $c_id . "\");return false;'>Show Description</a>]</span>";
-							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content4(\"hideSection_" . $c_id . "\");swap_content4(\"showSection_" . $c_id . "\");return false;'>Hide Description</a>]";
+							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content4(\"hideSection_" . $c_id . "\");swap_content4(\"showSection_" . $c_id . "\");return false;'>".plugin_lang_get('show_goal')."</a>]</span>";
+							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content4(\"hideSection_" . $c_id . "\");swap_content4(\"showSection_" . $c_id . "\");return false;'>".plugin_lang_get('hide_goal')."</a>]";
 								echo "<pre>";
 
 								echo $row_actors['description'];
@@ -111,7 +111,7 @@ EVENT_LAYOUT_RESOURCES
 							<!---->
 							</td>
 							<?php }
-							else { echo "<td class='small'>[No Description]</td>";}?>
+							else { echo "<td class='small'>[".plugin_lang_get('no_descrip')."]</td>";}?>
 
 
 				</tr>
@@ -120,7 +120,7 @@ EVENT_LAYOUT_RESOURCES
 				} ?>
 			</table>
 
-			<?php if($count_actors==0){echo "<p class='category'> No actors created for this project<p>";}?>
+			<?php if($count_actors==0){echo "<p class='category'> ".plugin_lang_get('no_actors_created')."<p>";}?>
 		</td>
 	</tr>
 
@@ -129,7 +129,7 @@ EVENT_LAYOUT_RESOURCES
 		<td colspan="2" class="none">
 			<?php 
 			if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_open( 'profile3' ); collapse_icon('profile3'); echo 'Extends';
+				<?php collapse_open( 'profile3' ); collapse_icon('profile3'); echo plugin_lang_get('extends');
 
 				//busco todas las reglas del proyecto
 
@@ -166,8 +166,8 @@ EVENT_LAYOUT_RESOURCES
 
 									 -->
 									 </script>";
-							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content5(\"hideSection_" . $c_id . "\");swap_content5(\"showSection_" . $c_id . "\");return false;'>Show Goal</a>]</span>";
-							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content5(\"hideSection_" . $c_id . "\");swap_content5(\"showSection_" . $c_id . "\");return false;'>Hide Goal</a>]";
+							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content5(\"hideSection_" . $c_id . "\");swap_content5(\"showSection_" . $c_id . "\");return false;'>".plugin_lang_get('show_goal')."</a>]</span>";
+							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content5(\"hideSection_" . $c_id . "\");swap_content5(\"showSection_" . $c_id . "\");return false;'".plugin_lang_get('hide_goal')."</a>]";
 								echo "<pre>";
 
 								echo $row_extends['goal'];
@@ -179,7 +179,7 @@ EVENT_LAYOUT_RESOURCES
 							<!---->
 							</td>
 							<?php }
-							else { echo "<td class='small'>[No Goal]</td>";}?>	
+							else { echo "<td class='small'>[".plugin_lang_get('no_goal')."]</td>";}?>	
 
 				</tr>
 				<?php
@@ -187,10 +187,10 @@ EVENT_LAYOUT_RESOURCES
 				} ?>
 			</table>
 
-			<?php if($count_extends==0){echo "<p class='category'> No usecases created for this project<p>";}?>
+			<?php if($count_extends==0){echo "<p class='category'> ".plugin_lang_get('no_uc_created')."<p>";}?>
 
 			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_closed( 'profile3' ); collapse_icon('profile3'); echo 'Extends';?>
+				<?php collapse_closed( 'profile3' ); collapse_icon('profile3'); echo plugin_lang_get('extends');?>
 				<?php collapse_end( 'profile3' ); ?>
 			<?php } ?>
 		</td>
@@ -202,7 +202,7 @@ EVENT_LAYOUT_RESOURCES
 		<td colspan="2" class="none">
 			<?php 
 			if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_open( 'profile4' ); collapse_icon('profile4'); echo 'Includes';
+				<?php collapse_open( 'profile4' ); collapse_icon('profile4'); echo plugin_lang_get('includes');
 
 				//busco todas las reglas del proyecto
 
@@ -239,8 +239,8 @@ EVENT_LAYOUT_RESOURCES
 
 									 -->
 									 </script>";
-							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content6(\"hideSection_" . $c_id . "\");swap_content6(\"showSection_" . $c_id . "\");return false;'>Show Goal</a>]</span>";
-							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content6(\"hideSection_" . $c_id . "\");swap_content6(\"showSection_" . $c_id . "\");return false;'>Hide Goal</a>]";
+							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content6(\"hideSection_" . $c_id . "\");swap_content6(\"showSection_" . $c_id . "\");return false;'>".plugin_lang_get('show_goal')."</a>]</span>";
+							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content6(\"hideSection_" . $c_id . "\");swap_content6(\"showSection_" . $c_id . "\");return false;'>".plugin_lang_get('hide_goal')."</a>]";
 								echo "<pre>";
 
 								echo $row_includes['goal'];
@@ -252,17 +252,17 @@ EVENT_LAYOUT_RESOURCES
 							<!---->
 							</td>
 							<?php }
-							else { echo "<td  class='small'>[No Goal]</td>";}?>
+							else { echo "<td  class='small'>[".plugin_lang_get('no_goal')."]</td>";}?>
 				</tr>
 				<?php 
 				$j++;
 				} ?>
 			</table>
 
-			<?php if($count_includes==0){echo "<p class='category'> No usecases created for this project<p>";}?>
+			<?php if($count_includes==0){echo "<p class='category'>".plugin_lang_get('no_uc_created')."<p>";}?>
 
 			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_closed( 'profile4' ); collapse_icon('profile4'); echo 'Includes';?>
+				<?php collapse_closed( 'profile4' ); collapse_icon('profile4'); echo plugin_lang_get('includes');?>
 				<?php collapse_end( 'profile4' ); ?>
 			<?php } ?>
 		</td>
@@ -271,7 +271,7 @@ EVENT_LAYOUT_RESOURCES
 
 	<tr <?php echo helper_alternate_class() ?>>
 		 <td class="category">
-		    Pre-conditions
+		    <?php echo plugin_lang_get('pre_conditions');?>
 		</td>
 		<td>
 		  <Textarea cols="100" rows="5"  name="preconditions" id="preconditions"></Textarea>
@@ -279,7 +279,7 @@ EVENT_LAYOUT_RESOURCES
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		 <td class="category">
-		    Post-conditions
+		    <?php echo plugin_lang_get('post_conditions');?>
 		</td>
 		<td>
 	     <Textarea cols="100" rows="5" name="postconditions" id="postconditions"></Textarea>
@@ -287,7 +287,7 @@ EVENT_LAYOUT_RESOURCES
 	 </tr>
      <tr <?php echo helper_alternate_class() ?>>
 		 <td class="category">
-		    Observations
+		    <?php echo plugin_lang_get('observations');?>
 		</td>
 		<td>
 	      <Textarea cols="100" name="obsevations" id="obsevations" ></Textarea>
@@ -295,14 +295,14 @@ EVENT_LAYOUT_RESOURCES
 	  </tr>
 	  <tr <?php echo helper_alternate_class() ?>>
 		 <td class="category">
-		 <span class="required">*</span> Normal Course
+		 <span class="required">*</span>  <?php echo plugin_lang_get('normal_course');?>
 		</td>
 		<td>
 	      <Textarea cols="100" rows="15" name="cursoNormal" id="cursoNormal"></Textarea>
 		</td>
 	  </tr>
 	   <tr <?php echo helper_alternate_class() ?>>
-		 <td class="category"> Alternative Course
+		 <td class="category">  <?php echo plugin_lang_get('alt_courses');?>
 		</td>
 		<td>
 	      <Textarea cols="100" rows="5" name="cursoAlternativo" id="cursoAlternativo"></Textarea>
@@ -320,7 +320,7 @@ EVENT_LAYOUT_RESOURCES
 		<td colspan="2" class="none">
 			<?php 
 			if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_open( 'profile' ); collapse_icon('profile'); echo 'Assign Rules';
+				<?php collapse_open( 'profile' ); collapse_icon('profile'); echo plugin_lang_get('assign_rules');
 
 				//busco todas las reglas del proyecto
 
@@ -357,8 +357,8 @@ EVENT_LAYOUT_RESOURCES
 
 									 -->
 									 </script>";
-							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content3(\"hideSection_" . $c_id . "\");swap_content3(\"showSection_" . $c_id . "\");return false;'>Show Description</a>]</span>";
-							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content3(\"hideSection_" . $c_id . "\");swap_content3(\"showSection_" . $c_id . "\");return false;'>Hide Description</a>]";
+							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content3(\"hideSection_" . $c_id . "\");swap_content3(\"showSection_" . $c_id . "\");return false;'>".plugin_lang_get('show_goal')."</a>]</span>";
+							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content3(\"hideSection_" . $c_id . "\");swap_content3(\"showSection_" . $c_id . "\");return false;'>".plugin_lang_get('hide_goal')."</a>]";
 								echo "<pre>";
 
 								echo $row_rules['description'];
@@ -370,7 +370,7 @@ EVENT_LAYOUT_RESOURCES
 							<!---->
 							</td>	
 							<?php }
-							else { echo "<td  class='small'>[No Description]</td>";}?>
+							else { echo "<td  class='small'>[".plugin_lang_get('no_goal')."]</td>";}?>
 
 				</tr>
 				<?php
@@ -378,10 +378,10 @@ EVENT_LAYOUT_RESOURCES
 				} ?>
 			</table>
 
-			<?php if($count_rules==0){echo "<p class='category'> No rules created for this project<p>";}?>
+			<?php if($count_rules==0){echo "<p class='category'> ".plugin_lang_get('no_rules_created')."<p>";}?>
 
 			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo 'Assign Rules';?>
+				<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo plugin_lang_get('assign_rules');?>
 				<?php collapse_end( 'profile' ); ?>
 			<?php } ?>
 		</td>
@@ -399,7 +399,7 @@ EVENT_LAYOUT_RESOURCES
 		<td colspan="2" class="none">
 			<?php 
 			if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_open( 'profile2' ); collapse_icon('profile2'); echo 'Attachments';?>
+				<?php collapse_open( 'profile2' ); collapse_icon('profile2'); echo plugin_lang_get('attach');?>
 		
 				<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 
@@ -422,7 +422,7 @@ EVENT_LAYOUT_RESOURCES
 				</table>
 
 			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_closed( 'profile2' ); collapse_icon('profile2'); echo 'Attachments';?>
+				<?php collapse_closed( 'profile2' ); collapse_icon('profile2'); echo plugin_lang_get('attach');?>
 				<?php collapse_end( 'profile2' ); ?>
 			<?php }
 		}//if( ON == config_get ?>
@@ -438,8 +438,8 @@ EVENT_LAYOUT_RESOURCES
 			<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
 		</td>
 
-		<td class="center"><input type='submit' name='button_ok' value='Save' onclick='validar();'>
-		<input type='button' name='button_cancel' value='Cancel'  onClick="javascript:go_page(null, null,'<?php echo $t_page?>')"></td>
+		<td class="center"><input type='submit' name='button_ok' value='<?php  echo plugin_lang_get('save');?>' onclick='validar();'>
+		<input type='button' name='button_cancel' value='<?php  echo plugin_lang_get('cancel');?>'  onClick="javascript:go_page(null, null,'<?php echo $t_page?>')"></td>
 	</tr>
 
 </table>

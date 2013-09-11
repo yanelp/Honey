@@ -37,7 +37,7 @@ if ($type_symbol == 1){
 			<div align="center">
 			<table class="width90">
 			<tr class="row-category">
-			<td>The Symbol <?php echo "<a  href=\"$t_page_return\">".str_pad($id_symbol, 7, "0", STR_PAD_LEFT)."</a>";?> is being referenced  by the following actors:</td>
+			<td><?php echo plugin_lang_get('the_symbol') ?> <?php echo "<a  href=\"$t_page_return\">".str_pad($id_symbol, 7, "0", STR_PAD_LEFT)."</a>";?> <?php echo plugin_lang_get('symbol_referenced') ?></td>
 			</tr>
 			<?php
 			while($row_search = db_fetch_array( $result_search )){
@@ -81,7 +81,7 @@ if ($type_symbol == 1){
 				<div align="center">
 				<table class="width90">
 				<tr class="row-category">
-				<td>The Symbol <?php echo "<a  href=\"$t_page_return\">".str_pad($id_symbol, 7, "0", STR_PAD_LEFT)."</a>";?> is being referenced  by the following use cases:</td>
+				<td><?php echo plugin_lang_get('the_symbol') ?> <?php echo "<a  href=\"$t_page_return\">".str_pad($id_symbol, 7, "0", STR_PAD_LEFT)."</a>";?> <?php echo plugin_lang_get('usecase_referenced') ?></td>
 				</tr>
 				<?php
 				while($row_search = db_fetch_array( $result_search )){
@@ -121,11 +121,11 @@ $t_page=$t_page."&id_symbol=".$id_symbol;
 <table class="width90">
 
 <tr class="row-category" <?php echo helper_alternate_class() ?>>
-		<td colspan="2">Are you sure you wish to delete these use Symbol</td>
+		<td colspan="2"><?php echo plugin_lang_get('sure_delete_symbol') ?></td>
 </tr>
 <tr class="row-category">
 		<td class="form-title" colspan="2">
-		<input type="button" value="Delete Symbol" onClick="javascript:go_page(null, null ,'<?php echo $t_page;?>')"/></td>
+		<input type="button" value="<?php echo plugin_lang_get('delete')?>" onClick="javascript:go_page(null, null ,'<?php echo $t_page;?>')"/></td>
 </tr>
 </table>
 </form>

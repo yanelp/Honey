@@ -51,9 +51,8 @@ $t_page_y =  $t_page_y."&id_derivation=".$id_derivation;
 if ($count > 0){
 
 ?>
-Ya se ha derivado el diccionario del proyecto<br>
-Desea dejar obsoleta la derivacion anterior?
-
+<?php echo plugin_lang_get('dictionary_derived')?><br>
+<?php echo plugin_lang_get('previous_derivation')?>
 <?php 
 
 }
@@ -62,7 +61,7 @@ else{
 
 ?>
 
-Esta seguro que desea realizar la derivacion
+<?php echo plugin_lang_get('sure_derivation')?>
 
 <?php
 
@@ -74,8 +73,8 @@ Esta seguro que desea realizar la derivacion
 <tr class="row-category">
 		<td class="form-title" colspan="2">
      	<!--<input type="button" name='button_no' value="No" onClick="javascript:go_page(null,null ,'<?php echo $t_page_no?>')"/> -->
-		<input type="button" value="NO" onClick="javascript:go_page(null, null ,'<?php echo $t_page?>')"/>
-		<input type="button" value="YES" onClick="javascript:go_page(null, null ,'<?php echo $t_page_y?>')"/>
+		<input type="button" value="<?php echo plugin_lang_get('no')?>" onClick="javascript:go_page(null, null ,'<?php echo $t_page?>')"/>
+		<input type="button" value="<?php echo plugin_lang_get('yes')?>" onClick="javascript:go_page(null, null ,'<?php echo $t_page_y?>')"/>
 		<!--<input type="hidden" id="id_derivation" name="id_derivation" value=<?php $id_derivation ?>/>-->
 		
 

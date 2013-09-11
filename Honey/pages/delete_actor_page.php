@@ -37,7 +37,7 @@ if($count_cus > 0){
 <div align="center">
 <table class="width90">
 <tr class="row-category">
-<td>The actor can not be deleted because the Use Case <?php echo "<a  href=\"$t_page_return\">".str_pad($id_actor, 7, "0", STR_PAD_LEFT)."</a>";?> is being referenced  by the following use cases:</td>
+<td><?php echo plugin_lang_get('not_delete_actor')?></td>
 </tr>
 <?php
 while($row_search = db_fetch_array( $result_search )){
@@ -74,11 +74,11 @@ else
 <table class="width90">
 
 <tr class="row-category" <?php echo helper_alternate_class() ?>>
-		<td colspan="2">Are you sure you wish to delete these actor</td>
+		<td colspan="2"><?php echo plugin_lang_get('sure_delete_actor')?></td>
 </tr>
 <tr class="row-category">
 		<td class="form-title" colspan="2">
-		<input type="button" value="Delete Actor" onClick="javascript:go_page(null, null ,'<?php echo $t_page?>')"/></td>
+		<input type="button" value="<?php echo plugin_lang_get('delete')?>" onClick="javascript:go_page(null, null ,'<?php echo $t_page?>')"/></td>
 </tr>
 </table>
 </form>

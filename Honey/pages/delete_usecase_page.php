@@ -39,7 +39,7 @@ if ($count_extends > 0){
 
 <table class="width90">
 <tr class="row-category">
-<td>The Use Case "<?php echo "<a  href=\"$t_page_return\">".$id."</a>";?>-&nbsp;<?php echo $usecase_name;?>" extend the folow Use Cases:</td>
+<td><?php echo plugin_lang_get('the_uc')?> "<?php echo "<a  href=\"$t_page_return\">".$id."</a>";?>-&nbsp;<?php echo $usecase_name;?>" <?php echo plugin_lang_get('usecase_referenced_extend')?></td>
 </tr>
 <?php
     while($row_search = db_fetch_array( $result_search )){
@@ -80,7 +80,7 @@ if ($count_include > 0){
 
 <table class="width90">
 <tr class="row-category">
-<td>The Use Case "<?php echo "<a  href=\"$t_page_return\">".$id."</a>";?>-&nbsp;<?php echo $usecase_name;?>" include the folow Use Cases:</td>
+<td><?php echo plugin_lang_get('the_uc')?> "<?php echo "<a  href=\"$t_page_return\">".$id."</a>";?>-&nbsp;<?php echo $usecase_name;?>" <?php echo plugin_lang_get('usecase_referenced_include')?></td>
 </tr>
 <?php
     while($row_search = db_fetch_array( $result_search )){
@@ -113,11 +113,11 @@ if ($count_include > 0){
 <table class="width90">
 
 <tr class="row-category" <?php echo helper_alternate_class() ?>>
-		<td colspan="2">Are you sure you wish to delete these use case?</td>
+		<td colspan="2">,<?php echo plugin_lang_get('sure_delete_uc')?></td>
 </tr>
 <tr class="row-category">
 		<td class="form-title" colspan="2">
-		<input type="button" value="Delete Use Case" onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page?>')"/></td>
+		<input type="button" value="<?php echo plugin_lang_get('delete')?>" onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page?>')"/></td>
 </tr>
 </table>
 </form>

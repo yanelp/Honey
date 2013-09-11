@@ -33,18 +33,18 @@ EVENT_LAYOUT_RESOURCES
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><span class="required">*</span>Name</td>
+		<td class="category"><span class="required">*</span><?php echo plugin_lang_get('name')?></td>
 		<td><input type="text" name="rule_name" id='rule_name' size="59"/></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Description</td><td><textarea name='rule_descrip' id='rule_descrip' cols='45' rows='5'></textarea></td>
+		<td class="category"><?php echo plugin_lang_get('description')?></td><td><textarea name='rule_descrip' id='rule_descrip' cols='45' rows='5'></textarea></td>
 	</tr>
 	<tr>
 		<td class="left">
 			<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
 		</td>
-		<td class="center"><input type='submit' name='button_ok' value='Save'>
-		<input type='button' name='button_cancel' value='Cancel' onClick="javascript:go_page(null, null,'<?php echo $t_page?>')"></td>
+		<td class="center"><input type='submit' name='button_ok' value='<?php echo plugin_lang_get('save')?>'>
+		<input type='button' name='button_cancel' value='<?php echo plugin_lang_get('cancel')?>' onClick="javascript:go_page(null, null,'<?php echo $t_page?>')"></td>
 	</tr>
 </table>
 

@@ -24,7 +24,7 @@ $id_symbol=$_REQUEST['id_symbol'];
 
 if ( is_blank( $name ) || is_blank( $notion ) || ( $type==0 ) ) {
 //			trigger_error( ERROR_GENERIC, ERROR );
-echo "Must add Name, Notion and Type";
+echo plugin_lang_get('must_symbol');
 
 if($operation==0){//new
 	$t_page = plugin_page( 'new_symbol_page' );
@@ -35,7 +35,7 @@ else{//update
 }
 
 echo '<br><br>';
-echo "<a href=\"$t_page\">Back</a>";
+echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";
 echo "<br>";
 html_page_bottom1( );
 
@@ -130,10 +130,10 @@ if($row_name==''){//si no existe el simbolo
 	}
 
 
-	echo "<p>Saved data</p>";
+	echo "<p>". plugin_lang_get('saved_data')."</p>";
 
 
-	echo 'name: '.$name;
+	/*echo 'name: '.$name;
 	echo '<br><br>';
 	for($i=0;$i<$row_number_symbol_synonymous;$i++){
 		$synonimous=trim($_REQUEST['symbol_synonymous'.$i]);
@@ -164,6 +164,7 @@ if($row_name==''){//si no existe el simbolo
 		}
 	echo 'type: '.$type;
 
+*/
 
 	if($operation==0){//new
 		$t_page = plugin_page( 'new_symbol_page' );
@@ -173,8 +174,9 @@ if($row_name==''){//si no existe el simbolo
 		$t_page=$t_page."&id_symbol=".$id_symbol;
 	}
 
+
 	echo '<br><br>';
-	echo "<a href=\"$t_page\">Back</a>";
+	echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";
 	echo '<br>';
 
 	$t_url= plugin_page( 'view_symbols_page' );
@@ -187,11 +189,11 @@ if($row_name==''){//si no existe el simbolo
 }//si no existe el simbolo
 else{//el simbolo esta repetido
 
-	echo  "<p>The symbol already exists</p>";
+	echo  "<p>". plugin_lang_get('symbol_exist')."</p>";
 
 	$t_page = plugin_page( 'new_symbol_page' );
 
 	echo '<br><br>';
-	echo "<a href=\"$t_page\">Back</a>";
+	echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";
 	echo '<br>';
 }

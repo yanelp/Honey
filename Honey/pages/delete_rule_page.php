@@ -36,7 +36,7 @@ if($count_cus > 0){
 <div align="center">
 <table class="width90">
 <tr class="row-category">
-<td>The rule can not be deleted because the rule <?php echo "<a  href=\"$t_page_return\">".str_pad($id_rule, 7, "0", STR_PAD_LEFT)."</a>";?> is being referenced  by the following use cases:</td>
+<td><?php echo plugin_lang_get('not_delete_rule')</td>
 </tr>
 <?php
 while($row_search = db_fetch_array( $result_search )){
@@ -73,11 +73,11 @@ else
 <table class="width90">
 
 <tr class="row-category" <?php echo helper_alternate_class() ?>>
-		<td colspan="2">Are you sure you wish to delete these use rule</td>
+		<td colspan="2"><?php echo plugin_lang_get('sure_delete_rule')?></td>
 </tr>
 <tr class="row-category">
 		<td class="form-title" colspan="2">
-		<input type="button" value="Delete Rule" onClick="javascript:go_page(null, null ,'<?php echo $t_page?>')"/></td>
+		<input type="button" value="<?php echo plugin_lang_get('delete')?>" onClick="javascript:go_page(null, null ,'<?php echo $t_page?>')"/></td>
 </tr>
 </table>
 </form>

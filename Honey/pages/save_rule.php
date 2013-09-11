@@ -21,7 +21,7 @@ $id_rule=$_REQUEST['id_rule'];
 
 if ( is_blank( $name )  ) {
 //			trigger_error( ERROR_GENERIC, ERROR );
-echo "Must add Name";
+echo plugin_lang_get('must_name');
 
 if($operation==0){//new
 	$t_page = plugin_page( 'new_rule_page' );
@@ -32,7 +32,7 @@ else{//update
 }
 
 echo '<br><br>';
-echo "<a href=\"$t_page\">Back</a>";
+echo "<a href=\"$t_page\">".plugin_lang_get('must_backname')."</a>";
 echo "<br>";
 html_page_bottom1( );
 
@@ -49,7 +49,7 @@ if($operation==1){//es update
 					   where id= ' . db_param();
 	$g_result_update_rule=db_query_bound( $t_query_rule, array( $descrip,$name, $id_rule)  );
 
-	echo "<p>Saved data</p>";
+	echo "<p>".plugin_lang_get('saved_data')."</p>";
 
 	if($operation==0){//new
 		$t_page = plugin_page( 'new_rule_page' );
@@ -60,7 +60,7 @@ if($operation==1){//es update
 	}
 
 	echo '<br><br>';
-	echo "<a href=\"$t_page\">Back</a>";
+	echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
 	echo '<br>';
 
 	$t_url= plugin_page( 'view_rules_page' );
@@ -94,7 +94,7 @@ else{//busco si la regla ya existe
 
 
 
-		echo "<p>Saved data</p>";
+		echo "<p>".plugin_lang_get('saved_data')."</p>";
 
 
 		if($operation==0){//new
@@ -106,7 +106,7 @@ else{//busco si la regla ya existe
 		}
 
 		echo '<br><br>';
-		echo "<a href=\"$t_page\">Back</a>";
+		echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
 		echo '<br>';
 
 		$t_url= plugin_page( 'view_rules_page' );
@@ -119,12 +119,12 @@ else{//busco si la regla ya existe
 	}//si no existe el actor
 	else{//el actor esta repetido
 
-		echo  "<p>Rule already exists</p>";
+		echo  "<p>".plugin_lang_get('rule_exist')."</p>";
 
 		$t_page = plugin_page( 'new_rule_page' );
 
 		echo '<br><br>';
-		echo "<a href=\"$t_page\">Back</a>";
+		echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
 		echo '<br>';
 	}
 

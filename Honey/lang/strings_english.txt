@@ -55,7 +55,74 @@
 	$s_plugin_Honey_derivation_not_condition='Not Condition';
 	$s_plugin_Honey_derivation_pre_condition='Precondition';
 	$s_plugin_Honey_derivation_post_condition='Postcondition';
+	$s_plugin_Honey_pre_conditions='Preconditions';
+	$s_plugin_Honey_post_conditions='Postconditions';
+	$s_plugin_Honey_observations='Observations';
+	$s_plugin_Honey_back='Back';
+	$s_plugin_Honey_not_delete_actor='The actor can not be deleted because is being referenced  by the following use cases:';
+	$s_plugin_Honey_not_delete_rule='The rule can not be deleted because is being referenced  by the following use cases:';
+	$s_plugin_Honey_sure_delete_actor='Are you sure you wish to delete these actor?';
+	$s_plugin_Honey_sure_delete_rule='Are you sure you wish to delete these rule?';
+	$s_plugin_Honey_sure_delete_symbol='Are you sure you wish to delete these symbol?';
+	$s_plugin_Honey_sure_delete_uc='Are you sure you wish to delete these use case?';
+	$s_plugin_Honey_deleted_data='Deleted Data';
+	$s_plugin_Honey_saved_data='Saved Data';
+	$s_plugin_Honey_the_symbol='The symbol';
+	$s_plugin_Honey_the_uc='The Use Case';
+	$s_plugin_Honey_symbol_referenced='is being referenced  by the following actors:';
+	$s_plugin_Honey_usecase_referenced='is being referenced  by the following use cases:';
+	$s_plugin_Honey_usecase_referenced_extend='extend the folow Use Cases:';
+	$s_plugin_Honey_usecase_referenced_include='include the folow Use Cases:';
+	$s_plugin_Honey_dictionary_derived='The dictionary of the project has already been derived.';
+	$s_plugin_Honey_previous_derivation='Do you want nullify the previous derivation?';
+	$s_plugin_Honey_sure_derivation='Are you sure you wish to do the derivation?';
+	$s_plugin_Honey_yes='Yes';
+	$s_plugin_Honey_no='No';
+	$s_plugin_Honey_name='Name';
+	$s_plugin_Honey_description='Description';
+	$s_plugin_Honey_save='Save';
+	$s_plugin_Honey_cancel='Cancel';
+	$s_plugin_Honey_delete='Delete';
+	$s_plugin_Honey_edit='Edit';
+	$s_plugin_Honey_update='Update';
+	$s_plugin_Honey_synonymous='Synonymous';
+	$s_plugin_Honey_impact='Impact';
+	$s_plugin_Honey_subject='Subject';
+	$s_plugin_Honey_object='Object';
+	$s_plugin_Honey_state='State';
+	$s_plugin_Honey_verb='Verb';
+	$s_plugin_Honey_notion='Notion';
+	$s_plugin_Honey_type='Type';
+	$s_plugin_Honey_objetive='Objetive';
+	$s_plugin_Honey_actors_involved='Actors Involved';
+	$s_plugin_Honey_no_descrip='No Description';
+	$s_plugin_Honey_no_actors_created='No actors created for this project';
+	$s_plugin_Honey_no_uc_created='No usecases created for this project';
+	$s_plugin_Honey_no_rules_created='No rules created for this project';
+	$s_plugin_Honey_extends='Extends';
+	$s_plugin_Honey_includes='Includes';
+	$s_plugin_Honey_show_goal='Show Goal';
+	$s_plugin_Honey_hide_goal='Hide Goal';
+	$s_plugin_Honey_no_goal='No Goal';
+	$s_plugin_Honey_normal_course='Normal Course';
+	$s_plugin_Honey_alt_courses='Alternative Courses';
+	$s_plugin_Honey_assign_rules='Assign Rules';
+	$s_plugin_Honey_attach='Attachments';
+	$s_plugin_Honey_must_name='Must add Name';
+	$s_plugin_Honey_must_symbol='Must add Name, Notion and Type';
+	$s_plugin_Honey_must_uc='Must add Name and main scenario';
+	$s_plugin_Honey_actor_exist='Actor already exists';
+	$s_plugin_Honey_rule_exist='Rule already exists';
+	$s_plugin_Honey_symbol_exist='Symbol already exists';
+	$s_plugin_Honey_uc_exist='Usecase already exists';
+	$s_plugin_Honey_cant_uc='Number of usecases: ';
+ 
 
+
+
+
+	
+	
 
 
 	

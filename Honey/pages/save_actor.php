@@ -21,7 +21,7 @@ $id_actor=$_REQUEST['id_actor'];
 
 if ( is_blank( $name )  ) {
 //			trigger_error( ERROR_GENERIC, ERROR );
-echo "Must add Name";
+echo plugin_lang_get('must_name');
 
 if($operation==0){//new
 	$t_page = plugin_page( 'new_actor_page' );
@@ -32,7 +32,7 @@ else{//update
 }
 
 echo '<br><br>';
-echo "<a href=\"$t_page\">Back</a>";
+echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
 echo "<br>";
 html_page_bottom1( );
 
@@ -60,7 +60,7 @@ if($operation==1){//es update
 	}
 
 	echo '<br><br>';
-	echo "<a href=\"$t_page\">Back</a>";
+	echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
 	echo '<br>';
 
 	$t_url= plugin_page( 'view_actors_page' );
@@ -94,7 +94,7 @@ else{//busco si el simbolo ya existe
 
 
 
-		echo "<p>Saved data</p>";
+		echo "<p>".plugin_lang_get('saved_data')."</p>";
 
 
 		if($operation==0){//new
@@ -106,7 +106,7 @@ else{//busco si el simbolo ya existe
 		}
 
 		echo '<br><br>';
-		echo "<a href=\"$t_page\">Back</a>";
+		echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
 		echo '<br>';
 
 		$t_url= plugin_page( 'view_actors_page' );
@@ -119,12 +119,12 @@ else{//busco si el simbolo ya existe
 	}//si no existe el actor
 	else{//el actor esta repetido
 
-		echo  "<p>Actor already exists</p>";
+		echo  "<p>".plugin_lang_get('actor_exist')."</p>";
 
 		$t_page = plugin_page( 'new_actor_page' );
 
 		echo '<br><br>';
-		echo "<a href=\"$t_page\">Back</a>";
+		echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
 		echo '<br>';
 	}
 

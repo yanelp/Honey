@@ -22,11 +22,11 @@ $t_query_usecase = 'UPDATE '.$t_repo_table.' set active=1
 $g_result_delete_usecase=db_query_bound( $t_query_usecase, array( $id_symbol) );
 
 
-echo "<p>Deleted data</p>";
+echo "<p>".plugin_lang_get('deleted_data')."</p>";
 
 $t_page=plugin_page('view_symbols_page');
 echo '<br><br>';
-echo "<a href=\"$t_page\">Back</a>";
+echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
 
 echo "<br>";
 

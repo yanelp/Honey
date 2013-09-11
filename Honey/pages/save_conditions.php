@@ -2,7 +2,7 @@
 
 $cant_cus=$_REQUEST['cant_cu'];
 
-echo "la cantidad de casos de uso es ".$cant_cus;
+echo plugin_lang_get('cant_uc').$cant_cus;
 
  for ($i = 0; $i <= $cant_cus; $i++) {
  	 $cu = $_REQUEST['cu_'.$i];

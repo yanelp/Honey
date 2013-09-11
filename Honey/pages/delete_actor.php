@@ -23,11 +23,11 @@ $t_query_rule = 'UPDATE '.$t_repo_table.' set active=1
 $g_result_delet =db_query_bound( $t_query_rule, array( $id_actor) );
 
 
-echo "<p>Deleted data</p>";
+echo "<p>".plugin_lang_get('deleted_data')."</p>";
 
 $t_page=plugin_page('view_actors_page');
 echo '<br><br>';
-echo "<a href=\"$t_page\">Back</a>";
+echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
 
 echo "<br>";
 
