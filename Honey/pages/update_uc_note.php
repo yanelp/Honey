@@ -20,7 +20,7 @@ $id_usecase=$_REQUEST['usecase_id'];
 
 if ( is_blank( $note ) ) {
 
-echo "Must add Note text";
+echo plugin_lang_get('must_note_text');
 
 
 	$t_page= plugin_page( 'usecase_page' );	;
@@ -28,7 +28,7 @@ echo "Must add Note text";
 
 
 echo '<br><br>';
-echo "<a href=\"$t_page\">Back</a>";
+echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
 echo "<br>";
 html_page_bottom1( );
 
@@ -47,7 +47,7 @@ die();
 
 	
 
-echo "<p>Saved data</p>";
+echo "<p>".plugin_lang_get('saved_data')."</p>";
 
 
 //echo 'Note: '.$note;
@@ -59,7 +59,7 @@ echo '<br><br>';
 
 
 echo '<br><br>';
-echo "<a href=\"$t_page\">Back</a>";
+echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
 echo "<br>";
 html_page_bottom1( );
 

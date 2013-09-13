@@ -12,7 +12,7 @@ $count_notion = db_num_rows( $result_notion );
 
 if($count_notion>0){?>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Notion</td>
+		<td class="category"><?php echo plugin_lang_get('notion')?></td>
 		<td>
 	<?php while( $row_notion = db_fetch_array( $result_notion ) ){
 

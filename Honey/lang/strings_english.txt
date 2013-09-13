@@ -1,6 +1,4 @@
 <?php
-
-
 	$s_plugin_Honey = '';
 	$s_plugin_Honey_title = 'Honey Plugin';
 	$s_plugin_Honey_description = 'Plugin add LEL and tracebility to MantisBT';
@@ -26,6 +24,9 @@
 	$s_plugin_Honey_required='required';
 	$s_plugin_Honey_viewing_use_cases='Viewing Use Cases';
 	$s_plugin_Honey_usecase_notes='Notes';
+	$s_plugin_Honey_note='Note';
+	$s_plugin_Honey_add_notes='Add Notes';
+	$s_plugin_Honey_add_note='Add Note';
 	$s_plugin_Honey_symbols_name_colum='Name';
 	$s_plugin_Honey_symbols_type_colum='Type';
 	$s_plugin_Honey_symbols_type_subject='Subjet';
@@ -47,7 +48,7 @@
 	$s_plugin_Honey_comment_uc='Comment does not reference any usecase\n';
 	$s_plugin_Honey_no_login='Unable to login.\n';
 	$s_plugin_Honey_derivation_actor_ref='Some derived actors are referenced by non-derivative use cases.';
-	$s_plugin_Honey_actor='Actor';
+	$s_plugin_Honey_actor='Actor/s';
 	$s_plugin_Honey_uc_manual='Manually created Use Case';
 	$s_plugin_Honey_derivation_uc_extend='Some of the use cases that you want to delete extend to other non-derivative.';
 	$s_plugin_Honey_derivation_uc_include='Some of the use cases that you want to delete are included to other non-derivative.';
@@ -67,6 +68,7 @@
 	$s_plugin_Honey_sure_delete_uc='Are you sure you wish to delete these use case?';
 	$s_plugin_Honey_deleted_data='Deleted Data';
 	$s_plugin_Honey_saved_data='Saved Data';
+	$s_plugin_Honey_updated_data='Updated Data';
 	$s_plugin_Honey_the_symbol='The symbol';
 	$s_plugin_Honey_the_uc='The Use Case';
 	$s_plugin_Honey_symbol_referenced='is being referenced  by the following actors:';
@@ -79,19 +81,26 @@
 	$s_plugin_Honey_yes='Yes';
 	$s_plugin_Honey_no='No';
 	$s_plugin_Honey_name='Name';
-	$s_plugin_Honey_description='Description';
+	$s_plugin_Honey_col_description='Description';
 	$s_plugin_Honey_save='Save';
 	$s_plugin_Honey_cancel='Cancel';
 	$s_plugin_Honey_delete='Delete';
 	$s_plugin_Honey_edit='Edit';
+	$s_plugin_Honey_make_public='Make Puclic';
+	$s_plugin_Honey_make_private='Make Private';
 	$s_plugin_Honey_update='Update';
-	$s_plugin_Honey_synonymous='Synonymous';
+	$s_plugin_Honey_synonymous='Synonym';
+	$s_plugin_Honey_synonyms='Synonyms';
 	$s_plugin_Honey_impact='Impact';
+	$s_plugin_Honey_impacts='Impacts';
 	$s_plugin_Honey_subject='Subject';
 	$s_plugin_Honey_object='Object';
 	$s_plugin_Honey_state='State';
 	$s_plugin_Honey_verb='Verb';
 	$s_plugin_Honey_notion='Notion';
+	$s_plugin_Honey_main_scenario='Main Senario';
+	$s_plugin_Honey_alt_scenario='Alternative Scenarios';
+	$s_plugin_Honey_ID='ID';
 	$s_plugin_Honey_type='Type';
 	$s_plugin_Honey_objetive='Objetive';
 	$s_plugin_Honey_actors_involved='Actors Involved';
@@ -101,28 +110,28 @@
 	$s_plugin_Honey_no_rules_created='No rules created for this project';
 	$s_plugin_Honey_extends='Extends';
 	$s_plugin_Honey_includes='Includes';
-	$s_plugin_Honey_show_goal='Show Goal';
-	$s_plugin_Honey_hide_goal='Hide Goal';
-	$s_plugin_Honey_no_goal='No Goal';
+	$s_plugin_Honey_show_goal='Show content';
+	$s_plugin_Honey_hide_goal='Hide content';
+	$s_plugin_Honey_no_goal='No content';
+	$s_plugin_Honey_goal='Goal';
 	$s_plugin_Honey_normal_course='Normal Course';
 	$s_plugin_Honey_alt_courses='Alternative Courses';
 	$s_plugin_Honey_assign_rules='Assign Rules';
+	$s_plugin_Honey_col_rules='Rules';
 	$s_plugin_Honey_attach='Attachments';
+	$s_plugin_Honey_add_attach='Add Attachments';
+	$s_plugin_Honey_add_file='Add File';
+	$s_plugin_Honey_add='Add';
 	$s_plugin_Honey_must_name='Must add Name';
+	$s_plugin_Honey_must_note_text='Must add Note text';
 	$s_plugin_Honey_must_symbol='Must add Name, Notion and Type';
 	$s_plugin_Honey_must_uc='Must add Name and main scenario';
 	$s_plugin_Honey_actor_exist='Actor already exists';
 	$s_plugin_Honey_rule_exist='Rule already exists';
 	$s_plugin_Honey_symbol_exist='Symbol already exists';
+	$s_plugin_Honey_symbol_do_not_exist='Symbol do not exists';
+	$s_plugin_Honey_uc_do_not_exist='Usecase do not exists';
 	$s_plugin_Honey_uc_exist='Usecase already exists';
 	$s_plugin_Honey_cant_uc='Number of usecases: ';
- 
-
-
-
-
-	
-	
-
-
+	$s_plugin_Honey_add_alt_scenario='Add alternative scenario'; 
 	

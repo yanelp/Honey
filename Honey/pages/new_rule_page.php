@@ -37,7 +37,7 @@ EVENT_LAYOUT_RESOURCES
 		<td><input type="text" name="rule_name" id='rule_name' size="59"/></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo plugin_lang_get('description')?></td><td><textarea name='rule_descrip' id='rule_descrip' cols='45' rows='5'></textarea></td>
+		<td class="category"><?php echo plugin_lang_get('col_description')?></td><td><textarea name='rule_descrip' id='rule_descrip' cols='45' rows='5'></textarea></td>
 	</tr>
 	<tr>
 		<td class="left">

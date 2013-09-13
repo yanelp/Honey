@@ -34,7 +34,7 @@ $t_page=plugin_page("new_symbol_page");
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category"><?php echo plugin_lang_get('synonymous')?></td>
 		<td><input type="text" name="symbol_synonymous" id='symbol_synonymous' size="50"/>
-		<input type='button' name='button_synonymous_add' value='add' onClick="javascript:insert_row('table_synonimous','symbol_synonymous', document.getElementById('symbol_synonymous').value)"/></td>
+		<input type='button' name='button_synonymous_add' value='<?php echo plugin_lang_get('add')?>' onClick="javascript:insert_row('table_synonimous','symbol_synonymous', document.getElementById('symbol_synonymous').value)"/></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">&nbsp;</td>
@@ -46,7 +46,7 @@ $t_page=plugin_page("new_symbol_page");
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category"><?php echo plugin_lang_get('impact')?></td>
 		<td><input type='text' name='symbol_impact' size="50" id='symbol_impact'/>
-		<input type='button' name='button_impact_add' value='add' onClick="javascript:insert_row('table_impacts','symbol_impact',document.getElementById('symbol_impact').value)"/></td></tr>
+		<input type='button' name='button_impact_add' value='<?php echo plugin_lang_get('add')?>' onClick="javascript:insert_row('table_impacts','symbol_impact',document.getElementById('symbol_impact').value)"/></td></tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">&nbsp;</td>
 		<td><table  name='table_impacts' id='table_impacts' ><thead></thead><tbody></tbody></table></td>

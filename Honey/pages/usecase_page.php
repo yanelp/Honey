@@ -215,38 +215,38 @@ if($count>0){
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category" width="20%">ID</td><td><?php echo $id ?></td>
+			<td class="category" width="20%"><?php echo plugin_lang_get('ID')?></td><td><?php echo $id ?></td>
 			
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">Name</td><td><?php echo $name ?></td>
+			<td class="category"><?php echo plugin_lang_get('name')?></td><td><?php echo $name ?></td>
 		</tr>
 			<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">Goal</td><td><?php echo $goal ?></td>
+			<td class="category"><?php echo plugin_lang_get('goal')?></td><td><?php echo $goal ?></td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">Actor/s</td><td><?php echo $actors ?></td>
+			<td class="category"><?php echo plugin_lang_get('actor')?></td><td><?php echo $actors ?></td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">Extends</td><td><?php echo $parents ?></td>
+			<td class="category"><?php echo plugin_lang_get('extends')?></td><td><?php echo $parents ?></td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">Includes</td><td><?php echo $childs ?></td>
+			<td class="category"><?php echo plugin_lang_get('includes')?></td><td><?php echo $childs ?></td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">Preconditions</td><td><?php echo $precond ?></td>
+			<td class="category"><?php echo plugin_lang_get('pre_conditions')?></td><td><?php echo $precond ?></td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">Postconditions</td><td><?php echo $postcond ?></td>
+			<td class="category"><?php echo plugin_lang_get('post_conditions')?></td><td><?php echo $postcond ?></td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">Observation</td><td><?php echo $observation ?></td>
+			<td class="category"><?php echo plugin_lang_get('observations')?></td><td><?php echo $observation ?></td>
 		</tr>
 			<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">Main Scenario</td><td><?php echo $main_scenario ?></td>
+			<td class="category"><?php echo plugin_lang_get('main_scenario')?></td><td><?php echo $main_scenario ?></td>
 		</tr>
 			<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">Rules Main Scenario</td><td><?php echo $rules_main?></td>
+			<td class="category"><?php echo plugin_lang_get('col_rules')?></td><td><?php echo $rules_main?></td>
 		</tr>
 			<?php 
 			while( $row_alternative_scenario = db_fetch_array( $result_alternative_scenario )){?>
@@ -258,7 +258,7 @@ if($count>0){
 
 	<?php # Attachments
 			echo '<tr ', helper_alternate_class(), '>';
-			echo '<td class="category"><a name="attachments" id="attachments">', 'Attachments', '</a>','</td>';
+			echo '<td class="category"><a name="attachments" id="attachments">', plugin_lang_get('attach'), '</a>','</td>';
 			echo '<td colspan="5">';
 			$cant_files=print_uc_attachments_list( $id_usecase, 1 );//0 significa sin delete de file
 			echo '</td></tr>';
@@ -280,7 +280,7 @@ if($count>0){
 				<td colspan="2" class="none">
 					<?php 
 					if( ON == config_get( 'use_javascript' ) ) { ?>
-						<?php collapse_open( 'profile7' ); collapse_icon('profile7'); echo 'Add Attachments';?>
+						<?php collapse_open( 'profile7' ); collapse_icon('profile7'); echo plugin_lang_get('add_attach');?>
 				
 						<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 						<table>
@@ -300,12 +300,12 @@ if($count>0){
 							</td>
 						</tr>
 						
-						<tr><td colspan="2"><input type="button" onClick="javascript:go_page(0,<?php  echo $id_usecase?>,'<?php  echo plugin_page('save_files_usecase');?>')" value="Add Files"/></td></tr>
+						<tr><td colspan="2"><input type="button" onClick="javascript:go_page(0,<?php  echo $id_usecase?>,'<?php  echo plugin_page('save_files_usecase');?>')" value="<?php echo plugin_lang_get('add_file')?>"/></td></tr>
 						
 					</table>
 
 				<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-					<?php collapse_closed( 'profile7' ); collapse_icon('profile7'); echo 'Add Attachments';?>
+					<?php collapse_closed( 'profile7' ); collapse_icon('profile7'); echo plugin_lang_get('add_atach');?>
 					<?php collapse_end( 'profile7' ); ?>
 				<?php }
 			}//if( ON == config_get ?>
@@ -347,7 +347,7 @@ if($count>0){
 			<td colspan="2" class="none">
 				<?php 
 				if( ON == config_get( 'use_javascript' ) ) { ?>
-					<?php collapse_open( 'profile2' ); collapse_icon('profile2'); echo lang_get( 'plugin_Honey_usecase_notes' ) ;}?>
+					<?php collapse_open( 'profile2' ); collapse_icon('profile2'); echo plugin_lang_get( 'usecase_notes' ) ;}?>
 			
 	<table width="90%">
 	<?php
@@ -399,14 +399,14 @@ if($count>0){
 				  
 				  <div class="small">
 
-				  <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("uc_note_edit_page");?>')" value="Editar"/>
-				  <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("delete_uc_note");?>')" value="Delete"/>
+				  <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("uc_note_edit_page");?>')" value="<?php echo plugin_lang_get('edit')?>"/>
+				  <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("delete_uc_note");?>')" value="<?php echo plugin_lang_get('delete')?>"/>
 				  <?php
 					if($state==VS_PRIVATE){ ?>
-					 <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("set_view_state_uc_note");?>')" value="Make Public"/>
+					 <input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("set_view_state_uc_note");?>')" value="<?php echo plugin_lang_get('make_public')?>"/>
 				  <?php }
 						else{?>
-							<input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("set_view_state_uc_note");?>')" value="Make Private"/>
+							<input type="button" onClick="javascript:go_page(<?php echo $id_note?>,<?php  echo $id_usecase?>,'<?php  echo plugin_page("set_view_state_uc_note");?>')" value="<?php echo plugin_lang_get('make_private')?>"/>
 						
 				  <?php } ?>	
 
@@ -422,7 +422,7 @@ if($count>0){
 		</table>
 
 		<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_closed( 'profile2' ); collapse_icon('profile2'); echo 'Notes';?>
+				<?php collapse_closed( 'profile2' ); collapse_icon('profile2'); echo plugin_lang_get('notes');?>
 				<?php collapse_end( 'profile2' ); ?>
 				<?php } ?>
 		</td></tr>
@@ -438,19 +438,19 @@ if($count>0){
 			<td colspan="2" class="none">
 				<?php 
 				if( ON == config_get( 'use_javascript' ) ) { ?>
-					<?php collapse_open( 'profile' ); collapse_icon('profile'); echo 'Add Note';}?>
+					<?php collapse_open( 'profile' ); collapse_icon('profile'); echo plugin_lang_get('add_notes');}?>
 					<table>
 					<tr>
-						<td class="category" width="25%">Note</td>
+						<td class="category" width="25%"><?php  echo plugin_lang_get('note')?></td>
 						<td width="75%">
 						<textarea cols="88" rows="10" name="new_note"></textarea>
 						</td>
 					</tr>
 					<?php $t_back=plugin_page("add_uc_note")?>
-					<tr><td colspan="2"><input type="button" onClick="javascript:go_page(0,<?php  echo $id_usecase?>,'<?php  echo $t_back.'&backPage=usecase_page'?>')" value="Add Note"/></td></tr>
+					<tr><td colspan="2"><input type="button" onClick="javascript:go_page(0,<?php  echo $id_usecase?>,'<?php  echo $t_back.'&backPage=usecase_page'?>')" value="<?php echo plugin_lang_get('add_note')?>"/></td></tr>
 					</table>
 				<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo 'Add Note';?>
+				<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo plugin_lang_get('add_notes');?>
 				<?php collapse_end( 'profile' ); ?>
 				<?php } ?>
 			</td>
@@ -461,9 +461,9 @@ if($count>0){
 	<br>
 	<table align="center">
 		<tr>
-			<td><input type="submit" value="Edit"/></td>
-			<td><input type="button" value="Cancel"  onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page?>')"/></td>
-			<td><input type="button" value="Delete" onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page_delete?>')"/></td>
+			<td><input type="submit" value=" <?php echo plugin_lang_get('edit')?>"/></td>
+			<td><input type="button" value=" <?php echo plugin_lang_get('cancel')?>"  onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page?>')"/></td>
+			<td><input type="button" value=" <?php echo plugin_lang_get('delete')?>" onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page_delete?>')"/></td>
 		</tr>
 	</table>
 	</div>
@@ -474,10 +474,10 @@ if($count>0){
 
 <?php
 }//if existe el uc buscado
-else{echo "<p>Use Case doesn't exist</p>";
+else{echo "<p>".plugin_lang_get('uc_do_not_exist')."</p>";
 echo '<br><br>';
 $t_page=plugin_page("view_cu_page");
-echo "<a href=\"$t_page\">Back</a>";
+echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";
 echo "<br>";}
 ?>
 

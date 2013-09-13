@@ -59,17 +59,17 @@ if($count>0){
 	<table class="width90">
 		<tr>
 			<td class="form-title" colspan="2">
-			<?php echo lang_get( 'plugin_Honey_symbol_information' )?>
+			<?php echo plugin_lang_get( 'symbol_information' )?>
 			</td>
 		</tr>
 
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">Name</td><td><?php echo $name ?></td>
+			<td class="category"><?php echo plugin_lang_get('name')?></td><td><?php echo $name ?></td>
 			
 			<?php include('search_notion_symbols.php');?>
 
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">Type</td><td><?php echo $type ?></td>
+			<td class="category"><?php echo plugin_lang_get('type')?></td><td><?php echo $type ?></td>
 
 			<?php include('search_impacts_symbols.php');?>
 
@@ -88,7 +88,7 @@ if($count>0){
 	if($count_synonymous>0){?>
 
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category">Synonyms</td>
+			<td class="category"><?php echo plugin_lang_get('synonyms')?></td>
 			<td>
 		<?php while( $row_synonymous = db_fetch_array( $result_synonymous) ){?>
 			
@@ -107,10 +107,10 @@ if($count>0){
 	<br>
 	<table align="center">
 		<tr>
-			<td><input type="submit" value="Edit"/></td>
+			<td><input type="submit" value="<?php echo plugin_lang_get('edit')?>"/></td>
 			<?php $t_page=plugin_page("view_symbols_page");?>
-			<td><input type="button" value="Cancel" onClick="javascript:go_page(null,null ,'<?php echo $t_page?>')"/>
-			<input type="button" value="Delete" onClick="javascript:go_page('null', null ,'<?php echo $t_page_delete?>')"/>
+			<td><input type="button" value="<?php echo plugin_lang_get('cancel')?>" onClick="javascript:go_page(null,null ,'<?php echo $t_page?>')"/>
+			<input type="button" value="<?php echo plugin_lang_get('delete')?>" onClick="javascript:go_page('null', null ,'<?php echo $t_page_delete?>')"/>
 			<input type="hidden" name="id_symbol_hidden" id="id_symbol_hidden" value="<?php echo $id_symbol ?>"/>
 			<input type="hidden" name="type_symbol_hidden" id="type_symbol_hidden" value="<?php echo $type_symbol?>"/>
 
@@ -121,10 +121,10 @@ if($count>0){
 
 <?php
 }//if existe el simbolo buscado
-else{echo "<p>Symbol doesn't exist</p>";
+else{echo "<p>".plugin_lang_get('symbol_do_not_exist')."</p>";
 echo '<br><br>';
 $t_page=plugin_page("view_symbols_page");
-echo "<a href=\"$t_page\">Back</a>";
+echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
 echo "<br>";}
 ?>
 <?php

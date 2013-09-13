@@ -89,7 +89,7 @@ html_page_top( plugin_lang_get( 'title' ) );
 
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo "Update" ?>" />
+		<input type="submit" class="button" value="<?php echo plugin_lang_get('update') ?>" />
 	</td>
 </tr>
 </table>

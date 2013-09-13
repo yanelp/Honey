@@ -37,14 +37,14 @@ EVENT_LAYOUT_RESOURCES
 		<td><input type="text" name="actor_name" id='actor_name' size="59"/></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo plugin_lang_get('description')?></td><td><textarea name='actor_descrip' id='actor_descrip' cols='45' rows='5'></textarea></td>
+		<td class="category"><?php echo plugin_lang_get('col_description')?></td><td><textarea name='actor_descrip' id='actor_descrip' cols='45' rows='5'></textarea></td>
 	</tr>
 	<tr>
 		<td class="left">
 			<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
 		</td>
 		<td class="center"><input type='submit' name='button_ok' value='<?php echo plugin_lang_get('save')?>'>
-		<input type='button' name='button_cancel' value='<?php echo plugin_lang_get('canel')?>' onClick="javascript:go_page(null, null,'<?php echo $t_page?>')"></td>
+		<input type='button' name='button_cancel' value='<?php echo plugin_lang_get('cancel')?>' onClick="javascript:go_page(null, null,'<?php echo $t_page?>')"></td>
 	</tr>
 </table>
 

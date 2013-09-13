@@ -59,14 +59,14 @@ echo '</br>';
 <table class="width90">
 	<tr>
 		<td class="form-title" colspan="2">
-		<?php echo lang_get( 'plugin_Honey_usecases' ) ?>
+		<?php echo plugin_lang_get( 'usecases' ) ?>
 		</td>
 	</tr>
 
 <tr class="row-category"> 
-	<td class="category"  width="7%">ID</td>
-	<td class="category"  width="30%">Name</td>
-	<td class="category">Goal</td>
+	<td class="category"  width="7%"><?php echo plugin_lang_get( 'ID' ) ?></td>
+	<td class="category"  width="30%"><?php echo plugin_lang_get( 'name' ) ?></td>
+	<td class="category"><?php echo plugin_lang_get( 'goal' ) ?></td>
 </tr>
 
 <?php 	while( $row = db_fetch_array( $result ) ){

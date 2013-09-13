@@ -150,17 +150,17 @@ $count_all_actors = db_num_rows( $result_all_actors );
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category" width="20%">ID</td><td><?php echo $id ?></td>
+		<td class="category" width="20%"><?php echo plugin_lang_get('ID')?></td><td><?php echo $id ?></td>
 		
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Name</td><td><input type="text" name="cu_name" id="cu_name" value="<?php echo $name ?>" size="133"/></td>
+		<td class="category"><?php echo plugin_lang_get('name')?></td><td><input type="text" name="cu_name" id="cu_name" value="<?php echo $name ?>" size="133"/></td>
 	</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Goal</td><td><textarea cols="100" name="goal" id="goal"><?php echo $goal ?></textarea></td>
+		<td class="category"></td><?php echo plugin_lang_get('goal')?><td><textarea cols="100" name="goal" id="goal"><?php echo $goal ?></textarea></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Actor/s</td>
+		<td class="category"><?php echo plugin_lang_get('actor')?></td>
 		<td>
 			<table>
 				<?php 
@@ -208,8 +208,8 @@ $count_all_actors = db_num_rows( $result_all_actors );
 
 									 -->
 									 </script>";
-							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content4(\"hideSection_" . $c_id . "\");swap_content4(\"showSection_" . $c_id . "\");return false;'>Show Description</a>]</span>";
-							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content4(\"hideSection_" . $c_id . "\");swap_content4(\"showSection_" . $c_id . "\");return false;'>Hide Description</a>]";
+							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content4(\"hideSection_" . $c_id . "\");swap_content4(\"showSection_" . $c_id . "\");return false;'>". plugin_lang_get('show_goal')."</a>]</span>";
+							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content4(\"hideSection_" . $c_id . "\");swap_content4(\"showSection_" . $c_id . "\");return false;'>". plugin_lang_get('hide_goal')."</a>]";
 								echo "<pre>";
 
 								echo $row_all_actors['description'];
@@ -221,13 +221,13 @@ $count_all_actors = db_num_rows( $result_all_actors );
 							<!---->
 							</td>
 							<?php }
-							else { echo "<td  class='small'>[No Description]</td>";}?>
+							else { echo "<td  class='small'>[". plugin_lang_get('no_goal')."]</td>";}?>
 				</tr>
 				<?php $j++;	
 				} ?>
 			</table>
 
-			<?php if($count_all_actors==0){echo "<p class='category'> No actors created for this project<p>";}?>
+			<?php if($count_all_actors==0){echo "<p class='category'>". plugin_lang_get('no_actors_created')."<p>";}?>
 		</td>
 	</tr>
 	 <!--aca van las relaciones extiende-->
@@ -235,7 +235,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 		<td colspan="2" class="none">
 			<?php 
 			if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_open( 'profile' ); collapse_icon('profile'); echo 'Extends';}
+				<?php collapse_open( 'profile' ); collapse_icon('profile'); echo  plugin_lang_get('extends');}
 
 				$result_all_ucs = db_query_bound( $query_all_ucs, array($id_project, $id_usecase) );
 				$count_all_ucs = db_num_rows( $result_all_ucs);
@@ -283,8 +283,8 @@ $count_all_actors = db_num_rows( $result_all_actors );
 
 									 -->
 									 </script>";
-							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content5(\"hideSection_" . $c_id . "\");swap_content5(\"showSection_" . $c_id . "\");return false;'>Show Goal</a>]</span>";
-							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content5(\"hideSection_" . $c_id . "\");swap_content5(\"showSection_" . $c_id . "\");return false;'>Hide Goal</a>]";
+							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content5(\"hideSection_" . $c_id . "\");swap_content5(\"showSection_" . $c_id . "\");return false;'>". plugin_lang_get('show_goal')."</a>]</span>";
+							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content5(\"hideSection_" . $c_id . "\");swap_content5(\"showSection_" . $c_id . "\");return false;'>". plugin_lang_get('hide_goal')."</a>]";
 								echo "<pre>";
 
 								echo $row_all_ucs['goal'];
@@ -296,16 +296,16 @@ $count_all_actors = db_num_rows( $result_all_actors );
 							<!---->
 							</td>
 							<?php }
-							else { echo "<td  class='small'>[No Goal]</td>";}?>					
+							else { echo "<td  class='small'>[". plugin_lang_get('no_goal')."]</td>";}?>					
 
 				</tr>
 				<?php $j++;	
 				} ?>
 			</table>
 
-			<?php if($count_all_ucs==0){echo "<p class='category'> No usecases created for this project<p>";}?>
+			<?php if($count_all_ucs==0){echo "<p class='category'> ". plugin_lang_get('no_uc_created')."<p>";}?>
 			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo 'Extends';?>
+				<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo plugin_lang_get('extends');?>
 				<?php collapse_end( 'profile' ); ?>
 			<?php } ?>
 		
@@ -318,7 +318,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 		<td colspan="2" class="none">
 			<?php 
 			if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_open( 'profile2' ); collapse_icon('profile2'); echo 'Includes';}
+				<?php collapse_open( 'profile2' ); collapse_icon('profile2'); echo  plugin_lang_get('includes');}
 				
 				$result_all_ucs = db_query_bound( $query_all_ucs, array($id_project, $id_usecase) );
 				$count_all_ucs = db_num_rows( $result_all_ucs);				
@@ -365,8 +365,8 @@ $count_all_actors = db_num_rows( $result_all_actors );
 
 									 -->
 									 </script>";
-							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content6(\"hideSection_" . $c_id . "\");swap_content6(\"showSection_" . $c_id . "\");return false;'>Show Goal</a>]</span>";
-							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content6(\"hideSection_" . $c_id . "\");swap_content6(\"showSection_" . $c_id . "\");return false;'>Hide Goal</a>]";
+							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content6(\"hideSection_" . $c_id . "\");swap_content6(\"showSection_" . $c_id . "\");return false;'>". plugin_lang_get('show_goal')."</a>]</span>";
+							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content6(\"hideSection_" . $c_id . "\");swap_content6(\"showSection_" . $c_id . "\");return false;'". plugin_lang_get('hide_goal')."</a>]";
 								echo "<pre>";
 
 								echo $row_all_ucs['goal'];
@@ -378,32 +378,32 @@ $count_all_actors = db_num_rows( $result_all_actors );
 							<!---->
 							</td>
 							<?php }
-							else { echo "<td  class='small'>[No Goal]</td>";}?>
+							else { echo "<td  class='small'>[". plugin_lang_get('no_goal')."]</td>";}?>
 
 				</tr>
 				<?php $j++;	
 				} ?>
 			</table>
 
-			<?php if($count_all_ucs==0){echo "<p class='category'> No usecases created for this project<p>";}?>
+			<?php if($count_all_ucs==0){echo "<p class='category'>". plugin_lang_get('no_uc_created')."<p>";}?>
 			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_closed( 'profile2' ); collapse_icon('profile2'); echo 'Includes';?>
+				<?php collapse_closed( 'profile2' ); collapse_icon('profile2'); echo  plugin_lang_get('includes');?>
 				<?php collapse_end( 'profile2' ); ?>
 			<?php } ?>
 		
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Preconditions</td><td><textarea  cols="100" rows="5"  name="preconditions" id="preconditions"><?php echo $precond ?></textarea></td>
+		<td class="category"><?php echo plugin_lang_get('pre_conditions')?></td><td><textarea  cols="100" rows="5"  name="preconditions" id="preconditions"><?php echo $precond ?></textarea></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Postconditions</td><td><textarea  cols="100" rows="5"  name="postconditions" id="postconditions"><?php echo $postcond ?></textarea></td>
+		<td class="category"><?php echo plugin_lang_get('post_conditions')?></td><td><textarea  cols="100" rows="5"  name="postconditions" id="postconditions"><?php echo $postcond ?></textarea></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Observation</td><td><Textarea cols="100" name="obsevations" id="obsevations" ><?php echo $observation ?></Textarea></td>
+		<td class="category"><?php echo plugin_lang_get('observations')?></td><td><Textarea cols="100" name="obsevations" id="obsevations" ><?php echo $observation ?></Textarea></td>
 	</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-		<td class="category">Main Scenario</td><td> <Textarea cols="100" rows="15" name="cursoNormal" id="cursoNormal"><?php echo $main_scenario ?></Textarea></td>
+		<td class="category"><?php echo plugin_lang_get('main_scenario')?></td><td> <Textarea cols="100" rows="15" name="cursoNormal" id="cursoNormal"><?php echo $main_scenario ?></Textarea></td>
 	</tr>
 		<!--aca van las reglas-->
 	  <tr <?php echo helper_alternate_class() ?>>
@@ -454,8 +454,8 @@ $count_all_actors = db_num_rows( $result_all_actors );
 
 									 -->
 									 </script>";
-							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content3(\"hideSection_" . $c_id . "\");swap_content3(\"showSection_" . $c_id . "\");return false;'>Show Description</a>]</span>";
-							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content3(\"hideSection_" . $c_id . "\");swap_content3(\"showSection_" . $c_id . "\");return false;'>Hide Description</a>]";
+							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content3(\"hideSection_" . $c_id . "\");swap_content3(\"showSection_" . $c_id . "\");return false;'>". plugin_lang_get('show_goal')."</a>]</span>";
+							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content3(\"hideSection_" . $c_id . "\");swap_content3(\"showSection_" . $c_id . "\");return false;'>". plugin_lang_get('hide_goal')."</a>]";
 								echo "<pre>";
 
 								echo $row_all_rules['description'];
@@ -467,16 +467,16 @@ $count_all_actors = db_num_rows( $result_all_actors );
 							<!---->
 							</td>	
 							<?php }
-							else { echo "<td  class='small'>[No Description]</td>";}?>
+							else { echo "<td  class='small'>[". plugin_lang_get('no_goal')."]</td>";}?>
 				</tr>
 
 				<?php $j++;	
 				} ?>
 			</table>
 
-			<?php if($count_all_rules==0){echo "<p class='category'> No rules created for this project<p>";}?>
+			<?php if($count_all_rules==0){echo "<p class='category'>". plugin_lang_get('no_rules_created')."<p>";}?>
 			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_closed( 'profile3' ); collapse_icon('profile3'); echo 'Rules';?>
+				<?php collapse_closed( 'profile3' ); collapse_icon('profile3'); echo plugin_lang_get('col_rules');?>
 				<?php collapse_end( 'profile3' ); ?>
 			<?php } ?>
 		</td>
@@ -485,10 +485,10 @@ $count_all_actors = db_num_rows( $result_all_actors );
 		<!--aca va para agregar nuevos escenarios alterativos-->
 
 		  <tr <?php echo helper_alternate_class() ?>>
-		 <td class="category">Alternative Courses</td>
+		 <td class="category"><?php echo plugin_lang_get('alt_scenario')?></td>
 		<td>
 	      <Textarea cols="100" rows="5" name="cursoAlternativo" id="cursoAlternativo"></Textarea>
-		  <input type='button' name='button_actor_add' value='Add alternative course' onClick="javascript:insert_row_course('table_course','cursoAlternativo',document.getElementById('cursoAlternativo').value)"/>
+		  <input type='button' name='button_actor_add' value='<?php echo plugin_lang_get('add_alt_scenario')?>' onClick="javascript:insert_row_course('table_course','cursoAlternativo',document.getElementById('cursoAlternativo').value)"/>
 		</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
@@ -510,7 +510,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 <?php # Attachments
 
 		echo '<tr ', helper_alternate_class(), '>';
-		echo '<td class="category">	<a name="attachments" id="attachments">', 'Attachments', '</a>','</td>';
+		echo '<td class="category">	<a name="attachments" id="attachments">', plugin_lang_get('attach'), '</a>','</td>';
 		echo '<td colspan="5">';
 		$cant_files=print_uc_attachments_list( $id_usecase , 0);//1 significa con delete file
 		echo '</td></tr>';
@@ -528,7 +528,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 		<td colspan="2" class="none">
 			<?php 
 			if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_open( 'profile7' ); collapse_icon('profile7'); echo 'Add Attachments';?>
+				<?php collapse_open( 'profile7' ); collapse_icon('profile7'); echo plugin_lang_get('add_attach');?>
 		
 				<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 
@@ -555,7 +555,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 				</table>
 
 			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_closed( 'profile7' ); collapse_icon('profile7'); echo 'Add Attachments';?>
+				<?php collapse_closed( 'profile7' ); collapse_icon('profile7'); echo plugin_lang_get('add_attach');?>
 				<?php collapse_end( 'profile7' ); ?>
 			<?php }
 		}//if( ON == config_get ?>
@@ -698,8 +698,8 @@ $count_notes = db_num_rows( $result_note );
 <br>
 <table align="center">
 	<tr>
-		<td><input type="submit" value="Update Information"/></td>
-		<td><input type="button" value="Cancel"  onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page?>')"/></td>
+		<td><input type="submit" value="<?php echo plugin_lang_get('update')?>"/></td>
+		<td><input type="button" value="<?php echo plugin_lang_get('cancel')?>"  onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page?>')"/></td>
 	</tr>
 </table>
 </div>

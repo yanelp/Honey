@@ -1,6 +1,4 @@
 <?php
-
-
 require_once( 'file_api.php' );
 require_once('functions.php');
 require_once( 'custom_field_api.php' );
@@ -34,9 +32,9 @@ $t_page = plugin_page( 'update_usecase_page' );
 
 if ( is_blank( $name ) || is_blank( $mainscenario )) {
 //			trigger_error( ERROR_GENERIC, ERROR );
-echo "Must add Name and main scenario";
+echo plugin_lang_get('must_uc');
 echo '<br><br>';
-echo "<a href=\"$t_page&id_usecase=$id_usecase\">Back</a>";
+echo "<a href=\"$t_page&id_usecase=$id_usecase\">".plugin_lang_get('back')."</a>";
 echo "<br>";
 html_page_bottom1( );
 die();
@@ -55,9 +53,9 @@ $count = db_num_rows( $result );
 $row = db_fetch_array( $result );
 
 if($count>0){
-	echo "Name already exists";
+	echo plugin_lang_get('uc_exist');
 	echo '<br><br>';
-	echo "<a href=\"$t_page&id_usecase=$id_usecase\">Back</a>";
+	echo "<a href=\"$t_page&id_usecase=$id_usecase\">".plugin_lang_get('back')."</a>";
 	echo "<br>";
 	html_page_bottom1( );
 	die();
@@ -244,11 +242,11 @@ for( $i = 0; $i < $cant_files; $i++ ) {
 
 /*save */
 
-echo "<p>Updated data</p>";
+echo "<p>".plugin_lang_get('updated_data')."</p>";
 
 $t_page=plugin_page('view_cu_page');
 echo '<br><br>';
-echo "<a href=\"$t_page\">Back</a>";
+echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
 
 echo "<br>";
 
