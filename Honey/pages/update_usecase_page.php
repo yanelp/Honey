@@ -157,7 +157,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 		<td class="category"><?php echo plugin_lang_get('name')?></td><td><input type="text" name="cu_name" id="cu_name" value="<?php echo $name ?>" size="133"/></td>
 	</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"></td><?php echo plugin_lang_get('goal')?><td><textarea cols="100" name="goal" id="goal"><?php echo $goal ?></textarea></td>
+		<td class="category"><?php echo plugin_lang_get('goal')?></td><td><textarea cols="100" name="goal" id="goal"><?php echo $goal ?></textarea></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category"><?php echo plugin_lang_get('actor')?></td>
