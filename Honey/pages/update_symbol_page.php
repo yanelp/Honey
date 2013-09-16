@@ -67,7 +67,7 @@ $t_page=$t_page."&id_symbol=".$id_symbol;
 <form name='form1' action="<?php echo $t_page; ?>" method="post" id="form1" >
 
 <div align="center">
-<table class="width90">
+<table class="width90" summary="<?php echo plugin_lang_get( 'summary_modify_symbol' ) ?>">
 	<tr>
 		<td class="form-title" colspan="2">
 		<?php echo plugin_lang_get( 'symbol_modify' )?>

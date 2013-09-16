@@ -21,7 +21,7 @@ $t_page=plugin_page("new_symbol_page");
 
 <form name='form1' action="<?php echo plugin_page( "save_symbol" ); ?>" id="form1" method="post">
 <div align="center">
-<table class="width90">
+<table class="width90"  summary="<?php echo plugin_lang_get( 'summary_new_symbol' ) ?>">
 	<tr>
 		<td class="form-title" colspan="2">
 		<?php echo lang_get( 'plugin_Honey_symbol_detail' )?>

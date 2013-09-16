@@ -39,7 +39,7 @@ $t_page_delete = plugin_page( "delete_actor_page" );
 <form name='form1' action="<?php echo $t_page; ?>" method="post" id="form1" >
 
 <div align="center">
-<table class="width90">
+<table class="width90" summary="<?php echo plugin_lang_get( 'summary_modify_actor' )?>">
 	<tr>
 		<td class="form-title" colspan="2">
 		<?php echo plugin_lang_get( 'actor_modify' )?>

@@ -56,7 +56,7 @@ if($count>0){
 	?>
 
 	<div align="center">
-	<table class="width90">
+	<table class="width90" summary="<?php echo plugin_lang_get( 'symbol_information' )?>">
 		<tr>
 			<td class="form-title" colspan="2">
 			<?php echo plugin_lang_get( 'symbol_information' )?>

@@ -141,10 +141,10 @@ $count_all_actors = db_num_rows( $result_all_actors );
 ?>
 
 <div align="center">
-<table class="width90">
+<table class="width90" <?php echo plugin_lang_get( 'summary_modify_uc' );?>>
 	<tr>
 		<td class="form-title" colspan="2">
-		<?php echo lang_get( 'plugin_Honey_usecase_information' );
+		<?php echo plugin_lang_get( 'usecase_information' );
 		echo '&#160;<span class="small">';
 	   // print_bracket_link( "#uc_notes",'Jump to notes'  );?>
 		</td>

@@ -26,10 +26,10 @@ EVENT_LAYOUT_RESOURCES
 
 <form name='form1' action="<?php echo plugin_page( "save_actor" ); ?>" id="form1" method="post">
 <div align="center">
-<table class="width90">
+<table class="width90"  summary="<?php echo plugin_lang_get( 'summary_new_actor' )?>">
 	<tr>
 		<td class="form-title" colspan="2">
-		<?php echo lang_get( 'plugin_Honey_actor_detail' )?>
+		<?php echo plugin_lang_get( 'actor_detail' )?>
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>

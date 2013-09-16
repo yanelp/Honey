@@ -38,10 +38,10 @@ $t_page_delete= $t_page_delete."&id_rule=".$id_rule;
 <form name='form1' action="<?php echo $t_page; ?>" method="post" id="form1" >
 
 <div align="center">
-<table class="width90">
+<table class="width90" summary="<?php echo plugin_lang_get( 'summary_modify_rule' )?>">
 	<tr>
 		<td class="form-title" colspan="2">
-		<?php echo lang_get( 'plugin_Honey_rule_modify' )?>
+		<?php echo plugin_lang_get( 'rule_modify' )?>
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>

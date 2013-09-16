@@ -206,10 +206,10 @@ if($count>0){
 	?>
 
 	<div align="center">
-	<table class="width90">
+	<table class="width90" summary="<?php echo plugin_lang_get( 'usecase_information' );?>">
 		<tr>
 			<td class="form-title" colspan="2">
-			<?php echo lang_get( 'plugin_Honey_usecase_information' );
+			<?php echo plugin_lang_get( 'usecase_information' );
 			echo '&#160;<span class="small">';
 			print_bracket_link( "#uc_notes",'Jump to notes'  );?>
 			</td>

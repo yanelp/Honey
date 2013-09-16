@@ -33,12 +33,12 @@ EVENT_LAYOUT_RESOURCES
 
 <div align="center">
 <form name="form1"  id="form1"  method="post"  enctype="multipart/form-data" onsubmit="javascript:validar()" action="<?php echo plugin_page( "save_usecase" ); ?>">
-<table  class="width90" cellspacing="1">
+<table  class="width90" cellspacing="1" summary="<?php echo plugin_lang_get( 'summary_new_uc' )?>">
 	<tr>
 		<td class="form-title" colspan="2">
 			<input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
 			<?php //echo lang_get( 'plugin_Honey_usecase_detail' )." ".$view_id ?>
-			<?php echo lang_get( 'plugin_Honey_usecase_detail' )?>
+			<?php echo plugin_lang_get( 'usecase_detail' )?>
 	       <!-- <input type="hidden" name="view_id" value="<?php echo $view_id ?>" />-->
 		</td>
 	</tr>

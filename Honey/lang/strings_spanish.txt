@@ -41,8 +41,7 @@
 	$s_plugin_Honey_rule_modify='Modifique los datos de la regla';
         $s_plugin_Honey_usecase_derivation='No existen símbolos de tipo verbo para realizar la derivación a Casos de Uso';
 	$s_plugin_Honey_usecase_derivation_title='Resultado de la derivación';
-	$s_plugin_Honey_Lel_derivation_link='Derivar a Casos de Uso';
-	$s_plugin_Honey_symbol_id='Símbolo #';
+	$s_plugin_Honey_Lel_derivation_link='Derivar a Casos de Uso';					$s_plugin_Honey_symbol_id='Símbolo #';
 	$s_plugin_Honey_usecase_id='Caso de Uso #';
 	$s_plugin_Honey_comment_issue='El comentario no hace referencia a ninguna incidencia.\n';
 	$s_plugin_Honey_comment_uc='El comentario no hace referencia a ningún caso de uso.\n';
@@ -134,4 +133,15 @@
 	$s_plugin_Honey_uc_do_not_exist='El Caso de Uso no existe';
 	$s_plugin_Honey_cant_uc='Cantidad de casos de uso: ';
 	$s_plugin_Honey_add_alt_scenario='Agregar curso alternativo';
-	
+	$s_plugin_Honey_summary_symbols='Lista de símbolos con id, nombre y tipo';
+	$s_plugin_Honey_summary_new_symbol='El usuario debe completar el detalle del símbolo a ser guardado en el sistema.'; 
+	$s_plugin_Honey_summary_modify_symbol='El usuario puede modificar y guardar información del símbolo almacenado.';
+	$s_plugin_Honey_summary_uc='Lista de casos de uso con id, nombre y objetivo';
+	$s_plugin_Honey_summary_modify_uc='El usuario puede modificar y guardar información del caso de uso almacenado.';
+	$s_plugin_Honey_summary_new_uc='El usuario debe completar el detalle del caso de uso a ser guardado en el sistema.'; 
+	$s_plugin_Honey_summary_new_rule='El usuario debe completar el detalle de la regla a ser guardada en el sistema.';
+	$s_plugin_Honey_summary_modify_rule='El usuario puede modificar y guardar información de la regla almacenada.';
+	$s_plugin_Honey_summary_new_actor='El usuario debe completar el detalle del actor a ser guardada en el sistema.';
+	$s_plugin_Honey_summary_modify_actor='El usuario puede modificar y guardar información del actor almacenado.';
+	$s_plugin_Honey_summary_actors='Lista de actores con id, nombre y descripción';
+	$s_plugin_Honey_summary_rules='Lista de reglas con id, nombre y descripción';

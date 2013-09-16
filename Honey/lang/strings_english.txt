@@ -134,4 +134,18 @@
 	$s_plugin_Honey_uc_exist='Usecase already exists';
 	$s_plugin_Honey_cant_uc='Number of usecases: ';
 	$s_plugin_Honey_add_alt_scenario='Add alternative scenario'; 
+	$s_plugin_Honey_summary_symbols='List of symbols with id, name and type'; 
+	$s_plugin_Honey_summary_new_symbol='The user must complete the detail of the symbol to be stored in the system.'; 
+	$s_plugin_Honey_summary_modify_symbol='The user can modify and save some information of the stored symbol.'; 
+	$s_plugin_Honey_summary_uc='List of usecases with id, name and goal.';
+	$s_plugin_Honey_summary_modify_uc='The user can modify and save some information of the stored usecase.'; 
+	$s_plugin_Honey_summary_new_uc='The user must complete the detail of the usecase to be stored in the system.'; 
+	$s_plugin_Honey_summary_new_rule='The user must complete the detail of the rule to be stored in the system.'; 
+	$s_plugin_Honey_summary_modify_rule='The user can modify and save some information of the stored rule.'; 
+	$s_plugin_Honey_summary_new_actor='The user must complete the detail of the actor to be stored in the system.'; 
+	$s_plugin_Honey_summary_modify_actor='The user can modify and save some information of the stored actor.'; 
+	$s_plugin_Honey_summary_actors='List of actors with id, name and description.';
+	$s_plugin_Honey_summary_rules='List of rules with id, name and description.';
+
+
 	

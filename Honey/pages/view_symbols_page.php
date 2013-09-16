@@ -47,13 +47,18 @@ echo '</tr>';
 echo '</table>';
 echo '</br>';
 ?>
-<table class="width90">
+<table class="width90" summary="<?php echo plugin_lang_get( 'summary_symbols' ) ?>">
 	<tr>
 		<td class="form-title" colspan="2">
 		<?php echo plugin_lang_get( 'symbols' ) ?>
 		</td>
 	</tr>
 	<tr  class="row-category">
+
+		<td>
+		<?php echo plugin_lang_get( 'ID' ) ?>
+		</td>
+
 		<td>
 		<?php echo plugin_lang_get( 'symbols_name_colum' ) ?>
 		</td>
@@ -66,12 +71,16 @@ echo '</br>';
 
 <?php 	while( $row = db_fetch_array( $result ) ){
 	$t_page=$t_page."&id_symbol=".$row['id'];
+	$id= str_pad($row['id'], 7, "0", STR_PAD_LEFT);
 	?>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td width='50%'>
+			<td width='20%'>
+			<?php echo "<a href=\"$t_page\">".$id."</a>";?>
+			</td>
+			<td width='60%'>
 			<?php echo "<a href=\"$t_page\">".$row['name']."</a>";?>
 			</td>
-			<td width='50%'>
+			<td width='20%'>
 			<?php echo "<a href=\"$t_page\">".get_symbol_type($row['type'])."</a>";?>
 			</td>
 		</tr>
