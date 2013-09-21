@@ -10,6 +10,8 @@ EVENT_LAYOUT_RESOURCES;
 
 $id_rule = gpc_get_int( 'id_rule' );
 
+if($id_rule==-1){$id_rule=$_REQUEST['id_rule'];}
+
 //busco el símbolo
 
 $t_repo_table = plugin_table( 'rule', 'honey' );
@@ -22,6 +24,9 @@ $query_rule = 'SELECT *
 $result = db_query_bound( $query_rule, array($id_rule) );
 $count = db_num_rows( $result );
 $row = db_fetch_array( $result );
+
+if($count>0){
+
 
 $name=$row['name'];
 $descrip=$row['description'];
@@ -69,6 +74,16 @@ $t_page_delete= $t_page_delete."&id_rule=".$id_rule;
 
 </div>
 </form>
+
+<?php
+}//if existe la regla buscada
+else{echo "<p>".plugin_lang_get('rule_do_not_exist')."</p>";
+echo '<br><br>';
+$t_page=plugin_page("view_rules_page");
+echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";
+echo "<br>";}
+?>
+
 <?php
 
 html_page_bottom1( );

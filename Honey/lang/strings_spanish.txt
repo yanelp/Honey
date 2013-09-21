@@ -43,6 +43,8 @@
 	$s_plugin_Honey_usecase_derivation_title='Resultado de la derivación';
 	$s_plugin_Honey_Lel_derivation_link='Derivar a Casos de Uso';					$s_plugin_Honey_symbol_id='Símbolo #';
 	$s_plugin_Honey_usecase_id='Caso de Uso #';
+	$s_plugin_Honey_actor_id='Actor #';
+	$s_plugin_Honey_rule_id='Regla #';
 	$s_plugin_Honey_comment_issue='El comentario no hace referencia a ninguna incidencia.\n';
 	$s_plugin_Honey_comment_uc='El comentario no hace referencia a ningún caso de uso.\n';
 	$s_plugin_Honey_no_login='Inhabilitado para loguearse.\n';
@@ -131,6 +133,8 @@
 	$s_plugin_Honey_uc_exist='El caso de uso ya existe';
 	$s_plugin_Honey_symbol_do_not_exist='El símbolo no existe';
 	$s_plugin_Honey_uc_do_not_exist='El Caso de Uso no existe';
+	$s_plugin_Honey_actor_do_not_exist='El Actor no existe';
+	$s_plugin_Honey_rule_do_not_exist='La Regla no existe';
 	$s_plugin_Honey_cant_uc='Cantidad de casos de uso: ';
 	$s_plugin_Honey_add_alt_scenario='Agregar curso alternativo';
 	$s_plugin_Honey_summary_symbols='Lista de símbolos con id, nombre y tipo';

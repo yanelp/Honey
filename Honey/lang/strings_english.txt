@@ -44,6 +44,8 @@
 	$s_plugin_Honey_Lel_derivation_link='Derive to Use Cases';
 	$s_plugin_Honey_symbol_id='Symbol #';
 	$s_plugin_Honey_usecase_id='Use Case #';
+	$s_plugin_Honey_actor_id='Actor #';
+	$s_plugin_Honey_rule_id='Rule #';
 	$s_plugin_Honey_comment_issue='Comment does not reference any issue.\n';
 	$s_plugin_Honey_comment_uc='Comment does not reference any usecase\n';
 	$s_plugin_Honey_no_login='Unable to login.\n';
@@ -131,6 +133,8 @@
 	$s_plugin_Honey_symbol_exist='Symbol already exists';
 	$s_plugin_Honey_symbol_do_not_exist='Symbol do not exists';
 	$s_plugin_Honey_uc_do_not_exist='Usecase do not exists';
+	$s_plugin_Honey_actor_do_not_exist='Actor do not exists';
+	$s_plugin_Honey_rule_do_not_exist='Rule do not exists';
 	$s_plugin_Honey_uc_exist='Usecase already exists';
 	$s_plugin_Honey_cant_uc='Number of usecases: ';
 	$s_plugin_Honey_add_alt_scenario='Add alternative scenario'; 

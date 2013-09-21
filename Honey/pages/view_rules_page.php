@@ -36,6 +36,21 @@ $count = db_num_rows( $result );
 
 if ($count != 0) {
 	$t_page = plugin_page( 'update_rule_page' );	
+
+	echo '<div align="center">';
+	echo '<table class="width90" cellspacing="0">';
+	echo '<tr align="right">';
+	echo '<td class="menu right nowrap">';
+	$t_page=$t_page."&id_rule=-1";
+	echo '<form method="post" action="' .$t_page.'">';
+	$t_bug_label = plugin_lang_get( 'rule_id' );
+	echo "<input type=\"text\" name=\"id_rule\" size=\"10\" class=\"small\" value=\"$t_bug_label\" onfocus=\"if (this.value == '$t_bug_label') this.value = ''\" onblur=\"if (this.value == '') this.value = '$t_bug_label'\" />&#160;";
+	echo '<input type="submit" class="button-small" value="' . lang_get( 'jump' ) . '" />&#160;';
+	echo '</form>';
+	echo '</td>';
+	echo '</tr>';
+	echo '</table>';
+	echo '</br>';
 ?>
 
 <div align="center">

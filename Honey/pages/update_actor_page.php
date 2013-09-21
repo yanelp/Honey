@@ -8,7 +8,8 @@ print_cu_menu();
 
 EVENT_LAYOUT_RESOURCES;
 
-$id_actor = gpc_get_int( 'id_actor' );
+$id_actor = gpc_get_int( 'actor_id' );
+if($id_actor==-1){$id_actor=$_REQUEST['actor_id'];}
 
 //busco el símbolo
 
@@ -22,6 +23,8 @@ $query_actor = 'SELECT *
 $result = db_query_bound( $query_actor, array($id_actor) );
 $count = db_num_rows( $result );
 $row = db_fetch_array( $result );
+
+if($count>0){
 
 $name=$row['name'];
 $descrip=$row['description'];
@@ -70,6 +73,16 @@ $t_page_delete = plugin_page( "delete_actor_page" );
 
 </div>
 </form>
+
+<?php
+}//if existe el actor buscado
+else{echo "<p>".plugin_lang_get('actor_do_not_exist')."</p>";
+echo '<br><br>';
+$t_page=plugin_page("view_actors_page");
+echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";
+echo "<br>";}
+?>
+
 <?php
 
 html_page_bottom1( );

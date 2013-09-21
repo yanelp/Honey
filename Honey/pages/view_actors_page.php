@@ -35,7 +35,22 @@ $count = db_num_rows( $result );
 <?php 
 
 if ($count != 0) {
-	$t_page = plugin_page( 'update_actor_page' );	
+	$t_page = plugin_page( 'update_actor_page' );
+	
+	echo '<div align="center">';
+	echo '<table class="width90" cellspacing="0">';
+	echo '<tr align="right">';
+	echo '<td class="menu right nowrap">';
+	$t_page=$t_page."&actor_id=-1";
+	echo '<form method="post" action="' .$t_page.'">';
+	$t_bug_label = plugin_lang_get( 'actor_id' );
+	echo "<input type=\"text\" name=\"actor_id\" size=\"10\" class=\"small\" value=\"$t_bug_label\" onfocus=\"if (this.value == '$t_bug_label') this.value = ''\" onblur=\"if (this.value == '') this.value = '$t_bug_label'\" />&#160;";
+	echo '<input type="submit" class="button-small" value="' . lang_get( 'jump' ) . '" />&#160;';
+	echo '</form>';
+	echo '</td>';
+	echo '</tr>';
+	echo '</table>';
+	echo '</br>';
 ?>
 
 <div align="center">
@@ -53,7 +68,7 @@ if ($count != 0) {
 </tr>
 
 <?php 	while( $row = db_fetch_array( $result ) ){
-	$t_page=$t_page."&id_actor=".$row['id'];
+	$t_page=$t_page."&actor_id=".$row['id'];
 	$id= str_pad($row['id'], 7, "0", STR_PAD_LEFT);
 	?>
 		<tr <?php echo helper_alternate_class() ?>>
