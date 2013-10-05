@@ -41,10 +41,11 @@
 	$s_plugin_Honey_rule_modify='Modifique los datos de la regla';
         $s_plugin_Honey_usecase_derivation='No existen símbolos de tipo verbo para realizar la derivación a Casos de Uso';
 	$s_plugin_Honey_usecase_derivation_title='Resultado de la derivación';
-	$s_plugin_Honey_Lel_derivation_link='Derivar a Casos de Uso';					$s_plugin_Honey_symbol_id='Símbolo #';
-	$s_plugin_Honey_usecase_id='Caso de Uso #';
-	$s_plugin_Honey_actor_id='Actor #';
-	$s_plugin_Honey_rule_id='Regla #';
+	$s_plugin_Honey_Lel_derivation_link='Derivar a Casos de Uso';					$s_plugin_Honey_symbol_id='Dato buscado';
+	$s_plugin_Honey_usecase_id='Dato buscado';
+	$s_plugin_Honey_actor_id='Dato buscado';
+	$s_plugin_Honey_rule_id='Dato buscado';
+	$s_plugin_Honey_search='Buscar';
 	$s_plugin_Honey_comment_issue='El comentario no hace referencia a ninguna incidencia.\n';
 	$s_plugin_Honey_comment_uc='El comentario no hace referencia a ningún caso de uso.\n';
 	$s_plugin_Honey_no_login='Inhabilitado para loguearse.\n';
