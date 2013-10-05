@@ -124,10 +124,10 @@ if ($count != 0) {
 			<?php echo "<a href=\"$t_page\">".$id."</a>";?>
 			</td>
 			<td width='60%'>
-			<?php echo "<a href=\"$t_page\">".$row['name']."</a>";?>
+			<?php echo $row['name'];?>
 			</td>
 			<td width='20%'>
-			<?php echo "<a href=\"$t_page\">".get_symbol_type($row['type'])."</a>";?>
+			<?php echo get_symbol_type($row['type']);?>
 			</td>
 		</tr>
 	 <?php 

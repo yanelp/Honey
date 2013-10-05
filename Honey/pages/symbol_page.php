@@ -34,6 +34,7 @@ $count = db_num_rows( $result );
 if($count>0){
 	$row = db_fetch_array( $result );
 
+	$id_sym=str_pad($row['id'], 7, "0", STR_PAD_LEFT);
 	$name=$row['name'];
 	$type=$row['type'];
 	$type_symbol = $type;
@@ -62,7 +63,9 @@ if($count>0){
 			<?php echo plugin_lang_get( 'symbol_information' )?>
 			</td>
 		</tr>
-
+		<tr <?php echo helper_alternate_class() ?>>
+			<td class="category"><?php echo plugin_lang_get('ID')?></td><td><?php echo $id_sym ?></td>
+		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td class="category"><?php echo plugin_lang_get('name')?></td><td><?php echo $name ?></td>
 			
