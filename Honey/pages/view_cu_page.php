@@ -9,6 +9,8 @@ html_page_top( plugin_lang_get( 'title' ) );
 
 print_cu_menu();
 
+$order	= gpc_get_int( 'order', -1 );
+if($order==-1){$order=2;}
 
 $project_id =  helper_get_current_project();
 
@@ -27,7 +29,7 @@ $query_symbol = 'SELECT *
 				   FROM '.$t_repo_table.'
 				   where id_project=' . db_param().'
 				   AND active = 0
-				   ORDER BY id';
+				   ORDER BY ' . $order;
 
 $result = db_query_bound( $query_symbol, array($project_id) );
 $count = db_num_rows( $result );
@@ -65,8 +67,20 @@ if ($count > 0) {
 	</tr>
 
 <tr class="row-category"> 
-	<td class="category"  width="7%"><?php echo plugin_lang_get( 'ID' ) ?></td>
-	<td class="category"  width="30%"><?php echo plugin_lang_get( 'name' ) ?></td>
+	<td class="category"  width="7%">
+		<?php
+			$t_page = plugin_page( 'view_cu_page' );	
+			$t_page=$t_page."&order=1";	
+			echo "<a href=\"$t_page\">".plugin_lang_get( 'ID' )."</a>";
+		?>
+	</td>
+	<td class="category"  width="30%">
+		<?php
+			$t_page = plugin_page( 'view_cu_page' );	
+			$t_page=$t_page."&order=2";	
+			echo "<a href=\"$t_page\">".plugin_lang_get( 'name' )."</a>";
+			?>
+	</td>
 	<td class="category"><?php echo plugin_lang_get( 'goal' ) ?></td>
 </tr>
 

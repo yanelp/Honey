@@ -6,6 +6,9 @@ html_page_top( plugin_lang_get( 'title' ) );
 
 print_lel_menu();
 
+$order	= gpc_get_int( 'order', -1 );
+if($order==-1){$order=2;}
+
 $project_id =  helper_get_current_project();
 
 
@@ -21,7 +24,7 @@ $query_symbol = 'SELECT id, name, type
 				   FROM '.$t_repo_table.'
 				   where id_project=' . db_param().'
 				   AND active = 0
-				   ORDER BY name';
+				   ORDER BY ' . $order;
 
 $result = db_query_bound( $query_symbol, array($project_id) );
 $count = db_num_rows( $result );
@@ -56,15 +59,27 @@ echo '</br>';
 	<tr  class="row-category">
 
 		<td>
-		<?php echo plugin_lang_get( 'ID' ) ?>
+			<?php
+				$t_page = plugin_page( 'view_symbols_page' );	
+				$t_page=$t_page."&order=1";	
+				echo "<a href=\"$t_page\">".plugin_lang_get( 'ID' )."</a>";
+			?>
 		</td>
 
 		<td>
-		<?php echo plugin_lang_get( 'symbols_name_colum' ) ?>
+			<?php 
+				$t_page = plugin_page( 'view_symbols_page' );	
+				$t_page=$t_page."&order=2";	
+				echo "<a href=\"$t_page\">".plugin_lang_get( 'symbols_name_colum' )."</a>";
+			?>
 		</td>
 
 		<td>
-		<?php echo plugin_lang_get( 'symbols_type_colum' ) ?>
+			<?php
+				$t_page = plugin_page( 'view_symbols_page' );	
+				$t_page=$t_page."&order=3";
+				echo "<a href=\"$t_page\">".plugin_lang_get( 'symbols_type_colum' )."</a>";
+			?>
 		</td>
 
 	</tr>
