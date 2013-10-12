@@ -110,10 +110,10 @@ if($count>0){
 	<br>
 	<table align="center">
 		<tr>
-			<td><input type="submit" value="<?php echo plugin_lang_get('edit')?>"/></td>
+			<td><input type="submit" value="<?php echo plugin_lang_get('edit')?>"/>
 			<?php $t_page=plugin_page("view_symbols_page");?>
-			<td><input type="button" value="<?php echo plugin_lang_get('cancel')?>" onClick="javascript:go_page(null,null ,'<?php echo $t_page?>')"/>
-			<input type="button" value="<?php echo plugin_lang_get('delete')?>" onClick="javascript:go_page('null', null ,'<?php echo $t_page_delete?>')"/>
+			<input type="button" value="<?php echo plugin_lang_get('delete')?>" onClick="javascript:go_page('null', null ,'<?php echo $t_page_delete?>')"/>&#160&#160&#160
+			<input type="button" value="<?php echo plugin_lang_get('cancel')?>" onClick="javascript:go_page(null,null ,'<?php echo $t_page?>')"/></td>
 			<input type="hidden" name="id_symbol_hidden" id="id_symbol_hidden" value="<?php echo $id_symbol ?>"/>
 			<input type="hidden" name="type_symbol_hidden" id="type_symbol_hidden" value="<?php echo $type_symbol?>"/>
 

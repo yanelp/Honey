@@ -150,3 +150,4 @@
 	$s_plugin_Honey_summary_modify_actor='El usuario puede modificar y guardar información del actor almacenado.';
 	$s_plugin_Honey_summary_actors='Lista de actores con id, nombre y descripción';
 	$s_plugin_Honey_summary_rules='Lista de reglas con id, nombre y descripción';
+	$s_plugin_Honey_derived_from='Derivado del símbolo:';

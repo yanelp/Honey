@@ -698,8 +698,8 @@ $count_notes = db_num_rows( $result_note );
 <br>
 <table align="center">
 	<tr>
-		<td><input type="submit" value="<?php echo plugin_lang_get('update')?>"/></td>
-		<td><input type="button" value="<?php echo plugin_lang_get('cancel')?>"  onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page?>')"/></td>
+		<td><input type="submit" value="<?php echo plugin_lang_get('update')?>"/>&#160&#160&#160
+		<input type="button" value="<?php echo plugin_lang_get('cancel')?>"  onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page?>')"/></td>
 	</tr>
 </table>
 </div>

@@ -113,7 +113,7 @@ $t_page=$t_page."&id_symbol=".$id_symbol;
 		<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
 	</td>
 	<td class="center"><input type='submit' name='button_ok' value='<?php echo plugin_lang_get( 'save' )?>'>
-	<?php $t_page_back=plugin_page("view_symbols_page");?>
+	<?php $t_page_back=plugin_page("view_symbols_page");?>&#160&#160&#160
 	<input type='button' name='button_cancel' value='<?php echo plugin_lang_get( 'cancel' )?>' onClick="javascript:go_page(null,null ,'<?php echo $t_page_back?>')"></td>
 </tr>
 </table>

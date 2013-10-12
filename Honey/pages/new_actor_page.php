@@ -43,7 +43,7 @@ EVENT_LAYOUT_RESOURCES
 		<td class="left">
 			<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
 		</td>
-		<td class="center"><input type='submit' name='button_ok' value='<?php echo plugin_lang_get('save')?>'>
+		<td class="center"><input type='submit' name='button_ok' value='<?php echo plugin_lang_get('save')?>'>&#160&#160&#160
 		<input type='button' name='button_cancel' value='<?php echo plugin_lang_get('cancel')?>' onClick="javascript:go_page(null, null,'<?php echo $t_page?>')"></td>
 	</tr>
 </table>

@@ -49,6 +49,11 @@ if($count>0){
 	$postcond=str_replace("\n", "<br>",$postcond);
 	$goal=$row['goal'];
 
+	//busco el símbolo de donde proviene si es que es derivado
+
+	$id_symbol=$row['id_symbol'];
+	if($id_symbol!=''){	$id_symbol=str_pad($row['id_symbol'], 7, "0", STR_PAD_LEFT);}
+
 	//busco sus actores (si los tiene)
 
 	$t_repo_table = plugin_table( 'actor', 'honey' );
@@ -215,8 +220,9 @@ if($count>0){
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category" width="20%"><?php echo plugin_lang_get('ID')?></td><td><?php echo $id ?></td>
-			
+		<?php $t_page_from=plugin_page( 'symbol_page' );;
+			  $t_page_from=$t_page_from."&id_symbol=".$row['id_symbol'];?>
+			<td class="category" width="20%"><?php echo plugin_lang_get('ID')?></td><td><?php echo $id ?>  <?php if($id_symbol!=''){ echo "(".plugin_lang_get('derived_from'); echo "<a href=\"$t_page_from\">".$id_symbol."</a>".")"; }?>  </td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td class="category"><?php echo plugin_lang_get('name')?></td><td><?php echo $name ?></td>
@@ -422,7 +428,7 @@ if($count>0){
 		</table>
 
 		<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_closed( 'profile2' ); collapse_icon('profile2'); echo plugin_lang_get('notes');?>
+				<?php collapse_closed( 'profile2' ); collapse_icon('profile2'); echo plugin_lang_get('usecase_notes');?>
 				<?php collapse_end( 'profile2' ); ?>
 				<?php } ?>
 		</td></tr>
@@ -461,9 +467,10 @@ if($count>0){
 	<br>
 	<table align="center">
 		<tr>
-			<td><input type="submit" value=" <?php echo plugin_lang_get('edit')?>"/></td>
-			<td><input type="button" value=" <?php echo plugin_lang_get('cancel')?>"  onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page?>')"/></td>
-			<td><input type="button" value=" <?php echo plugin_lang_get('delete')?>" onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page_delete?>')"/></td>
+			<td><input type="submit" value=" <?php echo plugin_lang_get('edit')?>"/>
+			<input type="button" value=" <?php echo plugin_lang_get('delete')?>" onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page_delete?>')"/>
+			&#160&#160&#160
+			<input type="button" value=" <?php echo plugin_lang_get('cancel')?>"  onClick="javascript:go_page(null,<?php echo $id_usecase?> ,'<?php echo $t_page?>')"/></td>
 		</tr>
 	</table>
 	</div>

@@ -151,6 +151,7 @@
 	$s_plugin_Honey_summary_modify_actor='The user can modify and save some information of the stored actor.'; 
 	$s_plugin_Honey_summary_actors='List of actors with id, name and description.';
 	$s_plugin_Honey_summary_rules='List of rules with id, name and description.';
+	$s_plugin_Honey_derived_from='Derived from symbol:';
 
 
 	

@@ -62,8 +62,8 @@ $t_page_delete= $t_page_delete."&id_rule=".$id_rule;
 		</td>
 		<td class="center"><input type='submit' name='button_ok' value='<?php echo plugin_lang_get( 'save' )?>'>
 			<?php $t_page_back=plugin_page("view_rules_page");?>
+			<input type="button" value="<?php echo plugin_lang_get( 'delete' )?>" onClick="javascript:go_page('id_rule', <?php echo $id_rule?> ,'<?php echo $t_page_delete?>')"/>&#160&#160&#160
 			<input type='button' name='button_cancel' value='<?php echo plugin_lang_get( 'cancel' )?>' onClick="javascript:go_page(null,null ,'<?php echo $t_page_back?>')">
-			<input type="button" value="<?php echo plugin_lang_get( 'delete' )?>" onClick="javascript:go_page('id_rule', <?php echo $id_rule?> ,'<?php echo $t_page_delete?>')"/>
 	</td>
 	</tr>
 </table>
