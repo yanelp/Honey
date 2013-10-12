@@ -113,7 +113,7 @@ if ($count_include > 0){
 <table class="width90">
 
 <tr class="row-category" <?php echo helper_alternate_class() ?>>
-		<td colspan="2">,<?php echo plugin_lang_get('sure_delete_uc')?></td>
+		<td colspan="2"><?php echo plugin_lang_get('sure_delete_uc')?></td>
 </tr>
 <tr class="row-category">
 		<td class="form-title" colspan="2">

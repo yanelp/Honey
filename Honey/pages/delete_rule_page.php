@@ -36,7 +36,7 @@ if($count_cus > 0){
 <div align="center">
 <table class="width90">
 <tr class="row-category">
-<td><?php echo plugin_lang_get('not_delete_rule')</td>
+<td><?php echo plugin_lang_get('not_delete_rule')?></td>
 </tr>
 <?php
 while($row_search = db_fetch_array( $result_search )){
