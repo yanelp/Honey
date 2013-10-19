@@ -57,7 +57,7 @@ $t_repo_table = plugin_table( 'actor', 'honey' );
 $query_all_actors = 'SELECT a.name , a.id, a.description
 				 FROM '.$t_repo_table.' a 
 				 where a.id_project=' . db_param().'
-				 AND a.active = 0 ';
+				 AND a.active = 0';
 
 $result_all_actors = db_query_bound( $query_all_actors, array($id_project) );
 $count_all_actors = db_num_rows( $result_all_actors );
@@ -142,7 +142,8 @@ $count_all_actors = db_num_rows( $result_all_actors );
 
 <div align="center">
 <table class="width90" <?php echo plugin_lang_get( 'summary_modify_uc' );?>>
-	<tr>
+	<tr>	<?php # UC notes BEGIN (permite el salto a #)?>
+	<a name="uc_actors" id="uc_actors" />
 		<td class="form-title" colspan="2">
 		<?php echo plugin_lang_get( 'usecase_information' );
 		echo '&#160;<span class="small">';
@@ -150,6 +151,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
+	
 		<td class="category" width="20%"><?php echo plugin_lang_get('ID')?></td><td><?php echo $id ?></td>
 		
 	</tr>
@@ -159,77 +161,12 @@ $count_all_actors = db_num_rows( $result_all_actors );
 		<tr <?php echo helper_alternate_class() ?>>
 		<td class="category"><?php echo plugin_lang_get('goal')?></td><td><textarea cols="100" name="goal" id="goal"><?php echo $goal ?></textarea></td>
 	</tr>
+
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category"><?php echo plugin_lang_get('actor')?></td>
-		<td>
-			<table>
-				<?php 
-				$t_repo_table = plugin_table( 'actor', 'honey' );
-				$t_repo_table2 = plugin_table( 'usecase_actor', 'honey' );
-
-				$query_actors = 'SELECT a.name , a.id, a.description
-								 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id=b.id_actor)
-								 where b.id_usecase=' . db_param().'
-								 AND a.active = 0 AND b.active = 0';
-
-				$result_actors = db_query_bound( $query_actors, array($id_usecase) );
-				$count_actors = db_num_rows( $result_actors );
-
-				$j=0;
-				while( $row_all_actors = db_fetch_array( $result_all_actors )){
-					$ck=false;
-					$result_actors = db_query_bound( $query_actors, array($id_usecase) );
-					while( $row_actors = db_fetch_array( $result_actors )){
-						if($row_actors['id']==$row_all_actors['id']){
-							$ck=true;
-						}
-					}?>
-				<tr>
-						<td>
-							<?php if($ck==false){?>
-								<input type="checkbox" name="ck_actor_<?php echo $j?>" id="ck_actor_<?php echo $j?>"/>
-							<?php }else{ ?>
-									<input type="checkbox" name="ck_actor_<?php echo $j?>" id="ck_actor_<?php echo $j?>" checked/>
-							<?php } ?>
-							<input type="hidden" name="id_actor_<?php echo $j?>" id="id_actor_<?php echo $j?>" value="<?php echo $row_all_actors['id'] ?>"/>
-						</td>
-							<td><?php echo $row_all_actors['name'] ?></td>
-							<?php if( $row_all_actors['description']!=''){?>
-							<td>
-									<!---->
-								<?php
-								$c_id = $row_all_actors['id'];
-								echo "<script type=\"text/javascript\" language=\"JavaScript\">
-									<!--
-									function swap_content4( span ) {
-									displayType = ( document.getElementById( span ).style.display == 'none' ) ? '' : 'none';
-									document.getElementById( span ).style.display = displayType;
-									}
-
-									 -->
-									 </script>";
-							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content4(\"hideSection_" . $c_id . "\");swap_content4(\"showSection_" . $c_id . "\");return false;'>". plugin_lang_get('show_goal')."</a>]</span>";
-							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content4(\"hideSection_" . $c_id . "\");swap_content4(\"showSection_" . $c_id . "\");return false;'>". plugin_lang_get('hide_goal')."</a>]";
-								echo "<pre>";
-
-								echo $row_all_actors['description'];
-
-
-								echo "</pre></span>\n";
-
-								?>
-							<!---->
-							</td>
-							<?php }
-							else { echo "<td  class='small'>[". plugin_lang_get('no_goal')."]</td>";}?>
-				</tr>
-				<?php $j++;	
-				} ?>
-			</table>
-
-			<?php if($count_all_actors==0){echo "<p class='category'>". plugin_lang_get('no_actors_created')."<p>";}?>
-		</td>
+	<td><?php include 'prueba_actores.php';?></td>
 	</tr>
+
 	 <!--aca van las relaciones extiende-->
 	  <tr <?php echo helper_alternate_class() ?>>
 		<td colspan="2" class="none">
