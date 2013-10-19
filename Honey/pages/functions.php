@@ -211,19 +211,28 @@ function print_successful_redirect_honey($p_uc_id, $page, $salto){
 
 		if( ON == $t_use_iis ) {
 			header( "Refresh: 0;url=$t_url" );
-		} else {
+		}
+		else {
 			if($salto=='note'){
 				header( "Location: $t_url" . "#uc_notes" );
 			}
-				else{header( "Location: $t_url" );}
-		}
-	} else {
+			else{ 
+				if($salto=='attachment'){
+					header( "Location: $t_url" . "#uc_atach" );
+				}
+				else{
+				header( "Location: $t_url" );
+				}
+			}//else
+		}//else
+	}//if
+	else {
 		trigger_error( ERROR_PAGE_REDIRECTION, ERROR );
 		return false;
-	}
+	}//else
 
 	return true;
-}
+}//function
 
 function html_meta_redirect_honey( $p_url, $p_time = null){
 

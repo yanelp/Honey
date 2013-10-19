@@ -216,7 +216,8 @@ if($count>0){
 			<td class="form-title" colspan="2">
 			<?php echo plugin_lang_get( 'usecase_information' );
 			echo '&#160;<span class="small">';
-			print_bracket_link( "#uc_notes",'Jump to notes'  );?>
+			print_bracket_link( "#uc_notes",'Jump to notes'  );
+			print_bracket_link( "#uc_atach",'Jump to Atachmentts'  );?>
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
@@ -272,12 +273,14 @@ if($count>0){
 
 	<!--aca van los archivos-->
 
+
+	<?php # UC atach BEGIN (permite el salto a #)?>
+	<a name="uc_atach" id="uc_atach" /><br />
 	<?php
 		// File Upload (if enabled)
 			$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 			//$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
-	?>
-	<?php
+	
 		//muestro en total 10 archivos-->10-la cant de ya guardados
 		$hasta=10-$cant_files;
 								
@@ -296,13 +299,13 @@ if($count>0){
 								<td>
 									<?php
 
-										for( $i = 0; $i < $hasta; $i++ ) {?>
+										//for( $i = 0; $i < $hasta; $i++ ) {?>
 
 											<input <?php echo helper_get_tab_index() ?> id="ufile[]" name="ufile[]" type="file" size="50" />
 											<br>
 											
 										<?php 
-										}//for	?>
+										//}//for	?>
 							</td>
 						</tr>
 						

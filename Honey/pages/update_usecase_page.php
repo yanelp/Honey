@@ -509,6 +509,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 
 <?php # Attachments
 
+/* van a quedar sólo en el ver caso de uso
 		echo '<tr ', helper_alternate_class(), '>';
 		echo '<td class="category">	<a name="attachments" id="attachments">', plugin_lang_get('attach'), '</a>','</td>';
 		echo '<td colspan="5">';
@@ -520,11 +521,14 @@ $count_all_actors = db_num_rows( $result_all_actors );
 <!--aca van los archivos-->
 
 <?php
+
+
 	// File Upload (if enabled)
 		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 		//$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
-?>
-	 <tr <?php echo helper_alternate_class() ?>>
+ ?>
+
+ <tr <?php echo helper_alternate_class() ?>>
 		<td colspan="2" class="none">
 			<?php 
 			if( ON == config_get( 'use_javascript' ) ) { ?>
@@ -566,6 +570,10 @@ $count_all_actors = db_num_rows( $result_all_actors );
 <!--aca termina lo de los archivos-->
 
 </table>
+
+*/?>
+
+
 
 <?php // echo $interface_main?>
 
