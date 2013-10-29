@@ -93,4 +93,77 @@ function go_page(id_note, id_usecase, page){
   document.getElementById('form1').submit();
 }
 
+function mostrarCapaActor( nro_capa, total_capas){
+	
+	var nro_div=nro_capa-1;
+	for(i=0;i<total_capas;i++){
+		if(document.getElementById('capa_actor'+i)==document.getElementById('capa_actor'+nro_div)){
+			document.getElementById('capa_actor'+i).style.display="block";
+		}
+		else{document.getElementById('capa_actor'+i).style.display="none";}
+	}
+	
+	var capa_mas=parseInt(nro_capa)+1;
+	var capa_menos=parseInt(nro_capa)-1;
 
+		if(nro_capa==1){
+			document.getElementById('texto').innerHTML = nro_capa+' <a style="text-decoration:none" href="javascript:mostrarCapaActor('+capa_mas+','+total_capas+')">  >></a>';
+		}
+		else{
+			if((nro_capa>1)&&(nro_capa<total_capas)){document.getElementById('texto').innerHTML ='<a style="text-decoration:none" href="javascript:mostrarCapaActor( '+capa_menos+','+total_capas+')">  <<  </a> '+nro_capa+' <a style="text-decoration:none" href="javascript:mostrarCapaActor('+capa_mas+','+total_capas+')">  >>  </a>';}
+			else{
+				document.getElementById('texto').innerHTML ='<a style="text-decoration:none" href="javascript:mostrarCapaActor( '+capa_menos+','+total_capas+')">  <<  </a>'+nro_capa;
+				}
+		}
+
+}	
+
+function mostrarCapaExtends( nro_capa, total_capas){
+	
+	var nro_div=nro_capa-1;
+	for(i=0;i<total_capas;i++){
+		if(document.getElementById('capa_extends'+i)==document.getElementById('capa_extends'+nro_div)){
+			document.getElementById('capa_extends'+i).style.display="block";
+		}
+		else{document.getElementById('capa_extends'+i).style.display="none";}
+	}
+	
+	var capa_mas=parseInt(nro_capa)+1;
+	var capa_menos=parseInt(nro_capa)-1;
+
+		if(nro_capa==1){
+			document.getElementById('texto2').innerHTML = nro_capa+' <a style="text-decoration:none" href="javascript:mostrarCapaExtends('+capa_mas+','+total_capas+')">  >></a>';
+		}
+		else{
+			if((nro_capa>1)&&(nro_capa<total_capas)){document.getElementById('texto2').innerHTML ='<a style="text-decoration:none" href="javascript:mostrarCapaExtends( '+capa_menos+','+total_capas+')">  <<  </a> '+nro_capa+' <a style="text-decoration:none" href="javascript:mostrarCapaExtends('+capa_mas+','+total_capas+')">  >>  </a>';}
+			else{
+				document.getElementById('texto2').innerHTML ='<a style="text-decoration:none" href="javascript:mostrarCapaExtends( '+capa_menos+','+total_capas+')">  <<  </a>'+nro_capa;
+				}
+		}
+
+}
+
+function mostrarCapaIncludes( nro_capa, total_capas){
+	
+	var nro_div=nro_capa-1;
+	for(i=0;i<total_capas;i++){
+		if(document.getElementById('capa_includes'+i)==document.getElementById('capa_includes'+nro_div)){
+			document.getElementById('capa_includes'+i).style.display="block";
+		}
+		else{document.getElementById('capa_includes'+i).style.display="none";}
+	}
+	
+	var capa_mas=parseInt(nro_capa)+1;
+	var capa_menos=parseInt(nro_capa)-1;
+
+		if(nro_capa==1){
+			document.getElementById('texto3').innerHTML = nro_capa+' <a style="text-decoration:none" href="javascript:mostrarCapaIncludes('+capa_mas+','+total_capas+')">  >></a>';
+		}
+		else{
+			if((nro_capa>1)&&(nro_capa<total_capas)){document.getElementById('texto3').innerHTML ='<a style="text-decoration:none" href="javascript:mostrarCapaIncludes( '+capa_menos+','+total_capas+')">  <<  </a> '+nro_capa+' <a style="text-decoration:none" href="javascript:mostrarCapaIncludes('+capa_mas+','+total_capas+')">  >>  </a>';}
+			else{
+				document.getElementById('texto3').innerHTML ='<a style="text-decoration:none" href="javascript:mostrarCapaIncludes( '+capa_menos+','+total_capas+')">  <<  </a>'+nro_capa;
+				}
+		}
+
+}
