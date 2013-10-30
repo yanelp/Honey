@@ -184,7 +184,7 @@ function mostrarCapaRule( nro_capa, total_capas){
 			document.getElementById('texto4').innerHTML = nro_capa+' <a style="text-decoration:none" href="javascript:mostrarCapaRule('+capa_mas+','+total_capas+')">  >></a>';
 		}
 		else{
-			if((nro_capa>1)&&(nro_capa<total_capas)){document.getElementById('texto3').innerHTML ='<a style="text-decoration:none" href="javascript:mostrarCapaRule( '+capa_menos+','+total_capas+')">  <<  </a> '+nro_capa+' <a style="text-decoration:none" href="javascript:mostrarCapaRule('+capa_mas+','+total_capas+')">  >>  </a>';}
+			if((nro_capa>1)&&(nro_capa<total_capas)){document.getElementById('texto4').innerHTML ='<a style="text-decoration:none" href="javascript:mostrarCapaRule( '+capa_menos+','+total_capas+')">  <<  </a> '+nro_capa+' <a style="text-decoration:none" href="javascript:mostrarCapaRule('+capa_mas+','+total_capas+')">  >>  </a>';}
 			else{
 				document.getElementById('texto4').innerHTML ='<a style="text-decoration:none" href="javascript:mostrarCapaRule( '+capa_menos+','+total_capas+')">  <<  </a>'+nro_capa;
 				}

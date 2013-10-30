@@ -1,7 +1,8 @@
 <?php
 
 $result_all_ucs = db_query_bound( $query_all_ucs, array($id_project, $id_usecase) );
-$count_all_ucs = db_num_rows( $result_all_ucs);	
+$count_all_ucs = db_num_rows( $result_all_ucs);
+
 $total_pag_extends = ceil($count_all_ucs / $TAMANO_PAGINA);
 
 //busco todos los actores y limito por grupo a mostrar
@@ -45,7 +46,6 @@ for($h=0;$h<$total_pag_extends;$h++){
 
 			$result_parents_limit = db_query_bound( $query_parents_limit, array($id_project,$id_usecase) );
 			$count_parents_limit = db_num_rows( $result_parents_limit );
-			
 			while( $row_all_ucs = db_fetch_array( $result_parents_limit )){
 				
 				$ck=false;

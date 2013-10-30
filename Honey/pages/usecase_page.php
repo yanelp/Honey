@@ -59,7 +59,7 @@ if($count>0){
 	$t_repo_table = plugin_table( 'actor', 'honey' );
 	$t_repo_table2 = plugin_table( 'usecase_actor', 'honey' );
 
-	$query_actors = 'SELECT a.name 
+	$query_actors = 'SELECT a.name , a.id
 					 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id=b.id_actor)
 					 where b.id_usecase=' . db_param().'
 					 AND a.active = 0 AND b.active = 0';
@@ -69,11 +69,15 @@ if($count>0){
 
 	$actors='';
 	while( $row_actors = db_fetch_array( $result_actors )){
+		$actor_id=str_pad($row_actors['id'], 7, "0", STR_PAD_LEFT);
+		$t_page_link = plugin_page( 'update_actor_page' );
+		$t_page_link=$t_page_link."&actor_id=".$row_actors['id'];
+		$actor_id="<a  href=\"$t_page_link\">".$actor_id."</a>";
 		if($actors==''){
-			$actors=$row_actors['name'];
+			$actors=$actor_id.'-'.$row_actors['name'];
 		}
 		else{
-			$actors=$actors.', '.$row_actors['name'];
+			$actors=$actors.', '.$actor_id.'-'.$row_actors['name'];
 			}
 	}//while
 
@@ -100,7 +104,7 @@ if($count>0){
 		$t_repo_table = plugin_table( 'rule_usecase', 'honey' );
 		$t_repo_table2 = plugin_table( 'rule', 'honey' );
 
-		$query_rules_scenario = 'SELECT b.name 
+		$query_rules_scenario = 'SELECT b.name , b.id
 						 FROM '.$t_repo_table.' a inner join '.$t_repo_table2.' b on (a.id_rule=b.id)
 						 where id_usecase=' . db_param().'
 						AND b.active = 0';
@@ -109,15 +113,19 @@ if($count>0){
 		$count_rules_scenario = db_num_rows( $result_rules_scenario );
 		
 		$rules_main='';
-			
+
 		while( $row_rules_scenario = db_fetch_array( $result_rules_scenario )){
+			$rule_id=str_pad($row_rules_scenario['id'], 7, "0", STR_PAD_LEFT);
+			$t_page_link_rule = plugin_page( 'update_rule_page' );
+			$t_page_link_rule=$t_page_link_rule."&id_rule=".$row_rules_scenario['id'];
+			$rule_id="<a  href=\"$t_page_link_rule\">".$rule_id."</a>";
 			if($rules_main==''){
-				$rules_main=$row_rules_scenario['name'];
+				$rules_main=$rule_id.'-'.$row_rules_scenario['name'];
 			}
 			else{
-				$rules_main=$rules_main.', '.$row_rules_scenario['name'];
+				$rules_main=$rules_main.', '.$rule_id.'-'.$row_rules_scenario['name'];
 				}
-		}//while
+		}
 		
 		//interfaces main
 
