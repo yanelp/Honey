@@ -83,10 +83,12 @@ $g_result_insert_usecase=db_query_bound( $t_query_usecase, array( $id_usecase)  
 
  
 for($i=0; $i<$row_number_uc_actor; $i++){
-	
+
 	if($_REQUEST['ck_actor_'.$i]=='on'){
 	
-		$id_actor=$_POST['id_actor_'.$i];
+		$id_actor=$_REQUEST['id_actor_'.$i];
+
+		//echo "actor a insertar: ".$id_actor."/";
 		
 		$t_repo_table_uc_actor= plugin_table( 'usecase_actor', 'honey' );
 
