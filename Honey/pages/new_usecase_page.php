@@ -144,7 +144,7 @@ EVENT_LAYOUT_RESOURCES
 <?php
 	// File Upload (if enabled)
 		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
-		//$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
+		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
 ?>
 	 <tr <?php echo helper_alternate_class() ?>>
 		<td colspan="2" class="none">
@@ -159,15 +159,19 @@ EVENT_LAYOUT_RESOURCES
 					<?php echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?></td></tr>
 					<tr>
 						<td>
-							<?php
-							// Display multiple file upload fields
-							for( $i = 0; $i < 10; $i++ ) {?>
-
+					
+							<table>
+							<thead></thead><tbody valign="bottom">
+								<tr>
+								<td empty-cells></td><td empty-cells></td>
+								<td>
 								<input <?php echo helper_get_tab_index() ?> id="ufile[]" name="ufile[]" type="file" size="50" />
-								<br>
-								
-							<?php 
-							}//for	?>
+								<input type='button' value='<?php echo plugin_lang_get( 'Add_another_file' )?>' onClick="javascript:insert_row_file('table_files','ufile[]',document.getElementById('ufile[]').value, document.getElementById('ufile[]').size)"/>
+								</tr></td>
+								</tbody>
+							</table>
+				
+						<table name='table_files' id='table_files' ><thead></thead><tbody valign="bottom"></tbody></table>
 						</td>
 					</tr>
 				</table>
@@ -195,6 +199,7 @@ EVENT_LAYOUT_RESOURCES
 
 </table>
 <input type='hidden' name='row_number_cursoAlternativo' id='row_number_cursoAlternativo' value='0'/>
+<input type='hidden' name='row_number_file' id='row_number_file' value='1'/>
 <input type='hidden' name='row_number_uc_actor' id='row_number_uc_actor' value='<?php echo $count_all_actors ?>'/>
 <input type='hidden' name='row_number_uc_rule' id='row_number_uc_rule' value='<?php echo $count_rules ?>'/>
 <input type='hidden' name='row_number_uc_extends' id='row_number_uc_extends' value='<?php echo $count_extends ?>'/>

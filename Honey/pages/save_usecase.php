@@ -181,7 +181,10 @@ $f_files=gpc_get_file( 'ufile', null );
 
 //echo "count( $f_files ): ".count( $f_files );
 
-for( $i = 0; $i < 10; $i++ ) {
+$cant_files=$_REQUEST['row_number_file'];
+//echo $cant_files;
+
+for( $i = 0; $i < $cant_files ; $i++ ) {
 	
 		if( !empty( $f_files['name'][$i] ) ) {
 			$t_file['name']     = $f_files['name'][$i];
@@ -190,9 +193,14 @@ for( $i = 0; $i < 10; $i++ ) {
 			$t_file['error']    = $f_files['error'][$i];
 			$t_file['size']     = $f_files['size'][$i];
 
-			attach_add( $id_usecase, $t_file );
+	      // echo "size: ".$t_file['size']."-";
+		//	if($t_file['size']<=500000){
+				attach_add( $id_usecase, $t_file );
+				//echo "add: ".$t_file['name']."<br>";
+			//}
+			//else{ echo "El archivo ".$t_file['name']." supera el tamaño permitido y no pudo ser guardado.<br>";}
 		}
-	}
+	}//for
 
 
 /*save */
@@ -209,6 +217,6 @@ $t_url= plugin_page( 'view_cu_page' );
 
 html_page_bottom( );
 
-html_meta_redirect_honey( $t_url, $p_time = null);
+//html_meta_redirect_honey( $t_url, $p_time = null);
 
 ?>

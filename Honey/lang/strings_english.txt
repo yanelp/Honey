@@ -76,8 +76,8 @@
 	$s_plugin_Honey_the_uc='The Use Case';
 	$s_plugin_Honey_symbol_referenced='is being referenced  by the following actors:';
 	$s_plugin_Honey_usecase_referenced='is being referenced  by the following use cases:';
-	$s_plugin_Honey_usecase_referenced_extend='extend the folow Use Cases:';
-	$s_plugin_Honey_usecase_referenced_include='include the folow Use Cases:';
+	$s_plugin_Honey_usecase_referenced_extend='extends the folow Use Cases:';
+	$s_plugin_Honey_usecase_referenced_include='includes the folow Use Cases:';
 	$s_plugin_Honey_dictionary_derived='The dictionary of the project has already been derived.';
 	$s_plugin_Honey_previous_derivation='Do you want nullify the previous derivation?';
 	$s_plugin_Honey_sure_derivation='Are you sure you wish to do the derivation?';
@@ -152,6 +152,11 @@
 	$s_plugin_Honey_summary_actors='List of actors with id, name and description.';
 	$s_plugin_Honey_summary_rules='List of rules with id, name and description.';
 	$s_plugin_Honey_derived_from='Derived from symbol:';
+	$s_plugin_Honey_Add_another_file='Add another file';
+	$s_plugin_Honey_warning='Warning';
+	$s_plugin_Honey_error='Error';
+	$s_plugin_Honey_congratulations='Congratulations';
+
 
 
 	

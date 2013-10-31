@@ -41,13 +41,14 @@ if($count_cus > 0){
 </tr>
 <?php
 while($row_search = db_fetch_array( $result_search )){
-     $usecase = $row_search['id_usecase'];
+     $usecase_id = $row_search['id_usecase'];
+	 $usecase_name = $row_search['name'];
 	 $t_page_go =  plugin_page( 'usecase_page' );
-	 $t_page_go=$t_page_go."&id_usecase=".$usecase;
+	 $t_page_go=$t_page_go."&id_usecase=".$usecase_id;
 	 ?>
-	<tr class="row-category" <?php echo helper_alternate_class() ?> >
-	<td class="form-title" colspan="2"> 
-						<?php echo "<a  href=\"$t_page_go\">".str_pad($usecase, 7, "0", STR_PAD_LEFT)."</a>";?>
+	<tr  <?php echo helper_alternate_class() ?> >
+	<td class="center" colspan="2"> 
+		<?php echo "<a  href=\"$t_page_go\">".str_pad($usecase_id, 7, "0", STR_PAD_LEFT)."</a> - ".$usecase_name;?>
 	</td>
 
 	</tr>
@@ -70,17 +71,12 @@ else
 
 <form id="form1" action="<?php echo plugin_page( $t_page ); ?>" method="POST" enctype="multipart/form-data">
 
-
-<table class="width90">
-
-<tr class="row-category" <?php echo helper_alternate_class() ?>>
-		<td colspan="2"><?php echo plugin_lang_get('sure_delete_actor')?></td>
-</tr>
-<tr class="row-category">
+<?php showMessage(plugin_lang_get('sure_delete_actor'), 'warning')?>
+		<tr class="row-category">
 		<td class="form-title" colspan="2">
-		<input type="button" value="<?php echo plugin_lang_get('delete')?>" onClick="javascript:go_page(null, null ,'<?php echo $t_page?>')"/></td>
-</tr>
-</table>
+		<input type="button" value="<?php echo plugin_lang_get('delete')?>" onClick="javascript:go_page(null, null ,'<?php echo $t_page;?>')"/></td>
+		</tr>
+		</table>
 </form>
 
 <?php

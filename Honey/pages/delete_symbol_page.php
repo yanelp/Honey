@@ -1,8 +1,8 @@
-<?php
 
+<?php
 require_once('functions.php');
 require_once( 'file_api.php' );
-
+require_once( 'plugin_api.php' );
 
 html_page_top( plugin_lang_get( 'title' ) );
 auth_ensure_user_authenticated();
@@ -15,7 +15,6 @@ EVENT_LAYOUT_RESOURCES;
 //symbol a borrar
 $id_symbol =$_REQUEST['id_symbol_hidden'];
 $type_symbol =$_REQUEST['type_symbol_hidden'];
-
 
 
 if ($type_symbol == 1){
@@ -46,8 +45,8 @@ if ($type_symbol == 1){
 				 $t_page_go =  plugin_page( 'update_actor_page' );
 				 $t_page_go=$t_page_go."&id_actor=".$id_actor;
 				 ?>
-				<tr class="row-category" <?php echo helper_alternate_class() ?> >
-				<td class="form-title" colspan="2"> 
+				<tr  <?php echo helper_alternate_class() ?> >
+				<td class="center" colspan="2"> 
 									<?php echo "<a  href=\"$t_page_go\">".str_pad($id_actor, 7, "0", STR_PAD_LEFT)."</a>";?>-<?php echo $actor_name;?>
 				</td>
 
@@ -56,6 +55,9 @@ if ($type_symbol == 1){
 
 		
 		}//fin while
+		?>
+</table>
+		<?php
 
 	}//fin if ($count_actors)
 
@@ -112,22 +114,17 @@ $t_page=$t_page."&id_symbol=".$id_symbol;
 ?>
 
 
-
-
 <div align="center">
-<form id="form1" action="<?php echo plugin_page( $t_page ); ?>" method="POST" enctype="multipart/form-data">
+<form id="form1" action="<?php echo  $t_page; ?>" method="POST" enctype="multipart/form-data">
 
 
-<table class="width90">
-
-<tr class="row-category" <?php echo helper_alternate_class() ?>>
-		<td colspan="2"><?php echo plugin_lang_get('sure_delete_symbol') ?></td>
-</tr>
-<tr class="row-category">
+		<?php showMessage(plugin_lang_get('sure_delete_symbol'), 'warning')?>
+		<tr class="row-category">
 		<td class="form-title" colspan="2">
 		<input type="button" value="<?php echo plugin_lang_get('delete')?>" onClick="javascript:go_page(null, null ,'<?php echo $t_page;?>')"/></td>
-</tr>
-</table>
+		</tr>
+		</table>
+
 </form>
 
 

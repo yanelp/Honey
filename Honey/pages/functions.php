@@ -1,3 +1,8 @@
+<style type="text/css">
+/*A:link,A:visited{font-style:bold;color:yellow};*/
+table.width30 { width: 30%;  border: solid 1px #000000; } ;
+</style>
+
 <?php
 require_once( 'bug_group_action_api.php' );
 
@@ -696,6 +701,33 @@ function actors_usecase($actores, $verb_id, $actores_id, $id_usecase, $symbol_ac
 		 }//for
 		
 }//function
+
+function path_file($name_file){
+
+	$tpage=   dirname( __FILE__ ) . DIRECTORY_SEPARATOR ;
+	$tpage=str_replace('\\', '/', $tpage);
+	$words = preg_split('[/]', $tpage);
+	$cant_words=sizeof($words)-2;//para sacar "/pages"
+	for($i=3;$i<$cant_words;$i++){$tpath=$tpath.'/'.$words[$i];}
+	$tpath=$tpath. '/files/'.$name_file;
+	return $tpath;
+
+}
+
+function showMessage($msg, $type){
+
+	echo "</br>";
+	echo "<table class='width30'>";
+	echo "<tr class='row-category'>";
+	echo "<td colspan='2'>".plugin_lang_get($type)."</td>";
+	echo "<tr>";
+	echo "<tr>";
+	echo "<td><img src='".path_file('information.jpg')."' width='50'  height='50'/></td>";
+	echo "<td>". $msg."</td>";
+	echo "</tr>";
+	//echo "</table>";
+
+}
 
 
 ?>
