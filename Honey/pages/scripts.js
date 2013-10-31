@@ -192,7 +192,7 @@ function mostrarCapaRule( nro_capa, total_capas){
 
 }
 
-function insert_row_file(tabla, campo, valor, size){
+function insert_row_file(tabla, campo, valor){
 	
 	if(valor!=''){
 		
@@ -210,10 +210,10 @@ function insert_row_file(tabla, campo, valor, size){
 		tabla.tBodies[0].rows[max_row].appendChild(cabecera); 
 		tabla.tBodies[0].rows[max_row].insertCell(1);	
 		var campo2="'"+campo+"'";
-		//tabla.tBodies[0].rows[max_row].cells[1].innerHTML='<input type="button" onClick="removeFila(this, '+campo2+')" value="X" />';
+		tabla.tBodies[0].rows[max_row].cells[1].innerHTML='<input type="button" onClick="removeFila(this, '+campo2+')" value="X" />';
 		tabla.tBodies[0].rows[max_row].insertCell(2);		
 		
-		tabla.tBodies[0].rows[max_row].cells[2].innerHTML="<input type='file' name="+campo+" id="+campo+" />";
+		tabla.tBodies[0].rows[max_row].cells[2].innerHTML="<input type='file' name="+campo2+" id="+campo2+" />";
 
 	//	document.getElementById('ufile[]').value='';
 		document.getElementById('row_number_file').value=parseInt(document.getElementById('row_number_file').value)+1;

@@ -156,7 +156,9 @@
 	$s_plugin_Honey_warning='Warning';
 	$s_plugin_Honey_error='Error';
 	$s_plugin_Honey_congratulations='Congratulations';
-
+	$s_plugin_Honey_the_file='The file ';
+	$s_plugin_Honey_file_error=' exceeds the size limit and could not be saved.';
+	$s_plugin_Honey_file_max_size='Upload max file size: ';
 
 
 	

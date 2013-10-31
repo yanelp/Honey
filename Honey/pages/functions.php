@@ -1,6 +1,6 @@
 <style type="text/css">
 /*A:link,A:visited{font-style:bold;color:yellow};*/
-table.width30 { width: 30%;  border: solid 1px #000000; } ;
+table.width30 { width: 30%;  border: solid 1px #000000;  } ;
 </style>
 
 <?php
@@ -317,7 +317,7 @@ function isCondition($impactText, $comparationArray){
 
 
 function attach_add($id_usecase, $p_file){
-
+	$t_file_size = filesize( $p_file['tmp_name'] );
 	file_ensure_uploaded( $p_file );
 		
 	$t_project_id= helper_get_current_project();
@@ -348,6 +348,7 @@ function attach_add($id_usecase, $p_file){
 		trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
 	}
 	$t_max_file_size = (int) min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+	
 	if( $t_file_size > $t_max_file_size ) {
 		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
 	}
@@ -717,12 +718,24 @@ function path_file($name_file){
 function showMessage($msg, $type){
 
 	echo "</br>";
-	echo "<table class='width30'>";
+	echo "<table class='width30' align='center'>";
 	echo "<tr class='row-category'>";
 	echo "<td colspan='2'>".plugin_lang_get($type)."</td>";
+	echo "</tr>";
 	echo "<tr>";
-	echo "<tr>";
-	echo "<td><img src='".path_file('information.jpg')."' width='50'  height='50'/></td>";
+	if($type=='congratulations'){
+		echo "<td align='center'><img src='".path_file('congratulations.jpg')."' width='50'  height='50'/></td>";
+	}
+	else{
+		if($type=='warning'){echo "<td><img src='".path_file('warning.jpg')."' width='50'  height='50'/></td>";}
+		else{
+			if($type=='error'){echo "<td><img src='".path_file('error.jpg')."' width='50'  height='50'/></td>";}
+			else{
+				if($type=='information'){echo "<td><img src='".path_file('information.jpg')."' width='50'  height='50'/></td>";}
+			}
+		}
+	}
+	
 	echo "<td>". $msg."</td>";
 	echo "</tr>";
 	//echo "</table>";

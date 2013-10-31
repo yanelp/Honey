@@ -155,8 +155,7 @@ EVENT_LAYOUT_RESOURCES
 				<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 
 				<table>
-					<tr><td><?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
-					<?php echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?></td></tr>
+					<tr><td>(<?php echo plugin_lang_get('file_max_size' ) ?> 990KB</span>)</td></tr>
 					<tr>
 						<td>
 					
@@ -166,7 +165,7 @@ EVENT_LAYOUT_RESOURCES
 								<td empty-cells></td><td empty-cells></td>
 								<td>
 								<input <?php echo helper_get_tab_index() ?> id="ufile[]" name="ufile[]" type="file" size="50" />
-								<input type='button' value='<?php echo plugin_lang_get( 'Add_another_file' )?>' onClick="javascript:insert_row_file('table_files','ufile[]',document.getElementById('ufile[]').value, document.getElementById('ufile[]').size)"/>
+								<input type='button' value='<?php echo plugin_lang_get( 'Add_another_file' )?>' onClick="javascript:insert_row_file('table_files','ufile[]',document.getElementById('ufile[]').value)"/>
 								</tr></td>
 								</tbody>
 							</table>

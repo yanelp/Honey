@@ -155,3 +155,6 @@
 	$s_plugin_Honey_warning='Advertencia';
 	$s_plugin_Honey_error='Error';
 	$s_plugin_Honey_congratulations='Felicitaciones';
+	$s_plugin_Honey_the_file='El archivo ';
+	$s_plugin_Honey_file_error=' supera el tamaño permitido y no pudo ser guardado.';
+	$s_plugin_Honey_file_max_size='Máximo tamaño de archivo: ';

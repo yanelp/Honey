@@ -36,13 +36,27 @@ $t_query_usecase = 'UPDATE '.$t_repo_table.' set active=1
 $g_result_delete_usecase=db_query_bound( $t_query_usecase, array( $id_usecase) );
 
 
-echo "<p>".plugin_lang_get('deleted_data')."</p>";
+//echo "<p>".plugin_lang_get('deleted_data')."</p>";
+?>
+<div align='center'>
+<?php showMessage(plugin_lang_get('deleted_data'), 'congratulations')?>
+</table>
+</div>
+<?php
 
 $t_page=plugin_page('view_cu_page');
 echo '<br><br>';
-echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
+//echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
+?>
+<table align='center'>
+<tr>
+<td class='center'>
+<?php echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";?>
+</td>
+</tr>
+</table>
 
-echo "<br>";
+<?php echo "<br>";
 
 $t_url= plugin_page( 'view_cu_page' );
 

@@ -301,8 +301,7 @@ if($count>0){
 				
 						<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 						<table>
-							<tr><td><?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
-							<?php echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?></td></tr>
+							<tr><td>(<?php echo plugin_lang_get('file_max_size' ) ?> 990KB</span>)</td></tr>
 							<tr>
 								<td>
 									<?php

@@ -32,9 +32,25 @@ $t_page = plugin_page( 'update_usecase_page' );
 
 if ( is_blank( $name ) || is_blank( $mainscenario )) {
 //			trigger_error( ERROR_GENERIC, ERROR );
-echo plugin_lang_get('must_uc');
+//echo plugin_lang_get('must_uc');
+?>
+<div align='center'>
+<?php showMessage(plugin_lang_get('must_uc'), 'error')?>
+</table>
+</div>
+<?php
+
 echo '<br><br>';
-echo "<a href=\"$t_page&id_usecase=$id_usecase\">".plugin_lang_get('back')."</a>";
+//echo "<a href=\"$t_page&id_usecase=$id_usecase\">".plugin_lang_get('back')."</a>";
+?>
+<table align='center'>
+<tr>
+<td class='center'>
+<?php echo "<a href=\"$t_page&id_usecase=$id_usecase\">".plugin_lang_get('back')."</a>";?>
+</td>
+</tr>
+</table>
+<?php
 echo "<br>";
 html_page_bottom1( );
 die();
@@ -53,9 +69,26 @@ $count = db_num_rows( $result );
 $row = db_fetch_array( $result );
 
 if($count>0){
-	echo plugin_lang_get('uc_exist');
+	//echo plugin_lang_get('uc_exist');
+	?>
+<div align='center'>
+<?php showMessage(plugin_lang_get('uc_exist'), 'error')?>
+</table>
+</div>
+<?php
 	echo '<br><br>';
-	echo "<a href=\"$t_page&id_usecase=$id_usecase\">".plugin_lang_get('back')."</a>";
+	//echo "<a href=\"$t_page&id_usecase=$id_usecase\">".plugin_lang_get('back')."</a>";
+	?>
+<table align='center'>
+<tr>
+<td class='center'>
+<?php echo "<a href=\"$t_page&id_usecase=$id_usecase\">". plugin_lang_get('back')."</a>";
+	?>
+</td>
+</tr>
+</table>
+
+<?php
 	echo "<br>";
 	html_page_bottom1( );
 	die();
@@ -244,11 +277,27 @@ for( $i = 0; $i < $cant_files; $i++ ) {
 
 /*save */
 
-echo "<p>".plugin_lang_get('updated_data')."</p>";
+//echo "<p>".plugin_lang_get('updated_data')."</p>";
+?>
+<div align='center'>
+<?php showMessage(plugin_lang_get('updated_data'), 'congratulations')?>
+</table>
+</div>
+<?php
 
 $t_page=plugin_page('view_cu_page');
 echo '<br><br>';
-echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
+//echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
+?>
+<table align='center'>
+<tr>
+<td class='center'>
+<?php echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";?>
+</td>
+</tr>
+</table>
+
+<?php
 
 echo "<br>";
 

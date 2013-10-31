@@ -33,9 +33,25 @@ $t_page = plugin_page( 'new_usecase_page' );
 
 if ( is_blank( $name ) || is_blank( $mainscenario )) {
 //			trigger_error( ERROR_GENERIC, ERROR );
-echo  plugin_lang_get('must_uc');
+//echo  plugin_lang_get('must_uc');
+?>
+<div align='center'>
+<?php showMessage(plugin_lang_get('must_uc'), 'error')?>
+</table>
+</div>
+<?php
 echo '<br><br>';
-echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";
+//echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";
+?>
+<table align='center'>
+<tr>
+<td class='center'>
+<?php echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";?>
+</td>
+</tr>
+</table>
+
+<?php
 echo "<br>";
 html_page_bottom1( );
 die();
@@ -54,9 +70,26 @@ $count = db_num_rows( $result );
 $row = db_fetch_array( $result );
 
 if($count>0){
-	echo  plugin_lang_get('uc_exist');
+	//echo  plugin_lang_get('uc_exist');
+	?>
+<div align='center'>
+<?php showMessage(plugin_lang_get('uc_exist'), 'error')?>
+</table>
+</div>
+<?php
 	echo '<br><br>';
-	echo "<a href=\"$t_page&id_usecase=$id_usecase\">". plugin_lang_get('back')."</a>";
+	//echo "<a href=\"$t_page&id_usecase=$id_usecase\">". plugin_lang_get('back')."</a>";
+	?>
+<table align='center'>
+<tr>
+<td class='center'>
+<?php echo "<a href=\"$t_page&id_usecase=$id_usecase\">". plugin_lang_get('back')."</a>";
+	?>
+</td>
+</tr>
+</table>
+
+<?php
 	echo "<br>";
 	html_page_bottom1( );
 	die();
@@ -179,13 +212,20 @@ for($i=0; $i<$row_number_uc_includes; $i++){
 
 $f_files=gpc_get_file( 'ufile', null );
 
-//echo "count( $f_files ): ".count( $f_files );
+//echo "count( f_files ): ".count( $f_files );
 
 $cant_files=$_REQUEST['row_number_file'];
 //echo $cant_files;
 
 for( $i = 0; $i < $cant_files ; $i++ ) {
+
 	
+		/*echo $f_files['name'][$i]."/<br>";
+		echo $f_files['tmp_name'][$i]."/<br>";
+		echo $f_files['type'][$i]."/<br>";
+		echo $f_files['error'][$i]."/<br>";
+		echo $f_files['size'][$i]."/<br>";*/
+
 		if( !empty( $f_files['name'][$i] ) ) {
 			$t_file['name']     = $f_files['name'][$i];
 			$t_file['tmp_name'] = $f_files['tmp_name'][$i];
@@ -193,30 +233,46 @@ for( $i = 0; $i < $cant_files ; $i++ ) {
 			$t_file['error']    = $f_files['error'][$i];
 			$t_file['size']     = $f_files['size'][$i];
 
-	      // echo "size: ".$t_file['size']."-";
-		//	if($t_file['size']<=500000){
+	       //echo "size: ".$t_file['size']."-";
+			//$t_file['size']=2097152;
+			//$t_max_file_size = (int) min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+			//echo $t_max_file_size."-".$t_file['size']."/";
+
+			if($t_file['size']<=1012790){
 				attach_add( $id_usecase, $t_file );
-				//echo "add: ".$t_file['name']."<br>";
-			//}
-			//else{ echo "El archivo ".$t_file['name']." supera el tamaño permitido y no pudo ser guardado.<br>";}
+			}
+			else{ echo plugin_lang_get('the_file').$t_file['name'].plugin_lang_get('file_error');}
 		}
 	}//for
 
 
 /*save */
 
-echo "<p>". plugin_lang_get('saved_data')."</p>";
+//echo "<p>". plugin_lang_get('saved_data')."</p>";
 
+?>
+<div align='center'>
+<?php showMessage(plugin_lang_get('saved_data'), 'congratulations')?>
+</table>
+</div>
+<?php
 
 echo '<br><br>';
-echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";
+?>
+<table align='center'>
+<tr>
+<td class='center'>
+<?php echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";?>
+</td>
+</tr>
+</table>
 
-echo "<br>";
+<?php echo "<br>";
 
 $t_url= plugin_page( 'view_cu_page' );
 
 html_page_bottom( );
 
-//html_meta_redirect_honey( $t_url, $p_time = null);
+html_meta_redirect_honey( $t_url, $p_time = null);
 
 ?>
