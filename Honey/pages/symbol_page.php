@@ -124,13 +124,26 @@ if($count>0){
 
 <?php
 }//if existe el simbolo buscado
-else{echo "<p>".plugin_lang_get('symbol_do_not_exist')."</p>";
-echo '<br><br>';
-$t_page=plugin_page("view_symbols_page");
-echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
-echo "<br>";}
-?>
-<?php
+else{?>
+	<div align='center'>
+	<?php showMessage(plugin_lang_get('symbol_do_not_exist'), 'error')?>
+	</table>
+	</div>
+	<?php
+	echo '<br><br>';
+	$t_page=plugin_page("view_symbols_page");
+	?>
+	<table align='center'>
+	<tr>
+	<td class='center'>
+	<?php echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";?>
+	</td>
+	</tr>
+	</table>
+
+	<?php
+	echo "<br>";
+}
 
 html_page_bottom1( );
 

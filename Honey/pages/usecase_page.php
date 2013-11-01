@@ -491,15 +491,27 @@ if($count>0){
 
 <?php
 }//if existe el uc buscado
-else{echo "<p>".plugin_lang_get('uc_do_not_exist')."</p>";
-echo '<br><br>';
-$t_page=plugin_page("view_cu_page");
-echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";
-echo "<br>";}
-?>
+else{?>
+	<div align='center'>
+	<?php showMessage(plugin_lang_get('uc_do_not_exist'), 'error')?>
+	</table>
+	</div>
+	<?php
+	echo '<br><br>';
+	$t_page=plugin_page("view_cu_page");
+	?>
+	<table align='center'>
+	<tr>
+	<td class='center'>
+	<?php echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";?>
+	</td>
+	</tr>
+	</table>
 
-<?php
-
+	<?php
+	echo "<br>";
+}
+	
 html_page_bottom1( );
 
 ?>

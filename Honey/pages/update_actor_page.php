@@ -76,14 +76,27 @@ $t_page_delete = plugin_page( "delete_actor_page" );
 
 <?php
 }//if existe el actor buscado
-else{echo "<p>".plugin_lang_get('actor_do_not_exist')."</p>";
-echo '<br><br>';
-$t_page=plugin_page("view_actors_page");
-echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";
-echo "<br>";}
-?>
+else{?>
 
-<?php
+<div align='center'>
+	<?php showMessage(plugin_lang_get('actor_do_not_exist'), 'error')?>
+	</table>
+	</div>
+	<?php
+	echo '<br><br>';
+	$t_page=plugin_page("view_actors_page");
+	?>
+	<table align='center'>
+	<tr>
+	<td class='center'>
+	<?php echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";?>
+	</td>
+	</tr>
+	</table>
+
+	<?php
+	echo "<br>";
+}
 
 html_page_bottom1( );
 

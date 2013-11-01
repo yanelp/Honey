@@ -77,14 +77,27 @@ $t_page_delete= $t_page_delete."&id_rule=".$id_rule;
 
 <?php
 }//if existe la regla buscada
-else{echo "<p>".plugin_lang_get('rule_do_not_exist')."</p>";
-echo '<br><br>';
-$t_page=plugin_page("view_rules_page");
-echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";
-echo "<br>";}
-?>
+else{	?>
+	
+	<div align='center'>
+	<?php showMessage(plugin_lang_get('rule_do_not_exist'), 'error')?>
+	</table>
+	</div>
+	<?php
+	echo '<br><br>';
+	$t_page=plugin_page("view_rules_page");
+	?>
+	<table align='center'>
+	<tr>
+	<td class='center'>
+	<?php echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";?>
+	</td>
+	</tr>
+	</table>
 
-<?php
+	<?php
+	echo "<br>";
+	}
 
 html_page_bottom1( );
 
