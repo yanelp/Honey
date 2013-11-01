@@ -13,67 +13,70 @@ $row_name='';
 <br/>
 <?php
 
+/*******Obtengo los datos de la regla***********/
+
 $name=trim($_REQUEST['rule_name']);
 $descrip=trim($_REQUEST['rule_descrip']);
 
 $operation=$_REQUEST['operation'];
 $id_rule=$_REQUEST['id_rule'];
 
-if ( is_blank( $name )  ) {
-//			trigger_error( ERROR_GENERIC, ERROR );
-echo plugin_lang_get('must_name');
+/************Verifico que estén los datos obligarorios completos***********/
 
-if($operation==0){//new
-	$t_page = plugin_page( 'new_rule_page' );
-}
-else{//update
-	$t_page= plugin_page( 'update_rule_page' );	;
-	$t_page=$t_page."&id_rule=".$id_rule;
-}
+if ( is_blank( $name )  ) {?>
 
-echo '<br><br>';
-echo "<a href=\"$t_page\">".plugin_lang_get('must_backname')."</a>";
-echo "<br>";
-html_page_bottom1( );
-
-die();
-		}
-
-
-if($operation==1){//es update
-
-	//actor update
-	$t_repo_table = plugin_table( 'rule', 'honey' );
-
-	$t_query_rule = 'UPDATE '.$t_repo_table.' set description= ' . db_param() . ', name= ' . db_param() . '
-					   where id= ' . db_param();
-	$g_result_update_rule=db_query_bound( $t_query_rule, array( $descrip,$name, $id_rule)  );
-
-	echo "<p>".plugin_lang_get('saved_data')."</p>";
+	<div align='center'>
+	<?php showMessage(plugin_lang_get('must_name'), 'error')?>
+	</table>
+	</div>
+	<?php
 
 	if($operation==0){//new
 		$t_page = plugin_page( 'new_rule_page' );
 	}
 	else{//update
-		$t_page= plugin_page( 'update_rule_page' );	
+		$t_page= plugin_page( 'update_rule_page' );	;
 		$t_page=$t_page."&id_rule=".$id_rule;
 	}
 
 	echo '<br><br>';
-	echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
-	echo '<br>';
+	?>
+	<table align='center'>
+	<tr>
+	<td class='center'>
+	<?php echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";?>
+	</td>
+	</tr>
+	</table>
 
-	$t_url= plugin_page( 'view_rules_page' );
+	<?php
+	echo "<br>";
+	html_page_bottom1( );
 
-	html_page_bottom( );
+	die();
+}
 
-	html_meta_redirect_honey( $t_url, $p_time = null);
 
-}//ES UPDATE
+/**********Verifico que la regla no existe*****************/
 
-else{//busco si la regla ya existe
+$t_repo_table = plugin_table( 'rule', 'honey' );
 
-	$t_repo_table = plugin_table( 'rule', 'honey' );
+if($operation==1){//es update
+
+	/*******Verifico que no existe teniendo en cuanta la regla que se está modificando************/
+
+	$t_query_rule_name = 'select name FROM '.$t_repo_table.' 
+						WHERE id_project=' . db_param() .' and active = 0 and name=' . db_param().' and id!='. db_param();
+		
+	$g_result_rule_name=db_query_bound( $t_query_rule_name, array( $t_project_id, $name, $id_rule) );
+
+	$row = db_fetch_array( $g_result_rule_name );
+
+	$row_name=$row['name'];
+}
+else{
+
+	/*******Verifico que no existe la regla************/
 
 	$t_query_rule_name = 'select name FROM '.$t_repo_table.' WHERE id_project=' . db_param() .' and active = 0 and name=' . db_param();
 		
@@ -83,19 +86,78 @@ else{//busco si la regla ya existe
 
 	$row_name=$row['name'];
 
-	if($row_name==''){//si no existe la regla
+}
 
-		//actor insert
+if($row_name==''){//la regla no existe
+
+	if($operation==1){//es update
+
+		$t_repo_table = plugin_table( 'rule', 'honey' );
+
+		$t_query_rule = 'UPDATE '.$t_repo_table.' set description= ' . db_param() . ', name= ' . db_param() . '
+						   where id= ' . db_param();
+		$g_result_update_rule=db_query_bound( $t_query_rule, array( $descrip,$name, $id_rule)  );
+
+		?>
+		<div align='center'>
+		<?php showMessage(plugin_lang_get('saved_data'), 'congratulations')?>
+		</table>
+		</div>
+		<?php
+
+
+	}//ES UPDATE
+
+	else{//es insert
+
 		$t_repo_table = plugin_table( 'rule', 'honey' );
 
 		$t_query_rule = 'INSERT INTO '.$t_repo_table.' (name, description,  id_project )
 					VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 		$g_result_insert_rule=db_query_bound( $t_query_rule, array( $name,$descrip, $t_project_id)  );
 
+		?>
+		<div align='center'>
+		<?php showMessage(plugin_lang_get('saved_data'), 'congratulations')?>
+		</table>
+		</div>
+		<?php
+
+	}//es insert
 
 
-		echo "<p>".plugin_lang_get('saved_data')."</p>";
+	$t_page = plugin_page( 'new_rule_page' );
 
+	echo '<br><br>';
+	?>
+	<table align='center'>
+	<tr>
+	<td class='center'>
+	<?php echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";?>
+	</td>
+	</tr>
+	</table>
+
+	<?php
+	echo '<br>';
+
+	$t_url= plugin_page( 'view_rules_page' );
+	html_page_bottom( );
+
+	html_meta_redirect_honey( $t_url, $p_time = null);
+
+
+}//si no existe el actor
+
+else{//el actor esta repetido
+
+		?>
+	
+		<div align='center'>
+		<?php showMessage(plugin_lang_get('rule_exist'), 'error')?>
+		</table>
+		</div>
+		<?php
 
 		if($operation==0){//new
 			$t_page = plugin_page( 'new_rule_page' );
@@ -106,27 +168,17 @@ else{//busco si la regla ya existe
 		}
 
 		echo '<br><br>';
-		echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
+		?>
+		<table align='center'>
+		<tr>
+		<td class='center'>
+		<?php echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";?>
+		</td>
+		</tr>
+		</table>
+
+		<?php
 		echo '<br>';
-
-		$t_url= plugin_page( 'view_rules_page' );
-
-		html_page_bottom( );
-
-		html_meta_redirect_honey( $t_url, $p_time = null);
-
-
-	}//si no existe el actor
-	else{//el actor esta repetido
-
-		echo  "<p>".plugin_lang_get('rule_exist')."</p>";
-
-		$t_page = plugin_page( 'new_rule_page' );
-
-		echo '<br><br>';
-		echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
-		echo '<br>';
-	}
 
 }
 

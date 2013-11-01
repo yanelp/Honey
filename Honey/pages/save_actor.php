@@ -13,67 +13,70 @@ $row_name='';
 <br/>
 <?php
 
+/********Obtengo todos los datos del actor**********/
+
 $name=trim($_REQUEST['actor_name']);
 $descrip=trim($_REQUEST['actor_descrip']);
 
 $operation=$_REQUEST['operation'];
 $id_actor=$_REQUEST['id_actor'];
 
-if ( is_blank( $name )  ) {
-//			trigger_error( ERROR_GENERIC, ERROR );
-echo plugin_lang_get('must_name');
 
-if($operation==0){//new
-	$t_page = plugin_page( 'new_actor_page' );
-}
-else{//update
-	$t_page= plugin_page( 'update_actor_page' );	;
-	$t_page=$t_page."&id_actor=".$id_actor;
-}
+/************Verifico que los datos obligatorios estén completos*********/
 
-echo '<br><br>';
-echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
-echo "<br>";
-html_page_bottom1( );
-
-die();
-		}
-
-
-if($operation==1){//es update
-
-	//actor update
-	$t_repo_table = plugin_table( 'actor', 'honey' );
-
-	$t_query_actor = 'UPDATE '.$t_repo_table.' set description= ' . db_param() . ', name= ' . db_param() . '
-					   where id= ' . db_param();
-	$g_result_update_actor=db_query_bound( $t_query_actor, array( $descrip,$name, $id_actor)  );
-
-	echo "<p>Saved data</p>";
+if ( is_blank( $name )  ) {?>
+	
+	<div align='center'>
+	<?php showMessage(plugin_lang_get('must_name'), 'error')?>
+	</table>
+	</div>
+	<?php
 
 	if($operation==0){//new
 		$t_page = plugin_page( 'new_actor_page' );
 	}
 	else{//update
-		$t_page= plugin_page( 'update_actor_page' );	
-		$t_page=$t_page."&id_symbol=".$id_actor;
+		$t_page= plugin_page( 'update_actor_page' );	;
+		$t_page=$t_page."&actor_id=".$id_actor;
 	}
 
 	echo '<br><br>';
-	echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
-	echo '<br>';
+	?>
+	<table align='center'>
+	<tr>
+	<td class='center'>
+	<?php echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";?>
+	</td>
+	</tr>
+	</table>
 
-	$t_url= plugin_page( 'view_actors_page' );
+	<?php
+	echo "<br>";
+	html_page_bottom1( );
 
-	html_page_bottom( );
+	die();
+}
 
-	html_meta_redirect_honey( $t_url, $p_time = null);
+/********Verifico que el actor no existe ************/
 
-}//ES UPDATE
+$t_repo_table = plugin_table( 'actor', 'honey' );
 
-else{//busco si el simbolo ya existe
+if($operation==1){//es update
 
-	$t_repo_table = plugin_table( 'actor', 'honey' );
+	/***********Busco repetido teniendo en cuenta que no sea el actor que está siendo modificado**************/
+
+	$t_query_actor_name = 'select name FROM '.$t_repo_table.' WHERE id_project=' . db_param() .' and active = 0 and name=' . db_param().' and id!='. db_param();
+		
+	$g_result_actor_name=db_query_bound( $t_query_actor_name, array( $t_project_id, $name, $id_actor) );
+
+	$row = db_fetch_array( $g_result_actor_name );
+
+	$row_name=$row['name'];
+
+}
+else{//es insert
+
+	/*********Busco si está repetido***************/
 
 	$t_query_actor_name = 'select name FROM '.$t_repo_table.' WHERE id_project=' . db_param() .' and active = 0 and name=' . db_param();
 		
@@ -83,30 +86,61 @@ else{//busco si el simbolo ya existe
 
 	$row_name=$row['name'];
 
-	if($row_name==''){//si no existe el actor
+}
 
-		//actor insert
+if($row_name==''){//el actor no existe
+
+	if($operation==1){//es update
+
+		//actor update
+		$t_repo_table = plugin_table( 'actor', 'honey' );
+
+		$t_query_actor = 'UPDATE '.$t_repo_table.' set description= ' . db_param() . ', name= ' . db_param() . '
+					   where id= ' . db_param();
+		$g_result_update_actor=db_query_bound( $t_query_actor, array( $descrip,$name, $id_actor)  );
+
+		?>
+		
+		<div align='center'>
+		<?php showMessage(plugin_lang_get('saved_data'), 'congratulations')?>
+		</table>
+		</div>
+		
+
+	<?php }//ES UPDATE
+
+	else{//es insert
+
 		$t_repo_table = plugin_table( 'actor', 'honey' );
 
 		$t_query_actor = 'INSERT INTO '.$t_repo_table.' (name, description, id_project )
 					VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 		$g_result_insert_actor=db_query_bound( $t_query_actor, array( $name,$descrip, $t_project_id)  );
 
+		?>
+	
+		<div align='center'>
+		<?php showMessage(plugin_lang_get('saved_data'), 'congratulations')?>
+		</table>
+		</div>
+		<?php
 
-
-		echo "<p>".plugin_lang_get('saved_data')."</p>";
-
-
-		if($operation==0){//new
-			$t_page = plugin_page( 'new_actor_page' );
-		}
-		else{//update
-			$t_page= plugin_page( 'update_actor_page' );	
-			$t_page=$t_page."&id_symbol=".$id_actor;
-		}
+	}//es insert
+		
+			
+		$t_page = plugin_page( 'new_actor_page' );
 
 		echo '<br><br>';
-		echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
+		?>
+		<table align='center'>
+		<tr>
+		<td class='center'>
+		<?php echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";?>
+		</td>
+		</tr>
+		</table>
+
+		<?php
 		echo '<br>';
 
 		$t_url= plugin_page( 'view_actors_page' );
@@ -116,17 +150,35 @@ else{//busco si el simbolo ya existe
 		html_meta_redirect_honey( $t_url, $p_time = null);
 
 
-	}//si no existe el actor
-	else{//el actor esta repetido
+}//si no existe el actor
+else{//el actor esta repetido
 
-		echo  "<p>".plugin_lang_get('actor_exist')."</p>";
-
+	?>		
+	<div align='center'>
+	<?php showMessage(plugin_lang_get('actor_exist'), 'error')?>
+	</table>
+	</div>
+	<?php
+	if($operation==0){//insert
 		$t_page = plugin_page( 'new_actor_page' );
-
-		echo '<br><br>';
-		echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";
-		echo '<br>';
 	}
+	else{//update
+		$t_page= plugin_page( 'update_actor_page' );	
+		$t_page=$t_page."&actor_id=".$id_actor;
+	}
+	echo '<br><br>';
+	?>
+	
+	<table align='center'>
+	<tr>
+	<td class='center'>
+	<?php echo "<a href=\"$t_page\">".plugin_lang_get('back')."</a>";?>
+	</td>
+	</tr>
+	</table>
 
-}
+	<?php
+	echo '<br>';
+	
+}//actor repetido
 

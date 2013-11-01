@@ -54,7 +54,7 @@
 	$s_plugin_Honey_actor='Actor/s';
 	$s_plugin_Honey_uc_manual='Manually created Use Case';
 	$s_plugin_Honey_derivation_uc_extend='Some of the use cases that you want to delete extend to other non-derivative.';
-	$s_plugin_Honey_derivation_uc_include='Some of the use cases that you want to delete are included to other non-derivative.';
+	$s_plugin_Honey_derivation_uc_include='Some of the use cases that you want to delete are included in other non-derivative.';
 	$s_plugin_Honey_derivation_uc_be_erased='Use Case derived  to be erased';
 	$s_plugin_Honey_derivation_not_condition='Not Condition';
 	$s_plugin_Honey_derivation_pre_condition='Precondition';
@@ -79,7 +79,7 @@
 	$s_plugin_Honey_usecase_referenced_extend='extends the folow Use Cases:';
 	$s_plugin_Honey_usecase_referenced_include='includes the folow Use Cases:';
 	$s_plugin_Honey_dictionary_derived='The dictionary of the project has already been derived.';
-	$s_plugin_Honey_previous_derivation='Do you want nullify the previous derivation?';
+	$s_plugin_Honey_previous_derivation='Do you want to nullify the previous derivation?';
 	$s_plugin_Honey_sure_derivation='Are you sure you wish to do the derivation?';
 	$s_plugin_Honey_yes='Yes';
 	$s_plugin_Honey_no='No';

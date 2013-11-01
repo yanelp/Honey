@@ -23,11 +23,25 @@ $t_query_rule = 'UPDATE '.$t_repo_table.' set active=1
 $g_result_delet =db_query_bound( $t_query_rule, array( $id_rule) );
 
 
-echo "<p>".plugin_lang_get('deleted_data')."</p>";
+?>
+<div align='center'>
+<?php showMessage(plugin_lang_get('deleted_data'), 'congratulations')?>
+</table>
+</div>
+<?php
 
 $t_page=plugin_page('view_rules_page');
 echo '<br><br>';
-echo "<a href=\"$t_page\">plugin_lang_get('back')</a>";
+?>
+<table align='center'>
+<tr>
+<td class='center'>
+<?php echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";?>
+</td>
+</tr>
+</table>
+
+<?php
 
 echo "<br>";
 

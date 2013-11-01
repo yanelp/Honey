@@ -183,7 +183,7 @@ if( $count_cu_include >0 ){
 <br><table class="width90">
 <tr  class="row-category">
 	<td colspan="2"> 
-	<?php echo plugin_lang_get('derivation_uc_be_erased');?>
+	<?php //echo plugin_lang_get('derivation_uc_be_erased');?>
 	<?php echo plugin_lang_get('derivation_uc_include');?>
 	</td>
 </tr>

@@ -42,28 +42,29 @@ $t_page_y =  $t_page_y."&id_derivation=".$id_derivation;
 
 <form id="form1" action="<?php echo plugin_page($t_page); ?>" method="POST" enctype="multipart/form-data"> 
 
-<table class="width90">
-<tr class="row-category">
-<td> 
-
 <?php
 
 if ($count > 0){
 
-?>
-<?php echo plugin_lang_get('dictionary_derived')?><br>
-<?php echo plugin_lang_get('previous_derivation')?>
-<?php 
-
+	?>
+	<div align='center'>
+	<?php showMessage(plugin_lang_get('dictionary_derived')." <br>".plugin_lang_get('previous_derivation'), 'warning')?>
+	</table>
+	</div>
+	
+	<?php //echo plugin_lang_get('dictionary_derived')?><br>
+	<?php //echo plugin_lang_get('previous_derivation')?>
+	<?php 
 }
 
 else{
 
-?>
-
-<?php echo plugin_lang_get('sure_derivation')?>
-
-<?php
+	?>
+	<div align='center'>
+	<?php showMessage(plugin_lang_get('sure_derivation'), 'warning')?>
+	</table>
+	</div>
+	<?php
 
 }
 

@@ -64,7 +64,7 @@ if($count>0){
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td class="category"><?php echo plugin_lang_get('ID')?></td><td><?php echo $id_sym ?></td>
+			<td class="category" width='20%'><?php echo plugin_lang_get('ID')?></td><td><?php echo $id_sym ?></td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td class="category"><?php echo plugin_lang_get('name')?></td><td><?php echo $name ?></td>
