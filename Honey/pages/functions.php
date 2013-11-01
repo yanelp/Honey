@@ -704,7 +704,7 @@ function actors_usecase($actores, $verb_id, $actores_id, $id_usecase, $symbol_ac
 }//function
 
 function path_file($name_file){
-
+    
 	$tpage=   dirname( __FILE__ ) . DIRECTORY_SEPARATOR ;
 	$tpage=str_replace('\\', '/', $tpage);
 	$words = preg_split('[/]', $tpage);

@@ -52,12 +52,6 @@ EVENT_LAYOUT_RESOURCES
 </div>
 
 </form>
-<?php
-
-html_page_bottom1( );
-
-?>
-
 
 <?php
 
