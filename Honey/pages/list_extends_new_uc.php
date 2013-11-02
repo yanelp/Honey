@@ -92,6 +92,6 @@ $ini=$ini+ $TAMANO_PAGINA;}//for ?>
 
 <table align='center'>
 <tr><td>
-<p id='texto2'> 1 <a style="text-decoration:none" href="javascript:mostrarCapaExtends( <?php echo 2?>, <?php echo $total_pag_ex;?> )";><?php echo $i;?> >> </a></p>
+<p id='texto2'><?php echo plugin_lang_get('page');?> 1 <a style="text-decoration:none" href="javascript:mostrarCapaExtends( <?php echo 2?>, <?php echo $total_pag_ex;?>, '<?php echo plugin_lang_get('page');?>' )";><?php echo $i;?> >> </a></p>
 </td></tr>
 </table>

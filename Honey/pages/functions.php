@@ -1,24 +1,56 @@
 <style type="text/css">
-/*A:link,A:visited{font-style:bold;color:yellow};*/
 table.width30 { width: 30%;  border: solid 1px #000000;  } ;
+#link_actual { border-bottom:1px solid #ccc; background-color:#fff; line-height: 20px; overflow:auto; font-size:11px; font-weight:bold; }
+#link_actual a {color:red;}
 </style>
 
 <?php
+
+//Limito la cant de elementos en el paginado
+$TAMANO_PAGINA = 7;
+
 require_once( 'bug_group_action_api.php' );
 
 function print_lel_menu( $p_page = '' ) {
 
-	echo '<div align="center"><p>';
+	echo '<div align="center" ><p>';
 
-	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
-		print_bracket_link(  plugin_page( 'new_symbol_page' ), plugin_lang_get( 'Lel_symbol_link' ) );
+	if($p_page=='new'){
+		$t_link= plugin_page( 'new_symbol_page' );
+		echo '<span id="link_actual">[&#160;';
+		echo "<a  href=\"$t_link\">". plugin_lang_get( 'Lel_symbol_link' )."</a>";
+		echo '&#160;]</span> ';
 	}
-	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
-		print_bracket_link(  plugin_page( 'view_symbols_page' ), plugin_lang_get( 'Lel_view_symbols_link' ) );
+	else{
+		if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+			print_bracket_link(  plugin_page( 'new_symbol_page' ), plugin_lang_get( 'Lel_symbol_link' ) );
+		}
 	}
-	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
-		print_bracket_link(  plugin_page( 'derivation_page' ), plugin_lang_get( 'Lel_derivation_link' ) );
+	
+	if($p_page=='view'){
+		$t_link= plugin_page( 'view_symbols_page' );
+		echo '<span id="link_actual">[&#160;';
+		echo "<a  href=\"$t_link\">". plugin_lang_get( 'Lel_view_symbols_link' )."</a>";
+		echo '&#160;]</span> ';
 	}
+	else{
+		if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+			print_bracket_link(  plugin_page( 'view_symbols_page' ), plugin_lang_get( 'Lel_view_symbols_link' ) );
+		}
+	}
+
+	if($p_page=='derivation'){
+		$t_link= plugin_page( 'derivation_page' );
+		echo '<span id="link_actual">[&#160;';
+		echo "<a  href=\"$t_link\">". plugin_lang_get( 'Lel_derivation_link' )."</a>";
+		echo '&#160;]</span> ';
+	}
+	else{
+		if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+			print_bracket_link(  plugin_page( 'derivation_page' ), plugin_lang_get( 'Lel_derivation_link' ) );
+		}
+	}
+	
 
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE' );
@@ -36,6 +68,7 @@ function print_lel_menu( $p_page = '' ) {
 	}
 
 	// Plugins menu items
+	
 	foreach( $t_menu_options as $t_menu_item ) {
 		print_bracket_link_prepared( $t_menu_item );
 	}
@@ -48,23 +81,76 @@ function print_cu_menu( $p_page = '' ) {
 
 	echo '<div align="center"><p>';
 
-	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
-		print_bracket_link(  plugin_page( 'new_usecase_page' ), plugin_lang_get( 'usecase_new_link' ) );
+	if($p_page=='new_uc'){
+		$t_link= plugin_page( 'new_usecase_page' );
+		echo '<span id="link_actual">[&#160;';
+		echo "<a  href=\"$t_link\">". plugin_lang_get( 'usecase_new_link' )."</a>";
+		echo '&#160;]</span> ';
 	}
-	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
-		print_bracket_link(  plugin_page( 'view_cu_page' ), plugin_lang_get( 'usecase_view_cu_link' ) );
+	else{
+		if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+			print_bracket_link(  plugin_page( 'new_usecase_page' ), plugin_lang_get( 'usecase_new_link' ) );
+		}
 	}
-	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
-		print_bracket_link(  plugin_page( 'new_rule_page' ), plugin_lang_get( 'new_rule_link' ) );
+
+	if($p_page=='view_uc'){
+		$t_link= plugin_page( 'view_cu_page' );
+		echo '<span id="link_actual">[&#160;';
+		echo "<a  href=\"$t_link\">". plugin_lang_get( 'usecase_view_cu_link' )."</a>";
+		echo '&#160;]</span> ';
 	}
-	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
-		print_bracket_link(  plugin_page( 'view_rules_page' ), plugin_lang_get( 'view_rule_link' ) );
+	else{
+		if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+			print_bracket_link(  plugin_page( 'view_cu_page' ), plugin_lang_get( 'usecase_view_cu_link' ) );
+		}
 	}
-	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
-		print_bracket_link(  plugin_page( 'new_actor_page' ), plugin_lang_get( 'new_actor_link' ) );
+
+	if($p_page=='new_rule'){
+		$t_link= plugin_page( 'new_rule_page' );
+		echo '<span id="link_actual">[&#160;';
+		echo "<a  href=\"$t_link\">". plugin_lang_get( 'new_rule_link' )."</a>";
+		echo '&#160;]</span> ';
 	}
-	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
-		print_bracket_link(  plugin_page( 'view_actors_page' ), plugin_lang_get( 'view_actor_link' ) );
+	else{
+		if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+			print_bracket_link(  plugin_page( 'new_rule_page' ), plugin_lang_get( 'new_rule_link' ) );
+		}
+	}
+
+	if($p_page=='view_rule'){
+		$t_link= plugin_page( 'view_rules_page' );
+		echo '<span id="link_actual">[&#160;';
+		echo "<a  href=\"$t_link\">". plugin_lang_get( 'view_rule_link' )."</a>";
+		echo '&#160;]</span> ';
+	}
+	else{
+		if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+			print_bracket_link(  plugin_page( 'view_rules_page' ), plugin_lang_get( 'view_rule_link' ) );
+		}
+	}
+
+	if($p_page=='new_actor'){
+		$t_link= plugin_page( 'new_actor_page' );
+		echo '<span id="link_actual">[&#160;';
+		echo "<a  href=\"$t_link\">". plugin_lang_get( 'new_actor_link' )."</a>";
+		echo '&#160;]</span> ';
+	}
+	else{
+		if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+			print_bracket_link(  plugin_page( 'new_actor_page' ), plugin_lang_get( 'new_actor_link' ) );
+		}
+	}
+
+	if($p_page=='view_actor'){
+		$t_link= plugin_page( 'view_actors_page' );
+		echo '<span id="link_actual">[&#160;';
+		echo "<a  href=\"$t_link\">". plugin_lang_get( 'view_actor_link' )."</a>";
+		echo '&#160;]</span> ';
+	}
+	else{
+		if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+			print_bracket_link(  plugin_page( 'view_actors_page' ), plugin_lang_get( 'view_actor_link' ) );
+		}
 	}
 
 	# Plugin / Event added options

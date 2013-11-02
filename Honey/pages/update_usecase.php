@@ -270,8 +270,11 @@ for( $i = 0; $i < $cant_files; $i++ ) {
 			$t_file['type']     = $f_files['type'][$i];
 			$t_file['error']    = $f_files['error'][$i];
 			$t_file['size']     = $f_files['size'][$i];
-
-			attach_add( $id_usecase, $t_file );
+			
+			if($t_file['size']<=1012790){
+				attach_add( $id_usecase, $t_file );
+			}
+			else{ echo plugin_lang_get('the_file').$t_file['name'].plugin_lang_get('file_error');}
 		}
 	}
 

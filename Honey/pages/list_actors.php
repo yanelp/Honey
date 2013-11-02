@@ -107,6 +107,6 @@ $ini=$ini+ $TAMANO_PAGINA;}//for ?>
 
 <table align='center'>
 <tr><td>
-<p id='texto'> 1 <a style="text-decoration:none" href="javascript:mostrarCapaActor( <?php echo 2?>, <?php echo $total_pag_actors;?> )";><?php echo $i;?> >> </a></p>
+<p id='texto'> <?php echo plugin_lang_get('page')?> 1 <a style="text-decoration:none" href="javascript:mostrarCapaActor( <?php echo 2?>, <?php echo $total_pag_actors;?>, '<?php echo plugin_lang_get('page')?>' )";><?php echo $i;?> >> </a></p>
 </td></tr>
 </table>

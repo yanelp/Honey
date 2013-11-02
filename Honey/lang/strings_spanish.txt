@@ -4,7 +4,7 @@
 	$s_plugin_Honey_description = 'Módulo que incorpora LEL y trazabilidad a MantisBT';
 	$s_plugin_Honey_lel_link = 'LEL';
 	$s_plugin_Honey_view_rule_link = 'Ver Reglas';
-	$s_plugin_Honey_new_rule_link = 'Nueva Regla';
+	$s_plugin_Honey_newa_rule_link = 'Nueva Regla';
 	$s_plugin_Honey_new_actor_link = 'Nuevo Actor';
 	$s_plugin_Honey_view_actor_link = 'Ver Actores';
 	$s_plugin_Honey_Lel_symbol_link='Nuevo Símbolo';
@@ -123,7 +123,9 @@
 	$s_plugin_Honey_attach='Archivos Adjuntos';
 	$s_plugin_Honey_add_attach='Seleccionar Archivos adjuntos';
 	$s_plugin_Honey_add_file='Agregar Archivo';
-	$s_plugin_Honey_add='Agregar';
+	$s_plugin_Honey_add_synonymous='Agregar sinónimo';
+	$s_plugin_Honey_add_impact='Agregar impacto';
+	$s_plugin_Honey_button_delete='Eliminar';
 	$s_plugin_Honey_must_name='Debe ingresar el nombre';
 	$s_plugin_Honey_must_note_text='Debe ingresar el texto de la nota';
 	$s_plugin_Honey_must_symbol='Debe ingresar el nombre, la noción y el tipo';
@@ -158,3 +160,11 @@
 	$s_plugin_Honey_the_file='El archivo ';
 	$s_plugin_Honey_file_error=' supera el tamaño permitido y no pudo ser guardado.';
 	$s_plugin_Honey_file_max_size='Máximo tamaño de archivo: ';
+	$s_plugin_Honey_page='Página';
+	$s_plugin_Honey_button_atl_course='(Escriba el texto del curso alternativo y luego presione el botón "Agregar curso alternativo")';
+	$s_plugin_Honey_select_checkbox_actor='(Select the actors you want to link to de Use Case.)';
+	$s_plugin_Honey_select_checkbox_extend='(Select the use cases that the current use case extends.)';
+	$s_plugin_Honey_select_checkbox_include='(Select the use cases that the current use case includes.)';
+	$s_plugin_Honey_select_checkbox_rule='(Select the rules that the current use case must follow.)';
+	$s_plugin_Honey_add_synonimous='(Escriba un sinónimo y luego presione el botón "Agregar sinónimo".)';
+	$s_plugin_Honey_add_impact='(Escriba un impacto y luego presione el botón "Agregar impacto".)';

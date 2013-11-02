@@ -7,9 +7,7 @@ require_once( 'file_api.php' );
 
 html_page_top( plugin_lang_get( 'title' ) );
 
-print_cu_menu();
-
-$TAMANO_PAGINA=2;
+print_cu_menu('new_uc');
 
 $project_id =  helper_get_current_project();
 $id_project=$project_id;
@@ -31,13 +29,11 @@ EVENT_LAYOUT_RESOURCES
 	<tr>
 		<td class="form-title" colspan="2">
 			<input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
-			<?php //echo lang_get( 'plugin_Honey_usecase_detail' )." ".$view_id ?>
 			<?php echo plugin_lang_get( 'usecase_detail' )?>
-	       <!-- <input type="hidden" name="view_id" value="<?php echo $view_id ?>" />-->
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		   <td class="category">
+		   <td class="category" width="20%">
 		   <span class="required">*</span><?php echo plugin_lang_get('name')?>
 		</td>
 		<td>
@@ -69,20 +65,41 @@ EVENT_LAYOUT_RESOURCES
 
 	 <!--aca va la lista de actores-->
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo plugin_lang_get('actors_involved')?></td>
+		<td class="category"><?php echo plugin_lang_get('actors_involved')?>
+			<table>	
+			<tr><td>&nbsp;</td></tr>
+			<tr><td class="required">
+				 <address> <?php echo plugin_lang_get('select_checkbox_actor');?></address>
+			</td></tr>
+			</table>
+		</td>
 		<td><?php include 'list_actors.php';?></td>
 	</tr>
 
 	<!--aca van las relaciones extiende-->
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo plugin_lang_get('extends')?></td>
+		<td class="category"><?php echo plugin_lang_get('extends')?>
+			<table>	
+			<tr><td>&nbsp;</td></tr>
+			<tr><td class="required">
+				 <address> <?php echo plugin_lang_get('select_checkbox_extend');?></address>
+			</td></tr>
+			</table>
+		</td>
 		<td><?php include 'list_extends_new_uc.php';?></td>
 	</tr>
 
 	
 	<!--aca van las relaciones incluye-->
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo plugin_lang_get('includes')?></td>
+		<td class="category"><?php echo plugin_lang_get('includes')?>
+			<table>	
+			<tr><td>&nbsp;</td></tr>
+			<tr><td class="required">
+				 <address> <?php echo plugin_lang_get('select_checkbox_include');?></address>
+			</td></tr>
+			</table>
+		</td>
 		<td><?php include 'list_includes_new_uc.php';?></td>
 	</tr>
 
@@ -120,10 +137,16 @@ EVENT_LAYOUT_RESOURCES
 	  </tr>
 	   <tr <?php echo helper_alternate_class() ?>>
 		 <td class="category">  <?php echo plugin_lang_get('alt_courses');?>
+			<table>	
+			<tr><td>&nbsp;</td></tr>
+			<tr><td class="required">
+				 <address> <?php echo plugin_lang_get('button_atl_course');?></address>
+			</td></tr>
+			</table>
 		</td>
 		<td>
 	      <Textarea cols="100" rows="5" name="cursoAlternativo" id="cursoAlternativo"></Textarea>
-		  <input type='button' name='button_actor_add' value='Add alternative course' onClick="javascript:insert_row_course('table_course','cursoAlternativo',document.getElementById('cursoAlternativo').value)"/>
+		  <input type='button' name='button_actor_add' value='Add alternative course' onClick="javascript:insert_row_course('table_course','cursoAlternativo',document.getElementById('cursoAlternativo').value, '<?php echo plugin_lang_get('button_delete');?>')"/>
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
@@ -134,7 +157,14 @@ EVENT_LAYOUT_RESOURCES
 
     <!--aca van las reglas--> 
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo plugin_lang_get('assign_rules')?></td>
+		<td class="category"><?php echo plugin_lang_get('assign_rules')?>
+			<table>	
+			<tr><td>&nbsp;</td></tr>
+			<tr><td class="required">
+				 <address> <?php echo plugin_lang_get('select_checkbox_rule');?></address>
+			</td></tr>
+			</table>
+		</td>
 		<td><?php include 'list_rules_new_uc.php';?></td>
 	</tr>
 

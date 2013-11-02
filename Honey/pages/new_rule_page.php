@@ -6,7 +6,7 @@ require_once( 'core.php' );
 
 html_page_top( plugin_lang_get( 'title' ) );
 
-print_cu_menu();
+print_cu_menu('new_rule');
 
 
 $project_id =  helper_get_current_project();

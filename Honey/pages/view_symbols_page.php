@@ -4,7 +4,7 @@ require_once('functions.php');
 
 html_page_top( plugin_lang_get( 'title' ) );
 
-print_lel_menu();
+print_lel_menu('view');
 
 $order	= gpc_get_int( 'order', -1 );
 if($order==-1){$order=2;}

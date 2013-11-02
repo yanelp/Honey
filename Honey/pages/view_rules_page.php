@@ -6,7 +6,7 @@ require_once( 'core.php' );
 
 html_page_top( plugin_lang_get( 'title' ) );
 
-print_cu_menu();
+print_cu_menu('view_rule');
 
 $order	= gpc_get_int( 'order', -1 );
 if($order==-1){$order=2;}

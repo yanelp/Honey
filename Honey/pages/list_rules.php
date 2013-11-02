@@ -101,6 +101,6 @@ for($h=0;$h<$total_pag_rules;$h++){
 
 <table align='center'>
 <tr><td>
-<p id='texto4'> 1 <a style="text-decoration:none" href="javascript:mostrarCapaRule( <?php echo 2?>, <?php echo $total_pag_rules;?> )";><?php echo $i;?> >> </a></p>
+<p id='texto4'><?php echo plugin_lang_get('page');?> 1 <a style="text-decoration:none" href="javascript:mostrarCapaRule( <?php echo 2?>, <?php echo $total_pag_rules;?>, '<?php echo plugin_lang_get('page');?>' )";><?php echo $i;?> >> </a></p>
 </td></tr>
 </table>

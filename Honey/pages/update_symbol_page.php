@@ -74,23 +74,35 @@ $t_page=$t_page."&id_symbol=".$id_symbol;
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><span class="required">*</span><?php echo plugin_lang_get( 'name' )?></td>
-		<td><input type="text" name="symbol_name" id='symbol_name' size="50" value="<?php echo $name?>"/></td>
+		<td class="category" width='20%'><span class="required">*</span><?php echo plugin_lang_get( 'name' )?></td>
+		<td><input type="text" name="symbol_name" id='symbol_name' size="120" value="<?php echo $name?>"/></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo plugin_lang_get( 'synonyms' )?></td>
-		<td><input type="text" name="symbol_synonymous" id='symbol_synonymous' size="50"/>
-			<input type='button' name='button_synonymous_add' value='<?php echo plugin_lang_get('add')?>' onClick="javascript:insert_row('table_synonimous','symbol_synonymous', document.getElementById('symbol_synonymous').value)"/></td>
+		<td class="category"><?php echo plugin_lang_get( 'synonyms' )?>
+			<table>	
+			<tr><td class="required">
+				 <address> <?php echo plugin_lang_get('add_synonymous');?></address>
+			</td></tr>
+			</table>
+		</td>
+		<td><input type="text" name="symbol_synonymous" id='symbol_synonymous' size="120"/>
+			<input type='button' name='button_synonymous_add' value='<?php echo plugin_lang_get('button_add_synonymous')?>' onClick="javascript:insert_row('table_synonimous','symbol_synonymous', document.getElementById('symbol_synonymous').value, '<?php echo plugin_lang_get('button_delete');?>')"/></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">&nbsp;</td><td><table  name='table_synonimous' id='table_synonimous' ><thead></thead><tbody></tbody></table></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><span class="required">*</span><?php echo plugin_lang_get( 'notion' )?></td><td><textarea name='symbol_notion' id='symbol_notion' cols='37' rows='5'><?php echo $notion?></textarea></td>
+		<td class="category"><span class="required">*</span><?php echo plugin_lang_get( 'notion' )?></td><td><textarea name='symbol_notion' id='symbol_notion' cols='90' rows='5'><?php echo $notion?></textarea></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo plugin_lang_get( 'impact' )?></td><td><input type='text' name='symbol_impact' size="50" id='symbol_impact'/>
-		<input type='button' name='button_impact_add' value='<?php echo plugin_lang_get('add')?>' onClick="javascript:insert_row('table_impacts','symbol_impact',document.getElementById('symbol_impact').value)"/></td>
+		<td class="category"><?php echo plugin_lang_get( 'impact' )?>
+			<table>	
+			<tr><td class="required">
+				 <address> <?php echo plugin_lang_get('add_impact');?></address>
+			</td></tr>
+			</table>
+		</td><td><input type='text' name='symbol_impact' size="120" id='symbol_impact'/>
+		<input type='button' name='button_impact_add' value='<?php echo plugin_lang_get('button_add_impact')?>' onClick="javascript:insert_row('table_impacts','symbol_impact',document.getElementById('symbol_impact').value, '<?php echo plugin_lang_get('button_delete');?>')"/></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">&nbsp;</td><td><table  name='table_impacts' id='table_impacts' ><thead></thead><tbody></tbody></table></td>
@@ -123,7 +135,7 @@ $t_page=$t_page."&id_symbol=".$id_symbol;
 	?>
 	
 	<script>
-	insert_row('table_synonimous','symbol_synonymous','<?php echo $row; ?>');
+	insert_row('table_synonimous','symbol_synonymous','<?php echo $row; ?>', '<?php echo plugin_lang_get('button_delete');?>');
 	</script>
 <?php } ?>
 
@@ -132,7 +144,7 @@ $t_page=$t_page."&id_symbol=".$id_symbol;
 	?>
 	
 	<script>
-	insert_row('table_impacts','symbol_impact','<?php echo $row; ?>');
+	insert_row('table_impacts','symbol_impact','<?php echo $row; ?>', '<?php echo plugin_lang_get('button_delete');?>');
 	</script>
 <?php } ?>
 

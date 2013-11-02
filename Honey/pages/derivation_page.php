@@ -7,7 +7,7 @@ require_once( 'file_api.php' );
 html_page_top( plugin_lang_get( 'title' ) );
 auth_ensure_user_authenticated();
 
-print_lel_menu();
+print_lel_menu('derivation');
 
 EVENT_LAYOUT_RESOURCES;
 

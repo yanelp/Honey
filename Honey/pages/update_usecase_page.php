@@ -10,8 +10,6 @@ print_cu_menu();
 
 EVENT_LAYOUT_RESOURCES;
 
-//Limito la busqueda
-$TAMANO_PAGINA = 2;
 $pag_actual_actor=1;
 
 $id_usecase = gpc_get_int( 'id_usecase' );
@@ -168,19 +166,40 @@ $count_all_actors = db_num_rows( $result_all_actors );
 
 	 <!--aca va la lista de actores-->
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo plugin_lang_get('actor')?></td>
+		<td class="category"><?php echo plugin_lang_get('actor')?>
+			<table>	
+			<tr><td>&nbsp;</td></tr>
+			<tr><td class="required">
+				 <address> <?php echo plugin_lang_get('select_checkbox_actor');?></address>
+			</td></tr>
+			</table>
+		</td>
 		<td><?php include 'list_actors.php';?></td>
 	</tr>
 
 	 <!--aca van las relaciones extiende-->
 	  <tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo  plugin_lang_get('extends');?></td>
+		<td class="category"><?php echo  plugin_lang_get('extends');?>
+			<table>	
+			<tr><td>&nbsp;</td></tr>
+			<tr><td class="required">
+				 <address> <?php echo plugin_lang_get('select_checkbox_extend');?></address>
+			</td></tr>
+			</table>
+		</td>
 		<td colspan="2" class="none"><?php include 'list_extends.php';?></td>
 	  </tr>	
 
 	   <!--aca van las relaciones incluye-->
 	  <tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo  plugin_lang_get('includes');?></td>
+		<td class="category"><?php echo  plugin_lang_get('includes');?>
+			<table>	
+			<tr><td>&nbsp;</td></tr>
+			<tr><td class="required">
+				 <address> <?php echo plugin_lang_get('select_checkbox_include');?></address>
+			</td></tr>
+			</table>
+		</td>
 		<td colspan="2" class="none"><?php include 'list_includes.php';?></td>
 	  </tr>  
 	
@@ -199,7 +218,14 @@ $count_all_actors = db_num_rows( $result_all_actors );
 	
 	 <!--aca van las reglas-->
 	  <tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo  plugin_lang_get('col_rules');?></td>
+		<td class="category"><?php echo  plugin_lang_get('col_rules');?>
+			<table>	
+			<tr><td>&nbsp;</td></tr>
+			<tr><td class="required">
+				 <address> <?php echo plugin_lang_get('select_checkbox_rule');?></address>
+			</td></tr>
+			</table>
+		</td>
 		<td colspan="2" class="none"><?php include 'list_rules.php';?></td>
 	  </tr>	
 
@@ -209,7 +235,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 		 <td class="category"><?php echo plugin_lang_get('alt_scenario')?></td>
 		<td>
 	      <Textarea cols="100" rows="5" name="cursoAlternativo" id="cursoAlternativo"></Textarea>
-		  <input type='button' name='button_actor_add' value='<?php echo plugin_lang_get('add_alt_scenario')?>' onClick="javascript:insert_row_course('table_course','cursoAlternativo',document.getElementById('cursoAlternativo').value)"/>
+		  <input type='button' name='button_actor_add' value='<?php echo plugin_lang_get('add_alt_scenario')?>' onClick="javascript:insert_row_course('table_course','cursoAlternativo',document.getElementById('cursoAlternativo').value, '<?php echo plugin_lang_get('button_delete');?>')"/>
 		</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
@@ -453,7 +479,7 @@ $count_notes = db_num_rows( $result_note );
 			</div>
 			<?php
 			echo "<script>";
-			echo "insert_row_course('table_course', 'cursoAlternativo',document.getElementById('oculto_alt_".$h."').value)";
+			echo "insert_row_course('table_course', 'cursoAlternativo',document.getElementById('oculto_alt_".$h."').value, '". plugin_lang_get('button_delete')."')";
 			echo "</script>";
 			$h++;	
 		}//while cada escenario ?>
@@ -462,7 +488,7 @@ $count_notes = db_num_rows( $result_note );
 <script>
 var l=<?php echo $h?>;
 for(i=0;i<l;i++){
-	//document.getElementById('capa_oculta_'+i).style.visibility = 'hidden'; 
+	document.getElementById('capa_oculta_'+i).style.visibility = 'hidden'; 
 }
 </script>
 </form>

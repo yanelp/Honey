@@ -217,6 +217,8 @@ $f_files=gpc_get_file( 'ufile', null );
 $cant_files=$_REQUEST['row_number_file'];
 //echo $cant_files;
 
+$text_error='';
+
 for( $i = 0; $i < $cant_files ; $i++ ) {
 
 	
@@ -236,12 +238,13 @@ for( $i = 0; $i < $cant_files ; $i++ ) {
 	       //echo "size: ".$t_file['size']."-";
 			//$t_file['size']=2097152;
 			//$t_max_file_size = (int) min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+			//$t_max_file_size = (int) min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ),1012790 );
 			//echo $t_max_file_size."-".$t_file['size']."/";
 
 			if($t_file['size']<=1012790){
 				attach_add( $id_usecase, $t_file );
 			}
-			else{ echo plugin_lang_get('the_file').$t_file['name'].plugin_lang_get('file_error');}
+			else{ $text_error=$text_errorecho+ plugin_lang_get('the_file').$t_file['name'].plugin_lang_get('file_error');}
 		}
 	}//for
 
@@ -256,8 +259,16 @@ for( $i = 0; $i < $cant_files ; $i++ ) {
 </table>
 </div>
 <?php
-
 echo '<br><br>';
+
+if($text_error!=''){?>
+	<div align='center'>
+	<?php showMessage($text_error, 'error')?>
+	</table>
+	</div>
+	<?php
+	echo '<br><br>';
+}
 ?>
 <table align='center'>
 <tr>
@@ -273,6 +284,6 @@ $t_url= plugin_page( 'view_cu_page' );
 
 html_page_bottom( );
 
-html_meta_redirect_honey( $t_url, $p_time = null);
+if($text_error==''){html_meta_redirect_honey( $t_url, $p_time = null);}
 
 ?>
