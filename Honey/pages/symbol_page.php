@@ -44,13 +44,13 @@ if($count>0){
 
 	//include('search_symbols.php');
 
-	if($type==1){$type='Subject';}
+	if($type==1){$type=plugin_lang_get('subject');}
 	else{
-		if($type==2){$type='Object';}
+		if($type==2){$type=plugin_lang_get('object');}
 		else{
-			if($type==3){$type='State';}
+			if($type==3){$type=plugin_lang_get('state');}
 			else{
-				if($type==4){$type='Verb';}
+				if($type==4){$type=plugin_lang_get('verb');}
 				}
 			}
 		}

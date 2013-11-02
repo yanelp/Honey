@@ -265,7 +265,7 @@ if($count>0){
 		</tr>
 			<?php 
 			while( $row_alternative_scenario = db_fetch_array( $result_alternative_scenario )){?>
-				<tr <?php echo helper_alternate_class() ?>><td class="category">Alternative Scenario</td><td><?php echo  $row_alternative_scenario['steps']?></td></tr>
+				<tr <?php echo helper_alternate_class() ?>><td class="category"><?php echo plugin_lang_get('alternative_scenario')?></td><td><?php echo  $row_alternative_scenario['steps']?></td></tr>
 				
 				<?php
 			}//while cada escenario ?>

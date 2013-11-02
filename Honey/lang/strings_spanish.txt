@@ -1,26 +1,60 @@
-<?php
+ï»¿<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Spanish (espaÃ±ol)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Antur
+ * @author Bithunter
+ * @author Crazymadlover
+ * @author Locos epraix
+ */
+
+
+
 
 	$s_plugin_Honey = '';
-	$s_plugin_Honey_title = 'Módulo Honey';
-	$s_plugin_Honey_description = 'Módulo que incorpora LEL y trazabilidad a MantisBT';
+	$s_plugin_Honey_title = 'MÃ³dulo Honey';
+	$s_plugin_Honey_description = 'MÃ³dulo que incorpora LEL y trazabilidad a MantisBT';
 	$s_plugin_Honey_lel_link = 'LEL';
 	$s_plugin_Honey_view_rule_link = 'Ver Reglas';
-	$s_plugin_Honey_newa_rule_link = 'Nueva Regla';
+	$s_plugin_Honey_new_rule_link = 'Nueva Regla';
 	$s_plugin_Honey_new_actor_link = 'Nuevo Actor';
 	$s_plugin_Honey_view_actor_link = 'Ver Actores';
-	$s_plugin_Honey_Lel_symbol_link='Nuevo Símbolo';
-	$s_plugin_Honey_Lel_view_symbols_link='Ver símbolos';
+	$s_plugin_Honey_Lel_symbol_link='Nuevo SÃ­mbolo';
+	$s_plugin_Honey_Lel_view_symbols_link='Ver sÃ­mbolos';
 	$s_plugin_Honey_not_found='No encontrado';
 	$s_plugin_Honey_usecase_link = 'Casos de Uso';
 	$s_plugin_Honey_usecase_new_link='Nuevo Caso de Uso';
         $s_plugin_Honey_usecase_view_cu_link='Ver Casos de Uso';
         $s_plugin_Honey_usecase_detail='Ingrese el detalle del caso de uso';
-	$s_plugin_Honey_symbol_detail='Ingrese el detalle del símbolo';
-	$s_plugin_Honey_symbol_information='Información del símbolo';
-	$s_plugin_Honey_usecase_information='Información del Caso de Uso';
-	$s_plugin_Honey_symbols='Lista de Símbolos';
+	$s_plugin_Honey_symbol_detail='Ingrese el detalle del sÃ­mbolo';
+	$s_plugin_Honey_symbol_information='InformaciÃ³n del sÃ­mbolo';
+	$s_plugin_Honey_usecase_information='InformaciÃ³n del Caso de Uso';
+	$s_plugin_Honey_symbols='Lista de SÃ­mbolos';
 	$s_plugin_Honey_usecases='Lista de Casos de Uso';
-	$s_plugin_Honey_symbol_modify='Modifique los datos del símbolo';
+	$s_plugin_Honey_symbol_modify='Modifique los datos del sÃ­mbolo';
 	$s_plugin_Honey_usecase_modify='Modifique los datos del caso de uso';
 	$s_plugin_Honey_required='requerido';
 	$s_plugin_Honey_viewing_use_cases='Viendo Casos de Uso';
@@ -40,15 +74,15 @@
 	$s_plugin_Honey_rules='Lista de Reglas';
 	$s_plugin_Honey_actor_modify='Modifique los datos del actor';
 	$s_plugin_Honey_rule_modify='Modifique los datos de la regla';
-        $s_plugin_Honey_usecase_derivation='No existen símbolos de tipo verbo para realizar la derivación a Casos de Uso';
-	$s_plugin_Honey_usecase_derivation_title='Resultado de la derivación';
+        $s_plugin_Honey_usecase_derivation='No existen sÃ­mbolos de tipo verbo para realizar la derivaciÃ³n a Casos de Uso';
+	$s_plugin_Honey_usecase_derivation_title='Resultado de la derivaciÃ³n';
 	$s_plugin_Honey_Lel_derivation_link='Derivar a Casos de Uso';					$s_plugin_Honey_symbol_id='Dato buscado';
 	$s_plugin_Honey_usecase_id='Dato buscado';
 	$s_plugin_Honey_actor_id='Dato buscado';
 	$s_plugin_Honey_rule_id='Dato buscado';
 	$s_plugin_Honey_search='Buscar';
 	$s_plugin_Honey_comment_issue='El comentario no hace referencia a ninguna incidencia.\n';
-	$s_plugin_Honey_comment_uc='El comentario no hace referencia a ningún caso de uso.\n';
+	$s_plugin_Honey_comment_uc='El comentario no hace referencia a ningÃºn caso de uso.\n';
 	$s_plugin_Honey_no_login='Inhabilitado para loguearse.\n';
 	$s_plugin_Honey_derivation_actor_ref='Algunos actores derivados son referenciados por casos de uso no derivados.';
 	$s_plugin_Honey_actor='Actor/es';
@@ -56,9 +90,9 @@
 	$s_plugin_Honey_derivation_uc_extend='Algunos de los casos de uso que se quieren borrar extienden a otros no derivados.';
 	$s_plugin_Honey_derivation_uc_include='Algunos de los casos de uso que se quieren borrar son incluidos por otros no derivados.';
 	$s_plugin_Honey_derivation_uc_be_erased='Caso de Uso a borrarse';
-	$s_plugin_Honey_derivation_not_condition='No es Condición';
-	$s_plugin_Honey_derivation_pre_condition='Precondición';
-	$s_plugin_Honey_derivation_post_condition='Postcondición';
+	$s_plugin_Honey_derivation_not_condition='No es CondiciÃ³n';
+	$s_plugin_Honey_derivation_pre_condition='PrecondiciÃ³n';
+	$s_plugin_Honey_derivation_post_condition='PostcondiciÃ³n';
 	$s_plugin_Honey_pre_conditions='Precondiciones';
 	$s_plugin_Honey_post_conditions='Postcondiciones';
 	$s_plugin_Honey_observations='Observaciones';
@@ -67,7 +101,7 @@
 	$s_plugin_Honey_not_delete_rule='La regla no puede ser borrada debido a que es referenciada por los siguientes Casos de Uso:';
 	$s_plugin_Honey_sure_delete_actor='Esta seguro de que desea borrar este actor?';
 	$s_plugin_Honey_sure_delete_rule='Esta seguro de que desea borrar esta regla?';
-	$s_plugin_Honey_sure_delete_symbol='Esta seguro de que desea borrar este símbolo?';
+	$s_plugin_Honey_sure_delete_symbol='Esta seguro de que desea borrar este sÃ­mbolo?';
 	$s_plugin_Honey_sure_delete_uc='Esta seguro de que desea borrar este caso de uso?';
 	$s_plugin_Honey_deleted_data='Datos borrados';
 	$s_plugin_Honey_saved_data='Datos Guardados';
@@ -78,35 +112,35 @@
 	$s_plugin_Honey_usecase_referenced='es referenciado por los siguientes casos de uso:';	
 	$s_plugin_Honey_usecase_referenced_extend='extiende los siguientes Casos de Uso:';
 	$s_plugin_Honey_usecase_referenced_include='incluye los siguientes Casos de Uso:';
-	$s_plugin_Honey_dictionary_derived='El diccioario del proyecto ya ha sido derivado.';
-	$s_plugin_Honey_previous_derivation='Quiere dejar obsoleta la derivacion anterior?';
-	$s_plugin_Honey_sure_derivation='Esta seguro que desea realizar la derivación?';
+	$s_plugin_Honey_dictionary_derived='El diccionario del proyecto ya ha sido derivado.';
+	$s_plugin_Honey_previous_derivation='Quiere dejar obsoleta la derivaciÃ³n anterior?';
+	$s_plugin_Honey_sure_derivation='Esta seguro que desea realizar la derivaciÃ³n?';
 	$s_plugin_Honey_yes='Si';
 	$s_plugin_Honey_no='No';
 	$s_plugin_Honey_name='Nombre';
-	$s_plugin_Honey_col_description='Descripción';
+	$s_plugin_Honey_col_description='DescripciÃ³n';
 	$s_plugin_Honey_save='Guardar';
 	$s_plugin_Honey_cancel='Cancelar';
 	$s_plugin_Honey_delete='Eliminar';
 	$s_plugin_Honey_edit='Editar';
-	$s_plugin_Honey_make_public='Hacer Pública';
+	$s_plugin_Honey_make_public='Hacer PÃºblica';
 	$s_plugin_Honey_make_private='Hacer Privada';
 	$s_plugin_Honey_update='Actualizar';
-	$s_plugin_Honey_synonymous='Sinónimo';
-	$s_plugin_Honey_synonyms='Sinónimos';
+	$s_plugin_Honey_synonymous='SinÃ³nimo';
+	$s_plugin_Honey_synonyms='SinÃ³nimos';
 	$s_plugin_Honey_impact='Impacto';
 	$s_plugin_Honey_impacts='Impactos';
 	$s_plugin_Honey_subject='Sujeto';
 	$s_plugin_Honey_object='Objecto';
 	$s_plugin_Honey_state='Estado';
 	$s_plugin_Honey_verb='Verbo';
-	$s_plugin_Honey_notion='Noción';
+	$s_plugin_Honey_notion='NociÃ³n';
 	$s_plugin_Honey_main_scenario='Curso Normal';
 	$s_plugin_Honey_ID='ID';
 	$s_plugin_Honey_type='Tipo';
 	$s_plugin_Honey_objetive='Objetivo';
 	$s_plugin_Honey_actors_involved='Actores involucrados';
-	$s_plugin_Honey_no_descrip='Sin Descripción';
+	$s_plugin_Honey_no_descrip='Sin DescripciÃ³n';
 	$s_plugin_Honey_no_actors_created='No hay actores creados para este proyecto';
 	$s_plugin_Honey_no_uc_created='No hay casos de uso creados para este proyecto';
 	$s_plugin_Honey_no_rules_created='No hay reglas creadas para este proyecto';
@@ -124,49 +158,50 @@
 	$s_plugin_Honey_attach='Archivos Adjuntos';
 	$s_plugin_Honey_add_attach='Seleccionar Archivos adjuntos';
 	$s_plugin_Honey_add_file='Agregar Archivo';
-	$s_plugin_Honey_add_synonymous='Agregar sinónimo';
-	$s_plugin_Honey_add_impact='Agregar impacto';
+	$s_plugin_Honey_button_add_synonymous='Agregar sinÃ³nimo';
+	$s_plugin_Honey_button_add_impact='Agregar impacto';
 	$s_plugin_Honey_button_delete='Eliminar';
 	$s_plugin_Honey_must_name='Debe ingresar el nombre';
 	$s_plugin_Honey_must_note_text='Debe ingresar el texto de la nota';
-	$s_plugin_Honey_must_symbol='Debe ingresar el nombre, la noción y el tipo';
+	$s_plugin_Honey_must_symbol='Debe ingresar el nombre, la nociÃ³n y el tipo';
 	$s_plugin_Honey_must_uc='Debe ingresar el nombre y el escenario principal';
 	$s_plugin_Honey_actor_exist='El actor ya existe';
 	$s_plugin_Honey_rule_exist='La regla ya existe';
-	$s_plugin_Honey_symbol_exist='El símbolo ya existe';
+	$s_plugin_Honey_symbol_exist='El sÃ­mbolo ya existe';
 	$s_plugin_Honey_uc_exist='El caso de uso ya existe';
-	$s_plugin_Honey_symbol_do_not_exist='El símbolo no existe';
+	$s_plugin_Honey_symbol_do_not_exist='El sÃ­mbolo no existe';
 	$s_plugin_Honey_uc_do_not_exist='El Caso de Uso no existe';
 	$s_plugin_Honey_actor_do_not_exist='El Actor no existe';
 	$s_plugin_Honey_rule_do_not_exist='La Regla no existe';
 	$s_plugin_Honey_cant_uc='Cantidad de casos de uso: ';
 	$s_plugin_Honey_add_alt_scenario='Agregar curso alternativo';
-	$s_plugin_Honey_summary_symbols='Lista de símbolos con id, nombre y tipo';
-	$s_plugin_Honey_summary_new_symbol='El usuario debe completar el detalle del símbolo a ser guardado en el sistema.'; 
-	$s_plugin_Honey_summary_modify_symbol='El usuario puede modificar y guardar información del símbolo almacenado.';
+	$s_plugin_Honey_summary_symbols='Lista de sÃ­mbolos con id, nombre y tipo';
+	$s_plugin_Honey_summary_new_symbol='El usuario debe completar el detalle del sÃ­mbolo a ser guardado en el sistema.'; 
+	$s_plugin_Honey_summary_modify_symbol='El usuario puede modificar y guardar informaciÃ³n del sÃ­mbolo almacenado.';
 	$s_plugin_Honey_summary_uc='Lista de casos de uso con id, nombre y objetivo';
-	$s_plugin_Honey_summary_modify_uc='El usuario puede modificar y guardar información del caso de uso almacenado.';
+	$s_plugin_Honey_summary_modify_uc='El usuario puede modificar y guardar informaciÃ³n del caso de uso almacenado.';
 	$s_plugin_Honey_summary_new_uc='El usuario debe completar el detalle del caso de uso a ser guardado en el sistema.'; 
 	$s_plugin_Honey_summary_new_rule='El usuario debe completar el detalle de la regla a ser guardada en el sistema.';
-	$s_plugin_Honey_summary_modify_rule='El usuario puede modificar y guardar información de la regla almacenada.';
+	$s_plugin_Honey_summary_modify_rule='El usuario puede modificar y guardar informaciÃ³n de la regla almacenada.';
 	$s_plugin_Honey_summary_new_actor='El usuario debe completar el detalle del actor a ser guardada en el sistema.';
-	$s_plugin_Honey_summary_modify_actor='El usuario puede modificar y guardar información del actor almacenado.';
-	$s_plugin_Honey_summary_actors='Lista de actores con id, nombre y descripción';
-	$s_plugin_Honey_summary_rules='Lista de reglas con id, nombre y descripción';
-	$s_plugin_Honey_derived_from='Derivado del símbolo:';
+	$s_plugin_Honey_summary_modify_actor='El usuario puede modificar y guardar informaciÃ³n del actor almacenado.';
+	$s_plugin_Honey_summary_actors='Lista de actores con id, nombre y descripciÃ³n';
+	$s_plugin_Honey_summary_rules='Lista de reglas con id, nombre y descripciÃ³n';
+	$s_plugin_Honey_derived_from='Derivado del sÃ­mbolo:';
 	$s_plugin_Honey_Add_another_file='Agregar otro archivo';
 	$s_plugin_Honey_warning='Advertencia';
 	$s_plugin_Honey_error='Error';
 	$s_plugin_Honey_congratulations='Felicitaciones';
 	$s_plugin_Honey_the_file='El archivo ';
-	$s_plugin_Honey_file_error=' supera el tamaño permitido y no pudo ser guardado.';
-	$s_plugin_Honey_file_max_size='Máximo tamaño de archivo: ';
-	$s_plugin_Honey_page='Página';
-	$s_plugin_Honey_button_atl_course='(Escriba el texto del curso alternativo y luego presione el botón "Agregar curso alternativo")';
-	$s_plugin_Honey_select_checkbox_actor='(Select the actors you want to link to de Use Case.)';
-	$s_plugin_Honey_select_checkbox_extend='(Select the use cases that the current use case extends.)';
-	$s_plugin_Honey_select_checkbox_include='(Select the use cases that the current use case includes.)';
-	$s_plugin_Honey_select_checkbox_rule='(Select the rules that the current use case must follow.)';
-	$s_plugin_Honey_add_synonimous='(Escriba un sinónimo y luego presione el botón "Agregar sinónimo".)';
-	$s_plugin_Honey_add_impact='(Escriba un impacto y luego presione el botón "Agregar impacto".)';
-	$s_plugin_Honey_button_add_file='(Seleccione el archivo y luego presione el botón "Agregar Archivo".)';
+	$s_plugin_Honey_file_error=' supera el tamaÃ±o permitido y no pudo ser guardado.';
+	$s_plugin_Honey_file_max_size='MÃ¡ximo tamaÃ±o de archivo: ';
+	$s_plugin_Honey_page='PÃ¡gina';
+	$s_plugin_Honey_button_atl_course='(Escriba el texto del curso alternativo y luego presione el botÃ³n "Agregar curso alternativo")';
+	$s_plugin_Honey_select_checkbox_actor='(Seleccione los actores que desee vincular con el caso de uso.)';
+	$s_plugin_Honey_select_checkbox_extend='(Seleccione los casos de uso que extiende el actual caso de uso.)';
+	$s_plugin_Honey_select_checkbox_include='(Seleccione los casos de uso que incluye el actual caso de uso.)';
+	$s_plugin_Honey_select_checkbox_rule='(Seleccione las reglas que debe cumplir el actual caso de uso.)';
+	$s_plugin_Honey_add_synonymous='(Escriba un sinÃ³nimo y luego presione el botÃ³n "Agregar sinÃ³nimo".)';
+	$s_plugin_Honey_add_impact='(Escriba un impacto y luego presione el botÃ³n "Agregar impacto".)';
+	$s_plugin_Honey_button_add_file='(Seleccione el archivo y luego presione el botÃ³n "Agregar Archivo".)';
+	$s_plugin_Honey_alternative_scenario='Escenario Alternativo';
