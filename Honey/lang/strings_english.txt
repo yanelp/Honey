@@ -169,3 +169,4 @@
 	$s_plugin_Honey_select_checkbox_rule='(Select the rules that the current use case must follow.)';
 	$s_plugin_Honey_add_synonymous='(Write a synonimous and then press the button "Add Synonymous".)';
 	$s_plugin_Honey_add_impact='(Write an impact and then press the button "Add impact".)';
+	$s_plugin_Honey_button_add_file='(Choose a file and then press the button "Add File".)';

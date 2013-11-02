@@ -1,4 +1,5 @@
 <?php
+
 	$s_plugin_Honey = '';
 	$s_plugin_Honey_title = 'Módulo Honey';
 	$s_plugin_Honey_description = 'Módulo que incorpora LEL y trazabilidad a MantisBT';
@@ -168,3 +169,4 @@
 	$s_plugin_Honey_select_checkbox_rule='(Select the rules that the current use case must follow.)';
 	$s_plugin_Honey_add_synonimous='(Escriba un sinónimo y luego presione el botón "Agregar sinónimo".)';
 	$s_plugin_Honey_add_impact='(Escriba un impacto y luego presione el botón "Agregar impacto".)';
+	$s_plugin_Honey_button_add_file='(Seleccione el archivo y luego presione el botón "Agregar Archivo".)';

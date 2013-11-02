@@ -316,7 +316,11 @@ if($count>0){
 							</td>
 						</tr>
 						
-						<tr><td colspan="2"><input type="button" onClick="javascript:go_page(0,<?php  echo $id_usecase?>,'<?php  echo plugin_page('save_files_usecase');?>')" value="<?php echo plugin_lang_get('add_file')?>"/></td></tr>
+						<tr align='center'><td><input type="button" onClick="javascript:go_page(0,<?php  echo $id_usecase?>,'<?php  echo plugin_page('save_files_usecase');?>')" value="<?php echo plugin_lang_get('add_file')?>"/></td><td style="text-align:left">
+						<address> <?php echo plugin_lang_get('button_add_file');?></address>
+						
+						</td>
+						</tr>
 						
 					</table>
 

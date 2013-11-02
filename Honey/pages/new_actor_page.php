@@ -29,7 +29,8 @@ EVENT_LAYOUT_RESOURCES
 <table class="width90"  summary="<?php echo plugin_lang_get( 'summary_new_actor' )?>">
 	<tr>
 		<td class="form-title" colspan="2">
-		<?php echo plugin_lang_get( 'actor_detail' )?>
+		<?php echo plugin_lang_get( 'actor_detail' )
+		// echo	lang_get( 'update_information_button' )?>
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
