@@ -244,7 +244,7 @@ for( $i = 0; $i < $cant_files ; $i++ ) {
 			if($t_file['size']<=1012790){
 				attach_add( $id_usecase, $t_file );
 			}
-			else{ $text_error=$text_errorecho+ plugin_lang_get('the_file').$t_file['name'].plugin_lang_get('file_error');}
+			else{ $text_error=$text_error+ plugin_lang_get('the_file').$t_file['name'].plugin_lang_get('file_error');}
 		}
 	}//for
 
