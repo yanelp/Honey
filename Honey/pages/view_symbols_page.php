@@ -92,7 +92,7 @@ if ($count != 0) {
 			<?php
 				$t_page = plugin_page( 'view_symbols_page' );	
 				$t_page=$t_page."&order=1";	
-				echo "<a href=\"$t_page\">".plugin_lang_get( 'ID' )."</a>";
+				echo "<a href=\"$t_page\" title='Order by ".plugin_lang_get( 'ID' )."'>".plugin_lang_get( 'ID' )."</a>";
 			?>
 		</td>
 
@@ -100,7 +100,7 @@ if ($count != 0) {
 			<?php 
 				$t_page = plugin_page( 'view_symbols_page' );	
 				$t_page=$t_page."&order=2";	
-				echo "<a href=\"$t_page\">".plugin_lang_get( 'symbols_name_colum' )."</a>";
+				echo "<a href=\"$t_page\" title='Order by ".plugin_lang_get( 'symbols_name_colum' )."'>".plugin_lang_get( 'symbols_name_colum' )."</a>";
 			?>
 		</td>
 
@@ -108,7 +108,7 @@ if ($count != 0) {
 			<?php
 				$t_page = plugin_page( 'view_symbols_page' );	
 				$t_page=$t_page."&order=3";
-				echo "<a href=\"$t_page\">".plugin_lang_get( 'symbols_type_colum' )."</a>";
+				echo "<a href=\"$t_page\" title='Order by ".plugin_lang_get( 'symbols_type_colum' )."'>".plugin_lang_get( 'symbols_type_colum' )."</a>";
 			?>
 		</td>
 
@@ -121,7 +121,7 @@ if ($count != 0) {
 	?>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td width='20%'>
-			<?php echo "<a href=\"$t_page\">".$id."</a>";?>
+			<?php echo "<a href=\"$t_page\" title=".$id.'-'.$row['name'].">".$id."</a>";?>
 			</td>
 			<td width='60%'>
 			<?php echo $row['name'];?>
