@@ -49,7 +49,7 @@ if ($count > 0){
 	?>
 	<div align='center'>
 	<?php showMessage(plugin_lang_get('dictionary_derived')." <br>".plugin_lang_get('previous_derivation'), 'warning')?>
-	</table>
+	<!--</table>-->
 	</div>
 	
 	<?php //echo plugin_lang_get('dictionary_derived')?><br>
@@ -62,7 +62,7 @@ else{
 	?>
 	<div align='center'>
 	<?php showMessage(plugin_lang_get('sure_derivation'), 'warning')?>
-	</table>
+	<!--</table>-->
 	</div>
 	<?php
 

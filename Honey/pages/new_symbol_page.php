@@ -29,7 +29,7 @@ $t_page=plugin_page("new_symbol_page");
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category" width='20%'><span class="required">*</span><?php echo plugin_lang_get('name')?></td>
-		<td><input type="text" name="symbol_name" id='symbol_name' size="120"/></td>
+		<td><input type="text" name="symbol_name" id='symbol_name' size="120" /></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category"><?php echo plugin_lang_get('synonymous')?>
@@ -47,7 +47,7 @@ $t_page=plugin_page("new_symbol_page");
 		<td><table  name='table_synonimous' id='table_synonimous' ><thead></thead><tbody></tbody></table></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><span class="required">*</span><?php echo plugin_lang_get('notion')?></td><td><textarea name='symbol_notion' id='symbol_notion' cols='90' rows='5'></textarea></td>
+		<td class="category"><span class="required">*</span><?php echo plugin_lang_get('notion')?></td><td><textarea name='symbol_notion' id='symbol_notion' cols='90' rows='5' title="<?php echo plugin_lang_get('title_notion');?>"></textarea></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category"><?php echo plugin_lang_get('impact')?>
@@ -57,7 +57,7 @@ $t_page=plugin_page("new_symbol_page");
 			</td></tr>
 			</table>
 		</td>
-		<td><input type='text' name='symbol_impact' size="120" id='symbol_impact'/>
+		<td><input type='text' name='symbol_impact' size="120" id='symbol_impact' title="<?php echo plugin_lang_get('title_impact');?>"/>
 		<input type='button' name='button_impact_add' value='<?php echo plugin_lang_get('button_add_impact')?>' onClick="javascript:insert_row('table_impacts','symbol_impact',document.getElementById('symbol_impact').value, '<?php echo plugin_lang_get('button_delete');?>')"/></td></tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">&nbsp;</td>

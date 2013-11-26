@@ -50,7 +50,7 @@ for($h=0;$h<$total_pag_ex;$h++){
 
 			<?php if( $row_extends['goal']!=''){?>
 						<td>
-							<!---->
+						<!---->
 								<?php
 								$c_id = $row_extends['id'];
 								echo "<script type=\"text/javascript\" language=\"JavaScript\">
@@ -62,8 +62,8 @@ for($h=0;$h<$total_pag_ex;$h++){
 
 									 -->
 									 </script>";
-							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content5(\"hideSection_" . $c_id . "\");swap_content5(\"showSection_" . $c_id . "\");return false;'>".plugin_lang_get('show_goal')."</a>]</span>";
-							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content5(\"hideSection_" . $c_id . "\");swap_content5(\"showSection_" . $c_id . "\");return false;'".plugin_lang_get('hide_goal')."</a>]";
+							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content5(\"hideSection_" . $c_id . "\");swap_content5(\"showSection_" . $c_id . "\");return false;'>". plugin_lang_get('show_goal')."</a>]</span>";
+							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content5(\"hideSection_" . $c_id . "\");swap_content5(\"showSection_" . $c_id . "\");return false;'>". plugin_lang_get('hide_goal')."</a>]";
 								echo "<pre>";
 
 								echo $row_extends['goal'];

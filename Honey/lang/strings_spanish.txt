@@ -205,3 +205,5 @@
 	$s_plugin_Honey_add_impact='(Escriba un impacto y luego presione el botón "Agregar impacto".)';
 	$s_plugin_Honey_button_add_file='(Seleccione el archivo y luego presione el botón "Agregar Archivo".)';
 	$s_plugin_Honey_alternative_scenario='Escenario Alternativo';
+	$s_plugin_Honey_title_notion='La noción es la descripción del signo por medio de sus propiedades intrínsecas.';
+	$s_plugin_Honey_title_impact='Los impactos describen cómo el signo se relaciona con otros signos.';

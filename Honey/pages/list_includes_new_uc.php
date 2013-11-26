@@ -52,7 +52,7 @@ for($h=0;$h<$total_pag_in;$h++){
 						<td>
 							<!---->
 								<?php
-								$c_id = $row_includes['id'];
+								$c_id2 = $row_includes['id']."algo";
 								echo "<script type=\"text/javascript\" language=\"JavaScript\">
 									<!--
 									function swap_content6( span ) {
@@ -62,8 +62,8 @@ for($h=0;$h<$total_pag_in;$h++){
 
 									 -->
 									 </script>";
-							echo " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content6(\"hideSection_" . $c_id . "\");swap_content6(\"showSection_" . $c_id . "\");return false;'>".plugin_lang_get('show_goal')."</a>]</span>";
-							echo " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_" . $c_id . "' onclick='swap_content6(\"hideSection_" . $c_id . "\");swap_content6(\"showSection_" . $c_id . "\");return false;'".plugin_lang_get('hide_goal')."</a>]";
+							echo " <span id=\"hideSection_$c_id2\">[<a class=\"small\" href='#' id='attmlink_" . $c_id2 . "' onclick='swap_content6(\"hideSection_" . $c_id2 . "\");swap_content6(\"showSection_" . $c_id2 . "\");return false;'>". plugin_lang_get('show_goal')."</a>]</span>";
+							echo " <span style='display:none' id=\"showSection_$c_id2\">[<a class=\"small\" href='#' id='attmlink_" . $c_id2 . "' onclick='swap_content6(\"hideSection_" . $c_id2 . "\");swap_content6(\"showSection_" . $c_id2 . "\");return false;'>". plugin_lang_get('hide_goal')."</a>]";
 								echo "<pre>";
 
 								echo $row_includes['goal'];
