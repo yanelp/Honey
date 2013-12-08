@@ -433,7 +433,7 @@ if($count>0){
 				</div>
 		  </td>
 		  <td  class="<?php echo $t_bugnote_note_css ?>" width="80%">
-		  <?php echo string_convert_uc_link($note); ?>
+		  <?php echo string_convert_uc_issue_link($note); ?>
 		  </td>
 		</tr>
 
@@ -463,11 +463,11 @@ if($count>0){
 					<tr>
 						<td class="category" width="25%"><?php  echo plugin_lang_get('note')?></td>
 						<td width="75%">
-						<textarea cols="88" rows="10" name="new_note"></textarea>
+						<textarea cols="88" rows="10" name="new_note" id="new_note"></textarea>
 						</td>
 					</tr>
 					<?php $t_back=plugin_page("add_uc_note")?>
-					<tr><td colspan="2"><input type="button" onClick="javascript:go_page(0,<?php  echo $id_usecase?>,'<?php  echo $t_back.'&backPage=usecase_page'?>')" value="<?php echo plugin_lang_get('add_note')?>"/></td></tr>
+					<tr><td colspan="2"><input type="button" onClick="javascript:if(document.getElementById('new_note').value!=''){go_page(0,<?php  echo $id_usecase?>,'<?php  echo $t_back.'&backPage=usecase_page'?>')}else{alert('<?php echo plugin_lang_get('empty_note');?>');}" value="<?php echo plugin_lang_get('add_note')?>"/></td></tr>
 					</table>
 				<?php if( ON == config_get( 'use_javascript' ) ) { ?>
 				<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo plugin_lang_get('add_notes');?>

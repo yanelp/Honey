@@ -261,8 +261,9 @@ function string_convert_uc_link($p_string) {
 			$t_page=$t_page."&id_usecase=".$id_uc_search;
 			
 			$concat= str_pad($palabra, 7, "0", STR_PAD_LEFT);
-
-			$frase=str_replace($palabra, $concat,$p_string);	
+			
+			if($frase==''){$frase=str_replace($palabra, $concat,$p_string);	}
+			else {$frase=str_replace($palabra, $concat,$frase);}
 
 			$link="<a href=\"$t_page\">".$concat."</a>";
 
@@ -272,6 +273,162 @@ function string_convert_uc_link($p_string) {
 	}
 	$frase=str_replace('#', '',$frase);
 	if($cant_links==0){$frase=$p_string;}
+	return $frase;
+}
+
+function string_convert_issue_link($p_string) {
+
+	$words = preg_split("/[\s]+/", $p_string);
+	$num_words=sizeof($words);
+	$t_page= 'view.php';
+	$cant_links=0;
+	$frase='';
+
+	for($r=0;$r<$num_words;$r++){
+
+		$palabra=str_replace('#', '', $words[$r]) ;
+		//echo "*".$palabra;
+		//busco en la tabla de casos de uso si la palabra es un id_view
+
+		$t_repo_table = db_get_table( 'mantis_bug_table');
+
+		$query_note = 'SELECT id 
+						 FROM '.$t_repo_table.' 
+						 where id=trim(' . db_param().')';
+
+		$result_note = db_query_bound( $query_note, array($palabra) );
+		$count_note = db_num_rows( $result_note );
+		$row_search = db_fetch_array( $result_note ) ; 
+
+		if($count_note>0){
+			$cant_links++;
+
+			$id_issue=$row_search['id'];
+			
+			$t_page=$t_page."?id=".$id_issue;
+			
+			$concat= str_pad($palabra, 7, "0", STR_PAD_LEFT);
+			if($frase==''){$frase=str_replace($palabra, $concat,$p_string);	}
+			else {$frase=str_replace($palabra, $concat,$frase);}
+
+			$link="<a href=\"$t_page\">".$concat."</a>";
+
+			$frase=str_replace($concat, $link,$frase);
+		}
+		
+	}
+	$frase=str_replace('#', '',$frase);
+	if($cant_links==0){$frase=$p_string;}
+	return $frase;
+}
+
+function string_convert_link($p_string){
+
+	
+	$words = preg_split("/[\s]+/", $p_string);
+	$num_words=sizeof($words);
+	$cant_links=0;
+	$frase='';
+	for($r=0;$r<$num_words;$r++){
+
+		$palabra= $words[$r];//#714
+		if(strpos($palabra, '#')!==false){//es un id de issue o de uc
+		  $palabra_bd=str_replace('#', '', $words[$r]) ;
+		  
+		  if(($words[$r-1]=='issue')||($words[$r-1]=='bug')||($words[$r-1]=='incidencia')||($words[$r-1]=='fallo')||($words[$r-1]=='error')||($words[$r-1]=='bug')){
+			  
+				$t_repo_table = db_get_table( 'mantis_bug_table');
+
+				$query_note = 'SELECT id 
+								 FROM '.$t_repo_table.' 
+								 where id=trim(' . db_param().')';
+
+				$result_note = db_query_bound( $query_note, array($palabra_bd) );
+				$count_note = db_num_rows( $result_note );
+				$row_search = db_fetch_array( $result_note ) ; 
+
+				if($count_note>0){
+					$cant_links++;
+
+					$id_issue=$row_search['id'];
+
+					$t_page= 'view.php';
+					
+					$t_page=$t_page."?id=".$id_issue;
+					
+					$concat= str_pad($palabra_bd, 7, "0", STR_PAD_LEFT);
+
+					if($frase==''){	$frase=str_replace($palabra, $concat,$p_string);}
+					else {	$frase=str_replace($palabra, $concat,$frase);}
+	
+					$link="<a href=\"$t_page\">".$concat."</a>";
+
+					$frase=str_replace($concat, $link,$frase);
+				}
+				
+		  }//es id de issue
+		  else{//es id de uc
+
+
+			  $t_repo_table = plugin_table( 'usecase', 'honey' );
+
+				$query_note = 'SELECT id 
+								 FROM '.$t_repo_table.' 
+								 where id=trim(' . db_param().')';
+
+				$result_note = db_query_bound( $query_note, array($palabra_bd) );
+				$count_note = db_num_rows( $result_note );
+				$row_search = db_fetch_array( $result_note ) ; 
+
+				if($count_note>0){
+					$cant_links++;
+
+					$id_uc_search=$row_search['id'];
+
+					$t_page= plugin_page( 'usecase_page' );
+					
+					$t_page=$t_page."&id_usecase=".$id_uc_search;
+					
+					$concat= str_pad($palabra_bd, 7, "0", STR_PAD_LEFT);
+					
+					if($frase==''){	$frase=str_replace($palabra, $concat,$p_string);}
+					else {	$frase=str_replace($palabra, $concat,$frase);}
+
+					$link="<a href=\"$t_page\">".$concat."</a>";
+
+					$frase=str_replace($concat, $link,$frase);
+				}
+				
+		  }//es un id de uc
+		}//es un id
+		
+	}//for
+	$frase=str_replace('#', '',$frase);
+	if($cant_links==0){$frase=$p_string;}
+	return $frase;
+	
+}
+
+function string_convert_uc_issue_link($p_string) {
+
+	//busco si es un comentario de un cu solo, issue solo o un comentario que tiene uc e issue
+
+	//sólo uc
+	if(((strpos($p_string, 'issue #')==false)&&(strpos($p_string, 'bug #')==false)&&(strpos($p_string, 'incidencia #')==false)&&(strpos($p_string, 'fallo #')==false)&&(strpos($p_string, 'error #')==false)&&(strpos($p_string, 'problema #')==false))&&((strpos($p_string, 'uc #')!=false)||(strpos($p_string, 'cu #')!=false)||(strpos($p_string, 'use case #')!=false)||(strpos($p_string, 'caso de uso #')!=false))) {
+		$frase=string_convert_uc_link($p_string);
+	}
+	else{//sólo issue
+		if(((strpos($p_string, 'issue #')!=false)||(strpos($p_string, 'bug #')!=false)||(strpos($p_string, 'incidencia #')!=false)||(strpos($p_string, 'fallo #')!=false)||(strpos($p_string, 'error #')!=false)||(strpos($p_string, 'problema #')!=false))&&((strpos($p_string, 'uc #')==false)&&(strpos($p_string, 'cu #')==false)&&(strpos($p_string, 'use case #')==false)&&(strpos($p_string, 'caso de uso #')==false))) {
+			$frase=string_convert_issue_link($p_string);
+		}
+		else{//ambos
+			if(((strpos($p_string, 'issue #')!=false)||(strpos($p_string, 'bug #')!=false)||(strpos($p_string, 'incidencia #')!=false)||(strpos($p_string, 'fallo #')!=false)||(strpos($p_string, 'error #')!=false)||(strpos($p_string, 'problema #')!=false))&&((strpos($p_string, 'uc #')!=false)||(strpos($p_string, 'cu #')!=false)|(strpos($p_string, 'use case #')!=false)||(strpos($p_string, 'caso de uso #')!=false))) {
+				$frase=string_convert_link($p_string);
+			}
+			else {$frase=$p_string;}
+		}
+	}
+
 	return $frase;
 }
 
