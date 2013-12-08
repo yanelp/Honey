@@ -173,3 +173,4 @@
 	$s_plugin_Honey_alternative_scenario='Alternative Scenario';
 	$s_plugin_Honey_title_notion='Notion describes the symbol denotation, which are intrinsic and substantial characteristics of the symbol.';
 	$s_plugin_Honey_title_impact='The impacts describe how the sign relates to other signs.';
+	$s_plugin_Honey_empty_note='The note is empty, enter a text please.';

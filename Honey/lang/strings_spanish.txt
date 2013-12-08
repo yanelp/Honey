@@ -207,3 +207,4 @@
 	$s_plugin_Honey_alternative_scenario='Escenario Alternativo';
 	$s_plugin_Honey_title_notion='La noción es la descripción del signo por medio de sus propiedades intrínsecas.';
 	$s_plugin_Honey_title_impact='Los impactos describen cómo el signo se relaciona con otros signos.';
+	$s_plugin_Honey_empty_note='la nota está vacía, ingrese un texto por favor.';
