@@ -29,7 +29,7 @@ $t_page=plugin_page("new_symbol_page");
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category" width='20%'><span class="required">*</span><?php echo plugin_lang_get('name')?></td>
-		<td><input type="text" name="symbol_name" id='symbol_name' size="120" /></td>
+		<td><input type="text" name="symbol_name" id='symbol_name' size="120"  title="<?php echo plugin_lang_get('title_symbol_name');?>" /></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category"><?php echo plugin_lang_get('synonymous')?>
@@ -39,7 +39,7 @@ $t_page=plugin_page("new_symbol_page");
 			</td></tr>
 			</table>
 		</td>
-		<td><input type="text" name="symbol_synonymous" id='symbol_synonymous' size="120"/>
+		<td><input type="text" name="symbol_synonymous" id='symbol_synonymous' size="120" title="<?php echo plugin_lang_get('title_symbol_synonym');?>"/>
 		<input type='button' name='button_synonymous_add' value='<?php echo plugin_lang_get('button_add_synonymous')?>' onClick="javascript:insert_row('table_synonimous','symbol_synonymous', document.getElementById('symbol_synonymous').value, '<?php echo plugin_lang_get('button_delete');?>')"/></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
@@ -66,7 +66,7 @@ $t_page=plugin_page("new_symbol_page");
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category"><span class="required">*</span><?php echo plugin_lang_get('type')?></td>
 		<td>
-			<select name='symbol_type' id='symbol_type'>
+			<select name='symbol_type' id='symbol_type' title="<?php echo plugin_lang_get('title_symbol_type');?>">
 				<option value='0'>.....</option>
 				<option value='1'><?php echo plugin_lang_get('subject')?></option>
 				<option value='2'><?php echo plugin_lang_get('object')?></option>

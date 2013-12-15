@@ -27,7 +27,7 @@ function print_lel_menu( $p_page = '' ) {
 		}
 	}
 	
-	if($p_page=='view'){
+	if(($p_page=='view')||($p_page=='edit_symbol')||(($p_page=='view_symbol'))){
 		$t_link= plugin_page( 'view_symbols_page' );
 		echo '<span id="link_actual">[&#160;';
 		echo "<a  href=\"$t_link\">". plugin_lang_get( 'Lel_view_symbols_link' )."</a>";
@@ -49,7 +49,7 @@ function print_lel_menu( $p_page = '' ) {
 		if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
 			print_bracket_link(  plugin_page( 'derivation_page' ), plugin_lang_get( 'Lel_derivation_link' ) );
 		}
-	}
+	}	
 	
 
 	# Plugin / Event added options
@@ -93,7 +93,7 @@ function print_cu_menu( $p_page = '' ) {
 		}
 	}
 
-	if($p_page=='view_uc'){
+	if(($p_page=='view')||($p_page=='view_uc')||($p_page=='edit_uc')){
 		$t_link= plugin_page( 'view_cu_page' );
 		echo '<span id="link_actual">[&#160;';
 		echo "<a  href=\"$t_link\">". plugin_lang_get( 'usecase_view_cu_link' )."</a>";
@@ -117,7 +117,7 @@ function print_cu_menu( $p_page = '' ) {
 		}
 	}
 
-	if($p_page=='view_rule'){
+	if(($p_page=='view_rule')||($p_page=='edit_rule')){
 		$t_link= plugin_page( 'view_rules_page' );
 		echo '<span id="link_actual">[&#160;';
 		echo "<a  href=\"$t_link\">". plugin_lang_get( 'view_rule_link' )."</a>";
@@ -141,7 +141,7 @@ function print_cu_menu( $p_page = '' ) {
 		}
 	}
 
-	if($p_page=='view_actor'){
+	if(($p_page=='view_actor')||($p_page=='edit_actor')){
 		$t_link= plugin_page( 'view_actors_page' );
 		echo '<span id="link_actual">[&#160;';
 		echo "<a  href=\"$t_link\">". plugin_lang_get( 'view_actor_link' )."</a>";

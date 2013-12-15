@@ -4,7 +4,7 @@ require_once('functions.php');
 
 html_page_top( plugin_lang_get( 'title' ) );
 
-print_cu_menu();
+print_cu_menu('edit_actor');
 
 EVENT_LAYOUT_RESOURCES;
 
@@ -50,10 +50,10 @@ $t_page_delete = plugin_page( "delete_actor_page" );
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category"><span class="required">*</span><?php echo plugin_lang_get( 'name' )?></td>
-		<td><input type="text" name="actor_name" id='actor_name' size="50" value="<?php echo $name?>"/></td>
+		<td><input type="text" name="actor_name" id='actor_name' size="50" value="<?php echo $name?>" title="<?php echo plugin_lang_get('title_actor_name');?>"/></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo plugin_lang_get( 'col_description' )?></td><td><textarea name='actor_descrip' id='actor_descrip' cols='38' rows='5'><?php echo $descrip?></textarea></td>
+		<td class="category"><?php echo plugin_lang_get( 'col_description' )?></td><td><textarea name='actor_descrip' id='actor_descrip' cols='38' rows='5' title="<?php echo plugin_lang_get('title_actor_description');?>"><?php echo $descrip?></textarea></td>
 	</tr>
 	<tr>
 		<td class="left">

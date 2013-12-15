@@ -5,7 +5,7 @@ require_once( 'file_api.php' );
 
 html_page_top( plugin_lang_get( 'title' ) );
 
-print_cu_menu();
+print_cu_menu('view_uc');
 
 EVENT_LAYOUT_RESOURCES;
 

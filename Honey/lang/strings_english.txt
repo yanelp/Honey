@@ -172,5 +172,24 @@
 	$s_plugin_Honey_button_add_file='(Choose a file and then press the button "Add File".)';
 	$s_plugin_Honey_alternative_scenario='Alternative Scenario';
 	$s_plugin_Honey_title_notion='Notion describes the symbol denotation, which are intrinsic and substantial characteristics of the symbol.';
-	$s_plugin_Honey_title_impact='The impacts describe how the sign relates to other signs.';
+	$s_plugin_Honey_title_impact='The impacts describe how the symbol relates to other symbols.';
 	$s_plugin_Honey_empty_note='The note is empty, enter a text please.';
+	$s_plugin_Honey_title_symbol_name='Term that identifies the symbol.';
+	$s_plugin_Honey_title_symbol_synonym='Synonym of the term that identifies the symbol.';
+	$s_plugin_Honey_title_symbol_type='Category to which the symbol belongs.';
+	$s_plugin_Honey_title_uc_name='Term that identifies the Use Case. A short statement of the action.';
+	$s_plugin_Honey_title_uc_objetive='Goal in context. The reason.';
+	$s_plugin_Honey_title_uc_precondition='Description of the state of the world before the execution of the Use Case.';
+	$s_plugin_Honey_title_uc_postcondition='Description of the state of the world after the execution of the Use Case.';
+	$s_plugin_Honey_title_uc_observations='Important explanations.';
+	$s_plugin_Honey_title_uc_normal_course='Actions needed to reach the goal. These actions are used to describe the main success scenario.';
+	$s_plugin_Honey_title_uc_alt_course='Options or exceptions that may occur respect to the normal course.';
+	$s_plugin_Honey_title_rule_description='Description of a business policy or restriction.';
+	$s_plugin_Honey_title_rule_name='Term that identifies a business policy or restriction.';
+	$s_plugin_Honey_title_actor_name='Term that identifies an entity that has a relation with the system and demands functionality.';
+	$s_plugin_Honey_title_actor_description='Description of the entity that has a relation with the system and demands functionality.';
+ 
+
+
+
+	

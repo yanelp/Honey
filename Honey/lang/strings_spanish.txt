@@ -208,3 +208,17 @@
 	$s_plugin_Honey_title_notion='La noción es la descripción del signo por medio de sus propiedades intrínsecas.';
 	$s_plugin_Honey_title_impact='Los impactos describen cómo el signo se relaciona con otros signos.';
 	$s_plugin_Honey_empty_note='la nota está vacía, ingrese un texto por favor.';
+	$s_plugin_Honey_title_symbol_name='Término que identifica al símbolo.';
+	$s_plugin_Honey_title_symbol_synonym='Sinónimo del término que identifica al símbolo.';
+	$s_plugin_Honey_title_symbol_type='Categoría a la que pertenece el símbolo.';
+	$s_plugin_Honey_title_uc_name='Término que identifica al caso de uso. Una breve declaración de la acción.';
+	$s_plugin_Honey_title_uc_objetive='Meta del contexto. La razón.';
+	$s_plugin_Honey_title_uc_precondition='Descripción del estado del contexto antes de la ejecución del caso de uso.';
+	$s_plugin_Honey_title_uc_postcondition='Descripción del estado del contexto después de la ejecución del caso de uso.';
+	$s_plugin_Honey_title_uc_observations='Aclaraciones que se consideren importantes.';
+	$s_plugin_Honey_title_uc_normal_course='Acciones necesarias para alcanzar la meta. Estas acciones se utilizan para describir el escenario principal de éxito.';
+	$s_plugin_Honey_title_uc_alt_course='Opciones o excepciones que pueden presentarse con respecto al curso normal.';
+	$s_plugin_Honey_title_rule_description='Descripción de una política o restricción de negocio.';
+	$s_plugin_Honey_title_rule_name='Término que identifica una política o restricción de negocio.';
+	$s_plugin_Honey_title_actor_name='Término que identifica una entidad que guarda una relación con el sistema y que le demanda funcionalidad.';
+	$s_plugin_Honey_title_actor_description='Descripción de la entidad que guarda una relación con el sistema y que le demanda funcionalidad.';	

@@ -6,7 +6,7 @@ require_once( 'file_api.php' );
 
 html_page_top( plugin_lang_get( 'title' ) );
 
-print_cu_menu();
+print_cu_menu('edit_uc');
 
 EVENT_LAYOUT_RESOURCES;
 
@@ -158,10 +158,10 @@ $count_all_actors = db_num_rows( $result_all_actors );
 		
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo plugin_lang_get('name')?></td><td><input type="text" name="cu_name" id="cu_name" value="<?php echo $name ?>" size="133"/></td>
+		<td class="category"><?php echo plugin_lang_get('name')?></td><td><input type="text" name="cu_name" id="cu_name" value="<?php echo $name ?>" size="133" title="<?php echo plugin_lang_get('title_uc_name');?>"/></td>
 	</tr>
 		<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo plugin_lang_get('goal')?></td><td><textarea cols="100" name="goal" id="goal"><?php echo $goal ?></textarea></td>
+		<td class="category"><?php echo plugin_lang_get('objetive')?></td><td><textarea cols="100" name="goal" id="goal" title="<?php echo plugin_lang_get('title_uc_objetive');?>"><?php echo $goal?> </textarea></td>
 	</tr>
 
 	 <!--aca va la lista de actores-->
@@ -204,16 +204,16 @@ $count_all_actors = db_num_rows( $result_all_actors );
 	  </tr>  
 	
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo plugin_lang_get('pre_conditions')?></td><td><textarea  cols="100" rows="5"  name="preconditions" id="preconditions"><?php echo $precond ?></textarea></td>
+		<td class="category"><?php echo plugin_lang_get('pre_conditions')?></td><td><textarea  cols="100" rows="5"  name="preconditions" id="preconditions"  title="<?php echo plugin_lang_get('title_uc_precondition');?>"><?php echo $precond ?></textarea></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo plugin_lang_get('post_conditions')?></td><td><textarea  cols="100" rows="5"  name="postconditions" id="postconditions"><?php echo $postcond ?></textarea></td>
+		<td class="category"><?php echo plugin_lang_get('post_conditions')?></td><td><textarea  cols="100" rows="5"  name="postconditions" id="postconditions"  title="<?php echo plugin_lang_get('title_uc_postcondition');?>"><?php echo $postcond ?></textarea></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo plugin_lang_get('observations')?></td><td><Textarea cols="100" name="obsevations" id="obsevations" ><?php echo $observation ?></Textarea></td>
+		<td class="category"><?php echo plugin_lang_get('observations')?></td><td><Textarea cols="100" name="obsevations" id="obsevations" title="<?php echo plugin_lang_get('title_uc_observations');?>" ><?php echo $observation ?></Textarea></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo plugin_lang_get('main_scenario')?></td><td> <Textarea cols="100" rows="15" name="cursoNormal" id="cursoNormal"><?php echo $main_scenario ?></Textarea></td>
+		<td class="category"><?php echo plugin_lang_get('main_scenario')?></td><td> <Textarea cols="100" rows="15" name="cursoNormal" id="cursoNormal" title="<?php echo plugin_lang_get('title_uc_normal_course');?>"><?php echo $main_scenario ?></Textarea></td>
 	</tr>
 	
 	 <!--aca van las reglas-->
@@ -234,7 +234,7 @@ $count_all_actors = db_num_rows( $result_all_actors );
 	<tr <?php echo helper_alternate_class() ?>>
 		 <td class="category"><?php echo plugin_lang_get('alt_scenario')?></td>
 		<td>
-	      <Textarea cols="100" rows="5" name="cursoAlternativo" id="cursoAlternativo"></Textarea>
+	      <Textarea cols="100" rows="5" name="cursoAlternativo" id="cursoAlternativo" title="<?php echo plugin_lang_get('title_uc_alt_course');?>"></Textarea>
 		  <input type='button' name='button_actor_add' value='<?php echo plugin_lang_get('add_alt_scenario')?>' onClick="javascript:insert_row_course('table_course','cursoAlternativo',document.getElementById('cursoAlternativo').value, '<?php echo plugin_lang_get('button_delete');?>')"/>
 		</td>
 		</tr>

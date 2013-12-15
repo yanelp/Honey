@@ -35,10 +35,10 @@ EVENT_LAYOUT_RESOURCES
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category"><span class="required">*</span><?php echo plugin_lang_get('name')?></td>
-		<td><input type="text" name="actor_name" id='actor_name' size="59"/></td>
+		<td><input type="text" name="actor_name" id='actor_name' size="59" title="<?php echo plugin_lang_get('title_actor_name');?>"/></td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
-		<td class="category"><?php echo plugin_lang_get('col_description')?></td><td><textarea name='actor_descrip' id='actor_descrip' cols='45' rows='5'></textarea></td>
+		<td class="category"><?php echo plugin_lang_get('col_description')?></td><td><textarea name='actor_descrip' id='actor_descrip' cols='45' rows='5' title="<?php echo plugin_lang_get('title_actor_description');?>"></textarea></td>
 	</tr>
 	<tr>
 		<td class="left">

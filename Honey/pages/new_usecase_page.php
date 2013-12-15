@@ -37,7 +37,7 @@ EVENT_LAYOUT_RESOURCES
 		   <span class="required">*</span><?php echo plugin_lang_get('name')?>
 		</td>
 		<td>
-	      <input type="text" name="cu_name" id='cu_name' size="133">
+	      <input type="text" name="cu_name" id='cu_name' size="133" title="<?php echo plugin_lang_get('title_uc_name');?>">
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
@@ -45,7 +45,7 @@ EVENT_LAYOUT_RESOURCES
 		    <?php echo plugin_lang_get('objetive')?>
 		</td>
 		<td>
-		   <Textarea cols="100" name="goal" id="goal"></Textarea>
+		   <Textarea cols="100" name="goal" id="goal" title="<?php echo plugin_lang_get('title_uc_objetive');?>"></Textarea>
 		</td>
 	</tr>
 
@@ -108,7 +108,7 @@ EVENT_LAYOUT_RESOURCES
 		    <?php echo plugin_lang_get('pre_conditions');?>
 		</td>
 		<td>
-		  <Textarea cols="100" rows="5"  name="preconditions" id="preconditions"></Textarea>
+		  <Textarea cols="100" rows="5"  name="preconditions" id="preconditions" title="<?php echo plugin_lang_get('title_uc_precondition');?>"></Textarea>
 		</td>
 	</tr>
 	<tr <?php echo helper_alternate_class() ?>>
@@ -116,7 +116,7 @@ EVENT_LAYOUT_RESOURCES
 		    <?php echo plugin_lang_get('post_conditions');?>
 		</td>
 		<td>
-	     <Textarea cols="100" rows="5" name="postconditions" id="postconditions"></Textarea>
+	     <Textarea cols="100" rows="5" name="postconditions" id="postconditions" title="<?php echo plugin_lang_get('title_uc_postcondition');?>"></Textarea>
 		</td>
 	 </tr>
      <tr <?php echo helper_alternate_class() ?>>
@@ -124,7 +124,7 @@ EVENT_LAYOUT_RESOURCES
 		    <?php echo plugin_lang_get('observations');?>
 		</td>
 		<td>
-	      <Textarea cols="100" name="obsevations" id="obsevations" ></Textarea>
+	      <Textarea cols="100" name="obsevations" id="obsevations" title="<?php echo plugin_lang_get('title_uc_observations');?>"></Textarea>
 		</td>
 	  </tr>
 	  <tr <?php echo helper_alternate_class() ?>>
@@ -132,7 +132,7 @@ EVENT_LAYOUT_RESOURCES
 		 <span class="required">*</span>  <?php echo plugin_lang_get('normal_course');?>
 		</td>
 		<td>
-	      <Textarea cols="100" rows="15" name="cursoNormal" id="cursoNormal"></Textarea>
+	      <Textarea cols="100" rows="15" name="cursoNormal" id="cursoNormal" title="<?php echo plugin_lang_get('title_uc_normal_course');?>"></Textarea>
 		</td>
 	  </tr>
 	   <tr <?php echo helper_alternate_class() ?>>
@@ -145,7 +145,7 @@ EVENT_LAYOUT_RESOURCES
 			</table>
 		</td>
 		<td>
-	      <Textarea cols="100" rows="5" name="cursoAlternativo" id="cursoAlternativo"></Textarea>
+	      <Textarea cols="100" rows="5" name="cursoAlternativo" id="cursoAlternativo" title="<?php echo plugin_lang_get('title_uc_alt_course');?>"></Textarea>
 		  <input type='button' name='button_actor_add' value='Add alternative course' onClick="javascript:insert_row_course('table_course','cursoAlternativo',document.getElementById('cursoAlternativo').value, '<?php echo plugin_lang_get('button_delete');?>')"/>
 		</td>
 	</tr>
