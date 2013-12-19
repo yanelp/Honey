@@ -640,19 +640,18 @@ if ($count_verb > 0){
 			</td>
 
 			<td class="center">
-				<?php if($a==0){?>
-					<input type="radio" name="cond_<?php echo $id_usecase.$a?>" id="cond_<?php echo $id_usecase.$a?>" value="condicion" checked/>
-				<?php }
-				else { ?>
-					<input type="radio" name="cond_<?php echo $id_usecase.$a?>" id="cond_<?php echo $id_usecase.$a?>" value="condicion"/>
-				<?php } ?>		
+				<input type="radio" name="cond_<?php echo $id_usecase.$a?>" id="cond_<?php echo $id_usecase.$a?>" value="condicion" checked/>
 			</td>
 
-	        <td><input type="radio"  name="cond_<?php echo $id_usecase.$a?>" id="cond_<?php echo $id_usecase.$a?>" value="precondicion"/>
-			<input type="hidden" name="id_cond_<?php echo $id_usecase.$a?>" id="id_cond_<?php echo $id_usecase.$a?>" value="<?php echo $matrizVerbo[$uc_name][$a]?>"/></td>
+	        <td>
+				<input type="radio"  name="cond_<?php echo $id_usecase.$a?>" id="cond_<?php echo $id_usecase.$a?>" value="precondicion"/>
+				<input type="hidden" name="id_cond_<?php echo $id_usecase.$a?>" id="id_cond_<?php echo $id_usecase.$a?>" value="<?php echo $matrizVerbo[$uc_name][$a]?>"/>
+			</td>
 
-	        <td><input type="radio"  name="cond_<?php echo $id_usecase.$a?>" id="cond_<?php echo $id_usecase.$a?>" value="postcondicion"/>
-			<input type="hidden" name="id_cond_<?php echo $id_usecase.$a?>" id="id_cond_<?php echo $id_usecase.$a?>" value="<?php echo $matrizVerbo[$uc_name][$a]?>"/></td>
+	        <td>
+				<input type="radio"  name="cond_<?php echo $id_usecase.$a?>" id="cond_<?php echo $id_usecase.$a?>" value="postcondicion"/>
+				<input type="hidden" name="id_cond_<?php echo $id_usecase.$a?>" id="id_cond_<?php echo $id_usecase.$a?>" value="<?php echo $matrizVerbo[$uc_name][$a]?>"/>
+			</td>
 
 			</tr>
            <?php
