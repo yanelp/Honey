@@ -62,6 +62,7 @@
 	$s_plugin_Honey_note='Nota';
 	$s_plugin_Honey_add_notes='Agregar Notas';
 	$s_plugin_Honey_add_note='Agregar Nota';
+	$s_plugin_Honey_no_note='No hay notas';
 	$s_plugin_Honey_symbols_name_colum='Nombre';
 	$s_plugin_Honey_symbols_type_colum='Tipo';
 	$s_plugin_Honey_symbols_type_subject='Sujeto';

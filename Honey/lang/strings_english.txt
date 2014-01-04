@@ -27,6 +27,7 @@
 	$s_plugin_Honey_note='Note';
 	$s_plugin_Honey_add_notes='Add Notes';
 	$s_plugin_Honey_add_note='Add Note';
+	$s_plugin_Honey_no_note='There is no notes';
 	$s_plugin_Honey_symbols_name_colum='Name';
 	$s_plugin_Honey_symbols_type_colum='Type';
 	$s_plugin_Honey_symbols_type_subject='Subjet';

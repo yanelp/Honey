@@ -225,7 +225,7 @@ if($count>0){
 			<?php echo plugin_lang_get( 'usecase_information' );
 			echo '&#160;<span class="small">';
 			print_bracket_link( "#uc_notes",'Jump to notes'  );
-			print_bracket_link( "#uc_atach",'Jump to Atachmentts'  );?>
+			print_bracket_link( "#uc_atach",'Jump to Attachmentts'  );?>
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
@@ -325,7 +325,7 @@ if($count>0){
 					</table>
 
 				<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-					<?php collapse_closed( 'profile7' ); collapse_icon('profile7'); echo plugin_lang_get('add_atach');?>
+					<?php collapse_closed( 'profile7' ); collapse_icon('profile7'); echo plugin_lang_get('add_attach');?>
 					<?php collapse_end( 'profile7' ); ?>
 				<?php }
 			}//if( ON == config_get ?>
@@ -439,6 +439,11 @@ if($count>0){
 
 
 		<?php }//while  ?>
+			<?php if($count_notes==0){?>
+			 <td  class="<?php echo $t_bugnote_note_css ?>" >
+				<?php echo plugin_lang_get('no_note')?>
+			 </td>
+			<?php }?>
 		</table>
 
 		<?php if( ON == config_get( 'use_javascript' ) ) { ?>
@@ -448,6 +453,7 @@ if($count>0){
 		</td></tr>
 
 	</TABLE>
+
 
 
 	<br>
