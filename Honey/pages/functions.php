@@ -44,6 +44,9 @@ function print_lel_menu( $p_page = '' ) {
 		echo '<span id="link_actual">[&#160;';
 		echo "<a  href=\"$t_link\">". plugin_lang_get( 'Lel_derivation_link' )."</a>";
 		echo '&#160;]</span> ';
+
+		$t_tokens=array();//recarga
+		session_set( 'form_security_tokens', $t_tokens );//recarga
 	}
 	else{
 		if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {

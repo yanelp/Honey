@@ -232,8 +232,20 @@ while($row_search = db_fetch_array( $result_search )){
 <?php
 }
 
+$t_tokens = session_get( 'form_security_tokens', array() );//recarga
+
+//for($i=0;$i<10;$i++){var_dump($t_tokens[$i]);}//recarga
+
+
+
 
 if( ($count_cu + $count + $count_cu_include) == 0 ){
+
+if (!(in_array('honey',$t_tokens )) ) { //recarga	
+	array_push($t_tokens, 'honey');//recarga
+	session_set( 'form_security_tokens', $t_tokens );//recarga
+
+
 
 /*Dejamos obsoleta la derivación activa del proyecto, casos de uso y actores generados por esa derivación*/
 
@@ -672,6 +684,7 @@ if ($count_verb > 0){
 			//} //fin while($row_search_state
   $x++;
 }//fin por cada verbo
+
 ?>
 <input type='hidden' name='cant_cu' id='cant_cu' value='<?php echo $count_verb ?>'/>
 
@@ -684,6 +697,7 @@ if ($count_verb > 0){
 
 }
 
+
 html_page_bottom1( );
 
 
@@ -692,8 +706,20 @@ if ($existenCondiciones == false){
 $t_url=plugin_page('view_cu_page');
 header( "Location: $t_url" );
 }
+
+
+}//recarga
+else{
+	
+	//echo "mal";//recarga
+	//$t_tokens=array();//recarga
+	//session_set( 'form_security_tokens', $t_tokens );//recarga
+
+	//for($i=0;$i<10;$i++){var_dump($t_tokens[$i]);}//recarga
+	trigger_error( ERROR_FORM_TOKEN_INVALID, ERROR );//recarga
+
+}
 	
 }// fin if ($count > 0)
-
 
 
