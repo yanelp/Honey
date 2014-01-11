@@ -46,12 +46,12 @@ if( !defined( "STDIN" ) ) {
 
 # Detect references to issues + concat all lines to have the comment log.
 //$t_commit_regexp = config_get( 'source_control_regexp' );
-$t_commit_regexp ='/\b(?:bug|issue|incidencia|fallo|error|problema)\s*[#]{0,1}(\d+)\b/i';
+$t_commit_regexp ='/\b(?:bug|issue|incidencia|fallo|error|problema|BUG|ISSUE|INCIDENCIA|FALLO|ERROR|PROBLEMA|bug|issue|incidencia|Fallo|Error|Problema)\s*[#]{0,1}(\d+)\b/i';
 
 $t_commit_regexp_honey ='/\b(?:uc|cu|caso de uso|use case)\s*[#]{0,1}(\d+)\b/i';
 
 //$t_commit_fixed_regexp = config_get( 'source_control_fixed_regexp' );
-$t_commit_fixed_regexp = '/\b(?:resuelto|resuelta|arreglado|arreglada|corregido|corregida|fixed)\s+(?:bug|issue|incidencia|fallo|error|problema)?\s*[#](\d+)\b/i';
+$t_commit_fixed_regexp = '/\b(?:resuelto|resuelta|arreglado|arreglada|corregido|corregida|fixed|RESUELTO|RESUELTA|ARREGLADO|ARREGLADA|CORREGIDO|CORREGIDA|FIXED|Resuelto|Resuelta|Arreglado|Arreglada|Corregido|Corregida|Fixed)\s+(?:bug|issue|incidencia|fallo|error|problema|BUG|ISSUE|INCIDENCIA|FALLO|ERROR|PROBLEMA|bug|issue|incidencia|Fallo|Error|Problema)?\s*[#](\d+)\b/i';
 
 
 
