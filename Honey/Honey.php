@@ -187,7 +187,7 @@ class HoneyPlugin extends MantisPlugin {
 		),
 	    	
 		
-		/* array('AddColumnSQL',array(plugin_table('symbol'),"
+		 array('AddColumnSQL',array(plugin_table('symbol'),"
 				active	I1 NOTNULL DEFAULT '0'
 				",
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
@@ -203,7 +203,7 @@ class HoneyPlugin extends MantisPlugin {
 				active	I1 NOTNULL DEFAULT '0'
 				",
 				array( 'mysql' => 'DEFAULT CHARSET=utf8' ) )
-		),*/
+		),
 
 		 array('AddColumnSQL',array(plugin_table('usecase'),"
 				active	I1 NOTNULL DEFAULT '0'
