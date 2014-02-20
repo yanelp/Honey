@@ -223,3 +223,7 @@
 	$s_plugin_Honey_title_rule_name='Término que identifica una política o restricción de negocio.';
 	$s_plugin_Honey_title_actor_name='Término que identifica una entidad que guarda una relación con el sistema y que le demanda funcionalidad.';
 	$s_plugin_Honey_title_actor_description='Descripción de la entidad que guarda una relación con el sistema y que le demanda funcionalidad.';	
+	$s_plugin_Honey_symbols_not_exist='No hay símbolos en el proyecto';
+ 	$s_plugin_Honey_ucs_not_exist='No hay casos de uso en el proyecto';
+	$s_plugin_Honey_actors_not_exist='No hay actores en el proyecto';
+	$s_plugin_Honey_rules_not_exist='No hay reglas en el proyecto';

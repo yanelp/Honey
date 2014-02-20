@@ -10,7 +10,6 @@ $query_rules = 'SELECT *
 
 $result_rules = db_query_bound( $query_rules, array($project_id) );
 $count_rules = db_num_rows( $result_rules );
-
 $total_pag_rules = ceil($count_rules/ $TAMANO_PAGINA);
 
 //busco todos los actores y limito por grupo a mostrar
@@ -43,7 +42,9 @@ for($h=0;$h<$total_pag_rules;$h++){
 		<tr>
 			<td><input type="checkbox" name="ck_rule_<?php echo $j?>"/>
 				<input type="hidden" name="id_rule_<?php echo $j?>" id="id_rule_<?php echo $j?>" value="<?php echo $row_rules['id'] ?>"/></td>
-			<td><?php echo $row_rules['name'] ?></td>
+			<td><?php echo $row_rules['name'];
+			
+				?></td>
 
 			<?php if( $row_rules['description']!=''){?>
 					<td>
@@ -89,6 +90,8 @@ $ini=$ini+ $TAMANO_PAGINA;}//for ?>
 
 <table align='center'>
 <tr><td>
+<?php if($count_rules>$TAMANO_PAGINA){?>
 <p id='texto4'><?php echo plugin_lang_get('page');?> 1 <a style="text-decoration:none" href="javascript:mostrarCapaRule( <?php echo 2?>, <?php echo $total_pag_rules;?>, '<?php echo plugin_lang_get('page');?>' )";><?php echo $i;?> >> </a></p>
+<?php } ?>
 </td></tr>
 </table>	

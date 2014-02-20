@@ -7,6 +7,7 @@ $total_pag_actors = ceil($count_all_actors / $TAMANO_PAGINA);
 $t_repo_table = plugin_table( 'actor', 'honey' );
 $ini=0;
 $t=0;//para todos los actores
+$cant_actors=0;
 for($h=0;$h<$total_pag_actors;$h++){
 
 	$query_actors_limit = 'SELECT a.name , a.id, a.description
@@ -62,7 +63,9 @@ for($h=0;$h<$total_pag_actors;$h++){
 							<?php } ?>
 							<input type="hidden" name="id_actor_<?php echo $t?>" id="id_actor_<?php echo $t?>" value="<?php echo $row_actors_limit['id'] ?>"/>
 						</td>
-							<td><?php echo $row_actors_limit['name']; ?></td>
+							<td><?php echo $row_actors_limit['name'];
+								$cant_actors++; ?>
+							</td>
 
 							<!--MUESTRA CONTENIDO-->
 							<?php if( $row_actors_limit['description']!=''){?>
@@ -107,6 +110,9 @@ $ini=$ini+ $TAMANO_PAGINA;}//for ?>
 
 <table align='center'>
 <tr><td>
+<?php
+if($cant_actors>$TAMANO_PAGINA){?>
 <p id='texto'> <?php echo plugin_lang_get('page')?> 1 <a style="text-decoration:none" href="javascript:mostrarCapaActor( <?php echo 2?>, <?php echo $total_pag_actors;?>, '<?php echo plugin_lang_get('page')?>' )";><?php echo $i;?> >> </a></p>
+<?php } ?>
 </td></tr>
 </table>

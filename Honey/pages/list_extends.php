@@ -2,7 +2,7 @@
 
 $result_all_ucs = db_query_bound( $query_all_ucs, array($id_project, $id_usecase) );
 $count_all_ucs = db_num_rows( $result_all_ucs);
-
+$cant_extends=0;
 $total_pag_extends = ceil($count_all_ucs / $TAMANO_PAGINA);
 
 //busco todos los actores y limito por grupo a mostrar
@@ -66,7 +66,8 @@ for($h=0;$h<$total_pag_extends;$h++){
 						<?php } ?>
 							<input type="hidden" name="id_extends_<?php echo $j?>" id="id_extends_<?php echo $j?>" value="<?php echo $row_all_ucs['id'] ?>"/>
 					</td>
-					<td><?php echo $row_all_ucs['name'] ?></td>
+					<td><?php echo $row_all_ucs['name'];
+							$cant_extends++;?></td>
 						<?php if( $row_all_ucs['goal']!=''){?>
 					<td>
 							<!---->
@@ -111,8 +112,10 @@ for($h=0;$h<$total_pag_extends;$h++){
 
 <?php $ini=$ini+ $TAMANO_PAGINA;}//for ?>
 
+<?php if($count_all_ucs>$TAMANO_PAGINA){?>
 <table align='center'>
 <tr><td>
 <p id='texto2'> <?php echo plugin_lang_get('page');?> 1 <a style="text-decoration:none" href="javascript:mostrarCapaExtends( <?php echo 2?>, <?php echo $total_pag_extends;?> , '<?php echo plugin_lang_get('page')?>')"><?php echo $i;?> >> </a></p>
 </td></tr>
 </table>
+<?php } ?>

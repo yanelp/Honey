@@ -99,8 +99,10 @@ for($h=0;$h<$total_pag_rules;$h++){
 </div>
 <?php $ini=$ini+ $TAMANO_PAGINA;}//for ?>
 
+<?php if($count_rules_limit>$TAMANO_PAGINA){?>
 <table align='center'>
 <tr><td>
 <p id='texto4'><?php echo plugin_lang_get('page');?> 1 <a style="text-decoration:none" href="javascript:mostrarCapaRule( <?php echo 2?>, <?php echo $total_pag_rules;?>, '<?php echo plugin_lang_get('page');?>' )";><?php echo $i;?> >> </a></p>
 </td></tr>
 </table>
+<?php } ?>

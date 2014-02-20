@@ -189,7 +189,10 @@
 	$s_plugin_Honey_title_rule_name='Term that identifies a business policy or restriction.';
 	$s_plugin_Honey_title_actor_name='Term that identifies an entity that has a relation with the system and demands functionality.';
 	$s_plugin_Honey_title_actor_description='Description of the entity that has a relation with the system and demands functionality.';
- 
+	$s_plugin_Honey_symbols_not_exist='There is no symbols in the project';
+ 	$s_plugin_Honey_ucs_not_exist='There is no use cases in the project';
+	$s_plugin_Honey_actors_not_exist='There is no actors in the project';
+	$s_plugin_Honey_rules_not_exist='There is no rules in the project';
 
 
 

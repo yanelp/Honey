@@ -364,12 +364,12 @@ if($count>0){
 		
 		 <table class="width90">
 		 <tr <?php echo helper_alternate_class() ?>>
-			<td colspan="2" class="none">
+			<td colspan="2" class="form-title" >
 				<?php 
 				if( ON == config_get( 'use_javascript' ) ) { ?>
 					<?php collapse_open( 'profile2' ); collapse_icon('profile2'); echo plugin_lang_get( 'usecase_notes' ) ;}?>
 			
-	<table width="90%">
+	<table class="width100" cellspacing="1">
 	<?php
 
 		while( $row_note = db_fetch_array( $result_note ) ){
@@ -397,15 +397,16 @@ if($count>0){
 		
 		<tr>
 		  <td  class="<?php echo $t_bugnote_css ?>" width="20%">
+		
 			<?php echo $id_note;?>
+			
 			<span class="small">
+			<?php echo "<a href='view_user_page.php?id=2'>".$reporter."</a>"?>
 			  <?php if ( user_exists( $reporter ) ) {
 				  $t_access_level = $user_access_level;
 				  }
-				  // Only display access level when higher than 0 (ANYBODY)
-				  if( $t_access_level > ANYBODY ) {
 					echo '(', get_enum_element( 'access_levels', $user_access_level ), ')';
-				  }?>
+				 ?>
 			</span>
 				  <?php if ( VS_PRIVATE == $state) { ?>
 					<span class="small">[ <?php echo lang_get( 'private' ) ?> ]</span>

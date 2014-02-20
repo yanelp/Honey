@@ -45,7 +45,7 @@ else{//con busqueda
 				   AND active = 0 and name like '.db_param().'
 				   ORDER BY ' . $order;
 			$result = db_query_bound( $query_symbol, array($project_id,$nombre) );
-			$count = db_num_rows( $result );
+			$count2 = db_num_rows( $result );
 	}
 	else{//busca por id
 		$query_symbol = 'SELECT * 
@@ -54,7 +54,7 @@ else{//con busqueda
 				   AND active = 0 and id=' . db_param().'
 				   ORDER BY ' . $order;
 		$result = db_query_bound( $query_symbol, array($project_id,$_REQUEST['usecase_id'] ) );
-		$count = db_num_rows( $result );
+		$count2 = db_num_rows( $result );
 	}
 }
 
@@ -62,7 +62,7 @@ else{//con busqueda
 
 <?php 
 
-if ($count > 0) {
+if (($count > 0)||($count2>0)) {
 
 	$t_page = plugin_page( 'view_cu_page' );
 	echo '<div align="center">';
@@ -133,11 +133,22 @@ if ($count > 0) {
 	$t_page = plugin_page( 'usecase_page' );				
 			} 
  } 
- else{ echo plugin_lang_get('uc_do_not_exist');
- echo '<br><br>';
-$t_page=plugin_page("view_cu_page");
-echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";
-echo "<br>";}
+ else{
+	if($p_search==-1){ 
+		echo plugin_lang_get('ucs_not_exist');
+		echo '<br><br>';
+		$t_page=plugin_page("view_cu_page");
+		echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";
+		echo "<br>";
+	}
+	else{
+		echo plugin_lang_get('uc_do_not_exist');
+		echo '<br><br>';
+		$t_page=plugin_page("view_cu_page");
+		echo "<a href=\"$t_page\">". plugin_lang_get('back')."</a>";
+		echo "<br>";
+	}
+}
  ?>
 
  </table>
