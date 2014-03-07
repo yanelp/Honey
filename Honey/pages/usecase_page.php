@@ -369,7 +369,7 @@ if($count>0){
 				if( ON == config_get( 'use_javascript' ) ) { ?>
 					<?php collapse_open( 'profile2' ); collapse_icon('profile2'); echo plugin_lang_get( 'usecase_notes' ) ;}?>
 			
-	<table class="width100" cellspacing="1">
+	<table width="100%" cellspacing="1">
 	<?php
 
 		while( $row_note = db_fetch_array( $result_note ) ){
